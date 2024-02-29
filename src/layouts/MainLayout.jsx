@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import bg from "../assets/images/global/bg.png";
+import Footer from "../components/shared/Footers/Footer";
 
 const MainLayout = () => {
   return (
@@ -12,10 +13,9 @@ const MainLayout = () => {
         // backgroundSize: "100% 3923px",
       }}
     >
-      <div className="w-full h-full flex flex-col justify-between max-w-[430px] md:max-w-theme mx-auto px-[12px] md:px-[42px] 2xl:px-[165px]">
-        <div className="flex-grow w-full h-full bg-transparent">
-          <Outlet />
-        </div>
+      <div className="bg-transparent w-full h-full max-w-[430px] md:max-w-theme mx-auto px-[12px] md:px-[42px] 2xl:px-[165px]">
+        <Outlet />
+        <Footer />
       </div>
     </div>
   );

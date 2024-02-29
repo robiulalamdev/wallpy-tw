@@ -37,7 +37,7 @@ const OfficialWallpapers = () => {
       </div>
 
       {/* // sm */}
-      <div className="grid grid-cols-2 gap-x-[7px] gap-y-[10px] md:hidden">
+      <div className="grid grid-cols-2 gap-x-[9px] gap-y-[10px] md:hidden">
         <div className="max-h-[196px] w-full rounded-[12px] overflow-hidden">
           <img
             src={img2}
