@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Button, Drawer } from "@material-tailwind/react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import {
   iLogin,
