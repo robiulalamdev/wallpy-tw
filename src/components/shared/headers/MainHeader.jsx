@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { iMenu, iSearch, iSearchClose } from "../../../utils/icons/icons";
 import logo from "../../../assets/brand/logo.png";
 import { Button } from "@material-tailwind/react";
+import HeaderDrawer from "./HeaderDrawer";
 
 const MainHeader = () => {
+  const [open, setOpen] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   return (
     <>
@@ -65,10 +67,17 @@ const MainHeader = () => {
                 {iSearch}
               </div>
             </div>
-            <div className="text-white cursor-pointer">{iMenu}</div>
+            <div
+              onClick={() => setOpen(!open)}
+              className="text-white cursor-pointer"
+            >
+              {iMenu}
+            </div>
           </div>
         )}
       </div>
+
+      <HeaderDrawer open={open} close={setOpen} />
     </>
   );
 };

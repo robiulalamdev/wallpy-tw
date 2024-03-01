@@ -23,7 +23,7 @@ module.exports = withMT({
       fontFamily: {
         lato: ["Lato", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
-        "bakbak-one": ["Bakbak One", "sans-serif", "cursive"],
+        "bakbak-one": ["Bakbak One", "sans-serif"],
       },
       spacing: {
         theme: "12px",
