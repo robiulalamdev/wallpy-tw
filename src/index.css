@@ -5,17 +5,18 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Bakbak+One&family=Lato:wght@100;300;400;700&family=Roboto:wght@400;500;700&display=swap");
 
-:root {
+/* :root {
   --bak: "Bakbak One", cursive;
   --lato: "Lato", sans-serif;
   --roboto: "Roboto", sans-serif;
-}
+} */
 
 body {
   padding: 0px !important;
   margin: 0px !important;
   box-sizing: border-box;
-  font-family: "Lato", "Roboto", sans-serif;
+  font-family: "Lato", "Roboto", sans-serif !important;
+  font-family: "Bakbak One", sans-serif !important;
 }
 
 ::-webkit-scrollbar {
