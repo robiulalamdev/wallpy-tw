@@ -140,7 +140,7 @@ const HeaderDrawer = ({ open, close }) => {
             {iLogout}
             <p>Log Out</p>
           </div>
-          <div className="border-t-[1px] border-[#5A5A5A] p-0 m-0"></div>>
+          <div className="border-t-[1px] border-[#5A5A5A] p-0 m-0"></div>
           <div className="flex justify-between items-center mt-[26px] pb-[29px] px-[29px]">
             <img src={icon1} alt="icon" className="size-[17px]" />
             <img src={icon2} alt="icon" className="size-[17px]" />
