@@ -10,6 +10,10 @@ import ForgotPassword from "../pages/AuthPages/ForgotPassword/ForgotPassword";
 import ForgotEmail from "../pages/AuthPages/ForgotEmail/ForgotEmail";
 import ResetPassword from "../pages/AuthPages/ResetPassword/ResetPassword";
 import NewPassword from "../pages/AuthPages/NewPassword/NewPassword";
+import TermsConditions from "../pages/TermsConditions/TermsConditions";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
+import CommunityRules from "../pages/CommunityRules/CommunityRules";
+import About from "../pages/About/About";
 
 export const route = createBrowserRouter([
   {
@@ -18,6 +22,22 @@ export const route = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/home", element: <Home /> },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsConditions />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/community-rules",
+        element: <CommunityRules />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
     ],
   },
   // auth routes
