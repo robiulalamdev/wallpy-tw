@@ -43,13 +43,13 @@ const Login = () => {
 
           <div className="bg-[#C9C9C9] rounded-[12px] min-w-[217px] max-w-[217px] h-[37px] flex justify-center items-center mx-auto mt-[36px] md:mt-[32px]">
             <Button
-              className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-bakbak-one rounded-[10px] text-[12px] min-w-[105px] h-[31px] bg-white text-[#373737]`}
+              className={`font-normal hover:shadow-none shadow-none p-0 m-0 normal-case font-bakbak-one rounded-[10px] text-[12px] min-w-[105px] h-[31px] bg-white text-[#373737]`}
             >
               Sign In
             </Button>
             <Link to="/signup">
               <Button
-                className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-bakbak-one rounded-[10px] text-[12px] w-[105px] h-[31px] bg-transparent text-[#373737]`}
+                className={`font-normal hover:shadow-none shadow-none p-0 m-0 normal-case font-bakbak-one rounded-[10px] text-[12px] w-[105px] h-[31px] bg-transparent text-[#373737]`}
               >
                 Sign Up
               </Button>
@@ -93,7 +93,7 @@ const Login = () => {
                   })
                 );
               }}
-              className="shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[44px] md:mt-[42px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one"
+              className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[44px] md:mt-[42px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one"
             >
               Sign In
             </Button>
@@ -103,21 +103,21 @@ const Login = () => {
             </p>
 
             <div className="mt-[34px] md:mt-[48px] flex flex-col items-center gap-[12px]">
-              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] bg-[#1877F2] p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
+              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-[#1877F2] p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
                 {iFacebook}{" "}
                 <p className="text-nowrap text-[12px] font-bakbak-one text-white">
                   Sign In with Facebook
                 </p>
               </Button>
 
-              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] bg-white p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
+              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-white p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
                 {iGoogle}{" "}
                 <p className="text-nowrap text-[12px] font-bakbak-one text-[#9F9F9F]">
                   Sign In with Google
                 </p>
               </Button>
 
-              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] bg-black p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
+              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-black p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
                 {iApple}{" "}
                 <p className="text-nowrap text-[12px] font-bakbak-one text-white">
                   Sign In with Apple

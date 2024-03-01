@@ -6,7 +6,7 @@ import { Button } from "@material-tailwind/react";
 const FeaturedArtists = () => {
   return (
     <div>
-      <h1 className="text-white text-center font-bakbak-one text-[15px] md:text-[35px] leading-[21px] font-normal md:!font-bold mt-[39px] mb-[21px] md:mt-[63px] md:mb-[54px]">
+      <h1 className="text-white text-center font-bakbak-one text-[15px] md:text-[35px] leading-[21px] font-normal mt-[39px] mb-[21px] md:mt-[63px] md:mb-[54px]">
         Featured Artists
       </h1>
 

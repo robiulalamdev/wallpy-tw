@@ -6,7 +6,7 @@ import img3 from "../../../assets/images/home/official-wellpaper/wimg3.png";
 const OfficialWallpapers = () => {
   return (
     <div>
-      <h1 className="text-white text-center font-bakbak-one text-[15px] md:text-[35px] leading-[21px] mt-[27px] mb-[24px] md:mt-[103px] md:mb-[58px] font-normal md:!font-bold">
+      <h1 className="text-white text-center font-bakbak-one text-[15px] md:text-[35px] leading-[21px] mt-[27px] mb-[24px] md:mt-[103px] md:mb-[58px] font-normal">
         Official Wallpapers
       </h1>
 

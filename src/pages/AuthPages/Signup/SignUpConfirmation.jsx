@@ -47,7 +47,7 @@ const SignUpConfirmation = () => {
               Thank you for joining the society!
             </p>
             <Link to="/">
-              <Button className="shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[102px] md:mt-[69px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
+              <Button className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[102px] md:mt-[69px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
                 Return Home
               </Button>
             </Link>

@@ -11,7 +11,7 @@ import img6 from "../../../assets/images/home/feature-wellpaper/img6.png";
 const FeaturedWallpapers = () => {
   return (
     <div className="">
-      <h1 className="text-white text-center font-bakbak-one text-[15px] md:text-[35px] leading-[21px] font-normal md:!font-bold mt-[20px] mb-[28px] md:mt-[106px] md:mb-[52px]">
+      <h1 className="text-white text-center font-bakbak-one text-[15px] md:text-[35px] leading-[21px] font-normal mt-[20px] mb-[28px] md:mt-[106px] md:mb-[52px]">
         Featured Wallpapers
       </h1>
 

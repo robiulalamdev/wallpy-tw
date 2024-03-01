@@ -60,12 +60,12 @@ const NewPassword = () => {
               />
             </div>
             <Link to="/password-changed-success">
-              <Button className="shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[63px] md:mt-[47px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
+              <Button className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[63px] md:mt-[47px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
                 Change Password
               </Button>
             </Link>
             <Link to="/">
-              <Button className="shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[34px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
+              <Button className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[34px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
                 Return Home
               </Button>
             </Link>

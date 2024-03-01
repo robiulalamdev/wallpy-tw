@@ -106,7 +106,7 @@ const HeaderDrawer = ({ open, close }) => {
               </div>
 
               <div className="flex justify-center mt-[51px]">
-                <Button className="shadow-none hover:shadow-none normal-case p-0 rounded-[5px] bg-[#2924FF] text-[#C4C4C4] text-[15px] w-[129px] h-[38px]">
+                <Button className="font-normal shadow-none hover:shadow-none normal-case p-0 rounded-[5px] bg-[#2924FF] text-[#C4C4C4] text-[15px] w-[129px] h-[38px]">
                   Upload
                 </Button>
               </div>

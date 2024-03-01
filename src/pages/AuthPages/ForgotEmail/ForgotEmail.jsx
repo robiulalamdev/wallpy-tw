@@ -48,13 +48,13 @@ const ForgotEmail = () => {
             <div className="bg-[#C9C9C9] rounded-[12px] min-w-[217px] max-w-[217px] h-[37px] flex justify-center items-center mx-auto mt-[36px] md:mt-[32px]">
               <Link to="/forgot-password">
                 <Button
-                  className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-bakbak-one rounded-[10px] text-[12px] min-w-[105px] h-[31px] bg-transparent text-[#373737]`}
+                  className={`font-normal hover:shadow-none shadow-none p-0 m-0 normal-case font-bakbak-one rounded-[10px] text-[12px] min-w-[105px] h-[31px] bg-transparent text-[#373737]`}
                 >
                   Password
                 </Button>
               </Link>
               <Button
-                className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-bakbak-one rounded-[10px] text-[12px] w-[105px] h-[31px] bg-white text-[#373737]`}
+                className={`font-normal hover:shadow-none shadow-none p-0 m-0 normal-case font-bakbak-one rounded-[10px] text-[12px] w-[105px] h-[31px] bg-white text-[#373737]`}
               >
                 E-mail
               </Button>
@@ -73,7 +73,7 @@ const ForgotEmail = () => {
               />
             </div>
             <Link to="/reset-password">
-              <Button className="shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[102px] md:mt-[28px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
+              <Button className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[102px] md:mt-[28px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
                 Reset
               </Button>
             </Link>

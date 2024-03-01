@@ -43,7 +43,7 @@ const PasswordChangedSuccess = () => {
               The password has been changed successfully.
             </p>
             <Link to="/login">
-              <Button className="shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[102px] md:mt-[88px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
+              <Button className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[102px] md:mt-[88px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one">
                 Sign In
               </Button>
             </Link>
