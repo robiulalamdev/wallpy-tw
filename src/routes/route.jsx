@@ -17,6 +17,7 @@ import About from "../pages/About/About";
 import CopyrightInformation from "../pages/CopyrightInformation/CopyrightInformation";
 import Socials from "../pages/Socials/Socials";
 import OfficialBrands from "../pages/OfficialBrands/OfficialBrands";
+import Contact from "../pages/Contact/Contact";
 
 export const route = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const route = createBrowserRouter([
       {
         path: "/official-brands",
         element: <OfficialBrands />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },
