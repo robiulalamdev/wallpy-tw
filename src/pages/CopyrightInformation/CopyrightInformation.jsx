@@ -51,15 +51,15 @@ const CopyrightInformation = () => {
             </p>
 
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2 mt-[27px]">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}A detailed description of the artwork in question.
             </p>
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}Your full name and contact information.
             </p>
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}Proof of your ownership, which may include original creation
               files, purchase receipts, or other relevant documentation.
             </p>
@@ -84,15 +84,15 @@ const CopyrightInformation = () => {
             </p>
 
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2 mt-[27px]">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}Provide the URL of the infringing content.
             </p>
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}Explain how your copyright is being violated.
             </p>
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}Include your contact information for correspondence.
             </p>
 
@@ -115,17 +115,17 @@ const CopyrightInformation = () => {
             </p>
 
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2 mt-[27px]">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}Do not upload, share, or use any content for which you do
               not have the necessary permissions or rights.
             </p>
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}Always credit the original creators and provide source
               information when uploading content to our website.
             </p>
             <p className="font-medium text-[#E3E3E3] font-lato text-left md:text-center text-[12px] md:text-[20px] flex items-center md:justify-center gap-2">
-              <div className="size-[8px] bg-white rounded-full"></div>
+              <div className="min-h-[6px] min-w-[6px] max-h-[6px] max-w-[6px] bg-white rounded-full"></div>
               {"  "}If in doubt about the legality of using any content, seek
               legal advice or consult the intellectual property rights holder.
             </p>
