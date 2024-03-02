@@ -18,6 +18,7 @@ import CopyrightInformation from "../pages/CopyrightInformation/CopyrightInforma
 import Socials from "../pages/Socials/Socials";
 import OfficialBrands from "../pages/OfficialBrands/OfficialBrands";
 import Contact from "../pages/Contact/Contact";
+import Messages from "../pages/Messages/Messages";
 
 export const route = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const route = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/messages",
+        element: <Messages />,
       },
     ],
   },

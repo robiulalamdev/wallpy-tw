@@ -28,7 +28,7 @@ const About = () => {
             <h1 className="wps-title md:hidden">WPS</h1>
           </div>
           <div className=" about-content text-center text-md-start flex-grow">
-            <h1 className="d-none md:block">THE WALLPER SOCIETY </h1>
+            <h1 className="hidden md:block">THE WALLPER SOCIETY </h1>
             <h6>Hello from the WPS</h6>
             <p>
               Our journey is in its early stages, but it all began with a simple
