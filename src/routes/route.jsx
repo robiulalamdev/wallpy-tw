@@ -15,6 +15,7 @@ import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import CommunityRules from "../pages/CommunityRules/CommunityRules";
 import About from "../pages/About/About";
 import CopyrightInformation from "../pages/CopyrightInformation/CopyrightInformation";
+import Socials from "../pages/Socials/Socials";
 
 export const route = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const route = createBrowserRouter([
       {
         path: "/copyright-information",
         element: <CopyrightInformation />,
+      },
+      {
+        path: "/socials",
+        element: <Socials />,
       },
     ],
   },
