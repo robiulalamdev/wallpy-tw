@@ -16,6 +16,7 @@ import CommunityRules from "../pages/CommunityRules/CommunityRules";
 import About from "../pages/About/About";
 import CopyrightInformation from "../pages/CopyrightInformation/CopyrightInformation";
 import Socials from "../pages/Socials/Socials";
+import OfficialBrands from "../pages/OfficialBrands/OfficialBrands";
 
 export const route = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const route = createBrowserRouter([
       {
         path: "/socials",
         element: <Socials />,
+      },
+      {
+        path: "/official-brands",
+        element: <OfficialBrands />,
       },
     ],
   },
