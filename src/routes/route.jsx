@@ -20,6 +20,7 @@ import OfficialBrands from "../pages/OfficialBrands/OfficialBrands";
 import Contact from "../pages/Contact/Contact";
 import Messages from "../pages/Messages/Messages";
 import Wallpaper from "../pages/Wallpaper/Wallpaper";
+import SearchWallpapers from "../pages/Wallpapers/SearchWallpapers";
 
 export const route = createBrowserRouter([
   {
@@ -68,8 +69,13 @@ export const route = createBrowserRouter([
         path: "/wallpaper",
         element: <Wallpaper />,
       },
+      {
+        path: "/wallpapers/:search",
+        element: <SearchWallpapers />,
+      },
     ],
   },
+
   // auth routes
   {
     path: "/",

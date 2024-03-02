@@ -5,7 +5,6 @@ import {
 } from "@material-tailwind/react";
 
 import { iSearch } from "../../utils/icons/icons";
-import { useState } from "react";
 import { official_brands } from "../../utils/data/officialBrands";
 
 const OfficialBrandSearch = () => {

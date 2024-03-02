@@ -657,3 +657,75 @@ export const iGallery = (
     </defs>
   </svg>
 );
+
+export const iPopularHr1 = (
+  <svg
+    width="234"
+    height="4"
+    viewBox="0 0 234 4"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M2 2H233" stroke="#EBEBEB" stroke-linecap="round" />
+    <path d="M2 2H54" stroke="white" stroke-width="4" stroke-linecap="round" />
+  </svg>
+);
+
+export const iPopularHr2 = (
+  <svg
+    width="234"
+    height="4"
+    viewBox="0 0 234 4"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M1 2H232" stroke="#EBEBEB" stroke-linecap="round" />
+    <path
+      d="M70 2H232"
+      stroke="white"
+      stroke-width="4"
+      stroke-linecap="round"
+    />
+  </svg>
+);
+
+export const iDropdown = (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_1_10101)">
+      <path d="M7 10L12 15L17 10H7Z" fill="white" />
+    </g>
+    <defs>
+      <clipPath id="clip0_1_10101">
+        <rect width="24" height="24" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export const iRefresh = (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_1_10269)">
+      <path
+        d="M9.99992 5.00016V7.50016L13.3333 4.16683L9.99992 0.833496V3.3335C6.31659 3.3335 3.33325 6.31683 3.33325 10.0002C3.33325 11.3085 3.71659 12.5252 4.36659 13.5502L5.58325 12.3335C5.20825 11.6418 4.99992 10.8418 4.99992 10.0002C4.99992 7.24183 7.24159 5.00016 9.99992 5.00016ZM15.6333 6.45016L14.4166 7.66683C14.7833 8.36683 14.9999 9.1585 14.9999 10.0002C14.9999 12.7585 12.7583 15.0002 9.99992 15.0002V12.5002L6.66659 15.8335L9.99992 19.1668V16.6668C13.6833 16.6668 16.6666 13.6835 16.6666 10.0002C16.6666 8.69183 16.2833 7.47516 15.6333 6.45016Z"
+        fill="#C1FD16"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_1_10269">
+        <rect width="20" height="20" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
