@@ -4,23 +4,24 @@ import logo from "../../../assets/brand/logo.png";
 import profile from "../../../assets/images/global/header/profile.gif";
 import HeaderDrawer from "./HeaderDrawer";
 import HeaderAU from "./HeaderAU";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const MainHeader = () => {
+const RulesHeader = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   return (
     <>
-      <div className="lg:flex items-center justify-between w-full gap-x-[20px] my-[23px] hidden lg:inline-block">
-        <div className="flex items-center gap-x-[4px] md:gap-x-[20px] flex-grow">
-          <img
-            onClick={() => navigate("/")}
-            src={logo}
-            alt="logo"
-            className="w-[85px] h-[56px] object-contain"
-          />
-          <div className="bg-[#00000033] rounded-[10px] h-[45px] max-w-[771px] w-full flex justify-center items-center pr-[10px]">
+      <div className="lg:flex items-center justify-between gap-x-[4px] md:gap-x-[20px] w-full my-[23px] hidden lg:inline-block">
+        <img
+          onClick={() => navigate("/")}
+          src={logo}
+          alt="logo"
+          className="!w-[85px] !h-[56px] object-contain"
+        />
+
+        <div className="flex items-center justify-center gap-x-[22px] flex-grow w-full">
+          <div className="bg-[#00000033] rounded-[10px] h-[45px] max-w-[771px] w-full flex justify-center items-center pr-[10px] flex-grow">
             <div className="text-[#5A5A5A] w-[40px] px-[10px] h-full flex justify-center items-center">
               {iSearch}
             </div>
@@ -90,4 +91,4 @@ const MainHeader = () => {
   );
 };
 
-export default MainHeader;
+export default RulesHeader;

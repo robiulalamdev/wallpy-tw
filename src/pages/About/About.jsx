@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import banner from "../../assets/images/about/bg.png";
-import MainHeader from "../../components/shared/headers/MainHeader";
+import RulesHeader from "../../components/shared/headers/RulesHeader";
 import "../../styles/about.css";
 
 const About = () => {
   return (
     <>
-      <MainHeader />
+      <RulesHeader />
 
       <div className="about-container">
         <h1 className="text-[15px] md:text-[25px] text-center font-bakbak-one text-white mb-[15px] md:mb-[23px]">
