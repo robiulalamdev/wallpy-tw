@@ -19,6 +19,7 @@ import Socials from "../pages/Socials/Socials";
 import OfficialBrands from "../pages/OfficialBrands/OfficialBrands";
 import Contact from "../pages/Contact/Contact";
 import Messages from "../pages/Messages/Messages";
+import Wallpaper from "../pages/Wallpaper/Wallpaper";
 
 export const route = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const route = createBrowserRouter([
       {
         path: "/messages",
         element: <Messages />,
+      },
+      {
+        path: "/wallpaper",
+        element: <Wallpaper />,
       },
     ],
   },
