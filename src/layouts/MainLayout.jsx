@@ -15,7 +15,7 @@ const MainLayout = () => {
       }}
     >
       <div>
-        <div className="bg-transparent w-full h-full max-w-[430px] md:max-w-theme mx-auto px-[12px] md:px-[42px] 2xl:px-[165px]">
+        <div className="bg-transparent w-full h-full max-w-[430px] md:max-w-theme mx-auto px-[12px] md:px-[42px] 2xl:px-[6vw]">
           <Outlet />
           <Footer />
         </div>

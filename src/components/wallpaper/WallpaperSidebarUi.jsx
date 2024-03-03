@@ -9,62 +9,59 @@ import {
 } from "../../utils/icons/icons";
 import { Button } from "@material-tailwind/react";
 
-const resulations = [
-  {
-    id: 1,
-    name: "Ultra Wide",
-    items: ["2560 × 1080", "3440 × 1440", "3840 × 1600"],
-    children: {
-      id: 4,
-      name: "4:3",
-      items: [
-        "1280 × 960",
-        "1600 × 1200",
-        "1920 × 1440",
-        "2560 × 1920",
-        "3840 × 2880",
-      ],
-    },
-  },
-  {
-    id: 2,
-    name: "16:9",
-    items: [
-      "1280 × 720",
-      "1600 × 900",
-      "1920 × 1080",
-      "2560 × 1440",
-      "3840 × 2160",
-    ],
-    children: {
-      id: 5,
-      name: "16:9",
-      items: [
-        "1280 × 1024",
-        "1600 × 1280",
-        "1920 × 1536",
-        "2560 × 2048",
-        "3840 × 3072",
-      ],
-    },
-  },
-  {
-    id: 3,
-    name: "16:10",
-    items: [
-      "1280 × 800",
-      "1600 × 1000",
-      "1920 × 1200",
-      "2560 × 1600",
-      "3840 × 2400",
-    ],
-  },
-];
+const resulations1 = {
+  name: "Ultra Wide",
+  items: ["2560 × 1080", "3440 × 1440", "3840 × 1600"],
+};
+
+const resulations2 = {
+  name: "4:3",
+  items: [
+    "1280 × 960",
+    "1600 × 1200",
+    "1920 × 1440",
+    "2560 × 1920",
+    "3840 × 2880",
+  ],
+};
+
+const resulations3 = {
+  name: "16:9",
+  items: [
+    "1280 × 720",
+    "1600 × 900",
+    "1920 × 1080",
+    "2560 × 1440",
+    "3840 × 2160",
+  ],
+};
+
+const resulations4 = {
+  name: "16:10",
+  items: [
+    "1280 × 800",
+    "1600 × 1000",
+    "1920 × 1200",
+    "2560 × 1600",
+    "3840 × 2400",
+  ],
+};
+
+const resulations5 = {
+  name: "16:9",
+  items: [
+    "1280 × 1024",
+    "1600 × 1280",
+    "1920 × 1536",
+    "2560 × 2048",
+    "3840 × 3072",
+  ],
+};
 
 const WallpaperSidebarUi = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="bg-[#121212] lg:bg-[#00000033] w-full min-h-[802px] max-h-[802px] max-w-[347px] min-w-[347px] rounded-[10px] pt-[15px] px-[19px] pb-[23px] overflow-y-auto">
+    <div className="bg-[#121212] lg:bg-[#00000033] w-full min-h-[802px] max-h-[802px] max-w-[347px] min-w-[347px] rounded-[10px] pt-[15px] px-[19px] pb-[23px] scroll_off">
       <h1 className="text-center font-bakbak-one text-[12px] text-white">
         Posted by
       </h1>
@@ -87,17 +84,21 @@ const WallpaperSidebarUi = () => {
           </Button>
         </div>
       </div>
-      <div className="border-t-[1px] border-[#393939] w-full mt-[22px] mb-[19px] hidden lg:block"></div>
+      <div className="border-t-[1px] border-[#393939] w-full mt-[20px] mb-[15px] hidden lg:block"></div>
 
-      <h1 className="text-center font-bakbak-one text-[15px] text-[#CCC]">
-        Dimensions
-      </h1>
+      {!open && (
+        <>
+          <h1 className="text-center font-bakbak-one text-[15px] text-[#CCC]">
+            Dimensions
+          </h1>
 
-      <h1 className="text-center font-bakbak-one mt-[9px] text-[15px] text-[#606060]">
-        3840 x 2160
-      </h1>
+          <h1 className="text-center font-bakbak-one mt-[9px] text-[15px] text-[#606060]">
+            3840 x 2160
+          </h1>
+        </>
+      )}
 
-      <div className="flex items-center justify-center gap-x-[3px] mt-[8px]">
+      <div className="flex items-center justify-center gap-x-[3px] mt-[5px]">
         <h1 className="text-[12px] font-bakbak-one text-[#CCC]">
           Size Configuration
         </h1>
@@ -119,7 +120,109 @@ const WallpaperSidebarUi = () => {
           </h1>
 
           <div className="mt-[20px] grid grid-cols-3 gap-x-[15px] gap-y-[9px] max-w-[279px] w-full mx-auto">
-            {resulations.map((res, index) => (
+            <div className="h-fit">
+              <div className="w-[83px] h-[29px] flex justify-center items-center">
+                <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
+                  {resulations1.name}
+                </h1>
+              </div>
+
+              <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
+                {resulations1.items.map((item, i) => (
+                  <div
+                    key={i}
+                    className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                  >
+                    <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
+                      {item}
+                    </h1>
+                  </div>
+                ))}
+              </div>
+              <div className="w-[83px] h-[29px] flex justify-center items-center">
+                <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
+                  {resulations2.name}
+                </h1>
+              </div>
+
+              <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
+                {resulations2.items.map((item, i) => (
+                  <div
+                    key={i}
+                    className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                  >
+                    <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
+                      {item}
+                    </h1>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-fit col-span-2 grid grid-cols-2 gap-x-[15px] gap-y-[9px]">
+              <div>
+                <div className="w-[83px] h-[29px] flex justify-center items-center">
+                  <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
+                    {resulations3.name}
+                  </h1>
+                </div>
+
+                <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
+                  {resulations3.items.map((item, i) => (
+                    <div
+                      key={i}
+                      className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                    >
+                      <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
+                        {item}
+                      </h1>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="w-[83px] h-[29px] flex justify-center items-center">
+                  <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
+                    {resulations4.name}
+                  </h1>
+                </div>
+
+                <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
+                  {resulations4.items.map((item, i) => (
+                    <div
+                      key={i}
+                      className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                    >
+                      <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
+                        {item}
+                      </h1>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* // last part */}
+              <div className="col-span-2">
+                <div className="w-[83px] h-fit flex justify-center items-center mx-auto">
+                  <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
+                    {resulations5.name}
+                  </h1>
+                </div>
+                <div className="grid grid-cols-2 gap-y-[10px] h-fit mt-[5px]">
+                  {resulations5.items.map((item, i) => (
+                    <div
+                      key={i}
+                      className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                    >
+                      <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
+                        {item}
+                      </h1>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {/* {resulations.map((res, index) => (
               <div key={index} className="h-fit">
                 <div className="w-[83px] h-[29px] flex justify-center items-center">
                   <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
@@ -127,7 +230,7 @@ const WallpaperSidebarUi = () => {
                   </h1>
                 </div>
 
-                <div className="grid grid-cols-1 gap-y-[16px] h-fit mt-[9px]">
+                <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
                   {res.items.map((item, i) => (
                     <div
                       key={i}
@@ -149,7 +252,7 @@ const WallpaperSidebarUi = () => {
                         </h1>
                       </div>
 
-                      <div className="grid grid-cols-1 gap-y-[16px] h-fit mt-[9px]">
+                      <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
                         {res?.children?.items.map((item, i) => (
                           <div
                             key={i}
@@ -165,7 +268,7 @@ const WallpaperSidebarUi = () => {
                   </>
                 )}
               </div>
-            ))}
+            ))} */}
           </div>
 
           <div className="max-w-[265px] w-full border-t-[1px] border-[#939393] mt-[23px] mx-auto"></div>
