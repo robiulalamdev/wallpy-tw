@@ -1114,3 +1114,25 @@ export const iFiledGalary = (
     </defs>
   </svg>
 );
+
+export const iUploadUp = (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 15 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_1_17651)">
+      <path
+        d="M5.625 10H9.375V6.25H11.875L7.5 1.875L3.125 6.25H5.625V10ZM3.125 11.25H11.875V12.5H3.125V11.25Z"
+        fill="#C4C4C4"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_1_17651">
+        <rect width="15" height="15" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);

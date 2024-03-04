@@ -6,6 +6,7 @@ import {
   iChecked,
   iCloseSm,
   iFiledGalary,
+  iUploadUp,
 } from "../../utils/icons/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -121,14 +122,14 @@ const UploadProggressArea = ({ step, setStep, files, setFiles }) => {
             </h1>
             <div className="border-t-[1px] border-[#5A5A5A] mt-[32px] mb-[32px] hidden md:block"></div>
 
-            <div className="flex justify-center items-center gap-x-[23px] mt-[45px] md:mt-[32px]">
+            <div className="flex justify-center items-center gap-x-[23px] mt-[45px] md:mt-[32px] mb-2">
               <div
                 onClick={() => setUpload(upload ? navigate("/profile") : true)}
                 className={`${
                   files.length > 0 ? "bg-[#2924FF]" : "bg-[#5A5A5A]"
-                } w-[129px] h-[38px] rounded-[5px] text-[#C4C4C4] text-[15px] font-bakbak-one  md:flex justify-center items-center cursor-pointer hidden md:inline-block`}
+                } w-[129px] h-[38px] rounded-[5px] text-[#C4C4C4] text-[15px] font-bakbak-one  md:flex justify-center items-center cursor-pointer hidden md:inline-block gap-[5px]`}
               >
-                Upload
+                Upload {iUploadUp}
               </div>
               {upload && (
                 <div
