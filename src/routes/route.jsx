@@ -22,6 +22,7 @@ import Messages from "../pages/Messages/Messages";
 import Wallpaper from "../pages/Wallpaper/Wallpaper";
 import SearchWallpapers from "../pages/Wallpapers/SearchWallpapers";
 import Profile from "../pages/Profile/Profile";
+import OfficialBrandProfile from "../pages/OfficialBrandProfile/OfficialBrandProfile";
 
 export const route = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ export const route = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/official-brand-profile",
+        element: <OfficialBrandProfile />,
       },
     ],
   },
