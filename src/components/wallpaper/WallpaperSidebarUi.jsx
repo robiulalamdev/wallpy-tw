@@ -222,53 +222,6 @@ const WallpaperSidebarUi = () => {
                 </div>
               </div>
             </div>
-            {/* {resulations.map((res, index) => (
-              <div key={index} className="h-fit">
-                <div className="w-[83px] h-[29px] flex justify-center items-center">
-                  <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
-                    {res.name}
-                  </h1>
-                </div>
-
-                <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
-                  {res.items.map((item, i) => (
-                    <div
-                      key={i}
-                      className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
-                    >
-                      <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                        {item}
-                      </h1>
-                    </div>
-                  ))}
-                </div>
-
-                {res?.children && (
-                  <>
-                    <div className="h-fit">
-                      <div className="w-[83px] h-[29px] flex justify-center items-center">
-                        <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
-                          {res?.children.name}
-                        </h1>
-                      </div>
-
-                      <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
-                        {res?.children?.items.map((item, i) => (
-                          <div
-                            key={i}
-                            className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
-                          >
-                            <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                              {item}
-                            </h1>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))} */}
           </div>
 
           <div className="max-w-[265px] w-full border-t-[1px] border-[#939393] mt-[23px] mx-auto"></div>

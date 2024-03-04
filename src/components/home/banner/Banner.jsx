@@ -14,7 +14,7 @@ const Banner = () => {
           <div
             onClick={() => navigate("/wallpaper")}
             key={index}
-            className="w-full max-w-[115px] h-[152px] md:max-w-[360px] 2xl:h-[190px] overflow-hidden rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px]"
+            className="w-full h-[152px] 2xl:h-[190px] overflow-hidden rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px]"
           >
             <img
               src={bn.img}

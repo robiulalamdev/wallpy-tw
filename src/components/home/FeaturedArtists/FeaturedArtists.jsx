@@ -32,12 +32,12 @@ const FeaturedArtists = () => {
               <div className="w-[10px] h-[10.109px] md:w-[18.242px] md:h-[17.094px]">
                 {iVerified}
               </div>
-              <p className="text-white text-[10px] md:text-[15px] font-bakbak-one font-bold">
+              <p className="text-white text-[10px] md:text-[15px] font-bakbak-one">
                 {artist.name}
               </p>
             </div>
             <div className="flex justify-center items-center mt-[8px] md:mt-[36px]">
-              <Button className="w-[77px] h-[25px] md:w-[92px] md:h-[31px] shadow-none hover:shadow-none font-bakbak-one font-bold !text-white text-[8px]  md:text-[10px] normal-case p-0 rounded-[15px] bg-[#131313]">
+              <Button className="w-[77px] h-[25px] md:w-[107px] md:h-[31px] shadow-none hover:shadow-none font-normal font-bakbak-one !text-[#FFF] text-[8px]  md:text-[13px] normal-case p-0 rounded-[15px] bg-[#131313]">
                 View Profile
               </Button>
             </div>

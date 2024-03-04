@@ -11,11 +11,10 @@ const MainLayout = () => {
         backgroundImage: `url(${bg})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
-        // backgroundSize: "100% 3923px",
       }}
     >
       <div>
-        <div className="bg-transparent w-full h-full max-w-[430px] md:max-w-theme mx-auto px-[12px] md:px-[42px] 2xl:px-[6vw]">
+        <div className="bg-transparent w-full h-full max-w-[430px] md:max-w-theme mx-auto px-[12px] md:px-[25px] lg:px-[40px] xl:px-[55px] 2xl:px-[75px]">
           <Outlet />
           <Footer />
         </div>
