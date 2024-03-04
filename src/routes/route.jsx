@@ -24,6 +24,7 @@ import SearchWallpapers from "../pages/Wallpapers/SearchWallpapers";
 import Profile from "../pages/Profile/Profile";
 import OfficialBrandProfile from "../pages/OfficialBrandProfile/OfficialBrandProfile";
 import Upload from "../pages/Upload/Upload";
+import DraftAndPublish from "../pages/Upload/DraftAndPublish";
 
 export const route = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const route = createBrowserRouter([
       {
         path: "/upload",
         element: <Upload />,
+      },
+      {
+        path: "/upload/draft-and-publish",
+        element: <DraftAndPublish />,
       },
     ],
   },

@@ -1136,3 +1136,47 @@ export const iUploadUp = (
     </defs>
   </svg>
 );
+
+export const iGrayPlush = (
+  <svg
+    width="17"
+    height="17"
+    viewBox="0 0 17 17"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_1_16754)">
+      <path
+        d="M13.4587 9.20817H9.20866V13.4582H7.79199V9.20817H3.54199V7.7915H7.79199V3.5415H9.20866V7.7915H13.4587V9.20817Z"
+        fill="#323232"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_1_16754">
+        <rect width="17" height="17" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export const iGrayClose = (
+  <svg
+    width="10"
+    height="10"
+    viewBox="0 0 10 10"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_1_16771)">
+      <path
+        d="M7.91634 2.671L7.32884 2.0835L4.99967 4.41266L2.67051 2.0835L2.08301 2.671L4.41217 5.00016L2.08301 7.32933L2.67051 7.91683L4.99967 5.58766L7.32884 7.91683L7.91634 7.32933L5.58717 5.00016L7.91634 2.671Z"
+        fill="#727272"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_1_16771">
+        <rect width="10" height="10" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
