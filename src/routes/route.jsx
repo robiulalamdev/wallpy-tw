@@ -23,6 +23,7 @@ import Wallpaper from "../pages/Wallpaper/Wallpaper";
 import SearchWallpapers from "../pages/Wallpapers/SearchWallpapers";
 import Profile from "../pages/Profile/Profile";
 import OfficialBrandProfile from "../pages/OfficialBrandProfile/OfficialBrandProfile";
+import Upload from "../pages/Upload/Upload";
 
 export const route = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ export const route = createBrowserRouter([
       {
         path: "/official-brand-profile",
         element: <OfficialBrandProfile />,
+      },
+      {
+        path: "/upload",
+        element: <Upload />,
       },
     ],
   },
