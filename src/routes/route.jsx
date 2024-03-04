@@ -21,6 +21,7 @@ import Contact from "../pages/Contact/Contact";
 import Messages from "../pages/Messages/Messages";
 import Wallpaper from "../pages/Wallpaper/Wallpaper";
 import SearchWallpapers from "../pages/Wallpapers/SearchWallpapers";
+import Profile from "../pages/Profile/Profile";
 
 export const route = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ export const route = createBrowserRouter([
       {
         path: "/wallpapers/:search",
         element: <SearchWallpapers />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

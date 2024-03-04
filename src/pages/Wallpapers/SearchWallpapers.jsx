@@ -25,21 +25,27 @@ const SearchWallpapers = () => {
         {tab3 === "NSFW" ? (
           <SearchWallpaperNsfwAria />
         ) : (
-          <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-x-[14px] gap-y-[14px] md:gap-x-[16px] md:gap-y-[32px] lg:gap-x-[26px] lg:gap-y-[42px]">
-            {wallpapers.map((item, index) => (
-              <div
-                onClick={() => navigate("/wallpaper")}
-                key={index}
-                className={`w-full h-[152px] md:h-[170px] rounded-[5px] md:rounded-[10px] lg:rounded-[15px] overflow-hidden`}
-              >
-                <img
-                  src={item.thumbnail}
-                  alt="wallpaper"
-                  className="w-full h-full rounded-[5px] md:rounded-[10px] lg:rounded-[15px] object-cover hover:scale-110 duration-300 cursor-pointer"
-                />
-              </div>
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-x-[14px] gap-y-[14px] md:gap-x-[16px] md:gap-y-[32px] lg:gap-x-[26px] lg:gap-y-[42px]">
+              {wallpapers.map((item, index) => (
+                <div
+                  onClick={() => navigate("/wallpaper")}
+                  key={index}
+                  className={`w-full h-[152px] md:h-[170px] rounded-[5px] md:rounded-[10px] lg:rounded-[15px] overflow-hidden`}
+                >
+                  <img
+                    src={item.thumbnail}
+                    alt="wallpaper"
+                    className="w-full h-full rounded-[5px] md:rounded-[10px] lg:rounded-[15px] object-cover hover:scale-110 duration-300 cursor-pointer"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-[#000000] w-[128px] h-[42px] rounded-[100px] mx-auto mt-[27px] flex justify-center items-center font-bakbak-one text-[12px] text-[#CCC] cursor-pointer md:hidden">
+              Load More
+            </div>
+          </>
         )}
       </div>
     </>
