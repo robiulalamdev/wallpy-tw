@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { iHrFooter } from "../../../utils/icons/icons";
 
 const EndFooter = () => {
@@ -8,15 +9,21 @@ const EndFooter = () => {
         <p className="text-[#D9D9D9] text-[8px] sm:text-[10px] md:text-[15px] font-roboto font-medium">
           © The Wallpapers Society
         </p>
-        <p className="text-[#D9D9D9] text-[8px] sm:text-[10px] md:text-[15px] font-roboto font-medium">
-          Community Rules
-        </p>
-        <p className="text-[#D9D9D9] text-[8px] sm:text-[10px] md:text-[15px] font-roboto font-medium">
-          Privacy Policy
-        </p>
-        <p className="text-[#D9D9D9] text-[8px] sm:text-[10px] md:text-[15px] font-roboto font-medium">
-          Terms and Conditions
-        </p>
+        <Link to="/community-rules">
+          <p className="text-[#D9D9D9] text-[8px] sm:text-[10px] md:text-[15px] font-roboto font-medium">
+            Community Rules
+          </p>
+        </Link>
+        <Link to="/privacy-policy">
+          <p className="text-[#D9D9D9] text-[8px] sm:text-[10px] md:text-[15px] font-roboto font-medium">
+            Privacy Policy
+          </p>
+        </Link>
+        <Link to="/terms-and-conditions">
+          <p className="text-[#D9D9D9] text-[8px] sm:text-[10px] md:text-[15px] font-roboto font-medium">
+            Terms and Conditions
+          </p>
+        </Link>
       </div>
     </div>
   );

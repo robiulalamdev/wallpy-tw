@@ -4,8 +4,10 @@ import logo from "../../../assets/brand/logo.png";
 import profile from "../../../assets/images/global/header/profile.gif";
 import HeaderDrawer from "./HeaderDrawer";
 import { useNavigate } from "react-router-dom";
+import HeaderProfile from "./HeaderProfile";
 
 const TitleHeader = () => {
+  const [isLoagged, setIsLogged] = useState(localStorage.getItem("wps") || "");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   return (
@@ -22,13 +24,7 @@ const TitleHeader = () => {
           THE WALLPAPER SOCIETY
         </h1>
 
-        <div className="rounded-full size-[62px] flex justify-center items-center bg-[#00000033]">
-          <img
-            src={profile}
-            alt="profile"
-            className="size-[50px] rounded-full object-cover"
-          />
-        </div>
+        {isLoagged && <HeaderProfile />}
       </div>
 
       <div className="lg:hidden my-[23px]">

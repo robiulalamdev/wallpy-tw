@@ -31,9 +31,11 @@ import {
   PopoverHandler,
 } from "@material-tailwind/react";
 import SimpleHeader from "../../components/shared/headers/SimpleHeader";
+import { Link, useNavigate } from "react-router-dom";
 
 const Wallpaper = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const shareRef = useRef();
   return (
@@ -201,6 +203,7 @@ const Wallpaper = () => {
         <div className="grid grid-cols-3 gap-x-[16px] md:gap-x-[42px] lg:gap-x-[83px] mt-[17px] md:mt-[32px] lg:mt-[59px]">
           <div className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]">
             <img
+              onClick={() => navigate("/wallpaper")}
               src={img1}
               alt="image"
               className="w-full h-full object-cover rounded-[5px] md:rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
@@ -208,6 +211,7 @@ const Wallpaper = () => {
           </div>
           <div className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]">
             <img
+              onClick={() => navigate("/wallpaper")}
               src={img2}
               alt="image"
               className="w-full h-full object-cover rounded-[5px] md:rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
@@ -215,6 +219,7 @@ const Wallpaper = () => {
           </div>
           <div className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]">
             <img
+              onClick={() => navigate("/wallpaper")}
               src={img3}
               alt="image"
               className="w-full h-full object-cover rounded-[5px] md:rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
@@ -222,9 +227,11 @@ const Wallpaper = () => {
           </div>
         </div>
 
-        <Button className="bg-[#000000] !text-[#ccc] font-bakbak-one text-[12px] w-[97px] h-[32px] rounded-[15px] shadow-none hover:shadow-none normal-case font-normal mt-[22px] text-nowrap !p-0 mx-auto hidden md:block">
-          View more
-        </Button>
+        <Link to="/wallpapers/search">
+          <Button className="bg-[#000000] !text-[#ccc] font-bakbak-one text-[12px] w-[97px] h-[32px] rounded-[15px] shadow-none hover:shadow-none normal-case font-normal mt-[22px] text-nowrap !p-0 mx-auto hidden md:block">
+            View more
+          </Button>
+        </Link>
       </div>
     </>
   );

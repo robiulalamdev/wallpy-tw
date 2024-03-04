@@ -2,8 +2,10 @@ import { Button } from "@material-tailwind/react";
 import img1 from "../../../assets/images/home/official-wellpaper/wimg1.png";
 import img2 from "../../../assets/images/home/official-wellpaper/wimg2.png";
 import img3 from "../../../assets/images/home/official-wellpaper/wimg3.png";
+import { useNavigate } from "react-router-dom";
 
 const OfficialWallpapers = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <h1 className="text-white text-center font-bakbak-one text-[15px] md:text-[35px] leading-[21px] mt-[27px] mb-[24px] md:mt-[103px] md:mb-[58px] font-normal">
@@ -62,7 +64,10 @@ const OfficialWallpapers = () => {
       </div>
 
       <div className="flex justify-center items-center pt-[22px] md:pt-[46px]">
-        <Button className="w-[171px] h-[37px] md:w-[225px] md:h-[49px] shadow-none hover:shadow-none font-lato font-bold !text-white md:!text-[#949494] text-[12px]  md:text-[15px] leading-[14.4px] normal-case p-0 rounded-[100px] bg-[#00000080]">
+        <Button
+          onClick={() => navigate("/wallpapers/search")}
+          className="w-[171px] h-[37px] md:w-[225px] md:h-[49px] shadow-none hover:shadow-none font-lato font-bold !text-white md:!text-[#949494] text-[12px]  md:text-[15px] leading-[14.4px] normal-case p-0 rounded-[100px] bg-[#00000080]"
+        >
           More Official Wallpapers
         </Button>
       </div>

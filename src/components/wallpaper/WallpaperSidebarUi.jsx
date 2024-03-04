@@ -8,6 +8,7 @@ import {
   iWallpaperClose,
 } from "../../utils/icons/icons";
 import { Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const resulations1 = {
   name: "Ultra Wide",
@@ -79,9 +80,11 @@ const WallpaperSidebarUi = () => {
             <h1 className="text-white font-bakbak-one text-[20px]">krs</h1>
             {iVerifiedPro}
           </div>
-          <Button className="w-[97px] h-[32px] shadow-none hover:shadow-none text-white bg-[#000000] font-bakbak-one text-[10px] normal-case font-normal p-0 rounded-[15px]">
-            View Profile
-          </Button>
+          <Link to="/profile">
+            <Button className="w-[97px] h-[32px] shadow-none hover:shadow-none text-white bg-[#000000] font-bakbak-one text-[10px] normal-case font-normal p-0 rounded-[15px]">
+              View Profile
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="border-t-[1px] border-[#393939] w-full mt-[20px] mb-[15px] hidden lg:block"></div>

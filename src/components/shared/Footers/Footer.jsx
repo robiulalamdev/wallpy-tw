@@ -29,7 +29,7 @@ const Footer = () => {
                 Favorites
               </p>
             </Link>
-            <Link to="/message">
+            <Link to="/messages">
               <p className="text-[#939393] font-bakbak-one text-[15px] mt-[7px] md:mt-[4px]">
                 Messages
               </p>
@@ -44,7 +44,7 @@ const Footer = () => {
                 About
               </p>
             </Link>
-            <Link to="/contact">
+            <Link to="/profile">
               <p className="text-[#939393] font-bakbak-one text-[15px] mt-[7px] md:mt-[4px]">
                 Contact
               </p>

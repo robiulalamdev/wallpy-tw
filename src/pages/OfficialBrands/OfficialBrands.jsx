@@ -3,11 +3,14 @@ import { Button } from "@material-tailwind/react";
 import { iSearch } from "../../utils/icons/icons";
 import TitleHeader from "../../components/shared/headers/TitleHeader";
 import OfficialBrandSearch from "../../components/officialBrands/OfficialBrandSearch";
+import { Link, useNavigate } from "react-router-dom";
 
 const OfficialBrands = () => {
   const characters = Array.from({ length: 26 }, (_, index) =>
     String.fromCharCode("A".charCodeAt(0) + index)
   );
+
+  const navigate = useNavigate();
   return (
     <>
       <TitleHeader />
@@ -43,9 +46,10 @@ const OfficialBrands = () => {
               } ${index === 2 && "col-span-3"}`}
             >
               <div
+                onClick={() => navigate("/official-brand-profile")}
                 className={`w-full ${
                   index === 0 ? "h-[210px]" : "h-[92px]"
-                } md:h-[257px] !rounded-[10px] md:rounded-[30px] overflow-hidden`}
+                } md:h-[257px] !rounded-[10px] md:rounded-[30px] overflow-hidden cursor-pointer`}
               >
                 <img
                   src={item.img}
@@ -53,9 +57,11 @@ const OfficialBrands = () => {
                   className="w-full h-full !rounded-[10px] md:rounded-[30px] object-cover"
                 />
               </div>
-              <h1 className="font-bold font-lato text-[10px] md:text-[20px] text-white mt-[3px] md:mt-[11px] text-center">
-                {item.name}
-              </h1>
+              <Link to="/official-brand-profile">
+                <h1 className="font-bold font-lato text-[10px] md:text-[20px] text-white mt-[3px] md:mt-[11px] text-center">
+                  {item.name}
+                </h1>
+              </Link>
             </div>
           ))}
         </div>

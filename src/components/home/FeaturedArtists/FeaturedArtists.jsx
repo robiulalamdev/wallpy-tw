@@ -2,8 +2,10 @@ import React from "react";
 import { artists } from "../../../utils/data/data";
 import { iVerified } from "../../../utils/icons/icons";
 import { Button } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 const FeaturedArtists = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <h1 className="text-white text-center font-bakbak-one text-[15px] md:text-[35px] leading-[21px] font-normal mt-[39px] mb-[21px] md:mt-[63px] md:mb-[54px]">
@@ -37,7 +39,10 @@ const FeaturedArtists = () => {
               </p>
             </div>
             <div className="flex justify-center items-center mt-[8px] md:mt-[36px]">
-              <Button className="w-[77px] h-[25px] md:w-[107px] md:h-[31px] shadow-none hover:shadow-none font-normal font-bakbak-one !text-[#FFF] text-[8px]  md:text-[13px] normal-case p-0 rounded-[15px] bg-[#131313]">
+              <Button
+                onClick={() => navigate("/profile")}
+                className="w-[77px] h-[25px] md:w-[107px] md:h-[31px] shadow-none hover:shadow-none font-normal font-bakbak-one !text-[#FFF] text-[8px]  md:text-[13px] normal-case p-0 rounded-[15px] bg-[#131313]"
+              >
                 View Profile
               </Button>
             </div>
