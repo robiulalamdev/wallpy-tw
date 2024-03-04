@@ -6,9 +6,9 @@ import ProfileBannerSocials from "./ProfileBannerSocials";
 const ProfileBanner = () => {
   return (
     <div>
-      <div className="pl-[10px] md:pl-[29px] relative">
+      <div className="pl-[4px] md:pl-[29px] relative">
         <div
-          className="h-[300px] w-full rounded-[10px]"
+          className="h-[106px] md:h-[300px] w-full rounded-[10px]"
           style={{
             background: `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${banner}), lightgray 50% / cover no-repeat`,
           }}
