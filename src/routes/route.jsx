@@ -25,6 +25,8 @@ import Profile from "../pages/Profile/Profile";
 import OfficialBrandProfile from "../pages/OfficialBrandProfile/OfficialBrandProfile";
 import Upload from "../pages/Upload/Upload";
 import DraftAndPublish from "../pages/Upload/DraftAndPublish";
+import AccountSettings from "../pages/AccountSettings/AccountSettings";
+import AccountVerification from "../pages/AccountVerification/AccountVerification";
 
 export const route = createBrowserRouter([
   {
@@ -92,6 +94,14 @@ export const route = createBrowserRouter([
       {
         path: "/upload/draft-and-publish",
         element: <DraftAndPublish />,
+      },
+      {
+        path: "/account-settings",
+        element: <AccountSettings />,
+      },
+      {
+        path: "/account-verification",
+        element: <AccountVerification />,
       },
     ],
   },

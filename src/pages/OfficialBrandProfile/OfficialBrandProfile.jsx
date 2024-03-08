@@ -2,7 +2,6 @@ import { Button } from "@material-tailwind/react";
 import SimpleHeader from "../../components/shared/headers/SimpleHeader";
 import { useState } from "react";
 import { iSearch } from "../../utils/icons/icons";
-import { wallpapers } from "../../utils/data/wallpapers";
 import { useNavigate } from "react-router-dom";
 import OfficialBrandBanner from "../../components/officialBrandProfile/OfficialBrandBanner";
 import {
