@@ -75,12 +75,12 @@ const HeaderAU = () => {
                         Messages
                       </p>
                     </Link>
-                    <Link to="/the-vault">
+                    <Link to="/vault">
                       <p className="text-white text-[15px] font-bakbak-one mt-[20px]">
                         The Vault
                       </p>
                     </Link>
-                    <Link to="/settings">
+                    <Link to="/account-settings">
                       <p className="text-white text-[15px] font-bakbak-one mt-[20px] mb-[11px]">
                         Settings
                       </p>

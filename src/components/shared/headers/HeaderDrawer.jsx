@@ -75,12 +75,12 @@ const HeaderDrawer = ({ open, close }) => {
                       Messages
                     </p>
                   </Link>
-                  <Link to="/the-vault">
+                  <Link to="/vault">
                     <p className="text-white text-[20px] font-bakbak-one mt-[27px]">
                       The Vault
                     </p>
                   </Link>
-                  <Link to="/settings">
+                  <Link to="/account-settings">
                     <p className="text-white text-[20px] font-bakbak-one mt-[27px]">
                       Settings
                     </p>

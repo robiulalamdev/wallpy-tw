@@ -48,7 +48,7 @@ const ProfileBanner = () => {
 
           <div className="max-w-[419px] mx-auto w-full min-h-[46px] max-h-[46px] bg-[#00000033] rounded-[10px] lg:flex justify-between items-center px-[14px] hidden lg:inline-block">
             <div className="flex items-center gap-x-[12px]">
-              <h1 className="text-[#ccc] font-bakbak-one text-[12px] font-semibold">
+              <h1 className="text-[#ccc] font-bakbak-one text-[12px]">
                 Uploads:
               </h1>{" "}
               <span className="text-[#939393] font-bakbak-one text-[12px]">
@@ -56,7 +56,7 @@ const ProfileBanner = () => {
               </span>
             </div>
             <div className="flex items-center gap-x-[12px]">
-              <h1 className="text-[#ccc] font-bakbak-one text-[12px] font-semibold">
+              <h1 className="text-[#ccc] font-bakbak-one text-[12px]">
                 Last Active:
               </h1>{" "}
               <span className="text-[#939393] font-bakbak-one text-[12px]">
@@ -64,7 +64,7 @@ const ProfileBanner = () => {
               </span>
             </div>
             <div className="flex items-center gap-x-[12px]">
-              <h1 className="text-[#ccc] font-bakbak-one text-[12px] font-semibold">
+              <h1 className="text-[#ccc] font-bakbak-one text-[12px]">
                 Member Since:
               </h1>{" "}
               <span className="text-[#939393] font-bakbak-one text-[12px]">

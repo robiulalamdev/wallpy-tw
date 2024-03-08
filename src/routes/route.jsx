@@ -93,7 +93,7 @@ export const route = createBrowserRouter([
         element: <Upload />,
       },
       {
-        path: "/upload/draft-and-publish",
+        path: "/vault",
         element: <DraftAndPublish />,
       },
       {
