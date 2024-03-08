@@ -111,7 +111,6 @@ export const route = createBrowserRouter([
     ],
   },
 
-  // auth routes
   {
     path: "/",
     element: <AuthLayout />,
