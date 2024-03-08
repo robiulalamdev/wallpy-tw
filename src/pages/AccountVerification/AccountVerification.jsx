@@ -8,7 +8,7 @@ const AccountVerification = () => {
   return (
     <>
       <RulesHeader />
-      <div className="acs-container">
+      <div className="">
         <h1 className="text-[15px] md:text-[25px] text-center font-bakbak-one text-[#FFF] mb-[15px] md:mb-[33px]">
           Request Verification
         </h1>

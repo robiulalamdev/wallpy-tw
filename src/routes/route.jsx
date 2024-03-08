@@ -27,6 +27,7 @@ import Upload from "../pages/Upload/Upload";
 import DraftAndPublish from "../pages/Upload/DraftAndPublish";
 import AccountSettings from "../pages/AccountSettings/AccountSettings";
 import AccountVerification from "../pages/AccountVerification/AccountVerification";
+import MediaCenter from "../pages/MediaCenter/MediaCenter";
 
 export const route = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ export const route = createBrowserRouter([
       {
         path: "/account-verification",
         element: <AccountVerification />,
+      },
+      {
+        path: "/media-center",
+        element: <MediaCenter />,
       },
     ],
   },
