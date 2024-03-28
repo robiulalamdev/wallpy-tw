@@ -1,11 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import bg from "../../../assets/images/auth/login/bg.png";
 import { iApple, iFacebook, iGoogle, iInfo } from "../../../utils/icons/icons";
 import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { usePostLoginMutation } from "../../../redux/features/users/usersApi";
+import { TOKEN_NAME } from "../../../lib/config";
+import { SpinnerCircularFixed } from "spinners-react";
+import { AuthContext } from "../../../contextApi/AuthContext";
 
 const Login = () => {
+  const {
+    handleSubmit,
+    register,
+    setError,
+    formState: { errors },
+  } = useForm();
+
+  const [postLogin, { isLoading }] = usePostLoginMutation();
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogin = async (data) => {
+    const options = {
+      data: data,
+    };
+
+    const result = await postLogin(options);
+    if (result?.data?.success) {
+      if (result?.data?.data?.accessToken) {
+        localStorage.setItem(TOKEN_NAME, result?.data?.data?.accessToken);
+        setUser(result?.data?.data?.user);
+        navigate("/");
+      }
+    } else {
+      if (result?.data?.type === "email") {
+        setError("email", result?.data?.message);
+      }
+      if (result?.data?.type === "password") {
+        setError("password", result?.data?.message);
+      }
+    }
+    if (result?.error?.data?.type === "email") {
+      const message = result?.error?.data?.message;
+      setError("email", message);
+    }
+  };
+
   return (
     <div>
       <h1 className="text-[30px] text-white font-bakbak-one mb-[17px] mt-[27px] text-center md:hidden">
@@ -56,13 +98,18 @@ const Login = () => {
             </Link>
           </div>
 
-          <div className="max-w-[400px] md:max-w-[326px] w-full mx-auto mt-[13px] md:mt-[10px]">
+          <form
+            onSubmit={handleSubmit(handleLogin)}
+            className="max-w-[400px] md:max-w-[326px] w-full mx-auto mt-[13px] md:mt-[10px]"
+          >
             <div className="flex flex-col items-center md:items-start gap-y-[17px]">
               <p className="font-bakbak-one text-[12px] text-[#373737]">
                 Email
               </p>
               <input
+                {...register("email", { required: true })}
                 type="email"
+                required={true}
                 placeholder="wallpapers@thewallpapersociety.com"
                 className="outline-none w-full h-[45px] rounded-[10px] bg-white placeholder:text-[#3737374D] text-[#3737374D] text-[12px] placeholder:text-[12px] px-[15px] font-bakbak-one"
               />
@@ -73,28 +120,48 @@ const Login = () => {
                 Password
               </p>
               <input
+                {...register("password", { required: true })}
                 type="password"
                 placeholder="*****************"
+                required={true}
                 className="outline-none w-full h-[45px] rounded-[10px] bg-white placeholder:text-[#3737374D] text-[#3737374D] text-[12px] placeholder:text-[12px] px-[15px] font-bakbak-one"
               />
             </div>
 
-            <p className="text-center text-[12px] text-[#F00] mt-[15px] font-lato">
-              Sorry, the username or password you entered is incorrect.{" "}
-            </p>
+            {errors.password && (
+              <p className="text-center text-[12px] text-[#F00] mt-[15px] font-lato">
+                Sorry, the password you entered is incorrect.{" "}
+              </p>
+            )}
+            {errors.email && (
+              <p className="text-center text-[12px] text-[#F00] mt-[15px] font-lato">
+                User not found!
+              </p>
+            )}
 
             <Button
-              onClick={() => {
-                localStorage.setItem(
-                  "wps",
-                  JSON.stringify({
-                    email: "user@gmail.com",
-                    password: "123456",
-                  })
-                );
-              }}
-              className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[44px] md:mt-[42px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one"
+              type="submit"
+              // onClick={() => {
+              //   localStorage.setItem(
+              //     "wps",
+              //     JSON.stringify({
+              //       email: "user@gmail.com",
+              //       password: "123456",
+              //     })
+              //   );
+              // }}
+              disabled={isLoading}
+              className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[44px] md:mt-[42px] mx-auto inline-block rounded-[10px] text-white text-[12px] font-bakbak-one flex items-center justify-center gap-2"
             >
+              {isLoading && (
+                <SpinnerCircularFixed
+                  size={20}
+                  thickness={180}
+                  speed={300}
+                  color="rgba(255, 255, 255, 1)"
+                  secondaryColor="rgba(255, 255, 255, 0.42)"
+                />
+              )}{" "}
               Sign In
             </Button>
 
@@ -103,28 +170,37 @@ const Login = () => {
             </p>
 
             <div className="mt-[34px] md:mt-[48px] flex flex-col items-center gap-[12px]">
-              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-[#1877F2] p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
+              <Button
+                type="button"
+                className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-[#1877F2] p-0 normal-case hover:shadow-none shadow-none rounded-[5px]"
+              >
                 {iFacebook}{" "}
                 <p className="text-nowrap text-[12px] font-bakbak-one text-white">
                   Sign In with Facebook
                 </p>
               </Button>
 
-              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-white p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
+              <Button
+                type="button"
+                className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-white p-0 normal-case hover:shadow-none shadow-none rounded-[5px]"
+              >
                 {iGoogle}{" "}
                 <p className="text-nowrap text-[12px] font-bakbak-one text-[#9F9F9F]">
                   Sign In with Google
                 </p>
               </Button>
 
-              <Button className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-black p-0 normal-case hover:shadow-none shadow-none rounded-[5px]">
+              <Button
+                type="button"
+                className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-black p-0 normal-case hover:shadow-none shadow-none rounded-[5px]"
+              >
                 {iApple}{" "}
                 <p className="text-nowrap text-[12px] font-bakbak-one text-white">
                   Sign In with Apple
                 </p>
               </Button>
             </div>
-          </div>
+          </form>
           <div className="flex justify-center items-center gap-x-[15px] md:gap-x-[20px] mt-[39px] md:mt-[52px]">
             <p className="text-[12px] font-roboto font-medium text-[#373737]">
               Community Rules

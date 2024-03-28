@@ -10,7 +10,11 @@ const usersApi = api.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+    getUser: builder.query({
+      query: () => `/users/me`,
+      providesTags: ["users"],
+    }),
   }),
 });
 
-export const { usePostLoginMutation } = usersApi;
+export const { usePostLoginMutation, useGetUserQuery } = usersApi;
