@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Button, Drawer } from "@material-tailwind/react";
-import { useState } from "react";
+import { useContext } from "react";
 
 import {
   iLogin,
@@ -18,9 +18,10 @@ import icon3 from "../../../assets/icons/global/header/icon3.png";
 import icon4 from "../../../assets/icons/global/header/icon4.png";
 import icon5 from "../../../assets/icons/global/header/icon5.png";
 import icon6 from "../../../assets/icons/global/header/icon6.png";
+import { AuthContext } from "../../../contextApi/AuthContext";
 
 const HeaderDrawer = ({ open, close }) => {
-  const [isLoagged, setIsLogged] = useState(localStorage.getItem("wps") || "");
+  const { logout, user } = useContext(AuthContext);
   const closeDrawer = () => close(false);
 
   return (
@@ -33,7 +34,7 @@ const HeaderDrawer = ({ open, close }) => {
       <div className="flex flex-col justify-between w-full h-full pt-[29px] px-[23px]">
         <div className=" h-fit">
           <div className="flex justify-between items-start h-fit">
-            {!isLoagged ? (
+            {!user?._id ? (
               <img
                 src={profile}
                 alt="profile"
@@ -48,7 +49,7 @@ const HeaderDrawer = ({ open, close }) => {
             </div>
           </div>
 
-          {!isLoagged ? (
+          {!user?._id ? (
             <>
               <div className="max-w-[359px] mx-auto grid grid-cols-2 mt-[46px] h-fit">
                 <div className="border-r-[1px] border-[#292D31] min-h-[164px] pl-[28px]">
@@ -119,7 +120,7 @@ const HeaderDrawer = ({ open, close }) => {
                   <p>Login</p>
                 </div>
               </Link>
-              <Link to="/register">
+              <Link to="/signup">
                 <div className="flex  items-center gap-x-[11px] text-white text-[25px] font-bakbak-one mt-[30px]">
                   {iRegister}
                   <p>Register</p>
@@ -131,10 +132,7 @@ const HeaderDrawer = ({ open, close }) => {
 
         <div className="">
           <div
-            onClick={() => {
-              setIsLogged("");
-              localStorage.removeItem("wps");
-            }}
+            onClick={() => logout()}
             className="flex items-center justify-center gap-1 font-bakbak-one text-[20px] text-[#939393] mb-[31px]"
           >
             {iLogout}

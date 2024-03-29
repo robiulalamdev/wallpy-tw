@@ -8,7 +8,15 @@ const usersApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["users"],
+      // invalidatesTags: ["users"],
+    }),
+    postSignup: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/signup`,
+        method: "POST",
+        body: data,
+      }),
+      // invalidatesTags: ["users"],
     }),
     getUser: builder.query({
       query: () => `/users/me`,

@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { iMenu, iSearch, iSearchClose } from "../../../utils/icons/icons";
 import logo from "../../../assets/brand/logo.png";
-import profile from "../../../assets/images/global/header/profile.gif";
 import HeaderDrawer from "./HeaderDrawer";
 import HeaderAU from "./HeaderAU";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import HeaderProfile from "./HeaderProfile";
+import { AuthContext } from "../../../contextApi/AuthContext";
 
 const RulesHeader = () => {
-  const [isLoagged, setIsLogged] = useState(localStorage.getItem("wps") || "");
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -36,7 +36,7 @@ const RulesHeader = () => {
           <HeaderAU />
         </div>
 
-        {isLoagged && <HeaderProfile />}
+        {user && <HeaderProfile />}
       </div>
 
       <div className="lg:hidden my-[23px]">

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import bg from "../../../assets/images/auth/login/bg.png";
 import { iApple, iFacebook, iGoogle, iInfo } from "../../../utils/icons/icons";

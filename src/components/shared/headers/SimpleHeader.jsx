@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { iMenu, iSearch, iSearchClose } from "../../../utils/icons/icons";
 import logo from "../../../assets/brand/logo.png";
 import HeaderDrawer from "./HeaderDrawer";
 import { useNavigate } from "react-router-dom";
 import HeaderProfile from "./HeaderProfile";
+import { AuthContext } from "../../../contextApi/AuthContext";
 
 const SimpleHeader = () => {
-  const [isLoagged, setIsLogged] = useState(localStorage.getItem("wps") || "");
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -27,7 +28,7 @@ const SimpleHeader = () => {
           />
         </div>
 
-        {isLoagged && <HeaderProfile />}
+        {user && <HeaderProfile />}
       </div>
 
       <div className="lg:hidden my-[23px]">
