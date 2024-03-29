@@ -36,15 +36,20 @@ const Login = () => {
       }
     } else {
       if (result?.data?.type === "email") {
-        setError("email", result?.data?.message);
+        setError("email", { type: "manual", message: result?.data?.message });
       }
       if (result?.data?.type === "password") {
-        setError("password", result?.data?.message);
+        setError("password", {
+          type: "manual",
+          message: result?.data?.message,
+        });
       }
     }
     if (result?.error?.data?.type === "email") {
-      const message = result?.error?.data?.message;
-      setError("email", message);
+      setError("email", {
+        type: "manual",
+        message: result?.error?.data?.message,
+      });
     }
   };
 
