@@ -29,6 +29,7 @@ import AccountSettings from "../pages/AccountSettings/AccountSettings";
 import AccountVerification from "../pages/AccountVerification/AccountVerification";
 import MediaCenter from "../pages/MediaCenter/MediaCenter";
 import EmailVerify from "../pages/AuthPages/Signup/EmailVerify";
+import PrivateRoute from "./PrivateRoute";
 
 export const route = createBrowserRouter([
   {
@@ -99,7 +100,11 @@ export const route = createBrowserRouter([
       },
       {
         path: "/account-settings",
-        element: <AccountSettings />,
+        element: (
+          <PrivateRoute>
+            <AccountSettings />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/account-verification",

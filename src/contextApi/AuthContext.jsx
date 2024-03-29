@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
     user,
     setUser,
     refetch,
-    isLoading,
+    isLoading: isLoading,
     logout,
   };
 

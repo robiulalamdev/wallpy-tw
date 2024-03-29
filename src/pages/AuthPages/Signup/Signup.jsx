@@ -62,7 +62,6 @@ const Signup = () => {
     }
   };
 
-  console.log(errors);
   return (
     <div>
       <h1 className="text-[30px] text-white font-bakbak-one mb-[17px] mt-[27px] text-center md:hidden">
