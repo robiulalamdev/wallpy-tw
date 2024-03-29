@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import bg from "../../../assets/images/auth/login/bg.png";
 import { iApple, iFacebook, iGoogle, iInfo } from "../../../utils/icons/icons";
@@ -9,18 +9,21 @@ import { usePostLoginMutation } from "../../../redux/features/users/usersApi";
 import { TOKEN_NAME } from "../../../lib/config";
 import { SpinnerCircularFixed } from "spinners-react";
 import { AuthContext } from "../../../contextApi/AuthContext";
+import VerifyModal from "../../../components/common/modals/VerifyModal";
 
 const Login = () => {
   const {
     handleSubmit,
     register,
     setError,
+    reset,
     formState: { errors },
   } = useForm();
 
   const [postLogin, { isLoading }] = usePostLoginMutation();
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
 
   const handleLogin = async (data) => {
     const options = {
@@ -43,6 +46,10 @@ const Login = () => {
           type: "manual",
           message: result?.data?.message,
         });
+      }
+      if (result?.data?.type === "unverified") {
+        setOpenModal(true);
+        reset();
       }
     }
     if (result?.error?.data?.type === "email") {
@@ -146,15 +153,6 @@ const Login = () => {
 
             <Button
               type="submit"
-              // onClick={() => {
-              //   localStorage.setItem(
-              //     "wps",
-              //     JSON.stringify({
-              //       email: "user@gmail.com",
-              //       password: "123456",
-              //     })
-              //   );
-              // }}
               disabled={isLoading}
               className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[44px] md:mt-[42px] mx-auto inline-block rounded-[10px] text-white text-[12px] font-bakbak-one flex items-center justify-center gap-2"
             >
@@ -219,6 +217,12 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      <VerifyModal
+        title="This Email have an account and account is unverified. Please check your email, and verify your email address"
+        open={openModal}
+        setOpen={setOpenModal}
+      />
     </div>
   );
 };

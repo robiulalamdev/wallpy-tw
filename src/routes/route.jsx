@@ -28,6 +28,7 @@ import DraftAndPublish from "../pages/Upload/DraftAndPublish";
 import AccountSettings from "../pages/AccountSettings/AccountSettings";
 import AccountVerification from "../pages/AccountVerification/AccountVerification";
 import MediaCenter from "../pages/MediaCenter/MediaCenter";
+import EmailVerify from "../pages/AuthPages/Signup/EmailVerify";
 
 export const route = createBrowserRouter([
   {
@@ -118,6 +119,7 @@ export const route = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
       { path: "/signup-confirmation", element: <SignUpConfirmation /> },
+      { path: "/verify/:token", element: <EmailVerify /> },
       {
         path: "/password-changed-success",
         element: <PasswordChangedSuccess />,

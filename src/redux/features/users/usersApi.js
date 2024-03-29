@@ -10,7 +10,8 @@ const usersApi = api.injectEndpoints({
       }),
       // invalidatesTags: ["users"],
     }),
-    postSignup: builder.mutation({
+
+    createUser: builder.mutation({
       query: ({ data }) => ({
         url: `/users/signup`,
         method: "POST",
@@ -18,6 +19,16 @@ const usersApi = api.injectEndpoints({
       }),
       // invalidatesTags: ["users"],
     }),
+
+    emailVerify: builder.mutation({
+      query: ({ token, data }) => ({
+        url: `/users//email-verify/${token}`,
+        method: "POST",
+        body: data,
+      }),
+      // invalidatesTags: ["users"],
+    }),
+
     getUser: builder.query({
       query: () => `/users/me`,
       providesTags: ["users"],
@@ -25,4 +36,9 @@ const usersApi = api.injectEndpoints({
   }),
 });
 
-export const { usePostLoginMutation, useGetUserQuery } = usersApi;
+export const {
+  usePostLoginMutation,
+  useCreateUserMutation,
+  useEmailVerifyMutation,
+  useGetUserQuery,
+} = usersApi;

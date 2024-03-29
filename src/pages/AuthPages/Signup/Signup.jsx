@@ -1,9 +1,68 @@
+import { useForm } from "react-hook-form";
 import bg from "../../../assets/images/auth/signup/bg.png";
 import { iInfo } from "../../../utils/icons/icons";
 import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../contextApi/AuthContext";
+import { useCreateUserMutation } from "../../../redux/features/users/usersApi";
+import { SpinnerCircularFixed } from "spinners-react";
+import VerifyModal from "../../../components/common/modals/VerifyModal";
 
 const Signup = () => {
+  const {
+    handleSubmit,
+    register,
+    setError,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const [createUser, { isLoading }] = useCreateUserMutation();
+
+  const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleCreate = async (data) => {
+    const options = {
+      data: data,
+    };
+
+    const result = await createUser(options);
+    if (result?.data?.success) {
+      if (result?.data?.type === "verify") {
+        navigate("/signup-confirmation");
+      }
+    } else {
+      if (result?.data?.type === "email") {
+        setError("email", { type: "manual", message: result?.data?.message });
+      }
+      if (result?.data?.type === "password") {
+        setError("password", {
+          type: "manual",
+          message: result?.data?.message,
+        });
+      }
+      if (result?.data?.type === "username") {
+        setError("username", {
+          type: "manual",
+          message: result?.data?.message,
+        });
+      }
+      if (result?.data?.type === "unverified") {
+        setOpenModal(true);
+        reset();
+      }
+    }
+    if (result?.error?.data?.type === "email") {
+      setError("email", {
+        type: "manual",
+        message: result?.error?.data?.message,
+      });
+    }
+  };
+
+  console.log(errors);
   return (
     <div>
       <h1 className="text-[30px] text-white font-bakbak-one mb-[17px] mt-[27px] text-center md:hidden">
@@ -54,14 +113,25 @@ const Signup = () => {
             </Button>
           </div>
 
-          <div className="max-w-[400px] md:max-w-[326px] w-full mx-auto mt-[35px] md:mt-[37px]">
+          <form
+            onSubmit={handleSubmit(handleCreate)}
+            className="max-w-[400px] md:max-w-[326px] w-full mx-auto mt-[35px] md:mt-[37px]"
+          >
             <div className="flex flex-col items-center md:items-start gap-y-[17px] mt-[15px]">
               <p className="font-bakbak-one text-[12px] text-[#373737]">
                 Username
               </p>
               <input
+                {...register("username", {
+                  required: "Username is required",
+                  pattern: {
+                    value: /^(?!\s)(?!.*\s{2}).*$/,
+                    message: "Username cannot contain spaces or multiple words",
+                  },
+                })}
                 type="text"
                 placeholder="Username"
+                required={true}
                 className="outline-none w-full h-[45px] rounded-[10px] bg-white placeholder:text-[#3737374D] text-[#3737374D] text-[12px] placeholder:text-[12px] px-[15px] font-bakbak-one"
               />
             </div>
@@ -71,8 +141,16 @@ const Signup = () => {
                 Email
               </p>
               <input
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Invalid email format",
+                  },
+                })}
                 type="email"
                 placeholder="wallpapers@thewallpapersociety.com"
+                required={true}
                 className="outline-none w-full h-[45px] rounded-[10px] bg-white placeholder:text-[#3737374D] text-[#3737374D] text-[12px] placeholder:text-[12px] px-[15px] font-bakbak-one"
               />
             </div>
@@ -82,27 +160,53 @@ const Signup = () => {
                 Password
               </p>
               <input
+                {...register("password", {
+                  required: "Password is required",
+                  pattern: {
+                    value: /^(?!\s)(?!.*\s{2})(?=.*[a-zA-Z0-9]).{6,8}$/, // Requires 6 to 8 characters with no spaces
+                    message:
+                      "Password must be 6 to 8 characters long with no spaces",
+                  },
+                })}
                 type="password"
                 placeholder="*****************"
+                required={true}
                 className="outline-none w-full h-[45px] rounded-[10px] bg-white placeholder:text-[#3737374D] text-[#3737374D] text-[12px] placeholder:text-[12px] px-[15px] font-bakbak-one"
               />
             </div>
 
+            {errors.username && (
+              <p className="text-center text-[12px] text-[#F00] mt-[15px] font-lato">
+                {errors?.username.message}
+              </p>
+            )}
+            {errors.email && (
+              <p className="text-center text-[12px] text-[#F00] mt-[15px] font-lato">
+                {errors?.email.message}
+              </p>
+            )}
+            {errors.password && (
+              <p className="text-center text-[12px] text-[#F00] mt-[15px] font-lato">
+                {errors?.password.message}
+              </p>
+            )}
+
             <Button
-              onClick={() => {
-                localStorage.setItem(
-                  "wps",
-                  JSON.stringify({
-                    email: "user@gmail.com",
-                    password: "123456",
-                  })
-                );
-              }}
-              className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[44px] md:mt-[42px] mx-auto block rounded-[10px] text-white text-[12px] font-bakbak-one"
+              type="submit"
+              className="font-normal shadow-none hover:shadow-none normal-case bg-black p-0 w-[132px] h-[35px] mt-[44px] md:mt-[42px] mx-auto inline-block rounded-[10px] text-white text-[12px] font-bakbak-one flex items-center justify-center gap-2"
             >
+              {isLoading && (
+                <SpinnerCircularFixed
+                  size={20}
+                  thickness={180}
+                  speed={300}
+                  color="rgba(255, 255, 255, 1)"
+                  secondaryColor="rgba(255, 255, 255, 0.42)"
+                />
+              )}{" "}
               Sign Up
             </Button>
-          </div>
+          </form>
           <div className="flex justify-center items-center gap-x-[15px] md:gap-x-[20px] mt-[120px] md:mt-[141px]">
             <p className="text-[12px] font-roboto font-medium text-[#373737]">
               Community Rules
@@ -116,6 +220,12 @@ const Signup = () => {
           </div>
         </div>
       </div>
+
+      <VerifyModal
+        title="This Email have an account and account is unverified. Please check your email, and verify your email address"
+        open={openModal}
+        setOpen={setOpenModal}
+      />
     </div>
   );
 };
