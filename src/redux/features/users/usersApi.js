@@ -90,6 +90,11 @@ const usersApi = api.injectEndpoints({
       providesTags: ["users"],
     }),
 
+    getPublicUserInfo: builder.query({
+      query: (username) => `/users/profile/${username}`,
+      providesTags: ["users"],
+    }),
+
     // ----------settings part----------
     //update user profile tab info
     settingsChange: builder.mutation({
@@ -108,6 +113,7 @@ export const {
   useCreateUserMutation,
   useEmailVerifyMutation,
   useGetUserQuery,
+  useGetPublicUserInfoQuery,
 
   // reset password step by stem
   usePasswordResetMutation,

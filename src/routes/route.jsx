@@ -30,6 +30,7 @@ import AccountVerification from "../pages/AccountVerification/AccountVerificatio
 import MediaCenter from "../pages/MediaCenter/MediaCenter";
 import EmailVerify from "../pages/AuthPages/Signup/EmailVerify";
 import PrivateRoute from "./PrivateRoute";
+import PublicProfile from "../pages/Profile/PublicProfile";
 
 export const route = createBrowserRouter([
   {
@@ -91,7 +92,11 @@ export const route = createBrowserRouter([
         ),
       },
       {
-        path: "/official-brand-profile",
+        path: "/profile/:username",
+        element: <PublicProfile />,
+      },
+      {
+        path: "/brand",
         element: <OfficialBrandProfile />,
       },
       {

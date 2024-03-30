@@ -1,13 +1,11 @@
+/* eslint-disable react/prop-types */
 import banner from "../../assets/images/profile/banner.png";
 import profile from "../../assets/images/global/header/profile.gif";
 import { iPVerified } from "../../utils/icons/icons";
 import ProfileBannerSocials from "./ProfileBannerSocials";
-import { useContext } from "react";
-import { AuthContext } from "../../contextApi/AuthContext";
 import useViewImage from "../../lib/hooks/useViewImage";
 
-const ProfileBanner = () => {
-  const { user } = useContext(AuthContext);
+const ProfileBanner = ({ user }) => {
   const { viewImg } = useViewImage();
 
   return (
@@ -17,7 +15,7 @@ const ProfileBanner = () => {
           className="h-[106px] md:h-[300px] w-full rounded-[10px]"
           style={{
             background: `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${
-              viewImg(user?.profile?.banner).replaceAll(/\\/g, "/") || banner
+              viewImg(user?.profile?.banner)?.replaceAll(/\\/g, "/") || banner
             }), lightgray 50% / cover no-repeat`,
           }}
         ></div>
