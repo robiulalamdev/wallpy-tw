@@ -19,8 +19,10 @@ import icon4 from "../../../assets/icons/global/header/icon4.png";
 import icon5 from "../../../assets/icons/global/header/icon5.png";
 import icon6 from "../../../assets/icons/global/header/icon6.png";
 import { AuthContext } from "../../../contextApi/AuthContext";
+import useViewImage from "../../../lib/hooks/useViewImage";
 
 const HeaderDrawer = ({ open, close }) => {
+  const { viewImg } = useViewImage();
   const { logout, user } = useContext(AuthContext);
   const closeDrawer = () => close(false);
 
@@ -36,7 +38,7 @@ const HeaderDrawer = ({ open, close }) => {
           <div className="flex justify-between items-start h-fit">
             {!user?._id ? (
               <img
-                src={profile}
+                src={viewImg(user?.profile?.profile_image) || profile}
                 alt="profile"
                 className="!size-[50px] rounded-full ml-[28px]"
               />

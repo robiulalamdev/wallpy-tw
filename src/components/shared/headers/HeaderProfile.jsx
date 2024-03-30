@@ -9,15 +9,17 @@ import profile from "../../../assets/images/global/header/profile.gif";
 import { iHLove, iLock, iLogout, iUser } from "../../../utils/icons/icons";
 import { useContext } from "react";
 import { AuthContext } from "../../../contextApi/AuthContext";
+import useViewImage from "../../../lib/hooks/useViewImage";
 const HeaderProfile = () => {
-  const { logout } = useContext(AuthContext);
+  const { viewImg } = useViewImage();
+  const { logout, user } = useContext(AuthContext);
   return (
     <>
       <SpeedDial placement="left">
         <SpeedDialHandler>
           <div className="rounded-full size-[62px] flex justify-center items-center bg-[#00000033]">
             <img
-              src={profile}
+              src={viewImg(user?.profile?.profile_image) || profile}
               alt="profile"
               className="size-[50px] rounded-full object-cover"
             />

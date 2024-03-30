@@ -56,9 +56,49 @@ const usersApi = api.injectEndpoints({
       // invalidatesTags: ["users"],
     }),
 
+    updatePassword: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/update-password`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
+
+    //update user profile tab info
+    updateProfileTabInfo: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/update-profile-tab`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
+
+    //update user profile tab info
+    updateCredentialsTabInfo: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/update-credentials-tab`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
+
     getUser: builder.query({
       query: () => `/users/me`,
       providesTags: ["users"],
+    }),
+
+    // ----------settings part----------
+    //update user profile tab info
+    settingsChange: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/settings/change`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
     }),
   }),
 });
@@ -73,4 +113,11 @@ export const {
   usePasswordResetMutation,
   useVerifyResetPasswordMutation,
   useChangePasswordMutation,
+
+  //  update user profile tab info
+  useUpdateProfileTabInfoMutation,
+  useUpdateCredentialsTabInfoMutation,
+
+  // -----------user settings endpoints------------
+  useSettingsChangeMutation,
 } = usersApi;

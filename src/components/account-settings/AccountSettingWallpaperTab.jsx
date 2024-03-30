@@ -1,9 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "@material-tailwind/react";
-import { useState } from "react";
-import { iAddPlus, iAdd_circle } from "../../utils/icons/icons";
+import { useContext, useMemo, useState } from "react";
+import { iAdd_circle } from "../../utils/icons/icons";
+import { useSettingsChangeMutation } from "../../redux/features/users/usersApi";
+import { AuthContext } from "../../contextApi/AuthContext";
+import { toast } from "react-toastify";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const AccountSettingWallpaperTab = () => {
+  const { user } = useContext(AuthContext);
+  const [settingsChange, { isLoading }] = useSettingsChangeMutation();
+
+  const [errorMessage, setErrorMessage] = useState("");
   const [nsfw, setNsfw] = useState("Enabled");
   const [tags, setTags] = useState([]);
 
@@ -14,6 +22,40 @@ const AccountSettingWallpaperTab = () => {
       e.target.reset();
     }
   };
+
+  const handleInfoUpdate = async () => {
+    const data = {
+      nsfw: nsfw === "Enabled" ? true : false,
+    };
+    if (tags?.length > 0) {
+      data["blacklist_tags"] = [...tags];
+    }
+    const options = {
+      data: data,
+    };
+    const result = await settingsChange(options);
+    if (result?.data?.success) {
+      toast.success(result?.data?.message);
+      // console.log(result);
+    } else {
+      if (result?.data?.type === "email") {
+        setErrorMessage(result?.data?.message);
+      }
+    }
+    if (result?.error?.data?.type === "email") {
+      setErrorMessage(result?.error?.data?.message);
+    }
+  };
+
+  useMemo(() => {
+    if (user) {
+      setNsfw(user?.settings?.nsfw ? "Enabled" : "Disabled");
+      if (user?.settings?.blacklist_tags?.length > 0) {
+        setTags([...user.settings.blacklist_tags]);
+      }
+    }
+  }, [user]);
+
   return (
     <div>
       <h1 className="text-center text-[#fff] text-[15px] font-lato pt-[39px]">
@@ -86,7 +128,20 @@ const AccountSettingWallpaperTab = () => {
         )}
       </div>
 
-      <Button className="font-normal normal-case bg-[#2924FF] w-[129px] h-[38px] rounded-[5px] mx-auto mt-[39px] hover:shadow-none shadow-none font-bakbak-one text-[15px] text-[#C4C4C4] block p-0">
+      <Button
+        onClick={() => handleInfoUpdate()}
+        disabled={isLoading}
+        className="font-normal normal-case bg-[#2924FF] w-[129px] h-[38px] rounded-[5px] mx-auto mt-[39px] hover:shadow-none shadow-none font-bakbak-one text-[15px] text-[#C4C4C4] inline-block p-0 flex items-center justify-center gap-2"
+      >
+        {isLoading && (
+          <SpinnerCircularFixed
+            size={20}
+            thickness={180}
+            speed={300}
+            color="rgba(255, 255, 255, 1)"
+            secondaryColor="rgba(255, 255, 255, 0.42)"
+          />
+        )}{" "}
         Save
       </Button>
     </div>

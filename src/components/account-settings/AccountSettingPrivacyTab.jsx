@@ -1,9 +1,46 @@
+/* eslint-disable no-unused-vars */
 import { Button } from "@material-tailwind/react";
-import { useState } from "react";
+import { useContext, useMemo, useState } from "react";
+import { AuthContext } from "../../contextApi/AuthContext";
+import { useSettingsChangeMutation } from "../../redux/features/users/usersApi";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const AccountSettingPrivacyTab = () => {
+  const { user } = useContext(AuthContext);
+  const [settingsChange, { isLoading }] = useSettingsChangeMutation();
+  const [errorMessage, setErrorMessage] = useState("");
   const [profileVisiblity, setProfileVisiblity] = useState("Visible");
   const [message, setMessage] = useState("Enabled");
+
+  const handleInfoUpdate = async () => {
+    const data = {
+      profile_visibility: profileVisiblity === "Visible" ? true : false,
+      messaging: message === "Enabled" ? true : false,
+    };
+    const options = {
+      data: data,
+    };
+    const result = await settingsChange(options);
+    if (result?.data?.success) {
+      console.log(result);
+    } else {
+      if (result?.data?.type === "email") {
+        setErrorMessage(result?.data?.message);
+      }
+    }
+    if (result?.error?.data?.type === "email") {
+      setErrorMessage(result?.error?.data?.message);
+    }
+  };
+
+  useMemo(() => {
+    if (user) {
+      setProfileVisiblity(
+        user?.settings?.profile_visibility ? "Visible" : "Hidden"
+      );
+      setMessage(user?.settings?.messaging ? "Enabled" : "Disabled");
+    }
+  }, [user]);
   return (
     <div>
       <div className="pt-[43px] w-full mx-auto">
@@ -69,7 +106,20 @@ const AccountSettingPrivacyTab = () => {
         )}
       </div>
 
-      <Button className="font-normal normal-case bg-[#2924FF] w-[129px] h-[38px] rounded-[5px] mx-auto mt-[85px] hover:shadow-none shadow-none font-bakbak-one text-[15px] text-[#C4C4C4] block p-0">
+      <Button
+        onClick={() => handleInfoUpdate()}
+        disabled={isLoading}
+        className="font-normal normal-case bg-[#2924FF] w-[129px] h-[38px] rounded-[5px] mx-auto mt-[85px] hover:shadow-none shadow-none font-bakbak-one text-[15px] text-[#C4C4C4] inline-block p-0 flex items-center justify-center gap-2"
+      >
+        {isLoading && (
+          <SpinnerCircularFixed
+            size={20}
+            thickness={180}
+            speed={300}
+            color="rgba(255, 255, 255, 1)"
+            secondaryColor="rgba(255, 255, 255, 0.42)"
+          />
+        )}{" "}
         Save
       </Button>
 
