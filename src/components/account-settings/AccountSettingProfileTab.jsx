@@ -93,13 +93,15 @@ const AccountSettingProfileTab = () => {
           Avatar size is 125x125 pixels, with a maximum file size not exceeding
           5MB.
         </h1>
-        <div className="md:pr-[41px] hidden md:block">
-          <Button
-            onClick={() => navigate("/account-verification")}
-            className="font-normal normal-case bg-[#00000080] w-[147px] h-[38px] rounded-[100px] hover:shadow-none shadow-none font-lato text-[12px] text-[#FFFFFF80] p-0 hidden md:block"
-          >
-            Request Verification
-          </Button>
+        <div className="md:pr-[41px] hidden md:block w-[147px]">
+          {user?.profile?.verification_status !== "Approved" && (
+            <Button
+              onClick={() => navigate("/account-verification")}
+              className="font-normal normal-case bg-[#00000080] w-[147px] h-[38px] rounded-[100px] hover:shadow-none shadow-none font-lato text-[12px] text-[#FFFFFF80] p-0 hidden md:block"
+            >
+              Request Verification
+            </Button>
+          )}
         </div>
       </div>
 
@@ -111,12 +113,14 @@ const AccountSettingProfileTab = () => {
         />
       </div>
 
-      <h1
-        onClick={() => imageRef.current.click()}
-        className="font-lato text-[15px] text-[#2555FF] mt-[12px] text-center cursor-pointer"
-      >
-        Change Profile Avatar
-      </h1>
+      <div className="flex justify-center">
+        <h1
+          onClick={() => imageRef.current.click()}
+          className="font-lato text-[15px] text-[#2555FF] mt-[12px] text-center cursor-pointer inline-block"
+        >
+          Change Profile Avatar
+        </h1>
+      </div>
       <input
         ref={imageRef}
         type="file"
@@ -136,12 +140,14 @@ const AccountSettingProfileTab = () => {
         alt="profile"
         className="rounded-[5px] w-[232px] h-[40px] mx-auto mt-[16px] md:mt-[17px] object-cover"
       />
-      <h1
-        onClick={() => bannerRef.current.click()}
-        className="font-lato text-[15px] text-[#2555FF] mt-[11px] text-center cursor-pointer"
-      >
-        Change Profile Banner
-      </h1>
+      <div className="flex justify-center">
+        <h1
+          onClick={() => bannerRef.current.click()}
+          className="font-lato text-[15px] text-[#2555FF] mt-[11px] text-center cursor-pointer inline-block"
+        >
+          Change Profile Banner
+        </h1>
+      </div>
 
       <input
         ref={bannerRef}
@@ -217,13 +223,15 @@ const AccountSettingProfileTab = () => {
             placeholder="Type link here..."
           />
 
-          <Button
-            type="button"
-            onClick={() => navigate("/account-verification")}
-            className="font-normal normal-case bg-[#00000080] w-[147px] h-[38px] rounded-[100px] mx-auto mt-[47px] hover:shadow-none shadow-none font-lato text-[12px] text-[#FFFFFF80] block p-0 md:hidden"
-          >
-            Request Verification
-          </Button>
+          {user?.profile?.verification_status !== "Approved" && (
+            <Button
+              type="button"
+              onClick={() => navigate("/account-verification")}
+              className="font-normal normal-case bg-[#00000080] w-[147px] h-[38px] rounded-[100px] mx-auto mt-[47px] hover:shadow-none shadow-none font-lato text-[12px] text-[#FFFFFF80] block p-0 md:hidden"
+            >
+              Request Verification
+            </Button>
+          )}
 
           <Button
             type="submit"

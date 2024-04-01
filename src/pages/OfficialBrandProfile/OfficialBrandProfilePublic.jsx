@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import ProfileMain from "../../components/profile/ProfileMain";
 import { useGetPublicUserInfoQuery } from "../../redux/features/users/usersApi";
+import OfficialBrandProfileMain from "../../components/officialBrandProfile/OfficialBrandProfileMain";
 import PageLoading from "../../components/common/loadings/PageLoading";
 import ErrorPageMain from "../../components/common/errorPages/ErrorPageMain";
 
-const PublicProfile = () => {
+const OfficialBrandProfilePublic = () => {
   const { username } = useParams();
   const { data, isLoading } = useGetPublicUserInfoQuery(username);
 
@@ -14,11 +14,16 @@ const PublicProfile = () => {
         <PageLoading />
       ) : (
         <>
-          {data?.data ? <ProfileMain user={data?.data} /> : <ErrorPageMain />}
+          {data?.data &&
+          data?.data?.profile?.verification_status === "Approved" ? (
+            <OfficialBrandProfileMain user={data?.data} />
+          ) : (
+            <ErrorPageMain />
+          )}
         </>
       )}
     </>
   );
 };
 
-export default PublicProfile;
+export default OfficialBrandProfilePublic;

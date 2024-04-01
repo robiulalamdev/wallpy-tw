@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   iCheck,
   iChecked,
@@ -9,10 +10,22 @@ import {
   iUploadUp,
 } from "../../utils/icons/icons";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contextApi/AuthContext";
+import { useCreateWallpapersMutation } from "../../redux/features/wallpapers/wallpapersApi";
+import { toast } from "react-toastify";
+import { SpinnerCircularFixed } from "spinners-react";
 
-const UploadProggressArea = ({ step, setStep, files, setFiles }) => {
+const UploadProggressArea = ({
+  step,
+  setStep,
+  files,
+  setFiles,
+  upload,
+  setUpload,
+}) => {
+  const { user } = useContext(AuthContext);
+  const [createWallpapers, { isLoading }] = useCreateWallpapersMutation();
   const [checked, setChecked] = useState(false);
-  const [upload, setUpload] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,7 +35,34 @@ const UploadProggressArea = ({ step, setStep, files, setFiles }) => {
     setFiles([...data]);
   };
 
-  console.log(files);
+  const handleUpload = async () => {
+    const formData = new FormData();
+
+    if (files?.length > 0) {
+      files.forEach((element) => {
+        formData.append("wallpaper", element);
+      });
+    }
+    const options = {
+      data: formData,
+    };
+
+    const result = await createWallpapers(options);
+    if (result?.data?.success) {
+      // setSuccessUpload(true);
+      setUpload(true);
+      toast.success(result?.data?.message);
+    } else {
+      if (result?.data?.type === "verification") {
+        toast.error(result?.data?.message);
+        setUpload(false);
+      }
+    }
+    if (result?.error?.data?.type === "email") {
+      toast.error(result?.error?.data?.message);
+      setUpload(false);
+    }
+  };
   return (
     <div className="md:pl-[26px] h-full w-full">
       {step === 1 && (
@@ -106,7 +146,12 @@ const UploadProggressArea = ({ step, setStep, files, setFiles }) => {
                       <p className="oneLine text-[#FFF] text-[12px] font-bakbak-one">
                         {file?.name}
                       </p>
-                      <div onClick={() => handleClose(index)}>{iCloseSm}</div>
+                      <div
+                        disabled={isLoading}
+                        onClick={() => handleClose(index)}
+                      >
+                        {iCloseSm}
+                      </div>
                     </div>
                   ))}
                 </>
@@ -118,22 +163,35 @@ const UploadProggressArea = ({ step, setStep, files, setFiles }) => {
             <h1 className="text-[12px] text-[#FFF] font-bakbak-one text-center">
               {upload
                 ? "Upload complete"
-                : "There are 3 files pending for upload"}
+                : `There are ${files?.length} files pending for upload`}
             </h1>
             <div className="border-t-[1px] border-[#5A5A5A] mt-[32px] mb-[32px] hidden md:block"></div>
 
             <div className="flex justify-center items-center gap-x-[23px] mt-[45px] md:mt-[32px] mb-2">
-              <div
-                onClick={() => setUpload(upload ? navigate("/profile") : true)}
-                className={`${
-                  files.length > 0 ? "bg-[#2924FF]" : "bg-[#5A5A5A]"
-                } w-[129px] h-[38px] rounded-[5px] text-[#C4C4C4] text-[15px] font-bakbak-one  md:flex justify-center items-center cursor-pointer hidden md:inline-block gap-[5px]`}
-              >
-                Upload {iUploadUp}
-              </div>
+              {!upload && (
+                <div
+                  onClick={() => files?.length > 0 && handleUpload()}
+                  disabled={files.length < 1}
+                  className={`${
+                    files.length > 0 ? "bg-[#2924FF]" : "bg-[#5A5A5A]"
+                  } w-[129px] h-[38px] rounded-[5px] text-[#C4C4C4] text-[15px] font-bakbak-one  md:flex justify-center items-center cursor-pointer hidden md:inline-block gap-[5px]`}
+                >
+                  {isLoading && (
+                    <SpinnerCircularFixed
+                      size={20}
+                      thickness={180}
+                      speed={300}
+                      color="rgba(255, 255, 255, 1)"
+                      secondaryColor="rgba(255, 255, 255, 0.42)"
+                    />
+                  )}{" "}
+                  Upload {iUploadUp}
+                </div>
+              )}
+
               {upload && (
                 <div
-                  onClick={() => navigate("/profile")}
+                  onClick={() => navigate("/vault")}
                   className={`bg-[#DD2E44] w-[129px] h-[38px] rounded-[5px] text-[#C4C4C4] text-[15px] font-bakbak-one flex justify-center items-center cursor-pointer`}
                 >
                   Continue

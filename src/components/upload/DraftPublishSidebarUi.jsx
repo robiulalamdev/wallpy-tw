@@ -1,21 +1,38 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { Button } from "@material-tailwind/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { iBack, iGrayClose, iGrayPlush } from "../../utils/icons/icons";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import {
+  useDeleteWallpapersByIdsMutation,
+  useUpdateWallpapersMutation,
+} from "../../redux/features/wallpapers/wallpapersApi";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const DraftPublishSidebarUi = ({
   setOpen,
-  selectedImage,
-  setSelectedImage,
+  selectedImages,
+  resetSelect,
+  items,
+  currentTab,
 }) => {
-  const [selectTab, setSelectTab] = useState("Select All");
-  const [typeTab, setTypeTab] = useState("Illustration");
-  const [classification, setClassification] = useState("Illustration");
+  const [updateWallpapers] = useUpdateWallpapersMutation();
+  const [deleteWallpapersByIds] = useDeleteWallpapersByIdsMutation();
+  const [selectTab, setSelectTab] = useState("");
+  const [typeTab, setTypeTab] = useState("");
+  const [classification, setClassification] = useState("");
   const [screenType, setScreenType] = useState("");
   const [tags, setTags] = useState([]);
 
-  const handleSubmit = (e) => {
+  const [source, setSource] = useState("");
+  const [author, setAuthor] = useState("");
+
+  const [isUpdateLoading, setIsUpdateLoading] = useState(false);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+
+  const handleAdd = (e) => {
     e.preventDefault();
     setTags([...tags, e.target.tag.value]);
     e.target.reset();
@@ -26,6 +43,122 @@ const DraftPublishSidebarUi = ({
     data.splice(index, 1);
     setTags([...data]);
   };
+
+  const handleSelectTab = (t) => {
+    setSelectTab(t);
+    if (t === "Select All") {
+      resetSelect(items);
+    } else {
+      resetSelect([]);
+    }
+  };
+
+  const handleUpdate = async (status) => {
+    if (!classification) {
+      toast.error("Classification is Required");
+      return;
+    }
+    if (!typeTab) {
+      toast.error("Type is Required");
+      return;
+    }
+    if (!screenType) {
+      toast.error("Screen Type is Required");
+      return;
+    }
+    if (tags?.length < 3) {
+      toast.error("A minimum of 3 tags is required");
+      return;
+    }
+    const updatedData = {};
+
+    if (currentTab) {
+      updatedData["status"] = status;
+    }
+
+    setIsUpdateLoading(true);
+    updatedData["type"] = typeTab;
+    updatedData["classification"] = classification;
+    updatedData["screen_type"] = screenType;
+    updatedData["tags"] = tags;
+    if (source) {
+      updatedData["source"] = source;
+    }
+    if (author) {
+      updatedData["author"] = author;
+    }
+
+    const ids = await selectedImages?.map((element) => {
+      return element?._id;
+    });
+
+    const options = {
+      data: { ids: ids, updateData: updatedData },
+    };
+
+    const result = await updateWallpapers(options);
+    if (result?.data?.success) {
+      toast.success(result?.data?.message);
+      setTags([]);
+      setTypeTab("");
+      setClassification("");
+      setScreenType("");
+      setAuthor("");
+      setSource("");
+      resetSelect([]);
+    } else {
+      toast.error(result?.data?.message);
+    }
+    setIsUpdateLoading(false);
+  };
+
+  const handleDelete = async () => {
+    setIsDeleteLoading(true);
+    const ids = await selectedImages?.map((element) => {
+      return element?._id;
+    });
+
+    const options = {
+      data: { ids: ids },
+    };
+
+    const result = await deleteWallpapersByIds(options);
+    if (result?.data?.success) {
+      toast.success(result?.data?.message);
+      resetSelect([]);
+    } else {
+      toast.error(result?.data?.message);
+    }
+
+    setIsDeleteLoading(false);
+  };
+
+  useMemo(() => {
+    if (selectedImages?.length > 0) {
+      if (selectedImages?.length === 1) {
+        setTags(selectedImages[0]?.tags);
+        setTypeTab(selectedImages[0]?.type);
+        setClassification(selectedImages[0]?.classification);
+        setScreenType(selectedImages[0]?.screen_type);
+        setAuthor(selectedImages[0]?.author);
+        setSource(selectedImages[0]?.source);
+      } else {
+        setTags([]);
+        setTypeTab("");
+        setClassification("");
+        setScreenType("");
+        setAuthor("");
+        setSource("");
+      }
+    }
+  }, [selectedImages]);
+
+  const isTrue =
+    selectedImages?.length > 0 &&
+    !!classification &&
+    !!typeTab &&
+    tags?.length > 2 &&
+    !!screenType;
 
   return (
     <div className="min-w-[295px] max-w-[295px] w-full h-full bg-[#121212] lg:bg-black/20 rounded-[10px] min-h-[986px] max-h-[986px] px-[62px] md:px-[30px] relative">
@@ -40,16 +173,16 @@ const DraftPublishSidebarUi = ({
         Select Wallpapers
       </h1>
 
-      {!!selectedImage && (
+      {selectedImages?.length > 0 && (
         <>
           <div className="bg-[#00000033] rounded-[8px] w-[235px] h-[36px] flex justify-between items-center px-[8px] mt-[21px]">
             {["Select All", "Clear Selection"].map((t, i) => (
               <Button
-                onClick={() => setSelectTab(t)}
+                onClick={() => handleSelectTab(t)}
                 key={i}
-                className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-bold min-w-[79px] h-[29px] px-2 ${
+                className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-bold min-w-[79px] h-[29px] px-2 hover:bg-[#0AB745] hover:!text-[#fff] ${
                   selectTab === t
-                    ? `bg-[#0AB745] !text-[#fff] rounded-[8px]`
+                    ? `bg-[#0AB745]... !text-[#fff] rounded-[8px]`
                     : "bg-transparent !text-[#C6C6C6]"
                 }`}
               >
@@ -139,8 +272,8 @@ const DraftPublishSidebarUi = ({
 
           <div className="mt-[10px] bg-[#00000033] rounded-[8px] ">
             <form
-              onSubmit={handleSubmit}
-              className="w-full h-[40px] flex justify-between items-center"
+              onSubmit={handleAdd}
+              className="w-full h-[40px] flex justify-between items-center relative"
             >
               <input
                 type="text"
@@ -179,20 +312,72 @@ const DraftPublishSidebarUi = ({
           </h1>
 
           <input
+            onChange={(e) => setSource(e.target.value)}
+            value={source}
             type="text"
             placeholder="Source (Optional)"
             className="placeholder:text-[#5C5C5C] text-[12px] font-lato placeholder:text-[12px] placeholder:font-lato text-[#fff] px-2 w-full outline-none bg-[#00000033] h-[35px] rounded-[8px] mt-[20px]"
           />
           <input
+            onChange={(e) => setAuthor(e.target.value)}
+            value={author}
             type="text"
             placeholder="Author (Optional)"
             className="placeholder:text-[#5C5C5C] text-[12px] font-lato placeholder:text-[12px] placeholder:font-lato text-[#fff] px-2 w-full outline-none bg-[#00000033] h-[35px] rounded-[8px] mt-[21px]"
           />
 
-          <button className="w-[129px] h-[38px] bg-[#2924FF] rounded-[5px] mt-[29px] text-[15px] font-bakbak-one block mx-auto text-[#5C5C5C]">
-            Publish
-          </button>
-          <button className="w-[129px] h-[38px] bg-[#DD2E4433] rounded-[5px] mt-[16px] text-[15px] font-bakbak-one block mx-auto text-[#C4C4C4]">
+          {currentTab === "Drafts" ? (
+            <button
+              onClick={() => handleUpdate("Published")}
+              disabled={!isTrue}
+              className={
+                "w-[129px] h-[38px] bg-[#2924FF] rounded-[5px] mt-[29px] text-[15px] font-bakbak-one inline-block mx-auto text-[#5C5C5C] flex justify-center items-center gap-2"
+              }
+            >
+              {isUpdateLoading && (
+                <SpinnerCircularFixed
+                  size={20}
+                  thickness={180}
+                  speed={300}
+                  color="rgba(255, 255, 255, 1)"
+                  secondaryColor="rgba(255, 255, 255, 0.42)"
+                />
+              )}{" "}
+              Publish
+            </button>
+          ) : (
+            <button
+              onClick={() => handleUpdate("Published")}
+              disabled={!isTrue}
+              className="w-[129px] h-[38px] bg-[#2924FF33] rounded-[5px] mt-[29px] text-[15px] font-bakbak-one inline-block mx-auto text-[#5C5C5C] flex justify-center items-center gap-2"
+            >
+              {isUpdateLoading && (
+                <SpinnerCircularFixed
+                  size={20}
+                  thickness={180}
+                  speed={300}
+                  color="rgba(255, 255, 255, 1)"
+                  secondaryColor="rgba(255, 255, 255, 0.42)"
+                />
+              )}{" "}
+              Save Changes
+            </button>
+          )}
+
+          <button
+            disabled={isDeleteLoading}
+            onClick={() => handleDelete()}
+            className="w-[129px] h-[38px] bg-[#DD2E4433] rounded-[5px] mt-[16px] text-[15px] font-bakbak-one inline-block mx-auto text-[#C4C4C4] flex justify-center items-center gap-2"
+          >
+            {isDeleteLoading && (
+              <SpinnerCircularFixed
+                size={20}
+                thickness={180}
+                speed={300}
+                color="rgba(255, 255, 255, 1)"
+                secondaryColor="rgba(255, 255, 255, 0.42)"
+              />
+            )}{" "}
             Delete
           </button>
         </>

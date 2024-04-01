@@ -47,7 +47,7 @@ const HeaderAU = () => {
               >
                 <div className="max-w-[240px] mx-auto grid grid-cols-2 h-fit bg-transparent">
                   <div className="border-r-[1px] border-[#292D31] pl-[21px]">
-                    <Link to="/profile">
+                    <Link to="/my-profile">
                       <p className="text-white text-[15px] font-bakbak-one">
                         Profile
                       </p>
@@ -110,6 +110,7 @@ const HeaderAU = () => {
             )}
           </PopoverContent>
         </Popover>
+
         <Button
           onClick={() => navigate("/upload")}
           className="shadow-none hover:shadow-none w-full h-full text-white bg-transparent normal-case font-normal text-[15px] font-bakbak-one p-0 m-0 flex justify-center items-center rounded-none"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import RulesHeader from "../../components/shared/headers/RulesHeader";
 import { Button } from "@material-tailwind/react";
 import AccountSettingProfileTab from "../../components/account-settings/AccountSettingProfileTab";
@@ -6,17 +6,25 @@ import AccountSettingBrandTab from "../../components/account-settings/AccountSet
 import AccountSettingCredentialTab from "../../components/account-settings/AccountSettingCredentialTab";
 import AccountSettingPrivacyTab from "../../components/account-settings/AccountSettingPrivacyTab";
 import AccountSettingWallpaperTab from "../../components/account-settings/AccountSettingWallpaperTab";
+import { AuthContext } from "../../contextApi/AuthContext";
 
 const tabs = [
   { id: 1, name: "Profile" },
-  { id: 2, name: "Brand" },
   { id: 3, name: "Credentials" },
   { id: 4, name: "Privacy" },
   { id: 5, name: "Wallpapers" },
 ];
 
 const AccountSettings = () => {
+  const { user } = useContext(AuthContext);
   const [selectedTab, setSelectedTab] = useState(1);
+
+  useMemo(() => {
+    if (user && user?.profile?.verification_status === "Approved") {
+      !tabs.find((t) => t.id === 2) &&
+        tabs.splice(1, 0, { id: 2, name: "Brand" });
+    }
+  }, [user]);
   return (
     <>
       <RulesHeader />

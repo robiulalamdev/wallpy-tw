@@ -1,10 +1,21 @@
 import RulesHeader from "../../components/shared/headers/RulesHeader";
 import AccountVerificationBrandTab from "../../components/account-verification/AccountVerificationBrandTab";
-import { useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import AccountVerificationSuccess from "../../components/account-verification/AccountVerificationSuccess";
+import { AuthContext } from "../../contextApi/AuthContext";
 
 const AccountVerification = () => {
+  const { user } = useContext(AuthContext);
   const [success, setSuccess] = useState(false);
+
+  useMemo(() => {
+    if (
+      (user && user?.profile?.verification_status === "Pending") ||
+      user?.profile?.verification_status === "Approved"
+    ) {
+      setSuccess(true);
+    }
+  }, [user]);
   return (
     <>
       <RulesHeader />

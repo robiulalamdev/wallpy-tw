@@ -1,14 +1,31 @@
-import React, { useRef, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useRef, useState } from "react";
 import RulesHeader from "../../components/shared/headers/RulesHeader";
 import UploadProggressArea from "../../components/upload/UploadProggressArea";
 import bg from "../../assets/images/upload/bg.png";
 import { iUpload } from "../../utils/icons/icons";
+import { toast } from "react-toastify";
 
 const Upload = () => {
   const [step, setStep] = useState(1);
   const [files, setFiles] = useState([]);
+  const [upload, setUpload] = useState(false);
 
   const imageRef = useRef();
+
+  const handleAddImages = async (images) => {
+    if (files?.length >= 6) {
+      toast.warning("Maximum 6 wallpapers can be uploaded");
+      return;
+    }
+
+    if (files?.length + images?.length > 6) {
+      toast.warning("Wallpapers Upload Maximum 6");
+      return;
+    }
+
+    setFiles([...files, ...images]);
+  };
 
   return (
     <>
@@ -49,6 +66,7 @@ const Upload = () => {
               </h1>
               <h1 className="text-[15px] font-bakbak-one text-[#FFF]">or</h1>
               <button
+                disabled={upload}
                 onClick={() => imageRef.current.click()}
                 className="w-[103px] h-[28px] bg-[#000000] rounded-[10px] font-bakbak-one text-[12px] text-[#939393]"
               >
@@ -57,7 +75,7 @@ const Upload = () => {
 
               <input
                 ref={imageRef}
-                onChange={(e) => setFiles([...e.target.files])}
+                onChange={(e) => handleAddImages(e.target.files)}
                 type="file"
                 accept=".png, .jpg, .jpeg"
                 multiple={true}
@@ -70,6 +88,8 @@ const Upload = () => {
             setStep={setStep}
             files={files}
             setFiles={setFiles}
+            upload={upload}
+            setUpload={setUpload}
           />
         </div>
       </div>

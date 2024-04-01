@@ -31,6 +31,8 @@ import MediaCenter from "../pages/MediaCenter/MediaCenter";
 import EmailVerify from "../pages/AuthPages/Signup/EmailVerify";
 import PrivateRoute from "./PrivateRoute";
 import PublicProfile from "../pages/Profile/PublicProfile";
+import VerificationPrivateRoute from "./VerificationPrivateRoute";
+import OfficialBrandProfilePublic from "../pages/OfficialBrandProfile/OfficialBrandProfilePublic";
 
 export const route = createBrowserRouter([
   {
@@ -39,6 +41,99 @@ export const route = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/home", element: <Home /> },
+
+      {
+        path: "/official-brands",
+        element: <OfficialBrands />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/wallpaper",
+        element: <Wallpaper />,
+      },
+      {
+        path: "/wallpapers/:search",
+        element: <SearchWallpapers />,
+      },
+      {
+        path: "/profiles/:username",
+        element: <PublicProfile />,
+      },
+      {
+        path: "/brands/:username",
+        element: <OfficialBrandProfilePublic />,
+      },
+      {
+        path: "/messages",
+        element: (
+          <PrivateRoute>
+            <Messages />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-brand",
+        element: (
+          <VerificationPrivateRoute>
+            <OfficialBrandProfile />
+          </VerificationPrivateRoute>
+        ),
+      },
+      {
+        path: "/upload",
+        element: (
+          <VerificationPrivateRoute>
+            <Upload />
+          </VerificationPrivateRoute>
+        ),
+      },
+      {
+        path: "/vault",
+        element: (
+          <VerificationPrivateRoute>
+            <DraftAndPublish />
+          </VerificationPrivateRoute>
+        ),
+      },
+      {
+        path: "/account-settings",
+        element: (
+          <PrivateRoute>
+            <AccountSettings />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/account-verification",
+        element: (
+          <PrivateRoute>
+            <AccountVerification />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/media-center",
+        element: (
+          <VerificationPrivateRoute>
+            <MediaCenter />
+          </VerificationPrivateRoute>
+        ),
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
       {
         path: "/terms-and-conditions",
         element: <TermsConditions />,
@@ -52,76 +147,12 @@ export const route = createBrowserRouter([
         element: <CommunityRules />,
       },
       {
-        path: "/about",
-        element: <About />,
-      },
-      {
         path: "/copyright-information",
         element: <CopyrightInformation />,
       },
       {
         path: "/socials",
         element: <Socials />,
-      },
-      {
-        path: "/official-brands",
-        element: <OfficialBrands />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/messages",
-        element: <Messages />,
-      },
-      {
-        path: "/wallpaper",
-        element: <Wallpaper />,
-      },
-      {
-        path: "/wallpapers/:search",
-        element: <SearchWallpapers />,
-      },
-      {
-        path: "/profile",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/profile/:username",
-        element: <PublicProfile />,
-      },
-      {
-        path: "/brand",
-        element: <OfficialBrandProfile />,
-      },
-      {
-        path: "/upload",
-        element: <Upload />,
-      },
-      {
-        path: "/vault",
-        element: <DraftAndPublish />,
-      },
-      {
-        path: "/account-settings",
-        element: (
-          <PrivateRoute>
-            <AccountSettings />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/account-verification",
-        element: <AccountVerification />,
-      },
-      {
-        path: "/media-center",
-        element: <MediaCenter />,
       },
     ],
   },

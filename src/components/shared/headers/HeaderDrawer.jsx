@@ -8,7 +8,7 @@ import {
   iMenuClose,
   iRegister,
 } from "../../../utils/icons/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import profile from "../../../assets/images/global/header/profile.gif";
 
@@ -25,6 +25,7 @@ const HeaderDrawer = ({ open, close }) => {
   const { viewImg } = useViewImage();
   const { logout, user } = useContext(AuthContext);
   const closeDrawer = () => close(false);
+  const navigate = useNavigate();
 
   return (
     <Drawer
@@ -36,7 +37,7 @@ const HeaderDrawer = ({ open, close }) => {
       <div className="flex flex-col justify-between w-full h-full pt-[29px] px-[23px]">
         <div className=" h-fit">
           <div className="flex justify-between items-start h-fit">
-            {!user?._id ? (
+            {user?._id ? (
               <img
                 src={viewImg(user?.profile?.profile_image) || profile}
                 alt="profile"
@@ -51,11 +52,11 @@ const HeaderDrawer = ({ open, close }) => {
             </div>
           </div>
 
-          {!user?._id ? (
+          {user && user?._id ? (
             <>
               <div className="max-w-[359px] mx-auto grid grid-cols-2 mt-[46px] h-fit">
                 <div className="border-r-[1px] border-[#292D31] min-h-[164px] pl-[28px]">
-                  <Link to="/profile">
+                  <Link to="/my-profile">
                     <p className="text-white text-[20px] font-bakbak-one">
                       Profile
                     </p>
@@ -109,7 +110,10 @@ const HeaderDrawer = ({ open, close }) => {
               </div>
 
               <div className="flex justify-center mt-[51px]">
-                <Button className="font-normal shadow-none hover:shadow-none normal-case p-0 rounded-[5px] bg-[#2924FF] text-[#C4C4C4] text-[15px] w-[129px] h-[38px]">
+                <Button
+                  onClick={() => navigate("/upload")}
+                  className="font-normal shadow-none hover:shadow-none normal-case p-0 rounded-[5px] bg-[#2924FF] text-[#C4C4C4] text-[15px] w-[129px] h-[38px]"
+                >
                   Upload
                 </Button>
               </div>

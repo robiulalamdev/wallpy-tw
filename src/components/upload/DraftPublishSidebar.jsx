@@ -6,16 +6,20 @@ import { Drawer } from "@material-tailwind/react";
 const DraftPublishSidebar = ({
   open,
   setOpen,
-  selectedImage,
-  setSelectedImage,
+  selectedImages,
+  resetSelect,
+  items,
+  currentTab,
 }) => {
   return (
     <>
       <div className="hidden lg:block">
         <DraftPublishSidebarUi
           setOpen={setOpen}
-          selectedImage={selectedImage}
-          setSelectedImage={setSelectedImage}
+          selectedImages={selectedImages}
+          resetSelect={resetSelect}
+          items={items}
+          currentTab={currentTab}
         />
       </div>
       <Drawer
@@ -26,8 +30,10 @@ const DraftPublishSidebar = ({
       >
         <DraftPublishSidebarUi
           setOpen={setOpen}
-          selectedImage={selectedImage}
-          setSelectedImage={setSelectedImage}
+          selectedImages={selectedImages}
+          resetSelect={resetSelect}
+          items={items}
+          currentTab={currentTab}
         />
       </Drawer>
     </>

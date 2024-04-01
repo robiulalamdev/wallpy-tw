@@ -84,6 +84,14 @@ const usersApi = api.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+    updateBrandTabInfo: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/profiles/update-brand-tab-info`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
 
     getUser: builder.query({
       query: () => `/users/me`,
@@ -101,6 +109,15 @@ const usersApi = api.injectEndpoints({
       query: ({ data }) => ({
         url: `/users/settings/change`,
         method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
+
+    verificationRequest: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/profiles/verification-request`,
+        method: "POST",
         body: data,
       }),
       invalidatesTags: ["users"],
@@ -123,7 +140,9 @@ export const {
   //  update user profile tab info
   useUpdateProfileTabInfoMutation,
   useUpdateCredentialsTabInfoMutation,
+  useUpdateBrandTabInfoMutation,
 
   // -----------user settings endpoints------------
   useSettingsChangeMutation,
+  useVerificationRequestMutation,
 } = usersApi;
