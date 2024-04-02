@@ -50,13 +50,15 @@ export const route = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+
       {
-        path: "/wallpaper",
-        element: <Wallpaper />,
-      },
-      {
-        path: "/wallpapers/:search",
+        path: "/wallpapers",
         element: <SearchWallpapers />,
+      },
+
+      {
+        path: "/wallpapers/:slug",
+        element: <Wallpaper />,
       },
       {
         path: "/profiles/:username",

@@ -3,11 +3,11 @@
 import { Drawer } from "@material-tailwind/react";
 import WallpaperSidebarUi from "./WallpaperSidebarUi";
 
-const WallpaperSidebar = ({ open, setOpen }) => {
+const WallpaperSidebar = ({ open, setOpen, data }) => {
   return (
     <>
       <div className="hidden lg:block">
-        <WallpaperSidebarUi />
+        <WallpaperSidebarUi data={data} />
       </div>
       <Drawer
         open={open}
@@ -15,7 +15,7 @@ const WallpaperSidebar = ({ open, setOpen }) => {
         size={361}
         className="bg-transparent p-0 m-0 w-full"
       >
-        <WallpaperSidebarUi />
+        <WallpaperSidebarUi data={data} />
       </Drawer>
     </>
   );

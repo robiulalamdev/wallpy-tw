@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <AuthProvider>
           <ToastContainer
             position="top-right"
-            autoClose={2000}
+            autoClose={1200}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick={true}
@@ -25,7 +25,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             draggable
             pauseOnHover
             theme="colored"
-            transition="Bounce"
           />
           <App />
         </AuthProvider>

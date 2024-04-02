@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import profile from "../../assets/images/global/header/profile.gif";
 import {
@@ -9,6 +11,7 @@ import {
 } from "../../utils/icons/icons";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import useViewImage from "../../lib/hooks/useViewImage";
 
 const resulations1 = {
   name: "Ultra Wide",
@@ -59,7 +62,8 @@ const resulations5 = {
   ],
 };
 
-const WallpaperSidebarUi = () => {
+const WallpaperSidebarUi = ({ data }) => {
+  const { viewImg } = useViewImage();
   const [open, setOpen] = useState(false);
   return (
     <div className="bg-[#121212] lg:bg-[#00000033] w-full min-h-[802px] max-h-[802px] max-w-[347px] min-w-[347px] rounded-[10px] pt-[15px] px-[19px] pb-[23px] scroll_off">
@@ -70,17 +74,21 @@ const WallpaperSidebarUi = () => {
       <div className="flex items-center justify-center gap-x-[32px] mt-[9px]">
         <div className="rounded-full size-[87px] flex justify-center items-center bg-[#00000033]">
           <img
-            src={profile}
+            src={viewImg(data?.author_info?.profile_image) || profile}
             alt="profile"
             className="size-[75px] rounded-full object-cover"
           />
         </div>
         <div className="flex flex-col items-center gap-[19px]">
           <div className="flex items-center gap-x-[4px]">
-            <h1 className="text-white font-bakbak-one text-[20px]">krs</h1>
+            <h1 className="text-white font-bakbak-one text-[20px]">
+              {data?.author_info?.username?.length > 12
+                ? data?.author_info?.username?.slice(0, 12) + "..."
+                : data?.author_info?.username}
+            </h1>
             {iVerifiedPro}
           </div>
-          <Link to="/profile">
+          <Link to={`/profiles/${data?.author_info?.username}`}>
             <Button className="w-[97px] h-[32px] shadow-none hover:shadow-none text-white bg-[#000000] font-bakbak-one text-[10px] normal-case font-normal p-0 rounded-[15px]">
               View Profile
             </Button>
@@ -254,14 +262,15 @@ const WallpaperSidebarUi = () => {
             Tags
           </h1>
           <h1 className="text-center font-bakbak-one text-[12px] text-[#0AB745] mt-[3px]">
-            SFW
+            {data?.classification}
           </h1>
 
           <div>
-            <h1 className="text-[#FFF] font-bakbak-one text-[12px]">
-              #cod #callofduty #ghost #gaming #wallpaper #illustration #shooter
-              #mw2
-            </h1>
+            {data?.tags?.length > 0 && (
+              <h1 className="text-[#FFF] font-bakbak-one text-[12px]">
+                {data?.tags?.map((tag, index) => `#${tag}   `)}
+              </h1>
+            )}
           </div>
 
           <div className="max-w-[235px] h-[35px] bg-[#00000033] rounded-[7px] mx-auto mt-[34px] flex justify-between items-center px-[10px]">
@@ -323,14 +332,20 @@ const WallpaperSidebarUi = () => {
             </h1>
             <div className="w-fit mt-[7px]">
               <div className="flex items-center gap-x-[2px]">
-                <h1 className="text-[#606060] font-bakbak-one text-[12px]">
-                  Source:
+                <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
+                  Source:{" "}
+                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
+                    {data?.source || ""}
+                  </h1>
                 </h1>
                 <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
               </div>
               <div className="flex items-center gap-x-[2px]">
-                <h1 className="text-[#606060] font-bakbak-one text-[12px]">
-                  Original Author:
+                <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
+                  Original Author:{" "}
+                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
+                    {data?.author || ""}
+                  </h1>
                 </h1>
                 <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
               </div>

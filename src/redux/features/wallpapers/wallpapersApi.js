@@ -33,12 +33,24 @@ const usersApi = api.injectEndpoints({
       query: () => `/wallpapers`,
       providesTags: ["wallpapers"],
     }),
+
+    getSearchWallpapers: builder.query({
+      query: (query = "") => `/wallpapers/public${query}`,
+      providesTags: ["wallpapers"],
+    }),
+
+    getWallpaperBySlug: builder.query({
+      query: (slug) => `/wallpapers/${slug}`,
+      providesTags: ["wallpapers"],
+    }),
   }),
 });
 
 export const {
   useCreateWallpapersMutation,
   useGetWallpapersQuery,
+  useGetSearchWallpapersQuery,
   useUpdateWallpapersMutation,
   useDeleteWallpapersByIdsMutation,
+  useGetWallpaperBySlugQuery,
 } = usersApi;

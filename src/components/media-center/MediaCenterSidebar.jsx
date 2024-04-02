@@ -8,10 +8,11 @@ import { iBack } from "../../utils/icons/icons";
 const MediaCenterSidebar = ({
   open,
   setOpen,
-  hideProfile,
-  setHideProfile,
   tab,
   setTab,
+  items,
+  selectedItems,
+  resetSelect,
 }) => {
   return (
     <>
@@ -19,10 +20,11 @@ const MediaCenterSidebar = ({
         <MediaCenterSidebarUi
           open={open}
           setOpen={setOpen}
-          hideProfile={hideProfile}
-          setHideProfile={setHideProfile}
           tab={tab}
           setTab={setTab}
+          items={items}
+          selectedItems={selectedItems}
+          resetSelect={resetSelect}
         />
       </div>
       <Drawer
@@ -36,10 +38,11 @@ const MediaCenterSidebar = ({
           <MediaCenterSidebarUi
             open={open}
             setOpen={setOpen}
-            hideProfile={hideProfile}
-            setHideProfile={setHideProfile}
             tab={tab}
             setTab={setTab}
+            items={items}
+            selectedItems={selectedItems}
+            resetSelect={resetSelect}
           />
         </div>
       </Drawer>

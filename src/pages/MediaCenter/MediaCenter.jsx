@@ -1,27 +1,47 @@
 import { Button } from "@material-tailwind/react";
 import RulesHeader from "../../components/shared/headers/RulesHeader";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import MediaCenterSidebar from "../../components/media-center/MediaCenterSidebar";
 import filter from "../../assets/icons/search-wallpapers/filter.gif";
 import MediaCenterFavoriteAria from "../../components/media-center/MediaCenterFavoriteAria";
-import { wallpapers } from "../../utils/data/wallpapers";
-import { official_brands_profiles_collections } from "../../utils/data/profile";
 import MediaCenterCollectionAria from "../../components/media-center/MediaCenterCollectionAria";
+import { useGetMyFavoritesQuery } from "../../redux/features/favorites/favoritesApi";
 
 const MediaCenter = () => {
+  const { data: favoriteData } = useGetMyFavoritesQuery();
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState("Favorites");
-  const [hideProfile, setHideProfile] = useState("Visible");
 
-  const [favoriteWallpapers, setFavoriteWallpapers] = useState(
-    [...wallpapers.slice(0, 10)] || []
+  const [favoriteWallpapers, setFavoriteWallpapers] = useState([]);
+  const [collectionWallpapers, setCollectionWallpapers] = useState([]);
+  const [selectedFavoriteWallpapers, setSelectedFavoriteWallpapers] = useState(
+    []
   );
-  const [collectionWallpapers, setCollectionWallpapers] = useState(
-    [...official_brands_profiles_collections.slice(0, 2)] || []
-  );
-  const [selectedWallpaper, setSelectedWallpaper] = useState(null);
-  const [selectedCollectionWallpaper, setSelectedCollectionWallpaper] =
-    useState(null);
+  const [selectedCollectionWallpapers, setSelectedCollectionWallpapers] =
+    useState([]);
+
+  useMemo(() => {
+    if (favoriteData?.data?.length > 0) {
+      setFavoriteWallpapers(favoriteData?.data);
+    }
+  }, [favoriteData]);
+
+  const handleSelectFavoriteWallpapers = async (item) => {
+    const itemIndex = await selectedFavoriteWallpapers.findIndex(
+      (sItem) => sItem?._id === item?._id
+    );
+    if (itemIndex !== -1) {
+      const stored = [...selectedFavoriteWallpapers];
+      stored.splice(itemIndex, 1);
+      setSelectedFavoriteWallpapers(stored);
+    } else {
+      setSelectedFavoriteWallpapers([...selectedFavoriteWallpapers, item]);
+    }
+  };
+
+  const handleSelectCollectionWallpapers = async (item) => {
+    console.log(item);
+  };
 
   return (
     <>
@@ -63,28 +83,43 @@ const MediaCenter = () => {
         </div>
 
         <div className="flex justify-between items-start gap-x-[42px]">
-          <MediaCenterSidebar
-            open={open}
-            setOpen={setOpen}
-            hideProfile={hideProfile}
-            setHideProfile={setHideProfile}
-            tab={tab}
-            setTab={setTab}
-          />
+          {tab === "Favorites" ? (
+            <MediaCenterSidebar
+              open={open}
+              setOpen={setOpen}
+              tab={tab}
+              setTab={setTab}
+              items={favoriteWallpapers}
+              selectedItems={selectedFavoriteWallpapers}
+              resetSelect={setSelectedFavoriteWallpapers}
+            />
+          ) : (
+            <MediaCenterSidebar
+              open={open}
+              setOpen={setOpen}
+              tab={tab}
+              setTab={setTab}
+              items={collectionWallpapers}
+              selectedItems={selectedCollectionWallpapers}
+              resetSelect={setSelectedCollectionWallpapers}
+            />
+          )}
 
           {tab === "Favorites" && (
             <MediaCenterFavoriteAria
-              favoriteWallpapers={favoriteWallpapers}
-              selectedWallpaper={selectedWallpaper}
-              setSelectedWallpaper={setSelectedWallpaper}
+              items={favoriteWallpapers}
+              selectedItems={selectedFavoriteWallpapers}
+              handleSelectFavoriteWallpapers={handleSelectFavoriteWallpapers}
             />
           )}
 
           {tab === "Collections" && (
             <MediaCenterCollectionAria
-              collectionWallpapers={collectionWallpapers}
-              selectedCollectionWallpaper={selectedCollectionWallpaper}
-              setSelectedCollectionWallpaper={setSelectedCollectionWallpaper}
+              items={collectionWallpapers}
+              selectedItems={selectedCollectionWallpapers}
+              handleSelectCollectionWallpapers={
+                handleSelectCollectionWallpapers
+              }
             />
           )}
         </div>

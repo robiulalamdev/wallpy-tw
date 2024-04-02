@@ -13,6 +13,6 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["users", "wallpapers"],
+  tagTypes: ["users", "wallpapers", "favorites", "collections"],
   endpoints: () => ({}),
 });
