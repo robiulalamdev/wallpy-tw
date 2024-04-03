@@ -1,12 +1,9 @@
+/* eslint-disable react/prop-types */
 import { Button } from "@material-tailwind/react";
-import React, { useState } from "react";
-
 const tabs1 = ["Trending", "New"];
 const tabs2 = ["All", "Illustration", "AI", "Photography"];
 
-const BannerTab = () => {
-  const [tab1, setTab1] = useState("Trending");
-  const [tab2, setTab2] = useState("All");
+const BannerTab = ({ tab1, setTab1, tab2, setTab2 }) => {
   return (
     <div className="py-[10px] md:py-[14px]">
       <div className="flex items-center justify-between md:justify-start gap-3 md:gap-8">

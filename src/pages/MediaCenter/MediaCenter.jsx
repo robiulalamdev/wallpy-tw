@@ -6,9 +6,11 @@ import filter from "../../assets/icons/search-wallpapers/filter.gif";
 import MediaCenterFavoriteAria from "../../components/media-center/MediaCenterFavoriteAria";
 import MediaCenterCollectionAria from "../../components/media-center/MediaCenterCollectionAria";
 import { useGetMyFavoritesQuery } from "../../redux/features/favorites/favoritesApi";
+import { useGetMyCollectionsQuery } from "../../redux/features/collections/collectionsApi";
 
 const MediaCenter = () => {
   const { data: favoriteData } = useGetMyFavoritesQuery();
+  const { data: collectionData } = useGetMyCollectionsQuery();
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState("Favorites");
 
@@ -26,6 +28,12 @@ const MediaCenter = () => {
     }
   }, [favoriteData]);
 
+  useMemo(() => {
+    if (collectionData?.data?.length > 0) {
+      setCollectionWallpapers(collectionData?.data);
+    }
+  }, [collectionData]);
+
   const handleSelectFavoriteWallpapers = async (item) => {
     const itemIndex = await selectedFavoriteWallpapers.findIndex(
       (sItem) => sItem?._id === item?._id
@@ -40,7 +48,16 @@ const MediaCenter = () => {
   };
 
   const handleSelectCollectionWallpapers = async (item) => {
-    console.log(item);
+    const itemIndex = await selectedCollectionWallpapers.findIndex(
+      (sItem) => sItem?._id === item?._id
+    );
+    if (itemIndex !== -1) {
+      const stored = [...selectedCollectionWallpapers];
+      stored.splice(itemIndex, 1);
+      setSelectedCollectionWallpapers(stored);
+    } else {
+      setSelectedCollectionWallpapers([...selectedCollectionWallpapers, item]);
+    }
   };
 
   return (

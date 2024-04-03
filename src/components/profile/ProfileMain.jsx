@@ -3,14 +3,22 @@ import { Button } from "@material-tailwind/react";
 import ProfileBanner from "../../components/profile/ProfileBanner";
 import SimpleHeader from "../../components/shared/headers/SimpleHeader";
 import { iSearch } from "../../utils/icons/icons";
-import { wallpapers } from "../../utils/data/wallpapers";
-import { useNavigate } from "react-router-dom";
+// import { wallpapers } from "../../utils/data/wallpapers";
+// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ProfileFavoriteWallpapers from "./ProfileFavoriteWallpapers";
+import { useGetMyProfileFavoritesQuery } from "../../redux/features/favorites/favoritesApi";
+import { useGetWallpapersByUserIdQuery } from "../../redux/features/wallpapers/wallpapersApi";
+import ProfileUploadsWallpapers from "./ProfileUploadsWallpapers";
+import { useGetMyCollectionsByUserIdQuery } from "../../redux/features/collections/collectionsApi";
+import ProfileCollectionsWallpapers from "./ProfileCollectionsWallpapers";
 
 const ProfileMain = ({ user }) => {
+  const { data } = useGetMyProfileFavoritesQuery(user?._id);
+  const { data: uploadsData } = useGetWallpapersByUserIdQuery(user?._id);
+  const { data: collectionData } = useGetMyCollectionsByUserIdQuery(user?._id);
   const [tab1, setTab1] = useState("Uploads");
 
-  const navigate = useNavigate();
   return (
     <>
       <SimpleHeader />
@@ -50,21 +58,15 @@ const ProfileMain = ({ user }) => {
         </div>
 
         <>
-          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-[14px] gap-y-[14px] md:gap-x-[16px] md:gap-y-[32px] lg:gap-x-[40px] lg:gap-y-[59px] mt-[18px] md:mt-[53px]">
-            {wallpapers.slice(0, 18).map((item, index) => (
-              <div
-                onClick={() => navigate("/wallpaper")}
-                key={index}
-                className={`w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
-              >
-                <img
-                  src={item.thumbnail}
-                  alt="wallpaper"
-                  className="w-full h-full rounded-[5px] md:rounded-[7px] lg:rounded-[10px] object-cover hover:scale-110 duration-300 cursor-pointer"
-                />
-              </div>
-            ))}
-          </div>
+          {tab1 === "Uploads" && (
+            <ProfileUploadsWallpapers wallpapers={uploadsData?.data} />
+          )}
+          {tab1 === "Favorites" && (
+            <ProfileFavoriteWallpapers wallpapers={data?.data} />
+          )}
+          {tab1 === "Collections" && (
+            <ProfileCollectionsWallpapers collections={collectionData?.data} />
+          )}
 
           <div className="bg-[#000000] w-[128px] h-[42px] rounded-[100px] mx-auto mt-[27px] md:mt-[40px] flex justify-center items-center font-bakbak-one text-[12px] text-[#CCC] cursor-pointer">
             View more

@@ -22,6 +22,11 @@ const SimpleHeader = () => {
             className="w-[85px] h-[56px] object-contain"
           />
           <input
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                navigate(`/wallpapers?search=${e.target.value}`);
+              }
+            }}
             type="text"
             placeholder="Find more wallpapers..."
             className="text-[#5A5A5A] placeholder:text-[#5A5A5A] text-[15px] bg-[#00000033] w-full rounded-[10px] px-[22px] font-lato outline-none border-none max-w-[348px] h-[37px]"
@@ -36,6 +41,11 @@ const SimpleHeader = () => {
           <>
             <div className=" flex justify-center items-center gap-3">
               <input
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    navigate(`/wallpapers?search=${e.target.value}`);
+                  }
+                }}
                 type="text"
                 placeholder="Find your next wallpaper..."
                 className="text-[#5A5A5A] placeholder:text-[#5A5A5A] text-[12px] leading-[14px] bg-[#00000033] rounded-[8px] h-[34px] max-w-[771px] w-full flex-grow font-lato outline-none border-none px-2 "

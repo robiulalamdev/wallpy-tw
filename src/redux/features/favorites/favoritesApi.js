@@ -33,6 +33,11 @@ const favoritesApi = api.injectEndpoints({
       query: () => `/favorites/my-favorites`,
       providesTags: ["favorites"],
     }),
+
+    getMyProfileFavorites: builder.query({
+      query: (userId) => `/favorites/my-profile-favorites/${userId}`,
+      providesTags: ["favorites"],
+    }),
   }),
 });
 
@@ -41,4 +46,5 @@ export const {
   useGetMyFavoritesQuery,
   useRemoveFavoritesMutation,
   useUpdateFavoritesMutation,
+  useGetMyProfileFavoritesQuery,
 } = favoritesApi;

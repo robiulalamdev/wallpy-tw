@@ -4,6 +4,7 @@ import profile from "../../assets/images/global/header/profile.gif";
 import { iPVerified } from "../../utils/icons/icons";
 import ProfileBannerSocials from "./ProfileBannerSocials";
 import useViewImage from "../../lib/hooks/useViewImage";
+import moment from "moment";
 
 const ProfileBanner = ({ user }) => {
   const { viewImg } = useViewImage();
@@ -38,7 +39,7 @@ const ProfileBanner = ({ user }) => {
                   {iPVerified}
                 </div>
                 {user?.profile?.bio && (
-                  <h1 className="text-[#939393] text-[15px] font-bakbak-one text-nowrap hidden md:block">
+                  <h1 className="text-[#939393] text-[15px] font-bakbak-one text-nowrap hidden md:block max-w-[300px] break-words">
                     {/* WPS Admin / AI Art */}
                     {user?.profile?.bio}
                   </h1>
@@ -79,7 +80,7 @@ const ProfileBanner = ({ user }) => {
                 Member Since:
               </h1>{" "}
               <span className="text-[#939393] font-bakbak-one text-[12px]">
-                2023
+                {moment(user?.createdAt).format("YYYY")}
               </span>
             </div>
           </div>

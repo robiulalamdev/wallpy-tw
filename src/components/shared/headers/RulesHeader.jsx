@@ -28,6 +28,11 @@ const RulesHeader = () => {
               {iSearch}
             </div>
             <input
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  navigate(`/wallpapers?search=${e.target.value}`);
+                }
+              }}
               type="text"
               placeholder="Find your next wallpaper..."
               className="text-[#5A5A5A] placeholder:text-[#5A5A5A] text-[15px] bg-transparent w-full h-full flex-grow font-lato outline-none border-none"
@@ -44,6 +49,11 @@ const RulesHeader = () => {
           <>
             <div className=" flex justify-center items-center gap-3">
               <input
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    navigate(`/wallpapers?search=${e.target.value}`);
+                  }
+                }}
                 type="text"
                 placeholder="Find your next wallpaper..."
                 className="text-[#5A5A5A] placeholder:text-[#5A5A5A] text-[12px] leading-[14px] bg-[#00000033] rounded-[8px] h-[34px] max-w-[771px] w-full flex-grow font-lato outline-none border-none px-2 "

@@ -16,10 +16,17 @@ import {
   useGetMyFavoritesQuery,
 } from "../../redux/features/favorites/favoritesApi";
 import { toast } from "react-toastify";
+import { useGetCollectionListByUserIdQuery } from "../../redux/features/collections/collectionsApi";
+import { AuthContext } from "../../contextApi/AuthContext";
+import { useContext } from "react";
 
 const WallpaperFavoriteAndCollection = ({ data }) => {
+  const { user } = useContext(AuthContext);
   const [addToFavorite] = useAddToFavoriteMutation();
   const { data: favoriteData } = useGetMyFavoritesQuery();
+  const { data: collectionListData } = useGetCollectionListByUserIdQuery(
+    user?._id
+  );
 
   const handleAddToFavorite = async () => {
     const options = {
@@ -57,14 +64,20 @@ const WallpaperFavoriteAndCollection = ({ data }) => {
               <div>{iAddPlus}</div>
             </div>
 
-            <div className="grid grid-cols-1 gap-y-[10px] max-h-[250px] h-full overflow-y-scroll mt-[20px]">
-              <div className="border-b-[1px] border-[#414141] h-9 flex items-center gap-[6px]">
-                <div>{iGallery}</div>
-                <h1 className="font-bakbak-one text-[#FFF] text-[12px]">
-                  Call of Duty
-                </h1>
-              </div>
-              <div className="border-b-[1px] border-[#414141] h-9 flex items-center gap-[6px]">
+            <div className="grid grid-cols-1 gap-y-[10px] max-h-[250px] h-fit overflow-y-auto mt-[20px]">
+              {collectionListData?.data?.map((item, index) => (
+                <div
+                  key={index}
+                  className="border-b-[1px] border-[#414141] h-9 flex items-center gap-[6px]"
+                >
+                  <div>{iGallery}</div>
+                  <h1 className="font-bakbak-one text-[#FFF] text-[12px]">
+                    {item?.name}
+                  </h1>
+                </div>
+              ))}
+
+              {/* <div className="border-b-[1px] border-[#414141] h-9 flex items-center gap-[6px]">
                 <div>{iGallery}</div>
                 <h1 className="font-bakbak-one text-[#FFF] text-[12px]">
                   World of Warcraft
@@ -87,7 +100,7 @@ const WallpaperFavoriteAndCollection = ({ data }) => {
                 <h1 className="font-bakbak-one text-[#FFF] text-[12px]">
                   Landscapes
                 </h1>
-              </div>
+              </div> */}
             </div>
           </PopoverContent>
         </Popover>

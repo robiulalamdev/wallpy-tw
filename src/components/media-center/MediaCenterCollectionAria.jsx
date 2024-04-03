@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import MediaCenterSingleCollection from "./MediaCenterSingleCollection";
 
 const MediaCenterCollectionAria = ({
-  items,
-  selectedItems,
+  items = [],
+  selectedItems = [],
   handleSelectCollectionWallpapers,
 }) => {
   const navigate = useNavigate();
