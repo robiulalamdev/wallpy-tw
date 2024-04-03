@@ -17,10 +17,30 @@ import {
   PopoverContent,
   PopoverHandler,
 } from "@material-tailwind/react";
+import { useSendContactMailMutation } from "../../redux/features/helpers/helpersApi";
+import { useForm } from "react-hook-form";
+import { SpinnerCircularFixed } from "spinners-react";
+import { toast } from "react-toastify";
 
 const Contact = () => {
+  const { handleSubmit, register, reset } = useForm();
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
+  const [sendContactMail, { isLoading }] = useSendContactMailMutation();
+
+  const handleSendMessage = async (data) => {
+    const options = {
+      data: data,
+    };
+    const result = await sendContactMail(options);
+    if (result?.data?.success) {
+      reset();
+      setStep(2);
+      toast.success("Message Send Success");
+    } else {
+      toast.error("Message Send Failed");
+    }
+  };
   return (
     <>
       <RulesHeader />
@@ -79,37 +99,57 @@ const Contact = () => {
                   Please always check your spam folder.
                 </p>
 
-                <div className="mt-[24px] md:mt-[49px]">
+                <form
+                  onSubmit={handleSubmit(handleSendMessage)}
+                  className="mt-[24px] md:mt-[49px]"
+                >
                   <input
+                    {...register("subject", { required: true })}
                     className="contact-input placeholder:text-[#474747] font-lato placeholder:font-lato !rounded-[10px] !mb-[25px]"
                     type="text"
                     placeholder="Subject"
+                    required={true}
                   />
                   <input
+                    {...register("name", { required: true })}
                     className="contact-input placeholder:text-[#474747] font-lato placeholder:font-lato !rounded-[10px] !mb-[25px]"
                     type="text"
                     placeholder="Name"
+                    required={true}
                   />
                   <input
+                    {...register("email", { required: true })}
                     className="contact-input placeholder:text-[#474747] font-lato placeholder:font-lato !rounded-[10px] !mb-[25px]"
                     type="email"
                     placeholder="E-mail"
+                    required={true}
                   />
                   <textarea
+                    {...register("message", { required: true })}
                     className="contact-input placeholder:text-[#474747] font-lato placeholder:font-lato !rounded-[10px] !mb-[25px] !py-[15px] !px-[11px] border-0"
                     style={{ height: "159px" }}
                     name="message"
                     placeholder="Your message"
+                    required={true}
                   ></textarea>
 
                   <button
-                    onClick={() => setStep(2)}
+                    disabled={isLoading}
                     type="submit"
-                    className="w-[95px] h-[34px] rounded-[10px] font-lato text-[12px] text-white bg-[#505050] mt-[21px]"
+                    className="w-[95px] h-[34px] rounded-[10px] font-lato text-[12px] text-white bg-[#505050] mt-[21px] flex justify-center items-center gap-2 mx-auto"
                   >
+                    {isLoading && (
+                      <SpinnerCircularFixed
+                        size={20}
+                        thickness={180}
+                        speed={300}
+                        color="rgba(255, 255, 255, 1)"
+                        secondaryColor="rgba(255, 255, 255, 0.42)"
+                      />
+                    )}{" "}
                     SEND
                   </button>
-                </div>
+                </form>
               </>
             )}
             {step === 2 && (

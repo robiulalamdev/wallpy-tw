@@ -5,7 +5,7 @@ import SimpleHeader from "../../components/shared/headers/SimpleHeader";
 import { iSearch } from "../../utils/icons/icons";
 // import { wallpapers } from "../../utils/data/wallpapers";
 // import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ProfileFavoriteWallpapers from "./ProfileFavoriteWallpapers";
 import { useGetMyProfileFavoritesQuery } from "../../redux/features/favorites/favoritesApi";
 import { useGetWallpapersByUserIdQuery } from "../../redux/features/wallpapers/wallpapersApi";
@@ -18,6 +18,77 @@ const ProfileMain = ({ user }) => {
   const { data: uploadsData } = useGetWallpapersByUserIdQuery(user?._id);
   const { data: collectionData } = useGetMyCollectionsByUserIdQuery(user?._id);
   const [tab1, setTab1] = useState("Uploads");
+
+  const [wallpapers, setWallpapers] = useState([]);
+  const [collections, setCollections] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+
+  const handleSearch = async (value) => {
+    const search = value?.toLowerCase();
+    if (tab1 === "Uploads") {
+      const result = await uploadsData?.data?.filter((item) => {
+        const isExist =
+          item?.slug?.includes(search) || item?.author?.includes(search);
+        const tags = item?.tags.some((tag) =>
+          tag.toLowerCase().includes(search)
+        );
+        if (isExist || tags) {
+          return item;
+        }
+      });
+      if (value) {
+        setWallpapers(result);
+      } else {
+        setWallpapers(uploadsData?.data);
+      }
+    }
+    if (tab1 === "Favorites") {
+      const result = await data?.data?.filter((element) => {
+        const item = element?.wallpaper;
+        const isExist =
+          item?.slug?.includes(search) || item?.author?.includes(search);
+        const tags = item?.tags.some((tag) =>
+          tag.toLowerCase().includes(search)
+        );
+        if (isExist || tags) {
+          return element;
+        }
+      });
+      if (value) {
+        setFavorites(result);
+      } else {
+        setFavorites(data?.data);
+      }
+    }
+    if (tab1 === "Collections") {
+      const result = await collectionData?.data?.filter((item) =>
+        item?.name.toLowerCase()?.includes(search)
+      );
+      if (value) {
+        setCollections(result);
+      } else {
+        setCollections(collectionData?.data);
+      }
+    }
+  };
+
+  useMemo(() => {
+    if (uploadsData?.data?.length > 0) {
+      setWallpapers(uploadsData?.data);
+    }
+  }, [uploadsData]);
+
+  useMemo(() => {
+    if (collectionData?.data?.length > 0) {
+      setCollections(collectionData?.data);
+    }
+  }, [collectionData]);
+
+  useMemo(() => {
+    if (data?.data?.length > 0) {
+      setFavorites(data?.data);
+    }
+  }, [data]);
 
   return (
     <>
@@ -48,6 +119,11 @@ const ProfileMain = ({ user }) => {
               {iSearch}
             </div>
             <input
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch(e.target.value);
+                }
+              }}
               type="text"
               placeholder="Search this profile"
               className="text-[#5A5A5A] placeholder:text-[#5A5A5A] text-[15px] bg-transparent w-full h-full flex-grow font-lato outline-none border-none"
@@ -59,13 +135,13 @@ const ProfileMain = ({ user }) => {
 
         <>
           {tab1 === "Uploads" && (
-            <ProfileUploadsWallpapers wallpapers={uploadsData?.data} />
+            <ProfileUploadsWallpapers wallpapers={wallpapers} />
           )}
           {tab1 === "Favorites" && (
-            <ProfileFavoriteWallpapers wallpapers={data?.data} />
+            <ProfileFavoriteWallpapers wallpapers={favorites} />
           )}
           {tab1 === "Collections" && (
-            <ProfileCollectionsWallpapers collections={collectionData?.data} />
+            <ProfileCollectionsWallpapers collections={collections} />
           )}
 
           <div className="bg-[#000000] w-[128px] h-[42px] rounded-[100px] mx-auto mt-[27px] md:mt-[40px] flex justify-center items-center font-bakbak-one text-[12px] text-[#CCC] cursor-pointer">

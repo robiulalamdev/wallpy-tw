@@ -10,9 +10,11 @@ import { iHLove, iLock, iLogout, iUser } from "../../../utils/icons/icons";
 import { useContext } from "react";
 import { AuthContext } from "../../../contextApi/AuthContext";
 import useViewImage from "../../../lib/hooks/useViewImage";
+import { useNavigate } from "react-router-dom";
 const HeaderProfile = () => {
   const { viewImg } = useViewImage();
   const { logout, user } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <>
       <SpeedDial placement="left">
@@ -32,13 +34,22 @@ const HeaderProfile = () => {
           >
             {iLogout}
           </IconButton>
-          <IconButton className="p-0 rounded-full bg-transparent hover:bg-black">
+          <IconButton
+            onClick={() => navigate("/account-settings")}
+            className="p-0 rounded-full bg-transparent hover:bg-black"
+          >
             {iLock}
           </IconButton>
-          <IconButton className="p-0 rounded-full bg-transparent hover:bg-black">
+          <IconButton
+            onClick={() => navigate("/media-center")}
+            className="p-0 rounded-full bg-transparent hover:bg-black"
+          >
             {iHLove}
           </IconButton>
-          <IconButton className="p-0 rounded-full bg-transparent hover:bg-black">
+          <IconButton
+            onClick={() => navigate("/my-profile")}
+            className="p-0 rounded-full bg-transparent hover:bg-black"
+          >
             {iUser}
           </IconButton>
         </SpeedDialContent>

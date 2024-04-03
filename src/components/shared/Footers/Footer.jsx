@@ -19,12 +19,12 @@ const Footer = () => {
                 Home
               </p>
             </Link>
-            <Link to="/account">
+            <Link to="/account-settings">
               <p className="text-[#939393] font-bakbak-one text-[15px] mt-[7px] md:mt-[4px]">
                 Account
               </p>
             </Link>
-            <Link to="/favorites">
+            <Link to="/media-center">
               <p className="text-[#939393] font-bakbak-one text-[15px] mt-[7px] md:mt-[4px]">
                 Favorites
               </p>
@@ -44,7 +44,7 @@ const Footer = () => {
                 About
               </p>
             </Link>
-            <Link to="/profile">
+            <Link to="/contact">
               <p className="text-[#939393] font-bakbak-one text-[15px] mt-[7px] md:mt-[4px]">
                 Contact
               </p>

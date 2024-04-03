@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button } from "@material-tailwind/react";
 import SimpleHeader from "../../components/shared/headers/SimpleHeader";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { iSearch } from "../../utils/icons/icons";
 import { useNavigate } from "react-router-dom";
 import OfficialBrandBanner from "../../components/officialBrandProfile/OfficialBrandBanner";
@@ -9,11 +9,63 @@ import {
   official_brands_profiles,
   official_brands_profiles_collections,
 } from "../../utils/data/profile";
+import { useGetWallpapersByUserIdQuery } from "../../redux/features/wallpapers/wallpapersApi";
+import { useGetMyCollectionsByUserIdQuery } from "../../redux/features/collections/collectionsApi";
+import useViewImage from "../../lib/hooks/useViewImage";
 
 const OfficialBrandProfileMain = ({ user }) => {
+  const { data: uploadsData } = useGetWallpapersByUserIdQuery(user?._id);
+  const { data: collectionData } = useGetMyCollectionsByUserIdQuery(user?._id);
   const [tab1, setTab1] = useState("Uploads");
+  const [wallpapers, setWallpapers] = useState([]);
+  const [collections, setCollections] = useState([]);
+
+  const { viewImg } = useViewImage();
 
   const navigate = useNavigate();
+
+  const handleSearch = async (value) => {
+    const search = value?.toLowerCase();
+    if (tab1 === "Uploads") {
+      const result = await uploadsData?.data?.filter((item) => {
+        const isExist =
+          item?.slug?.includes(search) || item?.author?.includes(search);
+        const tags = item?.tags.some((tag) =>
+          tag.toLowerCase().includes(search)
+        );
+        if (isExist || tags) {
+          return item;
+        }
+      });
+      if (value) {
+        setWallpapers(result);
+      } else {
+        setWallpapers(uploadsData?.data);
+      }
+    }
+    if (tab1 === "Collections") {
+      const result = await collectionData?.data?.filter((item) =>
+        item?.name.toLowerCase()?.includes(search)
+      );
+      if (value) {
+        setCollections(result);
+      } else {
+        setCollections(collectionData?.data);
+      }
+    }
+  };
+
+  useMemo(() => {
+    if (uploadsData?.data?.length > 0) {
+      setWallpapers(uploadsData?.data);
+    }
+  }, [uploadsData]);
+
+  useMemo(() => {
+    if (collectionData?.data?.length > 0) {
+      setCollections(collectionData?.data);
+    }
+  }, [collectionData]);
   return (
     <>
       <SimpleHeader />
@@ -43,6 +95,11 @@ const OfficialBrandProfileMain = ({ user }) => {
               {iSearch}
             </div>
             <input
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch(e.target.value);
+                }
+              }}
               type="text"
               placeholder="Search this profile"
               className="text-[#5A5A5A] placeholder:text-[#5A5A5A] text-[15px] bg-transparent w-full h-full flex-grow font-lato outline-none border-none"
@@ -55,14 +112,14 @@ const OfficialBrandProfileMain = ({ user }) => {
         <>
           {tab1 === "Uploads" && (
             <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-[14px] gap-y-[14px] md:gap-x-[16px] md:gap-y-[32px] lg:gap-x-[40px] lg:gap-y-[59px] mt-[18px] md:mt-[53px]">
-              {official_brands_profiles.map((item, index) => (
+              {wallpapers?.map((item, index) => (
                 <div
                   onClick={() => navigate("/wallpaper")}
                   key={index}
                   className={`w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
                 >
                   <img
-                    src={item.img}
+                    src={viewImg(item.wallpaper)}
                     alt="wallpaper"
                     className="w-full h-full rounded-[5px] md:rounded-[7px] lg:rounded-[10px] object-cover hover:scale-110 duration-300 cursor-pointer"
                   />
@@ -73,18 +130,20 @@ const OfficialBrandProfileMain = ({ user }) => {
 
           {tab1 === "Collections" && (
             <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-[14px] gap-y-[19px] md:gap-x-[32px] md:gap-y-[24px] lg:gap-x-[41px] lg:gap-y-[34px] mt-[18px] md:mt-[53px]">
-              {official_brands_profiles_collections.map((item, index) => (
+              {collections?.map((item, index) => (
                 <div key={index} className="">
                   <div
-                    onClick={() => navigate("/wallpaper")}
+                    onClick={() => navigate("/wallpapers")}
                     className={`grid grid-cols-2 w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
                   >
-                    {item.images.map((img, i) => (
+                    {item?.wallpapers?.map((img, i) => (
                       <img
                         key={i}
-                        src={img}
+                        src={viewImg(img.wallpaper)}
                         alt="wallpaper"
-                        className="w-full h-full object-cover cursor-pointer"
+                        className={`w-full h-full object-cover cursor-pointer  ${
+                          item?.wallpapers?.length === 1 && "col-span-2"
+                        }`}
                       />
                     ))}
                   </div>

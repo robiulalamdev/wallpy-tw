@@ -19,7 +19,7 @@ const SimpleHeader = () => {
             onClick={() => navigate("/")}
             src={logo}
             alt="logo"
-            className="w-[85px] h-[56px] object-contain"
+            className="w-[85px] h-[56px] object-contain cursor-pointer"
           />
           <input
             onKeyDown={(e) => {

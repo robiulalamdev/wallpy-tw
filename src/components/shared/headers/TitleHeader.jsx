@@ -17,7 +17,7 @@ const TitleHeader = () => {
           onClick={() => navigate("/")}
           src={logo}
           alt="logo"
-          className="!w-[85px] !h-[56px] object-contain"
+          className="!w-[85px] !h-[56px] object-contain cursor-pointer"
         />
 
         <h1 className="text-white font-bakbak-one text-[40px]">

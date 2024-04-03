@@ -19,7 +19,7 @@ const RulesHeader = () => {
           onClick={() => navigate("/")}
           src={logo}
           alt="logo"
-          className="!w-[85px] !h-[56px] object-contain"
+          className="!w-[85px] !h-[56px] object-contain cursor-pointer"
         />
 
         <div className="flex items-center justify-center gap-x-[22px] flex-grow w-full">

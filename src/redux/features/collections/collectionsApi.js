@@ -29,6 +29,15 @@ const collectionsApi = api.injectEndpoints({
       invalidatesTags: ["collections"],
     }),
 
+    toggleCollectionItem: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/collections/add-remove-wallpaper/${id}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["collections"],
+    }),
+
     getMyCollections: builder.query({
       query: () => `/collections/my-collections`,
       providesTags: ["collections"],
@@ -39,7 +48,8 @@ const collectionsApi = api.injectEndpoints({
       providesTags: ["collections"],
     }),
     getCollectionListByUserId: builder.query({
-      query: (userId) => `/collections/list/${userId}`,
+      query: ({ userId, wallpaperId }) =>
+        `/collections/list/${userId}/${wallpaperId}`,
       providesTags: ["collections"],
     }),
   }),
@@ -52,4 +62,5 @@ export const {
   useUpdateCollectionsMutation,
   useGetMyCollectionsByUserIdQuery,
   useGetCollectionListByUserIdQuery,
+  useToggleCollectionItemMutation,
 } = collectionsApi;

@@ -20,7 +20,7 @@ const MainHeader = () => {
             onClick={() => navigate("/")}
             src={logo}
             alt="logo"
-            className="w-[85px] h-[56px] object-contain"
+            className="w-[85px] h-[56px] object-contain cursor-pointer"
           />
           <div className="bg-[#00000033] rounded-[10px] h-[45px] max-w-[771px] w-full flex justify-center items-center pr-[10px]">
             <div className="text-[#5A5A5A] w-[40px] px-[10px] h-full flex justify-center items-center">
@@ -72,7 +72,7 @@ const MainHeader = () => {
                 onClick={() => navigate("/")}
                 src={logo}
                 alt="logo"
-                className="w-[60px] h-[32px] object-contain"
+                className="w-[60px] h-[32px] object-contain cursor-pointer"
               />
               <div
                 onClick={() => setOpenSearch(!openSearch)}
