@@ -85,7 +85,7 @@ const ProfileBanner = ({ user }) => {
             </div>
           </div>
 
-          <ProfileBannerSocials />
+          <ProfileBannerSocials author={user} />
         </div>
       </div>
     </div>

@@ -80,7 +80,7 @@ const OfficialBrandBanner = ({ user }) => {
             </div>
           </div>
 
-          <OfficialBrandProfileSocial />
+          <OfficialBrandProfileSocial author={user} />
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   iPSocial1,
   iPSocial2,
@@ -6,11 +7,11 @@ import {
 } from "../../utils/icons/icons";
 import BannerActionButtons from "./BannerActionButtons";
 
-const ProfileBannerSocials = () => {
+const ProfileBannerSocials = ({ author }) => {
   return (
     <>
       <div>
-        <BannerActionButtons />
+        <BannerActionButtons author={author} />
         <div className="flex items-center justify-between gap-x-[15px] mt-[12px] max-w-[127px]">
           <div className="">{iPSocial1}</div>
           <div className="">{iPSocial2}</div>

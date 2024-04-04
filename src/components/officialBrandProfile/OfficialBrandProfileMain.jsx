@@ -5,10 +5,6 @@ import { useMemo, useState } from "react";
 import { iSearch } from "../../utils/icons/icons";
 import { useNavigate } from "react-router-dom";
 import OfficialBrandBanner from "../../components/officialBrandProfile/OfficialBrandBanner";
-import {
-  official_brands_profiles,
-  official_brands_profiles_collections,
-} from "../../utils/data/profile";
 import { useGetWallpapersByUserIdQuery } from "../../redux/features/wallpapers/wallpapersApi";
 import { useGetMyCollectionsByUserIdQuery } from "../../redux/features/collections/collectionsApi";
 import useViewImage from "../../lib/hooks/useViewImage";

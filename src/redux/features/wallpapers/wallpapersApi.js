@@ -40,12 +40,27 @@ const usersApi = api.injectEndpoints({
     }),
 
     getWallpaperBySlug: builder.query({
-      query: (slug) => `/wallpapers/${slug}`,
+      query: (slug) => `/wallpapers/slug/${slug}`,
       providesTags: ["wallpapers"],
     }),
 
     getWallpapersByUserId: builder.query({
       query: (userId) => `/wallpapers/profile-wallpapers/${userId}`,
+      providesTags: ["wallpapers"],
+    }),
+
+    getPopularWallpapers: builder.query({
+      query: (query) => `/wallpapers/popular${query}`,
+      providesTags: ["wallpapers"],
+    }),
+
+    getFeaturedWallpapers: builder.query({
+      query: (query) => `/wallpapers/featured${query}`,
+      providesTags: ["wallpapers"],
+    }),
+
+    getOfficialWallpapers: builder.query({
+      query: (query) => `/wallpapers/official${query}`,
       providesTags: ["wallpapers"],
     }),
   }),
@@ -59,4 +74,7 @@ export const {
   useDeleteWallpapersByIdsMutation,
   useGetWallpaperBySlugQuery,
   useGetWallpapersByUserIdQuery,
+  useGetPopularWallpapersQuery,
+  useGetFeaturedWallpapersQuery,
+  useGetOfficialWallpapersQuery,
 } = usersApi;

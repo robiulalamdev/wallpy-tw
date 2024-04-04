@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import {
   iShare1,
   iShare2,
@@ -8,11 +10,11 @@ import {
 } from "../../utils/icons/icons";
 import BannerActionButtons from "../profile/BannerActionButtons";
 
-const OfficialBrandProfileSocial = () => {
+const OfficialBrandProfileSocial = ({ author }) => {
   return (
     <>
       <div>
-        <BannerActionButtons />
+        <BannerActionButtons author={author} />
         <div className="flex items-center justify-end gap-x-[10px] mt-[12px]">
           <div className="">{iShare1}</div>
           <div className="">{iShare2}</div>

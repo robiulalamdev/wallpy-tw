@@ -3,9 +3,30 @@
 import { Dialog } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { iSearchClose } from "../../utils/icons/icons";
+import { useSendReportMutation } from "../../redux/features/reports/reportsApi";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { SpinnerCircularFixed } from "spinners-react";
 
-const ReportDialog = ({ reportOpen, setReportOpen }) => {
+const ReportDialog = ({ reportOpen, setReportOpen, author }) => {
   const [step, setStep] = useState(1);
+  const [sendReport, { isLoading }] = useSendReportMutation();
+  const { handleSubmit, register, reset } = useForm();
+
+  const handleSendReport = async (data) => {
+    const options = {
+      data: { message: data?.message, receiver: author?._id },
+    };
+    const result = await sendReport(options);
+    if (result?.data?.success) {
+      setStep(2);
+      toast.success("Report Send Successfully");
+    } else {
+      toast.error("Report Send Failed");
+      setReportOpen(false);
+      setStep(1);
+    }
+  };
   return (
     <>
       <Dialog
@@ -28,7 +49,10 @@ const ReportDialog = ({ reportOpen, setReportOpen }) => {
         </div>
 
         {step === 1 && (
-          <div className="max-w-[324px] mx-auto w-full pb-[15px]">
+          <form
+            onSubmit={handleSubmit(handleSendReport)}
+            className="max-w-[324px] mx-auto w-full pb-[15px]"
+          >
             <h1 className="text-[#FFF] text-[20px] font-bakbak-one mt-[29px]">
               Explain your report
             </h1>
@@ -41,18 +65,27 @@ const ReportDialog = ({ reportOpen, setReportOpen }) => {
                 Message
               </span>
               <textarea
+                {...register("message", { required: true })}
                 placeholder="Write the details here."
+                required={true}
                 className="min-h-[68px] outline-none max-h-[150px] w-full bg-[#202020] rounded-[10px] placeholder:text-[#5B5B5B] text-[#fff] text-[12px] placeholder:text-[12px] font-bakbak-one placeholder:font-bakbak-one py-[8px] px-[13px]"
               ></textarea>
             </div>
 
-            <button
-              onClick={() => setStep(2)}
-              className="w-[158px] h-[37px] bg-[#FFF] rounded-[10px] text-[#202020] text-[12px] font-bakbak-one mx-auto mt-[13px] block"
-            >
+            <button className="w-[158px] h-[37px] bg-[#FFF] rounded-[10px] text-[#202020] text-[12px] font-bakbak-one mx-auto mt-[13px] inline-block flex items-center justify-center gap-2">
+              {isLoading && (
+                <SpinnerCircularFixed
+                  size={20}
+                  thickness={180}
+                  speed={300}
+                  color="rgba(255, 255, 255, 1)"
+                  secondaryColor="rgba(255, 255, 255, 0.42)"
+                />
+              )}{" "}
               Send Report
             </button>
             <button
+              type="button"
               onClick={() => {
                 setReportOpen(false);
                 setStep(1);
@@ -61,7 +94,7 @@ const ReportDialog = ({ reportOpen, setReportOpen }) => {
             >
               Cancel
             </button>
-          </div>
+          </form>
         )}
 
         {step === 2 && (
@@ -73,6 +106,7 @@ const ReportDialog = ({ reportOpen, setReportOpen }) => {
             </p>
 
             <button
+              type="button"
               onClick={() => {
                 setReportOpen(false);
                 setStep(1);

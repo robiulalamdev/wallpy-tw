@@ -28,7 +28,10 @@ import {
 } from "@material-tailwind/react";
 import SimpleHeader from "../../components/shared/headers/SimpleHeader";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useGetWallpaperBySlugQuery } from "../../redux/features/wallpapers/wallpapersApi";
+import {
+  useGetPopularWallpapersQuery,
+  useGetWallpaperBySlugQuery,
+} from "../../redux/features/wallpapers/wallpapersApi";
 import useViewImage from "../../lib/hooks/useViewImage";
 import PageLoading from "../../components/common/loadings/PageLoading";
 import ErrorPageMain from "../../components/common/errorPages/ErrorPageMain";
@@ -38,6 +41,8 @@ import { AuthContext } from "../../contextApi/AuthContext";
 const Wallpaper = () => {
   const { slug } = useParams();
   const { data, isLoading } = useGetWallpaperBySlugQuery(slug);
+  const { data: popularWallpapers } = useGetPopularWallpapersQuery("?limit=3");
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -153,14 +158,27 @@ const Wallpaper = () => {
         </div>
       )}
 
-      {!isLoading && data?.data && (
+      {!isLoading && data?.data && popularWallpapers?.data?.length > 0 && (
         <div className="mt-[17px] md:mt-[62px]">
           <h1 className="text-[#939393] font-bakbak-one text-center text-[20px] md:text-[30px]">
             You may also like
           </h1>
 
           <div className="grid grid-cols-3 gap-x-[16px] md:gap-x-[42px] lg:gap-x-[83px] mt-[17px] md:mt-[32px] lg:mt-[59px]">
-            <div className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]">
+            {popularWallpapers?.data?.map((item, index) => (
+              <div
+                key={index}
+                className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]"
+              >
+                <img
+                  onClick={() => navigate(`/wallpapers/${item?.slug}`)}
+                  src={viewImg(item?.wallpaper)}
+                  alt="image"
+                  className="w-full h-full object-cover rounded-[5px] md:rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
+                />
+              </div>
+            ))}
+            {/* <div className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]">
               <img
                 onClick={() => navigate("/wallpaper")}
                 src={img1}
@@ -183,10 +201,10 @@ const Wallpaper = () => {
                 alt="image"
                 className="w-full h-full object-cover rounded-[5px] md:rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
               />
-            </div>
+            </div> */}
           </div>
 
-          <Link to="/wallpapers/search">
+          <Link to="/wallpapers">
             <Button className="bg-[#000000] !text-[#ccc] font-bakbak-one text-[12px] w-[97px] h-[32px] rounded-[15px] shadow-none hover:shadow-none normal-case font-normal mt-[22px] text-nowrap !p-0 mx-auto hidden md:block">
               View more
             </Button>
