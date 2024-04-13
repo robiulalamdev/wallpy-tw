@@ -214,6 +214,22 @@ const MediaCenterSidebarUi = ({
         </>
       ) : (
         <>
+          {selectedItems?.length === 0 && (
+            <>
+              <h1 className="text-center text-[#fff] text-[15px] font-lato pt-[36px]">
+                Create New Collection
+              </h1>
+
+              <div
+                onClick={() => setOpen(!open)}
+                className="w-[81px] h-[36px] bg-[#00000033] flex justify-center items-center cursor-pointer mt-[28px] mx-auto rounded-full"
+              >
+                <p className="text-[12px] text-[#fff] text-center font-lato">
+                  Create
+                </p>
+              </div>
+            </>
+          )}
           {selectedItems?.length > 0 && (
             <>
               <h1 className="text-center text-[#fff] text-[15px] font-lato pt-[36px]">
