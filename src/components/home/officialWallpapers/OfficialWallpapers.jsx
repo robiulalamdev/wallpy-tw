@@ -1,7 +1,7 @@
 import { Button } from "@material-tailwind/react";
-import img1 from "../../../assets/images/home/official-wellpaper/wimg1.png";
-import img2 from "../../../assets/images/home/official-wellpaper/wimg2.png";
-import img3 from "../../../assets/images/home/official-wellpaper/wimg3.png";
+// import img1 from "../../../assets/images/home/official-wellpaper/wimg1.png";
+// import img2 from "../../../assets/images/home/official-wellpaper/wimg2.png";
+// import img3 from "../../../assets/images/home/official-wellpaper/wimg3.png";
 import { useNavigate } from "react-router-dom";
 import { useGetOfficialWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
 import useViewImage from "../../../lib/hooks/useViewImage";

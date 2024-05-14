@@ -15,7 +15,7 @@ const MediaCenterCreateCollectionModal = ({ open, close }) => {
       data: data,
     };
     const result = await createCollection(options);
-    console.log(result);
+    // console.log(result);
     if (result?.data?.success) {
       toast.success(result?.data?.message);
       reset();

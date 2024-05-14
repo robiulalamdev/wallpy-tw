@@ -1,11 +1,12 @@
 import BannerTab from "./BannerTab";
 import { Button } from "@material-tailwind/react";
-import { banners } from "../../../utils/data/data";
+// import { banners } from "../../../utils/data/data";
 import { useNavigate } from "react-router-dom";
 import { useGetSearchWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
 import { useMemo, useState } from "react";
 import useViewImage from "../../../lib/hooks/useViewImage";
 import PageLoading from "../../common/loadings/PageLoading";
+import NoData from "../../common/notFound/NoData";
 
 const Banner = () => {
   const [tab1, setTab1] = useState("Trending");
@@ -16,12 +17,10 @@ const Banner = () => {
   const { data, isLoading } = useGetSearchWallpapersQuery(searchString);
   const navigate = useNavigate();
   const { viewImg } = useViewImage();
-
   const [wallpapers, setWallpapers] = useState([]);
 
   useMemo(() => {
     if (data?.data) {
-      console.log(data?.data);
       setWallpapers(data?.data?.data);
     }
   }, [data?.data]);
@@ -63,6 +62,8 @@ const Banner = () => {
           </div>
         </>
       )}
+
+      {!isLoading && wallpapers?.length < 1 && <NoData />}
     </div>
   );
 };

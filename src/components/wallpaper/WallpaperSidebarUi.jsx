@@ -19,6 +19,7 @@ import {
 import { AuthContext } from "../../contextApi/AuthContext";
 import { useUpdateTagByIdMutation } from "../../redux/features/wallpapers/wallpapersApi";
 import { toast } from "react-toastify";
+import { useGetTotalFavoritesQuery } from "../../redux/features/favorites/favoritesApi";
 
 const resulations1 = {
   name: "Ultra Wide",
@@ -75,6 +76,7 @@ const resulations5 = {
 
 const WallpaperSidebarUi = ({ data }) => {
   const { user } = useContext(AuthContext);
+  const { data: favoriteData } = useGetTotalFavoritesQuery(data?._id);
   const { viewImg, formatFileSize } = useViewImage();
   const [open, setOpen] = useState(false);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
@@ -85,8 +87,6 @@ const WallpaperSidebarUi = ({ data }) => {
 
   // mutations
   const [updateTagById] = useUpdateTagByIdMutation();
-
-  // console.log(dimensions);
 
   const handleDimensions = async () => {
     const result = await getImageDimensions(data?.wallpaper);
@@ -157,7 +157,7 @@ const WallpaperSidebarUi = ({ data }) => {
                 ? data?.author_info?.username?.slice(0, 12) + "..."
                 : data?.author_info?.username}
             </h1>
-            {iVerifiedPro}
+            {data?.author_info?.verification_status && iVerifiedPro}
           </div>
           <Link to={`/profiles/${data?.author_info?.username}`}>
             <Button className="w-[97px] h-[32px] shadow-none hover:shadow-none text-white bg-[#000000] font-bakbak-one text-[10px] normal-case font-normal p-0 rounded-[15px]">
@@ -438,7 +438,7 @@ const WallpaperSidebarUi = ({ data }) => {
                     Favorites:
                   </h1>
                   <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                    1489
+                    {favoriteData?.total}
                   </h1>
                 </div>
                 <div className="flex items-center gap-x-[2px]">

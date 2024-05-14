@@ -7,6 +7,7 @@ import OfficialBrandProfileSocial from "./OfficialBrandProfileSocial";
 
 const OfficialBrandBanner = ({ user }) => {
   const { viewImg } = useViewImage();
+
   return (
     <div>
       <div className="pl-[4px] md:pl-[29px] relative">
@@ -38,7 +39,8 @@ const OfficialBrandBanner = ({ user }) => {
                     </h1>
                   )}
 
-                  {iOfficialVerified}
+                  {user?.profile.verification_status === "Approved" &&
+                    iOfficialVerified}
                 </div>
                 {user?.username && (
                   <h1 className="text-[#5A5A5A] text-[15px] font-bakbak-one text-nowrap hidden md:block mb-[7px]">

@@ -24,6 +24,7 @@ import {
 } from "../../redux/features/collections/collectionsApi";
 import { AuthContext } from "../../contextApi/AuthContext";
 import { useContext, useMemo, useRef, useState } from "react";
+import MediaCenterCreateCollectionModal from "../media-center/MediaCenterCreateCollectionModal";
 
 const WallpaperFavoriteAndCollection = ({ data }) => {
   const { user } = useContext(AuthContext);
@@ -35,7 +36,7 @@ const WallpaperFavoriteAndCollection = ({ data }) => {
   });
   const [toggleCollectionItem] = useToggleCollectionItemMutation();
   const [collections, setCollections] = useState([]);
-  const [collectionExist, setCollectionExist] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const collectionRef = useRef();
 
@@ -104,7 +105,9 @@ const WallpaperFavoriteAndCollection = ({ data }) => {
                 placeholder="Search Collections"
                 className="h-[45px] bg-[#FFF] rounded-[5px] outline-none flex-grow w-full px-[8px] min-w-[145px]"
               />
-              <div>{iAddPlus}</div>
+              <div onClick={() => setOpen(!open)} className="cursor-pointer">
+                {iAddPlus}
+              </div>
             </div>
 
             {collections?.length > 0 ? (
@@ -167,6 +170,8 @@ const WallpaperFavoriteAndCollection = ({ data }) => {
           </div>
         </div>
       </div>
+
+      <MediaCenterCreateCollectionModal open={open} close={setOpen} />
     </>
   );
 };

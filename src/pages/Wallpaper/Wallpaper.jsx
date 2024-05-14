@@ -51,18 +51,24 @@ const Wallpaper = () => {
   const { data: popularWallpapers } = useGetPopularWallpapersQuery("?limit=3");
   const [url, setUrl] = useState("");
 
+  const wallpaperRef = useRef();
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const { user } = useContext(AuthContext);
   const { viewImg } = useViewImage();
   const shareRef = useRef();
-  // console.log(data?.data?.wallpaper);
+  // console.log(data?.data);
 
   useEffect(() => {
     setUrl(`${CLIENT_URL}/wallpapers/${slug}`);
   }, [slug]);
-  console.log(url);
+
+  const openWallpaper = (slug) => {
+    wallpaperRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    navigate(`/wallpapers/${slug}`);
+  };
   return (
     <>
       <SimpleHeader />
@@ -70,7 +76,10 @@ const Wallpaper = () => {
       {isLoading && <PageLoading />}
       {!isLoading && !data?.data && <ErrorPageMain />}
       {!isLoading && data?.data && (
-        <div className="flex justify-between items-start gap-x-[13px] h-full w-full">
+        <div
+          ref={wallpaperRef}
+          className="flex justify-between items-start gap-x-[13px] h-full w-full"
+        >
           <WallpaperSidebar open={open} setOpen={setOpen} data={data?.data} />
           <div className="w-full h-full flex-grow min-h-[755px] max-h-[755px] lg:min-h-[802px] lg:max-h-[802px] max-w-[1442px] rounded-[10px] overflow-hidden relative">
             <img
@@ -243,7 +252,7 @@ const Wallpaper = () => {
                 className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]"
               >
                 <img
-                  onClick={() => navigate(`/wallpapers/${item?.slug}`)}
+                  onClick={() => openWallpaper(item.slug)}
                   src={viewImg(item?.wallpaper)}
                   alt="image"
                   className="w-full h-full object-cover rounded-[5px] md:rounded-[10px] hover:scale-110 duration-300 cursor-pointer"

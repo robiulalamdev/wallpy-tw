@@ -33,6 +33,7 @@ import PrivateRoute from "./PrivateRoute";
 import PublicProfile from "../pages/Profile/PublicProfile";
 import VerificationPrivateRoute from "./VerificationPrivateRoute";
 import OfficialBrandProfilePublic from "../pages/OfficialBrandProfile/OfficialBrandProfilePublic";
+import ProfileVerify from "../pages/Test/ProfileVerify";
 
 export const route = createBrowserRouter([
   {
@@ -155,6 +156,12 @@ export const route = createBrowserRouter([
       {
         path: "/socials",
         element: <Socials />,
+      },
+
+      // test routes
+      {
+        path: "/profile-verify",
+        element: <ProfileVerify />,
       },
     ],
   },

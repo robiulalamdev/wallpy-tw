@@ -103,6 +103,11 @@ const usersApi = api.injectEndpoints({
       providesTags: ["users"],
     }),
 
+    getAllUsers: builder.query({
+      query: () => `/users/all`,
+      providesTags: ["users"],
+    }),
+
     // ----------settings part----------
     //update user profile tab info
     settingsChange: builder.mutation({
@@ -118,6 +123,15 @@ const usersApi = api.injectEndpoints({
       query: ({ data }) => ({
         url: `/users/profiles/verification-request`,
         method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
+
+    approvedProfile: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/users/profiles/approved-profile/${id}`,
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: ["users"],
@@ -145,4 +159,8 @@ export const {
   // -----------user settings endpoints------------
   useSettingsChangeMutation,
   useVerificationRequestMutation,
+
+  // APPROVED PROFILE
+  useApprovedProfileMutation,
+  useGetAllUsersQuery,
 } = usersApi;
