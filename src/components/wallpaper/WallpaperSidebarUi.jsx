@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import profile from "../../assets/images/global/header/profile.gif";
 import {
   iAddTag,
@@ -12,59 +12,130 @@ import {
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import useViewImage from "../../lib/hooks/useViewImage";
+import {
+  downloadImageWithWH,
+  getImageDimensions,
+} from "../../lib/services/service";
+import { AuthContext } from "../../contextApi/AuthContext";
+import { useUpdateTagByIdMutation } from "../../redux/features/wallpapers/wallpapersApi";
+import { toast } from "react-toastify";
 
 const resulations1 = {
   name: "Ultra Wide",
-  items: ["2560 × 1080", "3440 × 1440", "3840 × 1600"],
+  items: [
+    { width: 2560, height: 1080 },
+    { width: 3440, height: 1440 },
+    { width: 3840, height: 1600 },
+  ],
 };
 
 const resulations2 = {
   name: "4:3",
   items: [
-    "1280 × 960",
-    "1600 × 1200",
-    "1920 × 1440",
-    "2560 × 1920",
-    "3840 × 2880",
+    { width: 1280, height: 960 },
+    { width: 1600, height: 1200 },
+    { width: 1920, height: 1440 },
+    { width: 2560, height: 1920 },
+    { width: 3840, height: 2880 },
   ],
 };
 
 const resulations3 = {
   name: "16:9",
   items: [
-    "1280 × 720",
-    "1600 × 900",
-    "1920 × 1080",
-    "2560 × 1440",
-    "3840 × 2160",
+    { width: 1280, height: 720 },
+    { width: 1600, height: 900 },
+    { width: 1920, height: 1080 },
+    { width: 2560, height: 1440 },
+    { width: 3840, height: 2160 },
   ],
 };
 
 const resulations4 = {
   name: "16:10",
   items: [
-    "1280 × 800",
-    "1600 × 1000",
-    "1920 × 1200",
-    "2560 × 1600",
-    "3840 × 2400",
+    { width: 1280, height: 800 },
+    { width: 1600, height: 1000 },
+    { width: 1920, height: 1200 },
+    { width: 2560, height: 1600 },
+    { width: 3840, height: 2400 },
   ],
 };
 
 const resulations5 = {
   name: "16:9",
   items: [
-    "1280 × 1024",
-    "1600 × 1280",
-    "1920 × 1536",
-    "2560 × 2048",
-    "3840 × 3072",
+    { width: 1280, height: 1024 },
+    { width: 1600, height: 1280 },
+    { width: 1920, height: 1536 },
+    { width: 2560, height: 2048 },
+    { width: 3840, height: 3072 },
   ],
 };
 
 const WallpaperSidebarUi = ({ data }) => {
-  const { viewImg } = useViewImage();
+  const { user } = useContext(AuthContext);
+  const { viewImg, formatFileSize } = useViewImage();
   const [open, setOpen] = useState(false);
+  const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
+  const [imageSize, setImageSize] = useState(0);
+  const [selectedDm, setSelectedDm] = useState({ height: 0, width: 0 });
+  const [tags, setTags] = useState([]);
+  const [tagValue, setTagValue] = useState("");
+
+  // mutations
+  const [updateTagById] = useUpdateTagByIdMutation();
+
+  // console.log(dimensions);
+
+  const handleDimensions = async () => {
+    const result = await getImageDimensions(data?.wallpaper);
+    setImageSize(result.size);
+    setDimensions({ width: result.width, height: result.height });
+    setSelectedDm({ width: result.width, height: result.height });
+  };
+
+  useEffect(() => {
+    if (data?.wallpaper) {
+      handleDimensions();
+    }
+    if (data?.tags?.length > 0) {
+      setTags(data?.tags);
+    }
+  }, [data]);
+
+  const handleDownload = () => {
+    const url = viewImg(data?.wallpaper);
+    if (selectedDm.width > 0 && selectedDm.height > 0) {
+      downloadImageWithWH(url, selectedDm.width, selectedDm.height);
+    } else {
+      downloadImageWithWH(url, dimensions.width, dimensions.height);
+    }
+  };
+
+  const isAuthor = data?.user === user?._id;
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    const tag = e.target.tag.value;
+    if (!tag) return;
+    if (isAuthor && tag) {
+      const options = {
+        id: data?._id,
+        data: { tags: [...tags, tag] },
+      };
+      const result = await updateTagById(options);
+      if (result?.data?.success) {
+        setTags([...tags, tag]);
+        setTagValue("");
+        e.target.reset();
+        toast.success("New Tag Add Successfully");
+      } else {
+        toast.error("New Tag Add unSuccessfully");
+      }
+    }
+  };
+
   return (
     <div className="bg-[#121212] lg:bg-[#00000033] w-full min-h-[802px] max-h-[802px] max-w-[347px] min-w-[347px] rounded-[10px] pt-[15px] px-[19px] pb-[23px] scroll_off">
       <h1 className="text-center font-bakbak-one text-[12px] text-white">
@@ -104,7 +175,7 @@ const WallpaperSidebarUi = ({ data }) => {
           </h1>
 
           <h1 className="text-center font-bakbak-one mt-[9px] text-[15px] text-[#606060]">
-            3840 x 2160
+            {dimensions.width} x {dimensions.height}
           </h1>
         </>
       )}
@@ -127,10 +198,10 @@ const WallpaperSidebarUi = ({ data }) => {
             Auto Detection
           </h1>
           <h1 className="text-center text-[12px] font-lato font-medium text-[#FFF] mt-[7px]">
-            Your screen resolution is 1920 × 1080.
+            Your screen resolution is {screen.width} × {screen.height}.
           </h1>
 
-          <div className="mt-[20px] grid grid-cols-3 gap-x-[15px] gap-y-[9px] max-w-[279px] w-full mx-auto">
+          <div className="mt-[20px] grid grid-cols-3 gap-x-[15px] gap-y-[9px] max-w-[279px] w-full mx-auto cursor-pointer">
             <div className="h-fit">
               <div className="w-[83px] h-[29px] flex justify-center items-center">
                 <h1 className="font-lato text-[12px] text-[#FDF516] font-medium">
@@ -141,11 +212,14 @@ const WallpaperSidebarUi = ({ data }) => {
               <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
                 {resulations1.items.map((item, i) => (
                   <div
+                    onClick={() =>
+                      setSelectedDm({ width: item.width, height: item.height })
+                    }
                     key={i}
                     className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
                   >
                     <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                      {item}
+                      {item.width} × {item.height}
                     </h1>
                   </div>
                 ))}
@@ -159,11 +233,14 @@ const WallpaperSidebarUi = ({ data }) => {
               <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
                 {resulations2.items.map((item, i) => (
                   <div
+                    onClick={() =>
+                      setSelectedDm({ width: item.width, height: item.height })
+                    }
                     key={i}
                     className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
                   >
                     <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                      {item}
+                      {item.width} × {item.height}
                     </h1>
                   </div>
                 ))}
@@ -181,11 +258,17 @@ const WallpaperSidebarUi = ({ data }) => {
                 <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
                   {resulations3.items.map((item, i) => (
                     <div
+                      onClick={() =>
+                        setSelectedDm({
+                          width: item.width,
+                          height: item.height,
+                        })
+                      }
                       key={i}
                       className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
                     >
                       <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                        {item}
+                        {item.width} × {item.height}
                       </h1>
                     </div>
                   ))}
@@ -201,11 +284,17 @@ const WallpaperSidebarUi = ({ data }) => {
                 <div className="grid grid-cols-1 gap-y-[10px] h-fit mt-[5px]">
                   {resulations4.items.map((item, i) => (
                     <div
+                      onClick={() =>
+                        setSelectedDm({
+                          width: item.width,
+                          height: item.height,
+                        })
+                      }
                       key={i}
                       className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
                     >
                       <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                        {item}
+                        {item.width} × {item.height}
                       </h1>
                     </div>
                   ))}
@@ -223,10 +312,16 @@ const WallpaperSidebarUi = ({ data }) => {
                   {resulations5.items.map((item, i) => (
                     <div
                       key={i}
+                      onClick={() =>
+                        setSelectedDm({
+                          width: item.width,
+                          height: item.height,
+                        })
+                      }
                       className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
                     >
                       <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                        {item}
+                        {item.width} × {item.height}
                       </h1>
                     </div>
                   ))}
@@ -242,17 +337,34 @@ const WallpaperSidebarUi = ({ data }) => {
 
           <div className="flex justify-center items-start gap-x-[25px] mt-[16px]">
             <input
+              onChange={(e) =>
+                setSelectedDm({
+                  width: e.target.value,
+                  height: selectedDm.height,
+                })
+              }
+              value={selectedDm.width}
               type="number"
               placeholder="Width"
               className="w-[79px] h-[30px] font-lato placeholder:font-lato bg-[#000000B2] outline-none rounded-[5px] placeholder:text-[#939393] text-[12px] placeholder:text-[12px] text-[#FFF] text-center"
             />
             <input
+              onChange={(e) =>
+                setSelectedDm({
+                  width: selectedDm.width,
+                  height: e.target.value,
+                })
+              }
+              value={selectedDm.height}
               type="number"
               placeholder="Height"
               className="w-[79px] h-[30px] font-lato placeholder:font-lato bg-[#000000B2] outline-none rounded-[5px] placeholder:text-[#939393] text-[12px] placeholder:text-[12px] text-[#FFF] text-center"
             />
           </div>
-          <Button className="w-[79px] h-[30px] font-lato bg-[#000000B2] shadow-none hover:shadow-none normal-case font-normal rounded-[5px] text-[11px] text-[#FFF] text-center mt-[16px] mx-auto flex justify-center items-center">
+          <Button
+            onClick={() => setOpen(false)}
+            className="w-[79px] h-[30px] font-lato bg-[#000000B2] shadow-none hover:shadow-none normal-case font-normal rounded-[5px] text-[11px] text-[#FFF] text-center mt-[16px] mx-auto flex justify-center items-center"
+          >
             Generate
           </Button>
         </div>
@@ -266,23 +378,36 @@ const WallpaperSidebarUi = ({ data }) => {
           </h1>
 
           <div>
-            {data?.tags?.length > 0 && (
+            {tags?.length > 0 && (
               <h1 className="text-[#FFF] font-bakbak-one text-[12px]">
-                {data?.tags?.map((tag, index) => `#${tag}   `)}
+                {tags?.map((tag, index) => `#${tag}   `)}
               </h1>
             )}
           </div>
 
-          <div className="max-w-[235px] h-[35px] bg-[#00000033] rounded-[7px] mx-auto mt-[34px] flex justify-between items-center px-[10px]">
-            <input
-              type="text"
-              placeholder="Add tags here..."
-              className="w-full h-full flex-grow bg-transparent outline-none text-[#fff] placeholder:text-[#FFFFFF33] text-[12px] placeholder:text-[12px] placeholder:font-lato font-lato"
-            />
-            <div className="flex justify-center items-center size-[17px]">
-              {iAddTag}
-            </div>
-          </div>
+          {isAuthor && (
+            <form
+              onSubmit={handleAdd}
+              className="max-w-[235px] h-[35px] bg-[#00000033] rounded-[7px] mx-auto mt-[34px] flex justify-between items-center px-[10px]"
+            >
+              <input
+                onChange={(e) => setTagValue(e.target.value)}
+                type="text"
+                name="tag"
+                value={tagValue}
+                placeholder="Add tags here..."
+                className="w-full h-full flex-grow bg-transparent outline-none text-[#fff] placeholder:text-[#FFFFFF33] text-[12px] placeholder:text-[12px] placeholder:font-lato font-lato"
+              />
+              <button
+                type="button"
+                className={`flex justify-center items-center size-[17px]  ${
+                  tagValue ? "text-white" : "text-[#323232]"
+                }`}
+              >
+                {iAddTag}
+              </button>
+            </form>
+          )}
 
           <div className="max-w-[235px] w-full mt-[17px] mx-auto">
             <h1 className=" text-[#CCC] text-[15px] font-bakbak-one text-center">
@@ -303,7 +428,7 @@ const WallpaperSidebarUi = ({ data }) => {
                     Category:
                   </h1>
                   <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                    Gaming
+                    {data?.type}
                   </h1>
                 </div>
               </div>
@@ -321,7 +446,7 @@ const WallpaperSidebarUi = ({ data }) => {
                     Size:
                   </h1>
                   <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                    12.2 MB
+                    {formatFileSize(imageSize)}
                   </h1>
                 </div>
               </div>
@@ -351,7 +476,10 @@ const WallpaperSidebarUi = ({ data }) => {
               </div>
             </div>
 
-            <Button className="flex items-center justify-center gap-x-[3px] rounded-[5px] bg-[#2924FF] w-[129px] h-[38px] mx-auto mt-[26px] shadow-none hover:shadow-none font-normal normal-case p-0">
+            <Button
+              onClick={() => handleDownload()}
+              className="flex items-center justify-center gap-x-[3px] rounded-[5px] bg-[#2924FF] w-[129px] h-[38px] mx-auto mt-[26px] shadow-none hover:shadow-none font-normal normal-case p-0"
+            >
               <h1 className="text-[15px] text-[#C4C4C4] font-bakbak-one ">
                 Download
               </h1>

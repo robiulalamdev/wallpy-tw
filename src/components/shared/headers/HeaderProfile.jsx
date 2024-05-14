@@ -18,8 +18,8 @@ const HeaderProfile = () => {
   return (
     <>
       <SpeedDial placement="left">
-        <SpeedDialHandler>
-          <div className="rounded-full size-[62px] flex justify-center items-center bg-[#00000033]">
+        <SpeedDialHandler open={true}>
+          <div className="rounded-full hover:rounded-l-none cursor-pointer size-[62px] flex justify-center items-center bg-[#00000033] hover:bg-[#00000050] backdrop-blur-lg">
             <img
               src={viewImg(user?.profile?.profile_image) || profile}
               alt="profile"
@@ -27,7 +27,7 @@ const HeaderProfile = () => {
             />
           </div>
         </SpeedDialHandler>
-        <SpeedDialContent className="w-[317px] h-[62px] bg-[#00000033] rounded-[100px] ml-16 flex flex-row justify-start items-center gap-x-[16px] pl-[31px]">
+        <SpeedDialContent className="w-[255px] h-[62px] bg-[#00000050] backdrop-blur-lg rounded-[100px] rounded-r-none ml-[5px] flex flex-row justify-start items-center gap-x-[16px] pl-[25px]">
           <IconButton
             onClick={() => logout()}
             className="p-0 rounded-full bg-transparent hover:bg-black"

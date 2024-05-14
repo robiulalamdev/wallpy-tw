@@ -15,11 +15,11 @@ import {
 } from "../../utils/icons/icons";
 
 import download from "../../assets/icons/wallpaper/download.gif";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
-import img1 from "../../assets/images/wallpaper/img1.png";
-import img2 from "../../assets/images/wallpaper/img2.png";
-import img3 from "../../assets/images/wallpaper/img3.png";
+// import img1 from "../../assets/images/wallpaper/img1.png";
+// import img2 from "../../assets/images/wallpaper/img2.png";
+// import img3 from "../../assets/images/wallpaper/img3.png";
 import {
   Button,
   Popover,
@@ -37,11 +37,19 @@ import PageLoading from "../../components/common/loadings/PageLoading";
 import ErrorPageMain from "../../components/common/errorPages/ErrorPageMain";
 import WallpaperFavoriteAndCollection from "../../components/wallpaper/WallpaperFavoriteAndCollection";
 import { AuthContext } from "../../contextApi/AuthContext";
+import { CLIENT_URL } from "../../lib/config";
+import {
+  WhatsappShareButton,
+  TwitterShareButton,
+  FacebookShareButton,
+} from "react-share";
+import { toast } from "react-toastify";
 
 const Wallpaper = () => {
   const { slug } = useParams();
   const { data, isLoading } = useGetWallpaperBySlugQuery(slug);
   const { data: popularWallpapers } = useGetPopularWallpapersQuery("?limit=3");
+  const [url, setUrl] = useState("");
 
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -49,7 +57,12 @@ const Wallpaper = () => {
   const { user } = useContext(AuthContext);
   const { viewImg } = useViewImage();
   const shareRef = useRef();
+  // console.log(data?.data?.wallpaper);
 
+  useEffect(() => {
+    setUrl(`${CLIENT_URL}/wallpapers/${slug}`);
+  }, [slug]);
+  console.log(url);
   return (
     <>
       <SimpleHeader />
@@ -106,48 +119,107 @@ const Wallpaper = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-center items-end flex-wrap gap-x-[22px] gap-y-[20px] mt-[11px] px-[11px]">
+                <div className="flex justify-center items-end flex-wrap gap-x-[22px] gap-y-[20px] mt-[11px] px-[11px] cursor-pointer">
                   <div className="flex flex-col items-center gap-[8px]">
-                    <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
-                      {iShare1}
-                    </div>
-                    <h1 className="text-[#FFF] font-lato text-[10px]">X</h1>
+                    <TwitterShareButton url={url}>
+                      <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
+                        {iShare1}
+                      </div>
+                    </TwitterShareButton>
+                    <TwitterShareButton url={url}>
+                      <h1 className="text-[#FFF] font-lato text-[10px]">X</h1>
+                    </TwitterShareButton>
                   </div>
                   <div className="flex flex-col items-center gap-[8px]">
-                    <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
-                      {iShare2}
-                    </div>
-                    <h1 className="text-[#FFF] font-lato text-[10px]">
-                      Facebook
-                    </h1>
+                    <FacebookShareButton url={url}>
+                      <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
+                        {iShare2}
+                      </div>
+                    </FacebookShareButton>
+                    <FacebookShareButton url={url}>
+                      <h1 className="text-[#FFF] font-lato text-[10px]">
+                        Facebook
+                      </h1>
+                    </FacebookShareButton>
                   </div>
                   <div className="flex flex-col items-center gap-[8px]">
-                    <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
-                      {iShare3}
-                    </div>
-                    <h1 className="text-[#FFF] font-lato text-[10px]">
-                      WhatsApp
-                    </h1>
+                    <WhatsappShareButton url={url}>
+                      <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
+                        {iShare3}
+                      </div>
+                    </WhatsappShareButton>
+                    <WhatsappShareButton url={url}>
+                      <h1 className="text-[#FFF] font-lato text-[10px]">
+                        WhatsApp
+                      </h1>
+                    </WhatsappShareButton>
                   </div>
                   <div className="flex flex-col items-center gap-[8px]">
-                    <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
+                    <div
+                      onClick={() =>
+                        window.open(
+                          `https://discord.com/api/oauth2/authorize?client_id=<YOUR_CLIENT_ID>&scope=bot&permissions=0&redirect_uri=${encodeURIComponent(
+                            url
+                          )}`,
+                          "_blank"
+                        )
+                      }
+                      className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center"
+                    >
                       {iShare4}
                     </div>
-                    <h1 className="text-[#FFF] font-lato text-[10px]">
+                    <h1
+                      onClick={() =>
+                        window.open(
+                          `https://discord.com/api/oauth2/authorize?client_id=<YOUR_CLIENT_ID>&scope=bot&permissions=0&redirect_uri=${encodeURIComponent(
+                            url
+                          )}`,
+                          "_blank"
+                        )
+                      }
+                      className="text-[#FFF] font-lato text-[10px]"
+                    >
                       Discord
                     </h1>
                   </div>
                   <div className="flex flex-col items-center gap-[8px]">
-                    <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
-                      {iShare5}
-                    </div>
-                    <h1 className="text-[#FFF] font-lato text-[10px]">Email</h1>
+                    <a
+                      href={`mailto:?subject=Check%20out%20my%20profile&body=${encodeURIComponent(
+                        url
+                      )}`}
+                    >
+                      <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
+                        {iShare5}
+                      </div>
+                    </a>
+
+                    <a
+                      href={`mailto:?subject=Check%20out%20my%20profile&body=${encodeURIComponent(
+                        url
+                      )}`}
+                    >
+                      <h1 className="text-[#FFF] font-lato text-[10px]">
+                        Email
+                      </h1>
+                    </a>
                   </div>
                   <div className="flex flex-col items-center gap-[8px]">
-                    <div className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center">
+                    <div
+                      onClick={() => {
+                        navigator.clipboard.writeText(url);
+                        toast.success("Link Copied");
+                      }}
+                      className="w-[30px] h-[30px] bg-[#00000066] rounded flex justify-center items-center"
+                    >
                       {iShare6}
                     </div>
-                    <h1 className="text-[#FFF] font-lato text-[10px]">
+                    <h1
+                      onClick={() => {
+                        navigator.clipboard.writeText(url);
+                        toast.success("Link Copied");
+                      }}
+                      className="text-[#FFF] font-lato text-[10px]"
+                    >
                       Copy Link
                     </h1>
                   </div>

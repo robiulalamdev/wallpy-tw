@@ -29,6 +29,14 @@ const usersApi = api.injectEndpoints({
       invalidatesTags: ["wallpapers"],
     }),
 
+    updateTagById: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/wallpapers/update-tags/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
     getWallpapers: builder.query({
       query: () => `/wallpapers`,
       providesTags: ["wallpapers"],
@@ -77,4 +85,7 @@ export const {
   useGetPopularWallpapersQuery,
   useGetFeaturedWallpapersQuery,
   useGetOfficialWallpapersQuery,
+
+  // PATCH
+  useUpdateTagByIdMutation,
 } = usersApi;

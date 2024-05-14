@@ -485,13 +485,13 @@ export const iAddTag = (
     width="17"
     height="17"
     viewBox="0 0 17 17"
-    fill="none"
+    fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g clip-path="url(#clip0_1_13411)">
       <path
         d="M13.4577 9.20866H9.20768V13.4587H7.79102V9.20866H3.54102V7.79199H7.79102V3.54199H9.20768V7.79199H13.4577V9.20866Z"
-        fill="#323232"
+        fill="currentColor"
       />
     </g>
     <defs>
