@@ -2,15 +2,6 @@ import { useContext, useMemo, useRef, useState } from "react";
 import profile from "../../assets/images/global/header/profile.png";
 import bannerImg from "../../assets/images/profile-settings/banner.png";
 import info from "../../assets/icons/profile-settings/info.png";
-
-import icon1 from "../../assets/icons/profile-settings/icon1.png";
-import icon2 from "../../assets/icons/profile-settings/icon2.png";
-import icon3 from "../../assets/icons/profile-settings/icon3.png";
-import icon4 from "../../assets/icons/profile-settings/icon4.png";
-import icon5 from "../../assets/icons/profile-settings/icon5.png";
-import icon6 from "../../assets/icons/profile-settings/icon6.png";
-import icon7 from "../../assets/icons/profile-settings/icon7.png";
-import icon8 from "../../assets/icons/profile-settings/icon8.png";
 import { Button } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contextApi/AuthContext";
@@ -19,6 +10,7 @@ import { SpinnerCircularFixed } from "spinners-react";
 import useViewImage from "../../lib/hooks/useViewImage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { socialLinkItems } from "../../lib/data/globalData";
 
 const AccountSettingProfileTab = () => {
   const { user } = useContext(AuthContext);
@@ -38,6 +30,8 @@ const AccountSettingProfileTab = () => {
 
   const [image, setImage] = useState(null);
   const [banner, setBanner] = useState(null);
+  const [selectedSocial, setSelectedSocial] = useState(null);
+  const [linkValue, setLinkValue] = useState("");
 
   const imageRef = useRef();
   const bannerRef = useRef();
@@ -56,6 +50,22 @@ const AccountSettingProfileTab = () => {
     if (banner) {
       formData.append("banner", banner);
     }
+    const socials = {
+      twitter: user?.profile?.socials?.twitter,
+      behance: user?.profile?.socials?.behance,
+      dribbble: user?.profile?.socials?.dribbble,
+      instagram: user?.profile?.socials?.instagram,
+      discord: user?.profile?.socials?.discord,
+      deviantart: user?.profile?.socials?.deviantart,
+      reddit: user?.profile?.socials?.reddit,
+      twitch: user?.profile?.socials?.twitch,
+    };
+
+    if (selectedSocial?.name) {
+      socials[selectedSocial?.name] = linkValue;
+      formData.append("socials", JSON.stringify(socials));
+    }
+
     const options = {
       data: formData,
     };
@@ -82,8 +92,23 @@ const AccountSettingProfileTab = () => {
     if (user) {
       setValue("username", user?.username);
       setValue("bio", user?.profile?.bio);
+
+      if (user?.profile?.socials) {
+        setSelectedSocial({ name: "twitter" });
+        setLinkValue(user?.profile?.socials?.twitter);
+      }
     }
   }, [user]);
+
+  const handleSelectSocial = async (social) => {
+    if (social?.length > 0) {
+      if (social[0] !== selectedSocial?.name) {
+        const value = user?.profile?.socials[social[0]];
+        setLinkValue(value);
+        setSelectedSocial({ name: social[0] });
+      }
+    }
+  };
 
   return (
     <div>
@@ -206,19 +231,32 @@ const AccountSettingProfileTab = () => {
         </h1>
 
         <div className="flex justify-center items-center flex-wrap mt-[21px] md:mt-[16px] gap-[20px]">
-          <img src={icon1} alt="icon" className="max-w-[25px] object-contain" />
-          <img src={icon2} alt="icon" className="max-w-[25px] object-contain" />
-          <img src={icon3} alt="icon" className="max-w-[25px] object-contain" />
-          <img src={icon4} alt="icon" className="max-w-[25px] object-contain" />
-          <img src={icon5} alt="icon" className="max-w-[25px] object-contain" />
-          <img src={icon6} alt="icon" className="max-w-[25px] object-contain" />
-          <img src={icon7} alt="icon" className="max-w-[25px] object-contain" />
-          <img src={icon8} alt="icon" className="max-w-[25px] object-contain" />
+          {Object.entries(socialLinkItems)?.map((item, index) => (
+            <div
+              onClick={() => handleSelectSocial(item)}
+              key={index}
+              className={`w-[30px] min-h-[40px] h-[40px] flex justify-center items-center border-b-[4px] cursor-pointer 
+              ${
+                selectedSocial?.name === item[0]
+                  ? "border-green-600"
+                  : "border-transparent hover:border-green-600 duration-100"
+              }`}
+            >
+              <img
+                src={item[1].icon}
+                alt="icon"
+                className="max-w-[25px] object-contain"
+              />
+            </div>
+          ))}
         </div>
 
         <div className="mt-[22px] md:mt-[27px] max-w-[264px] mx-auto pb-[35px]">
           <input
-            type="text"
+            onChange={(e) => setLinkValue(e.target.value)}
+            type="url"
+            value={linkValue}
+            required={false}
             className="w-full h-[35px] bg-[#00000080] outline-none rounded-[10px] px-[18px] font-bakbak-one placeholder:text-[12px] placeholder:font-bakbak-one text-[#FFFFFF80] placeholder:text-[#FFFFFF80]"
             placeholder="Type link here..."
           />

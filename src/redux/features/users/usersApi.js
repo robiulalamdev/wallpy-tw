@@ -108,6 +108,11 @@ const usersApi = api.injectEndpoints({
       providesTags: ["users"],
     }),
 
+    getProfileActivityById: builder.query({
+      query: (userId) => `/users/profile-activity/${userId}`,
+      providesTags: ["users"],
+    }),
+
     // ----------settings part----------
     //update user profile tab info
     settingsChange: builder.mutation({
@@ -145,6 +150,7 @@ export const {
   useEmailVerifyMutation,
   useGetUserQuery,
   useGetPublicUserInfoQuery,
+  useGetProfileActivityByIdQuery,
 
   // reset password step by stem
   usePasswordResetMutation,

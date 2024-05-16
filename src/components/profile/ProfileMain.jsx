@@ -3,8 +3,6 @@ import { Button } from "@material-tailwind/react";
 import ProfileBanner from "../../components/profile/ProfileBanner";
 import SimpleHeader from "../../components/shared/headers/SimpleHeader";
 import { iSearch } from "../../utils/icons/icons";
-// import { wallpapers } from "../../utils/data/wallpapers";
-// import { useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
 import ProfileFavoriteWallpapers from "./ProfileFavoriteWallpapers";
 import { useGetMyProfileFavoritesQuery } from "../../redux/features/favorites/favoritesApi";

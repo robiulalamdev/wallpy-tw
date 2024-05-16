@@ -5,8 +5,10 @@ import { iPVerified } from "../../utils/icons/icons";
 import ProfileBannerSocials from "./ProfileBannerSocials";
 import useViewImage from "../../lib/hooks/useViewImage";
 import moment from "moment";
+import { useGetProfileActivityByIdQuery } from "../../redux/features/users/usersApi";
 
 const ProfileBanner = ({ user }) => {
+  const { data } = useGetProfileActivityByIdQuery(user?._id);
   const { viewImg } = useViewImage();
 
   return (
@@ -36,7 +38,7 @@ const ProfileBanner = ({ user }) => {
                   <h1 className="text-[#FFF] text-[20px] md:text-[30px] font-bakbak-one">
                     {user?.username}
                   </h1>
-                  {iPVerified}
+                  {/* {iPVerified} */}
                 </div>
                 {user?.profile?.bio && (
                   <h1 className="text-[#939393] text-[15px] font-bakbak-one text-nowrap hidden md:block max-w-[300px] break-words">
@@ -64,7 +66,7 @@ const ProfileBanner = ({ user }) => {
                 Uploads:
               </h1>{" "}
               <span className="text-[#939393] font-bakbak-one text-[12px]">
-                1549
+                {data?.data?.uploadTotal}
               </span>
             </div>
             <div className="flex items-center gap-x-[12px]">
@@ -72,7 +74,7 @@ const ProfileBanner = ({ user }) => {
                 Last Active:
               </h1>{" "}
               <span className="text-[#939393] font-bakbak-one text-[12px]">
-                Today
+                {moment(data?.data?.lastActive).fromNow()}
               </span>
             </div>
             <div className="flex items-center gap-x-[12px]">
@@ -80,7 +82,7 @@ const ProfileBanner = ({ user }) => {
                 Member Since:
               </h1>{" "}
               <span className="text-[#939393] font-bakbak-one text-[12px]">
-                {moment(user?.createdAt).format("YYYY")}
+                {moment(data?.data?.memberSince?.createdAt).format("YYYY")}
               </span>
             </div>
           </div>
