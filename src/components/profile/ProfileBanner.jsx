@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import banner from "../../assets/images/profile/banner.png";
-import profile from "../../assets/images/global/header/profile.gif";
+import profile from "../../assets/images/global/header/profile.png";
 import { iPVerified } from "../../utils/icons/icons";
 import ProfileBannerSocials from "./ProfileBannerSocials";
 import useViewImage from "../../lib/hooks/useViewImage";

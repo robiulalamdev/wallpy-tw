@@ -14,13 +14,13 @@ const Upload = () => {
   const imageRef = useRef();
 
   const handleAddImages = async (images) => {
-    if (files?.length >= 6) {
-      toast.warning("Maximum 6 wallpapers can be uploaded");
+    if (files?.length >= 15) {
+      toast.warning("Maximum 15 wallpapers can be uploaded");
       return;
     }
 
-    if (files?.length + images?.length > 6) {
-      toast.warning("Wallpapers Upload Maximum 6");
+    if (files?.length + images?.length > 15) {
+      toast.warning("Wallpapers Upload Maximum 15");
       return;
     }
 

@@ -1,5 +1,5 @@
 import { useContext, useMemo, useRef, useState } from "react";
-import profile from "../../assets/images/global/header/profile.gif";
+import profile from "../../assets/images/global/header/profile.png";
 import bannerImg from "../../assets/images/profile-settings/banner.png";
 import info from "../../assets/icons/profile-settings/info.png";
 

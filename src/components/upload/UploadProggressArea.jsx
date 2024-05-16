@@ -115,7 +115,7 @@ const UploadProggressArea = ({
               Files
             </h1>
 
-            <div className="mt-[32px] max-w-[250px] mx-auto max-h-[200px] overflow-y-auto h-fit">
+            <div className="mt-[20px] max-w-[250px] mx-auto max-h-[340px] overflow-y-auto h-fit">
               {upload ? (
                 <>
                   {files.map((file, index) => (

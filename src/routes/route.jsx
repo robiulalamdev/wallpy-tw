@@ -96,17 +96,17 @@ export const route = createBrowserRouter([
       {
         path: "/upload",
         element: (
-          <VerificationPrivateRoute>
+          <PrivateRoute>
             <Upload />
-          </VerificationPrivateRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/vault",
         element: (
-          <VerificationPrivateRoute>
+          <PrivateRoute>
             <DraftAndPublish />
-          </VerificationPrivateRoute>
+          </PrivateRoute>
         ),
       },
       {
@@ -128,9 +128,9 @@ export const route = createBrowserRouter([
       {
         path: "/media-center",
         element: (
-          <VerificationPrivateRoute>
+          <PrivateRoute>
             <MediaCenter />
-          </VerificationPrivateRoute>
+          </PrivateRoute>
         ),
       },
       {

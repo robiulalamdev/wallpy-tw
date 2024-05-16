@@ -5,7 +5,7 @@ import {
   SpeedDialHandler,
 } from "@material-tailwind/react";
 
-import profile from "../../../assets/images/global/header/profile.gif";
+import profile from "../../../assets/images/global/header/profile.png";
 import { iHLove, iLock, iLogout, iUser } from "../../../utils/icons/icons";
 import { useContext } from "react";
 import { AuthContext } from "../../../contextApi/AuthContext";

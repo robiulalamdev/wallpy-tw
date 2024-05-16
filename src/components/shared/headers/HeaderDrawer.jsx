@@ -10,7 +10,7 @@ import {
 } from "../../../utils/icons/icons";
 import { Link, useNavigate } from "react-router-dom";
 
-import profile from "../../../assets/images/global/header/profile.gif";
+import profile from "../../../assets/images/global/header/profile.png";
 
 import icon1 from "../../../assets/icons/global/header/icon1.png";
 import icon2 from "../../../assets/icons/global/header/icon2.png";

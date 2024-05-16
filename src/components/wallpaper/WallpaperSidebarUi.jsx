@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import profile from "../../assets/images/global/header/profile.gif";
+import profile from "../../assets/images/global/header/profile.png";
 import {
   iAddTag,
   iDownloadArrow,
@@ -456,24 +456,28 @@ const WallpaperSidebarUi = ({ data }) => {
               Credits
             </h1>
             <div className="w-fit mt-[7px]">
-              <div className="flex items-center gap-x-[2px]">
-                <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
-                  Source:{" "}
-                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                    {data?.source || ""}
+              {data?.source && (
+                <div className="flex items-center gap-x-[2px]">
+                  <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
+                    Source:{" "}
+                    <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
+                      {data?.source || ""}
+                    </h1>
                   </h1>
-                </h1>
-                <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
-              </div>
-              <div className="flex items-center gap-x-[2px]">
-                <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
-                  Original Author:{" "}
-                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                    {data?.author || ""}
+                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
+                </div>
+              )}
+              {data?.author && (
+                <div className="flex items-center gap-x-[2px]">
+                  <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
+                    Original Author:{" "}
+                    <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
+                      {data?.author || ""}
+                    </h1>
                   </h1>
-                </h1>
-                <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
-              </div>
+                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
+                </div>
+              )}
             </div>
 
             <Button
@@ -502,12 +506,16 @@ const WallpaperSidebarUi = ({ data }) => {
               </h1>
             </div>
             <div className="flex items-center justify-center gap-x-[9px] mt-[17px] pb-[7px]">
-              <h1 className="text-[#FFF] text-[10px] font-semibold font-roboto">
-                Privacy Policy
-              </h1>
-              <h1 className="text-[#FFF] text-[10px] font-semibold font-roboto">
-                Terms and Conditions
-              </h1>
+              <Link to="/privacy-policy">
+                <h1 className="text-[#FFF] text-[10px] font-semibold font-roboto">
+                  Privacy Policy
+                </h1>
+              </Link>
+              <Link to="/terms-and-conditions">
+                <h1 className="text-[#FFF] text-[10px] font-semibold font-roboto">
+                  Terms and Conditions
+                </h1>
+              </Link>
             </div>
           </div>
         </>
