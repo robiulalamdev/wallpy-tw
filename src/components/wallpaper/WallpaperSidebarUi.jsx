@@ -12,10 +12,7 @@ import {
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import useViewImage from "../../lib/hooks/useViewImage";
-import {
-  downloadImageWithWH,
-  getImageDimensions,
-} from "../../lib/services/service";
+import { downloadImageWithWH } from "../../lib/services/service";
 import { AuthContext } from "../../contextApi/AuthContext";
 import { useUpdateTagByIdMutation } from "../../redux/features/wallpapers/wallpapersApi";
 import { toast } from "react-toastify";
@@ -80,7 +77,6 @@ const WallpaperSidebarUi = ({ data }) => {
   const { viewImg, formatFileSize } = useViewImage();
   const [open, setOpen] = useState(false);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
-  const [imageSize, setImageSize] = useState(0);
   const [selectedDm, setSelectedDm] = useState({ height: 0, width: 0 });
   const [tags, setTags] = useState([]);
   const [tagValue, setTagValue] = useState("");
@@ -89,10 +85,14 @@ const WallpaperSidebarUi = ({ data }) => {
   const [updateTagById] = useUpdateTagByIdMutation();
 
   const handleDimensions = async () => {
-    const result = await getImageDimensions(data?.wallpaper);
-    setImageSize(result.size);
-    setDimensions({ width: result.width, height: result.height });
-    setSelectedDm({ width: result.width, height: result.height });
+    setDimensions({
+      width: data?.dimensions?.width,
+      height: data?.dimensions?.height,
+    });
+    setSelectedDm({
+      width: data?.dimensions?.width,
+      height: data?.dimensions?.height,
+    });
   };
 
   useEffect(() => {
@@ -175,7 +175,7 @@ const WallpaperSidebarUi = ({ data }) => {
           </h1>
 
           <h1 className="text-center font-bakbak-one mt-[9px] text-[15px] text-[#606060]">
-            {dimensions.width} x {dimensions.height}
+            {data?.dimensions?.width} x {data?.dimensions?.height}
           </h1>
         </>
       )}
@@ -420,7 +420,7 @@ const WallpaperSidebarUi = ({ data }) => {
                     Views:
                   </h1>
                   <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                    8947
+                    {data?.view}
                   </h1>
                 </div>
                 <div className="flex items-center gap-x-[2px]">
@@ -446,7 +446,7 @@ const WallpaperSidebarUi = ({ data }) => {
                     Size:
                   </h1>
                   <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                    {formatFileSize(imageSize)}
+                    {formatFileSize(data?.size)}
                   </h1>
                 </div>
               </div>

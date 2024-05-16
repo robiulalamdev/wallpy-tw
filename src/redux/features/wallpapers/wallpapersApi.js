@@ -37,6 +37,14 @@ const usersApi = api.injectEndpoints({
       }),
     }),
 
+    incrementWallView: builder.mutation({
+      query: ({ data, wallpaperId }) => ({
+        url: `/wallpapers/view-increment/${wallpaperId}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
     getWallpapers: builder.query({
       query: () => `/wallpapers`,
       providesTags: ["wallpapers"],
@@ -88,4 +96,5 @@ export const {
 
   // PATCH
   useUpdateTagByIdMutation,
+  useIncrementWallViewMutation,
 } = usersApi;

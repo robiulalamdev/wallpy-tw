@@ -23,7 +23,6 @@ const Upload = () => {
       toast.warning("Wallpapers Upload Maximum 15");
       return;
     }
-
     setFiles([...files, ...images]);
   };
 

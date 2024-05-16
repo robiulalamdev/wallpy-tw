@@ -1,6 +1,6 @@
 import { official_brands } from "../../utils/data/officialBrands";
 import { Button } from "@material-tailwind/react";
-import { iSearch } from "../../utils/icons/icons";
+// import { iSearch } from "../../utils/icons/icons";
 import TitleHeader from "../../components/shared/headers/TitleHeader";
 import OfficialBrandSearch from "../../components/officialBrands/OfficialBrandSearch";
 import { Link, useNavigate } from "react-router-dom";

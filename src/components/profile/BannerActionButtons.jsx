@@ -11,7 +11,7 @@ import MailDialog from "./MailDialog";
 import { AuthContext } from "../../contextApi/AuthContext";
 import ShareIcons from "../common/ShareIcons";
 
-const BannerActionButtons = ({ author }) => {
+const BannerActionButtons = ({ author, brand = false }) => {
   const { user } = useContext(AuthContext);
   const [reportOpen, setReportOpen] = useState(false);
   const [mailOpen, setMailOpen] = useState(false);
@@ -19,7 +19,7 @@ const BannerActionButtons = ({ author }) => {
   return (
     <>
       <div className="flex justify-end items-center gap-x-[8px] cursor-pointer">
-        {author?.settings?.messaging && (
+        {author?.settings?.messaging && !brand && (
           <>
             {user && user?._id !== author?._id && (
               <div

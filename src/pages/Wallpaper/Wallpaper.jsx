@@ -31,6 +31,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useGetPopularWallpapersQuery,
   useGetWallpaperBySlugQuery,
+  useIncrementWallViewMutation,
 } from "../../redux/features/wallpapers/wallpapersApi";
 import useViewImage from "../../lib/hooks/useViewImage";
 import PageLoading from "../../components/common/loadings/PageLoading";
@@ -49,11 +50,13 @@ const Wallpaper = () => {
   const { slug } = useParams();
   const { data, isLoading } = useGetWallpaperBySlugQuery(slug);
   const { data: popularWallpapers } = useGetPopularWallpapersQuery("?limit=3");
+  const [incrementWallView] = useIncrementWallViewMutation();
   const [url, setUrl] = useState("");
 
   const wallpaperRef = useRef();
 
   const [open, setOpen] = useState(false);
+  const [permit, setPermit] = useState(true);
   const navigate = useNavigate();
 
   const { user } = useContext(AuthContext);
@@ -69,6 +72,26 @@ const Wallpaper = () => {
     wallpaperRef.current.scrollTo({ top: 0, behavior: "smooth" });
     navigate(`/wallpapers/${slug}`);
   };
+
+  const handleView = async () => {
+    const options = {
+      data: {},
+      wallpaperId: data?.data?._id,
+    };
+    await incrementWallView(options);
+  };
+
+  useEffect(() => {
+    if (data?.data) {
+      if (permit) {
+        setTimeout(() => {
+          setPermit(false);
+          handleView();
+        }, 5000);
+      }
+    }
+  }, [data]);
+
   return (
     <>
       <SimpleHeader />
