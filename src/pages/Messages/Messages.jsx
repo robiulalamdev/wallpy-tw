@@ -1,13 +1,19 @@
 import { useState } from "react";
 import "../../styles/messages.css";
 import SidebarChats from "../../components/messages/SidebarChats";
-import MessageConversationArea from "../../components/messages/MessageConversationArea";
 import MainHeader from "../../components/shared/headers/MainHeader";
 import { iLeftArrow } from "../../utils/icons/icons";
+import { useSelector } from "react-redux";
+import { useMyChatsQuery } from "../../redux/features/conversations/conversationApi";
+import MessagesContainer from "../../components/messages/MessagesContainer";
 
 const Messages = () => {
+  const { isLoading } = useMyChatsQuery();
+  const { chats } = useSelector((state) => state.conversation);
   const [selectedTab, setSelectedTab] = useState(0);
   const [open, setOpen] = useState(false);
+
+  console.log(chats);
   return (
     <>
       <MainHeader />
@@ -23,9 +29,11 @@ const Messages = () => {
                 onClick={() => setSelectedTab(i)}
                 className={`${
                   selectedTab === i
-                    ? "message-active-btn"
+                    ? `message-active-btn ${
+                        selectedTab === 1 && "!bg-[#DD2E44]"
+                      }`
                     : "message-dactive-btn"
-                }`}
+                } `}
                 key={i}
               >
                 {t}
@@ -33,19 +41,24 @@ const Messages = () => {
             ))}
           </div>
         </div>
-        <div className="msg-left-arrow lg:hidden">{iLeftArrow}</div>
+        <div
+          onClick={() => setOpen(false)}
+          className="msg-left-arrow lg:hidden"
+        >
+          {iLeftArrow}
+        </div>
         <section
           className="flex justify-between h-full"
           style={{ maxHeight: "620px", columnGap: "54px" }}
         >
           <div
             className={`${
-              open ? "hidden lg:block" : "block"
+              open ? "hidden md:block" : "block"
             } message-sidebar flex flex-col items-center gap-4 w-full md:max-w-[295px]`}
           >
             <SidebarChats open={open} setOpen={setOpen} />
           </div>
-          <MessageConversationArea open={open} setOpen={setOpen} />
+          <MessagesContainer open={open} setOpen={setOpen} />
         </section>
       </div>
     </>

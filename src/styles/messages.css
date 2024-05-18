@@ -113,7 +113,7 @@
   line-height: normal;
 }
 
-.send-message-box button {
+.send-message-box .submit_button {
   width: 133px;
   height: 45px;
   flex-shrink: 0;

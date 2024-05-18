@@ -10,20 +10,30 @@ import ReportDialog from "./ReportDialog";
 import MailDialog from "./MailDialog";
 import { AuthContext } from "../../contextApi/AuthContext";
 import ShareIcons from "../common/ShareIcons";
+import { useNavigate } from "react-router-dom";
 
 const BannerActionButtons = ({ author, brand = false }) => {
   const { user } = useContext(AuthContext);
   const [reportOpen, setReportOpen] = useState(false);
   const [mailOpen, setMailOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      setMailOpen(true);
+    }
+  };
 
   return (
     <>
       <div className="flex justify-end items-center gap-x-[8px] cursor-pointer">
         {author?.settings?.messaging && !brand && (
           <>
-            {user && user?._id !== author?._id && (
+            {user?._id !== author?._id && (
               <div
-                onClick={() => setMailOpen(true)}
+                onClick={() => handleOpen(true)}
                 className="w-[25px] md:w-[36px] h-[25px] md:h-[35px]"
               >
                 {iPMail}
@@ -61,7 +71,11 @@ const BannerActionButtons = ({ author, brand = false }) => {
         setReportOpen={setReportOpen}
         author={author}
       />
-      <MailDialog mailOpen={mailOpen} setMailOpen={setMailOpen} />
+      <MailDialog
+        mailOpen={mailOpen}
+        setMailOpen={setMailOpen}
+        author={author}
+      />
     </>
   );
 };

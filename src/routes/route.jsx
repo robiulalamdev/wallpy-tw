@@ -34,6 +34,7 @@ import PublicProfile from "../pages/Profile/PublicProfile";
 import VerificationPrivateRoute from "./VerificationPrivateRoute";
 import OfficialBrandProfilePublic from "../pages/OfficialBrandProfile/OfficialBrandProfilePublic";
 import ProfileVerify from "../pages/Test/ProfileVerify";
+import MessageLayout from "../layouts/MessageLayout";
 
 export const route = createBrowserRouter([
   {
@@ -69,14 +70,7 @@ export const route = createBrowserRouter([
         path: "/brands/:username",
         element: <OfficialBrandProfilePublic />,
       },
-      {
-        path: "/messages",
-        element: (
-          <PrivateRoute>
-            <Messages />
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "/my-profile",
         element: (
@@ -162,6 +156,22 @@ export const route = createBrowserRouter([
       {
         path: "/profile-verify",
         element: <ProfileVerify />,
+      },
+    ],
+  },
+
+  // without footer layout
+  {
+    path: "/",
+    element: <MessageLayout />,
+    children: [
+      {
+        path: "/messages",
+        element: (
+          <PrivateRoute>
+            <Messages />
+          </PrivateRoute>
+        ),
       },
     ],
   },
