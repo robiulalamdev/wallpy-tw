@@ -14,20 +14,32 @@ import { useNavigate } from "react-router-dom";
 const SearchWallpapersSearchInput = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (e.target.search.value) {
+      navigate(`?search=${e.target.search.value}`);
+    } else {
+      navigate(``);
+    }
+  };
   return (
     <>
       <Popover placement="bottom">
         <PopoverHandler>
-          <div className="bg-[#00000033] rounded-[10px] h-[45px] max-w-[771px] mx-auto w-full flex justify-center items-center pr-[10px]">
+          <form
+            onSubmit={handleSearch}
+            className="bg-[#00000033] rounded-[10px] h-[45px] max-w-[771px] mx-auto w-full flex justify-center items-center pr-[10px]"
+          >
             <div className="text-[#5A5A5A] w-[40px] px-[10px] h-full flex justify-center items-center">
               {iSearch}
             </div>
             <input
+              name="search"
               type="text"
               placeholder="Find your next wallpaper..."
               className="text-[#5A5A5A] placeholder:text-[#5A5A5A] text-[15px] bg-transparent w-full h-full flex-grow font-lato outline-none border-none"
             />
-          </div>
+          </form>
         </PopoverHandler>
         <PopoverContent className="px-[18px] py-[15px] m-0 border-[1px] border-[#2F2F2F] rounded-[10px] shadow-none max-w-[771px] w-full bg-[#00000059] backdrop-blur h-fit">
           <div>

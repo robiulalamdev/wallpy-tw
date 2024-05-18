@@ -55,6 +55,12 @@ const usersApi = api.injectEndpoints({
       providesTags: ["wallpapers"],
     }),
 
+    // search-all
+    getSearchAndFilterWallpapers: builder.query({
+      query: (query = "") => `/wallpapers/search-all${query}`,
+      providesTags: ["wallpapers"],
+    }),
+
     getWallpaperBySlug: builder.query({
       query: (slug) => `/wallpapers/slug/${slug}`,
       providesTags: ["wallpapers"],
@@ -93,6 +99,9 @@ export const {
   useGetPopularWallpapersQuery,
   useGetFeaturedWallpapersQuery,
   useGetOfficialWallpapersQuery,
+
+  // advance search and filter
+  useGetSearchAndFilterWallpapersQuery,
 
   // PATCH
   useUpdateTagByIdMutation,

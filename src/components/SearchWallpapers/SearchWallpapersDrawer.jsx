@@ -21,14 +21,7 @@ import { resolutions } from "../../utils/data/data";
 
 const tabs2 = ["All", "Illustration", "Photography", "AI"];
 
-const SearchWallpapersDrawer = ({
-  open,
-  setOpen,
-  tab2,
-  setTab2,
-  tab3,
-  setTab3,
-}) => {
+const SearchWallpapersDrawer = ({ open, setOpen, tab2, tab3, handleQuery }) => {
   return (
     <>
       <Drawer
@@ -50,10 +43,10 @@ const SearchWallpapersDrawer = ({
             <div className="bg-[#313131] rounded-[100px] h-[42px] w-full max-w-[327px] flex items-center justify-between px-2 mt-[38px] mx-auto">
               {tabs2.map((t, i) => (
                 <Button
-                  onClick={() => setTab2(t)}
+                  onClick={() => handleQuery("type", t)}
                   key={i}
                   className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-semibold min-w-[65px] px-2 h-[32px] ${
-                    tab2 === t
+                    tab2.toLowerCase() === t.toLowerCase()
                       ? "bg-[#000000B2] !text-white rounded-[100px]"
                       : "bg-transparent !text-[#FFF]"
                   }`}
@@ -66,10 +59,10 @@ const SearchWallpapersDrawer = ({
             <div className="bg-[#313131] rounded-[100px] h-[42px] max-w-[166px] flex justify-between items-center px-[4px] mt-[49px] mx-auto">
               {["SFW", "NSFW"].map((t, i) => (
                 <Button
-                  onClick={() => setTab3(t)}
+                  onClick={() => handleQuery("classification", t)}
                   key={i}
                   className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-bold w-[69px] h-[32px] ${
-                    tab3 === t
+                    tab3.toLowerCase() === t.toLowerCase()
                       ? `${
                           tab3 === "SFW" ? "bg-[#0AB745]" : "bg-[#FF0F00]"
                         } !text-white rounded-[100px] md:rounded-[23.5px]`

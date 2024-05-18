@@ -24,10 +24,8 @@ const tabs1 = ["Trending", "New"];
 const tabs2 = ["All", "Illustration", "Photography", "AI"];
 const tabs3 = ["SFW", "NSFW"];
 
-const SearchWallpapersTabs = ({ tab3, setTab3 }) => {
+const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
   const [open, setOpen] = useState(false);
-  const [tab1, setTab1] = useState("Trending");
-  const [tab2, setTab2] = useState("All");
 
   return (
     <>
@@ -36,10 +34,10 @@ const SearchWallpapersTabs = ({ tab3, setTab3 }) => {
           <div className="bg-[#00000033] rounded-[100px] md:rounded-[23.5px] w-[177px] h-[40px] md:w-[192px] md:h-[42px] flex justify-center items-center">
             {tabs1.map((t, i) => (
               <Button
-                onClick={() => setTab1(t)}
+                onClick={() => handleQuery("tn", t)}
                 key={i}
                 className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-bold w-[82px] h-[30px] md:min-w-[88px] md:h-[33px]  ${
-                  tab1 === t
+                  tab1.toLowerCase() === t.toLowerCase()
                     ? "bg-[#000000B2] !text-white rounded-[100px] md:rounded-[23.5px]"
                     : "bg-transparent !text-[#C6C6C6]"
                 }`}
@@ -60,10 +58,10 @@ const SearchWallpapersTabs = ({ tab3, setTab3 }) => {
             <div className="bg-[#00000033] rounded-[100px] md:rounded-[23.5px] h-[40px] w-full md:max-w-[450px] md:h-[42px] md:flex justify-between items-center px-2 hidden md:inline-block">
               {tabs2.map((t, i) => (
                 <Button
-                  onClick={() => setTab2(t)}
+                  onClick={() => handleQuery("type", t)}
                   key={i}
                   className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-bold w-[82px] h-[30px] md:min-w-[88px] md:h-[33px]  ${
-                    tab2 === t
+                    tab2.toLowerCase() === t.toLowerCase()
                       ? "bg-[#000000B2] !text-white rounded-[100px] md:rounded-[23.5px]"
                       : "bg-transparent !text-[#C6C6C6]"
                   }`}
@@ -76,10 +74,10 @@ const SearchWallpapersTabs = ({ tab3, setTab3 }) => {
             <div className="bg-[#00000033] rounded-[100px] md:rounded-[23.5px] min-w-[177px] h-[40px] md:w-[166px] md:h-[42px] flex justify-center items-center px-[4px]">
               {tabs3.map((t, i) => (
                 <Button
-                  onClick={() => setTab3(t)}
+                  onClick={() => handleQuery("classification", t)}
                   key={i}
                   className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-bold w-[82px] h-[30px] md:min-w-[65px] md:h-[32px] ${
-                    tab3 === t
+                    tab3.toLowerCase() === t.toLowerCase()
                       ? `${
                           tab3 === "SFW" ? "bg-[#0AB745]" : "bg-[#FF0F00]"
                         } !text-white rounded-[100px] md:rounded-[23.5px]`
@@ -350,9 +348,8 @@ const SearchWallpapersTabs = ({ tab3, setTab3 }) => {
         open={open}
         setOpen={setOpen}
         tab2={tab2}
-        setTab2={setTab2}
         tab3={tab3}
-        setTab3={setTab3}
+        handleQuery={handleQuery}
       />
     </>
   );

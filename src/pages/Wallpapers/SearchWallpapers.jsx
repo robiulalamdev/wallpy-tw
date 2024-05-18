@@ -1,27 +1,64 @@
+/* eslint-disable no-extra-boolean-cast */
+/* eslint-disable no-unused-vars */
 import TitleHeader from "../../components/shared/headers/TitleHeader";
 import SearchWallpapersSearchInput from "../../components/SearchWallpapers/SearchWallpapersSearchInput";
 // import { wallpapers } from "../../utils/data/wallpapers";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import SearchWallpapersTabs from "../../components/SearchWallpapers/SearchWallpapersTabs";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import SearchWallpaperNsfwAria from "../../components/SearchWallpapers/SearchWallpaperNsfwAria";
-import { useGetSearchWallpapersQuery } from "../../redux/features/wallpapers/wallpapersApi";
+import { useGetSearchAndFilterWallpapersQuery } from "../../redux/features/wallpapers/wallpapersApi";
 import useViewImage from "../../lib/hooks/useViewImage";
 import PageLoading from "../../components/common/loadings/PageLoading";
 import { AuthContext } from "../../contextApi/AuthContext";
+import { makeQuery } from "../../lib/services/service";
 
 const SearchWallpapers = () => {
   const { user } = useContext(AuthContext);
   const location = useLocation();
-  const search = new URLSearchParams(location.search).get("search") || "";
+  const [searchParams, setSearchParams] = useSearchParams();
+  // const search = new URLSearchParams(location.search).get("search") || "";
 
-  const { data, isLoading } = useGetSearchWallpapersQuery(
-    `?${search && `search=${search}`}`
+  const search = searchParams.get("search");
+  const tn = searchParams.get("tn");
+  const type = searchParams.get("type");
+  const classification = searchParams.get("classification");
+  const height = searchParams.get("height");
+  const width = searchParams.get("width");
+  const screen_type = searchParams.get("screen_type");
+  const sort_by = searchParams.get("sort_by");
+  const date = searchParams.get("date");
+
+  const queries = `${search ? `search=${search}&` : ""}${
+    tn ? `tn=${tn}&` : "Trending"
+  }${type ? `type=${type}&` : ""}${
+    classification ? `classification=${classification}&` : ""
+  }${width && height ? `width=${width}&height=${height}&` : ""}${
+    screen_type ? `screen_type=${screen_type}&` : ""
+  }${sort_by ? `sort_by=${sort_by}` : ""}${date ? `date=${date}&` : ""}`;
+
+  const { data, isLoading } = useGetSearchAndFilterWallpapersQuery(
+    `?${queries?.slice(0, -1)}`
   );
   const { viewImg } = useViewImage();
   const [wallpapers, setWallpapers] = useState([]);
+  const [tab1, setTab1] = useState("Trending");
+  const [tab2, setTab2] = useState("All");
   const [tab3, setTab3] = useState("SFW");
+
   const navigate = useNavigate();
+
+  const queryObject = {
+    search: search || "",
+    tn: tn || "Trending",
+    type: type || "",
+    classification: classification || "",
+    height: height || "",
+    width: width || "",
+    screen_type: screen_type || "",
+    sort_by: sort_by || "",
+    date: date || "",
+  };
 
   useMemo(() => {
     if (data?.data) {
@@ -31,7 +68,30 @@ const SearchWallpapers = () => {
     }
   }, [data]);
 
+  const handleQuery = async (name, value) => {
+    // console.log(name, value);
+    const query = await makeQuery(name, value, queryObject);
+    console.log(query);
+    navigate(`?${query}`);
+  };
+
   const isTrue = (tab3 === "NSFW" && user?.settings?.nsfw) || tab3 !== "NSFW";
+
+  const types = ["all", "illustration", "photography", "ai"];
+  useEffect(() => {
+    if (type && types.includes(type.toLowerCase())) {
+      setTab2(type);
+    }
+    if (tn && ["trending", "new"].includes(tn.toLowerCase())) {
+      setTab1(tn);
+    }
+    if (
+      classification &&
+      ["sfw", "nsfw"].includes(classification.toLowerCase())
+    ) {
+      setTab3(classification);
+    }
+  }, [queries]);
 
   return (
     <>
@@ -40,7 +100,15 @@ const SearchWallpapers = () => {
       <div className="w-full h-full">
         <SearchWallpapersSearchInput />
 
-        <SearchWallpapersTabs tab3={tab3} setTab3={setTab3} />
+        <SearchWallpapersTabs
+          tab1={tab1}
+          setTab1={setTab1}
+          tab2={tab2}
+          setTab2={setTab2}
+          tab3={tab3}
+          setTab3={setTab3}
+          handleQuery={handleQuery}
+        />
 
         <div className="border-t-[1px] border-[#5A5A5A] mt-[39px] mb-[27px] hidden md:block"></div>
 

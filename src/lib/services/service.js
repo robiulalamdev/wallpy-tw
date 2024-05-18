@@ -94,3 +94,22 @@ const loadImage = (src) => {
     img.src = src;
   });
 };
+
+export const makeQuery = async (name, value, queryObject) => {
+  // Create a copy of the queryObject to avoid mutating the original object
+  const updatedQueryObject = { ...queryObject };
+
+  // Update the specified query parameter with the new value
+  updatedQueryObject[name] = value;
+
+  // Build the query string from the updated query object, excluding empty values
+  const newQuery = Object.keys(updatedQueryObject)
+    .filter(
+      (key) =>
+        updatedQueryObject[key] !== undefined && updatedQueryObject[key] !== ""
+    )
+    .map((key) => `${key}=${updatedQueryObject[key]}`)
+    .join("&");
+
+  return newQuery;
+};
