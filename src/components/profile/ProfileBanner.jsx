@@ -10,7 +10,7 @@ import { useGetProfileActivityByIdQuery } from "../../redux/features/users/users
 const ProfileBanner = ({ user }) => {
   const { data } = useGetProfileActivityByIdQuery(user?._id);
   const { viewImg } = useViewImage();
-
+  console.log(user);
   return (
     <div>
       <div className="pl-[4px] md:pl-[29px] relative">
@@ -38,7 +38,9 @@ const ProfileBanner = ({ user }) => {
                   <h1 className="text-[#FFF] text-[20px] md:text-[30px] font-bakbak-one">
                     {user?.username}
                   </h1>
-                  {/* {iPVerified} */}
+                  {user?.profile?.verification_status === "Approved" &&
+                    user?.profile?.profile_type === "Artist" &&
+                    iPVerified}
                 </div>
                 {user?.profile?.bio && (
                   <h1 className="text-[#939393] text-[15px] font-bakbak-one text-nowrap hidden md:block max-w-[300px] break-words">

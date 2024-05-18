@@ -7,6 +7,10 @@ import icon6 from "../../assets/icons/profile-settings/icon6.png";
 import icon7 from "../../assets/icons/profile-settings/icon7.png";
 import icon8 from "../../assets/icons/profile-settings/icon8.png";
 
+import profile from "../../assets/images/global/header/profile.png";
+
+export const DefaultProfile = profile;
+
 export const socialLinkItems = {
   twitter: { name: "Twitter", icon: icon1 },
   behance: { name: "Behance", icon: icon2 },

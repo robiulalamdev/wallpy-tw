@@ -103,6 +103,11 @@ const usersApi = api.injectEndpoints({
       providesTags: ["users"],
     }),
 
+    getVerifiedArtists: builder.query({
+      query: () => `/users/verified-artists`,
+      providesTags: ["users"],
+    }),
+
     getAllUsers: builder.query({
       query: () => `/users/all`,
       providesTags: ["users"],
@@ -151,6 +156,7 @@ export const {
   useGetUserQuery,
   useGetPublicUserInfoQuery,
   useGetProfileActivityByIdQuery,
+  useGetVerifiedArtistsQuery,
 
   // reset password step by stem
   usePasswordResetMutation,
