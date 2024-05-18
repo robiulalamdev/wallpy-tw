@@ -12,6 +12,7 @@ import useViewImage from "../../lib/hooks/useViewImage";
 import PageLoading from "../../components/common/loadings/PageLoading";
 import { AuthContext } from "../../contextApi/AuthContext";
 import { makeQuery } from "../../lib/services/service";
+import NoData from "../../components/common/notFound/NoData";
 
 const SearchWallpapers = () => {
   const { user } = useContext(AuthContext);
@@ -141,6 +142,8 @@ const SearchWallpapers = () => {
                 </div>
               </>
             )}
+
+            {!isLoading && wallpapers?.length < 1 && <NoData />}
           </>
         )}
       </div>
