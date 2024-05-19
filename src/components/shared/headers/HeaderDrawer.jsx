@@ -61,12 +61,12 @@ const HeaderDrawer = ({ open, close }) => {
                       Profile
                     </p>
                   </Link>
-                  <Link to="/favorites">
+                  <Link to="/media-center/favorites">
                     <p className="text-white text-[20px] font-bakbak-one mt-[27px]">
                       Favorites
                     </p>
                   </Link>
-                  <Link to="/collections">
+                  <Link to="/media-center/collections">
                     <p className="text-white text-[20px] font-bakbak-one mt-[27px]">
                       Collections
                     </p>

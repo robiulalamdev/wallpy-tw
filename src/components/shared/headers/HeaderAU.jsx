@@ -52,12 +52,12 @@ const HeaderAU = () => {
                         Profile
                       </p>
                     </Link>
-                    <Link to="/media-center">
+                    <Link to="/media-center/favorites">
                       <p className="text-white text-[15px] font-bakbak-one mt-[20px]">
                         Favorites
                       </p>
                     </Link>
-                    <Link to="/media-center">
+                    <Link to="/media-center/collections">
                       <p className="text-white text-[15px] font-bakbak-one mt-[20px] mb-[11px]">
                         Collections
                       </p>

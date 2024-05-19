@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Button } from "@material-tailwind/react";
 import RulesHeader from "../../components/shared/headers/RulesHeader";
 import { useMemo, useState } from "react";
@@ -8,11 +9,11 @@ import MediaCenterCollectionAria from "../../components/media-center/MediaCenter
 import { useGetMyFavoritesQuery } from "../../redux/features/favorites/favoritesApi";
 import { useGetMyCollectionsQuery } from "../../redux/features/collections/collectionsApi";
 
-const MediaCenter = () => {
+const MediaCenter = ({ pathname = "Favorites" }) => {
   const { data: favoriteData } = useGetMyFavoritesQuery();
   const { data: collectionData } = useGetMyCollectionsQuery();
   const [open, setOpen] = useState(false);
-  const [tab, setTab] = useState("Favorites");
+  const [tab, setTab] = useState(pathname || "Favorites");
 
   const [favoriteWallpapers, setFavoriteWallpapers] = useState([]);
   const [collectionWallpapers, setCollectionWallpapers] = useState([]);
@@ -27,6 +28,12 @@ const MediaCenter = () => {
       setFavoriteWallpapers(favoriteData?.data);
     }
   }, [favoriteData]);
+
+  useMemo(() => {
+    if (pathname) {
+      setTab(pathname);
+    }
+  }, [pathname]);
 
   useMemo(() => {
     if (collectionData?.data?.length > 0) {

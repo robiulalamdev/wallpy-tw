@@ -1,6 +1,5 @@
 import BannerTab from "./BannerTab";
 import { Button } from "@material-tailwind/react";
-// import { banners } from "../../../utils/data/data";
 import { useNavigate } from "react-router-dom";
 import { useGetSearchWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
 import { useMemo, useState } from "react";

@@ -66,10 +66,6 @@ export const route = createBrowserRouter([
         path: "/profiles/:username",
         element: <PublicProfile />,
       },
-      {
-        path: "/brands/:username",
-        element: <OfficialBrandProfilePublic />,
-      },
 
       {
         path: "/my-profile",
@@ -79,14 +75,18 @@ export const route = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/my-brand",
-        element: (
-          <VerificationPrivateRoute>
-            <OfficialBrandProfile />
-          </VerificationPrivateRoute>
-        ),
-      },
+      // {
+      //   path: "/brands/:username",
+      //   element: <OfficialBrandProfilePublic />,
+      // },
+      // {
+      //   path: "/my-brand",
+      //   element: (
+      //     <VerificationPrivateRoute>
+      //       <OfficialBrandProfile />
+      //     </VerificationPrivateRoute>
+      //   ),
+      // },
       {
         path: "/upload",
         element: (
@@ -120,10 +120,18 @@ export const route = createBrowserRouter([
         ),
       },
       {
-        path: "/media-center",
+        path: "/media-center/favorites",
         element: (
           <PrivateRoute>
-            <MediaCenter />
+            <MediaCenter pathname={"Favorites"} />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/media-center/collections",
+        element: (
+          <PrivateRoute>
+            <MediaCenter pathname={"Collections"} />
           </PrivateRoute>
         ),
       },

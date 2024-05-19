@@ -41,7 +41,7 @@ const HeaderProfile = () => {
             {iLock}
           </IconButton>
           <IconButton
-            onClick={() => navigate("/media-center")}
+            onClick={() => navigate("/media-center/favorites")}
             className="p-0 rounded-full bg-transparent hover:bg-black"
           >
             {iHLove}
