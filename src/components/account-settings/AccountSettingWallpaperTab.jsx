@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "@material-tailwind/react";
 import { useContext, useMemo, useState } from "react";
-import { iAdd_circle } from "../../utils/icons/icons";
+import { iAdd_circle, iGrayClose } from "../../utils/icons/icons";
 import { useSettingsChangeMutation } from "../../redux/features/users/usersApi";
 import { AuthContext } from "../../contextApi/AuthContext";
 import { toast } from "react-toastify";
@@ -10,7 +10,6 @@ import { SpinnerCircularFixed } from "spinners-react";
 const AccountSettingWallpaperTab = () => {
   const { user } = useContext(AuthContext);
   const [settingsChange, { isLoading }] = useSettingsChangeMutation();
-
   const [errorMessage, setErrorMessage] = useState("");
   const [nsfw, setNsfw] = useState("Enabled");
   const [tags, setTags] = useState([]);
@@ -27,7 +26,7 @@ const AccountSettingWallpaperTab = () => {
     const data = {
       nsfw: nsfw === "Enabled" ? true : false,
     };
-    if (tags?.length > 0) {
+    if (tags) {
       data["blacklist_tags"] = [...tags];
     }
     const options = {
@@ -55,6 +54,12 @@ const AccountSettingWallpaperTab = () => {
       }
     }
   }, [user]);
+
+  const handleRemoveTag = (index) => {
+    const data = [...tags];
+    data.splice(index, 1);
+    setTags([...data]);
+  };
 
   return (
     <div>
@@ -113,12 +118,20 @@ const AccountSettingWallpaperTab = () => {
         {tags?.length > 0 ? (
           <div className="grid grid-cols-3 gap-2 px-[22px] overflow-y-auto w-full h-full">
             {tags.map((tag, index) => (
-              <p
+              <div
                 key={index}
-                className="text-[#939393] text-[12px] font-lato text-wrap"
+                className="bg-[#00000066] rounded-[5px] relative w-fit h-[28px] px-[16px] flex justify-center items-center cursor-pointer"
               >
-                {tag}
-              </p>
+                <h1 className="text-[#FFF] text-[12px] font-bakbak-one">
+                  {tag}
+                </h1>
+                <div
+                  onClick={() => handleRemoveTag(index)}
+                  className="absolute top-1 right-1"
+                >
+                  {iGrayClose}
+                </div>
+              </div>
             ))}
           </div>
         ) : (
