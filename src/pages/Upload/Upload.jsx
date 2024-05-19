@@ -1,30 +1,43 @@
 /* eslint-disable no-unused-vars */
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import RulesHeader from "../../components/shared/headers/RulesHeader";
 import UploadProggressArea from "../../components/upload/UploadProggressArea";
 import bg from "../../assets/images/upload/bg.png";
 import { iUpload } from "../../utils/icons/icons";
 import { toast } from "react-toastify";
+import { useDropzone } from "react-dropzone";
 
 const Upload = () => {
   const [step, setStep] = useState(1);
   const [files, setFiles] = useState([]);
   const [upload, setUpload] = useState(false);
 
-  const imageRef = useRef();
+  const onUpload = useCallback(
+    async (acceptedFiles) => {
+      if (acceptedFiles) {
+        if (files.length >= 15) {
+          toast.warning("Maximum 15 wallpapers can be uploaded");
+          return;
+        } else {
+          if (files.length + acceptedFiles.length > 15) {
+            toast.warning("Wallpapers Upload Maximum 15");
+            return;
+          } else {
+            const merge = [...files, ...acceptedFiles];
+            setFiles(merge);
+          }
+        }
+      }
+    },
+    [files] // Add files to the dependency array
+  );
 
-  const handleAddImages = async (images) => {
-    if (files?.length >= 15) {
-      toast.warning("Maximum 15 wallpapers can be uploaded");
-      return;
-    }
-
-    if (files?.length + images?.length > 15) {
-      toast.warning("Wallpapers Upload Maximum 15");
-      return;
-    }
-    setFiles([...files, ...images]);
-  };
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: onUpload,
+    accept: {
+      "image/*": [".jpeg", ".png", ".jpg"],
+    },
+  });
 
   return (
     <>
@@ -58,7 +71,13 @@ const Upload = () => {
             ></div>
           )}
           {step === 2 && (
-            <div className="w-full h-full max-h-[238px] md:max-h-full rounded-[5px] md:rounded-[10px] bg-[#00000080] flex flex-col justify-center items-center gap-[12px]">
+            <div
+              {...(!upload && getRootProps())}
+              disabled={upload}
+              className={`w-full h-full max-h-[238px] md:max-h-full rounded-[5px] md:rounded-[10px] bg-[#00000080] flex flex-col justify-center items-center gap-[12px] 
+              ${isDragActive ? "border border-green-600" : ""}
+              `}
+            >
               <div className="size-[30px]">{iUpload}</div>
               <h1 className="text-[15px] font-bakbak-one text-[#FFF]">
                 Drag and drop files here
@@ -66,15 +85,14 @@ const Upload = () => {
               <h1 className="text-[15px] font-bakbak-one text-[#FFF]">or</h1>
               <button
                 disabled={upload}
-                onClick={() => imageRef.current.click()}
                 className="w-[103px] h-[28px] bg-[#000000] rounded-[10px] font-bakbak-one text-[12px] text-[#939393]"
               >
                 Select Files
               </button>
 
               <input
-                ref={imageRef}
-                onChange={(e) => handleAddImages(e.target.files)}
+                {...getInputProps()}
+                disabled={upload}
                 type="file"
                 accept=".png, .jpg, .jpeg"
                 multiple={true}

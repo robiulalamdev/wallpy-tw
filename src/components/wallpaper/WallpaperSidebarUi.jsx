@@ -452,9 +452,13 @@ const WallpaperSidebarUi = ({ data }) => {
               </div>
             </div>
 
-            <h1 className="mt-[22px] text-[#ccc] font-bakbak-one text-[15px] text-center">
-              Credits
-            </h1>
+            {data?.source || data?.author ? (
+              <h1 className="mt-[22px] text-[#ccc] font-bakbak-one text-[15px] text-center">
+                Credits
+              </h1>
+            ) : (
+              ""
+            )}
             <div className="w-fit mt-[7px]">
               {data?.source && (
                 <div className="flex items-center gap-x-[2px]">

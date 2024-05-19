@@ -2,7 +2,7 @@ import BannerTab from "./BannerTab";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useGetSearchWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
-import { useMemo, useState } from "react";
+import { lazy, useMemo, useState } from "react";
 import useViewImage from "../../../lib/hooks/useViewImage";
 import PageLoading from "../../common/loadings/PageLoading";
 import NoData from "../../common/notFound/NoData";
@@ -46,6 +46,7 @@ const Banner = () => {
                 <img
                   src={viewImg(item?.wallpaper)}
                   alt="img"
+                  loading="lazy"
                   className="w-full h-full object-cover hover:scale-110 rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px] duration-300 cursor-pointer"
                 />
               </div>
