@@ -12,9 +12,14 @@ const Banner = () => {
   const [tab1, setTab1] = useState("Trending");
   const [tab2, setTab2] = useState("All");
   const [limit, setLimit] = useState(12);
-  const [searchString, setSearchString] = useState(`?limit=${limit}`);
 
-  const { data, isLoading } = useGetSearchWallpapersQuery(searchString);
+  const queries = `${tab1 ? `tn=${tab1}&` : ""}${tab2 ? `type=${tab2}&` : ""}${
+    limit ? `limit=${limit}&` : ""
+  }`;
+
+  const { data, isLoading } = useGetSearchWallpapersQuery(
+    `?${queries?.slice(0, -1)}`
+  );
   const navigate = useNavigate();
   const { viewImg } = useViewImage();
   const [wallpapers, setWallpapers] = useState([]);
@@ -25,11 +30,6 @@ const Banner = () => {
     }
   }, [data?.data]);
 
-  useMemo(() => {
-    if (tab2) {
-      setSearchString(`?limit=12${tab2 !== "All" ? `&type=${tab2}` : ""} `);
-    }
-  }, [tab2]);
   return (
     <div className="bg-[#00000033] rounded-[10px] md:rounded-[40px] px-[12px] md:px-[35px]">
       <BannerTab tab1={tab1} setTab1={setTab1} tab2={tab2} setTab2={setTab2} />
