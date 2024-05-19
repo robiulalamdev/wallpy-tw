@@ -16,12 +16,10 @@ import NoData from "../../components/common/notFound/NoData";
 
 const SearchWallpapers = () => {
   const { user } = useContext(AuthContext);
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  // const search = new URLSearchParams(location.search).get("search") || "";
 
   const search = searchParams.get("search");
-  const tn = searchParams.get("tn");
+  const tn = searchParams.get("tn") || "Trending";
   const type = searchParams.get("type");
   const classification = searchParams.get("classification");
   const height = searchParams.get("height");
@@ -31,12 +29,12 @@ const SearchWallpapers = () => {
   const date = searchParams.get("date");
 
   const queries = `${search ? `search=${search}&` : ""}${
-    tn ? `tn=${tn}&` : "Trending"
+    tn ? `tn=${tn}&` : ""
   }${type ? `type=${type}&` : ""}${
     classification ? `classification=${classification}&` : ""
   }${width && height ? `width=${width}&height=${height}&` : ""}${
     screen_type ? `screen_type=${screen_type}&` : ""
-  }${sort_by ? `sort_by=${sort_by}` : ""}${date ? `date=${date}&` : ""}`;
+  }${sort_by ? `sort_by=${sort_by}&` : ""}${date ? `date=${date}&` : ""}`;
 
   const { data, isLoading } = useGetSearchAndFilterWallpapersQuery(
     `?${queries?.slice(0, -1)}`
@@ -54,8 +52,8 @@ const SearchWallpapers = () => {
     tn: tn || "Trending",
     type: type || "",
     classification: classification || "",
-    height: height || "",
     width: width || "",
+    height: height || "",
     screen_type: screen_type || "",
     sort_by: sort_by || "",
     date: date || "",
@@ -69,11 +67,24 @@ const SearchWallpapers = () => {
     }
   }, [data]);
 
-  const handleQuery = async (name, value) => {
-    // console.log(name, value);
-    const query = await makeQuery(name, value, queryObject);
-    console.log(query);
-    navigate(`?${query}`);
+  const handleQuery = async (name, value, isDelete = false) => {
+    if (name === "dimensions") {
+      const query = await makeQuery(
+        "",
+        "",
+        {
+          ...queryObject,
+          width: value.width,
+          height: value.height,
+        },
+        true, // isDimensions
+        isDelete
+      );
+      window.location.replace(`?${query}`);
+    } else {
+      const query = await makeQuery(name, value, queryObject, isDelete);
+      window.location.replace(`?${query}`);
+    }
   };
 
   const isTrue = (tab3 === "NSFW" && user?.settings?.nsfw) || tab3 !== "NSFW";
@@ -99,7 +110,7 @@ const SearchWallpapers = () => {
       <TitleHeader />
 
       <div className="w-full h-full">
-        <SearchWallpapersSearchInput />
+        <SearchWallpapersSearchInput handleQuery={handleQuery} />
 
         <SearchWallpapersTabs
           tab1={tab1}

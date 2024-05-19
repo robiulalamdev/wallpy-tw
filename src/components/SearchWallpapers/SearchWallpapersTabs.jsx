@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
   Button,
@@ -19,6 +20,7 @@ import {
 import filter from "../../assets/icons/search-wallpapers/filter.gif";
 import { resolutions } from "../../utils/data/data";
 import SearchWallpapersDrawer from "./SearchWallpapersDrawer";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const tabs1 = ["Trending", "New"];
 const tabs2 = ["All", "Illustration", "Photography", "AI"];
@@ -26,6 +28,16 @@ const tabs3 = ["SFW", "NSFW"];
 
 const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
   const [open, setOpen] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: null, height: null });
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const navigate = useNavigate();
+
+  const height = searchParams.get("height");
+  const width = searchParams.get("width");
+  const screen_type = searchParams.get("screen_type");
+  const sort_by = searchParams.get("sort_by");
+  const date = searchParams.get("date");
 
   return (
     <>
@@ -115,11 +127,34 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                       <div className="grid grid-cols-1 gap-y-[16px] h-fit mt-[5px]">
                         {resolutions.resolutions1.items.map((item, i) => (
                           <div
+                            onClick={() => {
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? handleQuery(
+                                    "dimensions",
+                                    {
+                                      width: null,
+                                      height: null,
+                                    },
+                                    true
+                                  )
+                                : handleQuery("dimensions", {
+                                    width: item.width,
+                                    height: item.height,
+                                  });
+                            }}
                             key={i}
-                            className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                            className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px]
+                            ${
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? "bg-green-600"
+                                : "bg-[#00000066]"
+                            }
+                            `}
                           >
                             <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                              {item}
+                              {item.width} × {item.height}
                             </h1>
                           </div>
                         ))}
@@ -136,11 +171,34 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                       <div className="grid grid-cols-1 gap-y-[16px] h-fit mt-[5px]">
                         {resolutions.resolutions2.items.map((item, i) => (
                           <div
+                            onClick={() => {
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? handleQuery(
+                                    "dimensions",
+                                    {
+                                      width: null,
+                                      height: null,
+                                    },
+                                    true
+                                  )
+                                : handleQuery("dimensions", {
+                                    width: item.width,
+                                    height: item.height,
+                                  });
+                            }}
                             key={i}
-                            className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                            className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px]
+                            ${
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? "bg-green-600"
+                                : "bg-[#00000066]"
+                            }
+                            `}
                           >
                             <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                              {item}
+                              {item.width} × {item.height}
                             </h1>
                           </div>
                         ))}
@@ -157,11 +215,34 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                       <div className="grid grid-cols-1 gap-y-[16px] h-fit mt-[5px]">
                         {resolutions.resolutions3.items.map((item, i) => (
                           <div
+                            onClick={() => {
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? handleQuery(
+                                    "dimensions",
+                                    {
+                                      width: null,
+                                      height: null,
+                                    },
+                                    true
+                                  )
+                                : handleQuery("dimensions", {
+                                    width: item.width,
+                                    height: item.height,
+                                  });
+                            }}
                             key={i}
-                            className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                            className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px]
+                            ${
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? "bg-green-600"
+                                : "bg-[#00000066]"
+                            }
+                            `}
                           >
                             <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                              {item}
+                              {item.width} × {item.height}
                             </h1>
                           </div>
                         ))}
@@ -178,11 +259,34 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                       <div className="grid grid-cols-1 gap-y-[16px] h-fit mt-[5px]">
                         {resolutions.resolutions4.items.map((item, i) => (
                           <div
+                            onClick={() => {
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? handleQuery(
+                                    "dimensions",
+                                    {
+                                      width: null,
+                                      height: null,
+                                    },
+                                    true
+                                  )
+                                : handleQuery("dimensions", {
+                                    width: item.width,
+                                    height: item.height,
+                                  });
+                            }}
                             key={i}
-                            className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                            className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px]
+                            ${
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? "bg-green-600"
+                                : "bg-[#00000066]"
+                            }
+                            `}
                           >
                             <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                              {item}
+                              {item.width} × {item.height}
                             </h1>
                           </div>
                         ))}
@@ -199,11 +303,34 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                       <div className="grid grid-cols-1 gap-y-[16px] h-fit mt-[5px]">
                         {resolutions.resolutions5.items.map((item, i) => (
                           <div
+                            onClick={() => {
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? handleQuery(
+                                    "dimensions",
+                                    {
+                                      width: null,
+                                      height: null,
+                                    },
+                                    true
+                                  )
+                                : handleQuery("dimensions", {
+                                    width: item.width,
+                                    height: item.height,
+                                  });
+                            }}
                             key={i}
-                            className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                            className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px]
+                            ${
+                              item.width === parseInt(width) &&
+                              item.height === parseInt(height)
+                                ? "bg-green-600"
+                                : "bg-[#00000066]"
+                            }
+                            `}
                           >
                             <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
-                              {item}
+                              {item.width} × {item.height}
                             </h1>
                           </div>
                         ))}
@@ -216,7 +343,8 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                       Auto Detection
                     </h1>
                     <h1 className="text-center text-[12px] font-lato font-medium text-[#FFF] mt-[7px]">
-                      Your screen resolution is 1920 × 1080.
+                      Your screen resolution is {screen.width} × {screen.height}
+                      .
                     </h1>
                     <h1 className="text-center text-[12px] font-lato text-[#FFF] mt-[25px]">
                       Custom Resolution
@@ -224,17 +352,37 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
 
                     <div className="flex justify-center items-start gap-x-[25px] mt-[16px]">
                       <input
+                        onChange={(e) =>
+                          setDimensions({
+                            width: e.target.value,
+                            height: dimensions.height,
+                          })
+                        }
                         type="number"
                         placeholder="Width"
                         className="w-[79px] h-[30px] font-lato placeholder:font-lato bg-[#000000B2] outline-none rounded-[5px] placeholder:text-[#939393] text-[12px] placeholder:text-[12px] text-[#FFF] text-center"
                       />
                       <input
+                        onChange={(e) =>
+                          setDimensions({
+                            width: dimensions.width,
+                            height: e.target.value,
+                          })
+                        }
                         type="number"
                         placeholder="Height"
                         className="w-[79px] h-[30px] font-lato placeholder:font-lato bg-[#000000B2] outline-none rounded-[5px] placeholder:text-[#939393] text-[12px] placeholder:text-[12px] text-[#FFF] text-center"
                       />
                     </div>
-                    <Button className="w-[129px] h-[38px] bg-[#2924FF] shadow-none hover:shadow-none normal-case font-normal rounded-[5px] text-[15px] text-[#C4C4C4] font-bakbak-one text-center !mt-[26px] mx-auto flex justify-center items-center">
+                    <Button
+                      onClick={() =>
+                        handleQuery("dimensions", {
+                          width: dimensions.width,
+                          height: dimensions.height,
+                        })
+                      }
+                      className="w-[129px] h-[38px] bg-[#2924FF] shadow-none hover:shadow-none normal-case font-normal rounded-[5px] text-[15px] text-[#C4C4C4] font-bakbak-one text-center !mt-[26px] mx-auto flex justify-center items-center"
+                    >
                       Search
                     </Button>
                   </div>
@@ -258,19 +406,54 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                   }}
                 >
                   <div className="grid grid-cols-3 gap-x-[15px] gap-y-[13px]">
-                    <div className="w-[126px] h-[38px] bg-[#00000080] rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold">
+                    <div
+                      onClick={() => handleQuery("screen_type", "Desktop")}
+                      className={`w-[126px] h-[38px] ${
+                        "Desktop".toLowerCase() === screen_type?.toLowerCase()
+                          ? "bg-green-600"
+                          : "bg-[#00000080]"
+                      } rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold`}
+                    >
                       {iDesktop} <span>Desktop</span>
                     </div>
-                    <div className="w-[126px] h-[38px] bg-[#00000080] rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold">
+                    <div
+                      onClick={() => handleQuery("screen_type", "Phones")}
+                      className={`w-[126px] h-[38px] ${
+                        "Phones".toLowerCase() === screen_type?.toLowerCase()
+                          ? "bg-green-600"
+                          : "bg-[#00000080]"
+                      } rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold`}
+                    >
                       {iPhone} <span>Phones</span>
                     </div>
-                    <div className="w-[126px] h-[38px] bg-[#00000080] rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold">
+                    <div
+                      onClick={() => handleQuery("screen_type", "Tablets")}
+                      className={`w-[126px] h-[38px] ${
+                        "Tablets".toLowerCase() === screen_type?.toLowerCase()
+                          ? "bg-green-600"
+                          : "bg-[#00000080]"
+                      } rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold`}
+                    >
                       {iTablet} <span>Tablets</span>
                     </div>
-                    <div className="w-[126px] h-[38px] bg-[#00000080] rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold">
+                    <div
+                      onClick={() => handleQuery("screen_type", "Handhelds")}
+                      className={`w-[126px] h-[38px] ${
+                        "Handhelds".toLowerCase() === screen_type?.toLowerCase()
+                          ? "bg-green-600"
+                          : "bg-[#00000080]"
+                      } rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold`}
+                    >
                       {iHandhelds} <span>Handhelds</span>
                     </div>
-                    <div className="w-[126px] h-[38px] bg-[#00000080] rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold">
+                    <div
+                      onClick={() => handleQuery("screen_type", "Other")}
+                      className={`w-[126px] h-[38px] ${
+                        "Other".toLowerCase() === screen_type?.toLowerCase()
+                          ? "bg-green-600"
+                          : "bg-[#00000080]"
+                      } rounded-[5px] flex justify-center items-center gap-x-[5px] text-[#FFF] font-lato text-[15px] font-semibold`}
+                    >
                       {iOther} <span>Other</span>
                     </div>
                   </div>
@@ -292,13 +475,34 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                     backdropFilter: "blur(25px)",
                   }}
                 >
-                  <div className="text-[15px] font-lato font-semibold text-[#fff] w-[110px] h-[36px] hover:bg-[#00000080] flex justify-center items-center rounded-[5px]">
+                  <div
+                    onClick={() => handleQuery("sort_by", "Random")}
+                    className={`text-[15px] font-lato font-semibold text-[#fff] w-[110px] h-[36px] ${
+                      "Random".toLowerCase() === sort_by?.toLowerCase()
+                        ? "bg-green-600"
+                        : ""
+                    } hover:bg-[#00000080] flex justify-center items-center rounded-[5px]`}
+                  >
                     Random
                   </div>
-                  <div className="text-[15px] font-lato font-semibold text-[#fff] w-[110px] h-[36px] hover:bg-[#00000080] flex justify-center items-center rounded-[5px]">
+                  <div
+                    onClick={() => handleQuery("sort_by", "Views")}
+                    className={`text-[15px] font-lato font-semibold text-[#fff] w-[110px] h-[36px] ${
+                      "Views".toLowerCase() === sort_by?.toLowerCase()
+                        ? "bg-green-600"
+                        : ""
+                    } hover:bg-[#00000080] flex justify-center items-center rounded-[5px]`}
+                  >
                     Views
                   </div>
-                  <div className="text-[15px] font-lato font-semibold text-[#fff] w-[110px] h-[36px] hover:bg-[#00000080] flex justify-center items-center rounded-[5px]">
+                  <div
+                    onClick={() => handleQuery("sort_by", "Favorites")}
+                    className={`text-[15px] font-lato font-semibold text-[#fff] w-[110px] h-[36px] ${
+                      "Favorites".toLowerCase() === sort_by?.toLowerCase()
+                        ? "bg-green-600"
+                        : ""
+                    } hover:bg-[#00000080] flex justify-center items-center rounded-[5px]`}
+                  >
                     Favorites
                   </div>
                 </div>
@@ -319,25 +523,63 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
                     backdropFilter: "blur(25px)",
                   }}
                 >
-                  <div className="text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] hover:bg-[#00000080] flex justify-center items-center rounded-[5px]">
+                  <div
+                    onClick={() => handleQuery("date", "Today")}
+                    className={`text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] ${
+                      "Today".toLowerCase() === date?.toLowerCase()
+                        ? "bg-green-600"
+                        : ""
+                    } hover:bg-[#00000080] flex justify-center items-center rounded-[5px]`}
+                  >
                     Today
                   </div>
-                  <div className="text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] hover:bg-[#00000080] flex justify-center items-center rounded-[5px]">
+                  <div
+                    onClick={() => handleQuery("date", "This week")}
+                    className={`text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] ${
+                      "This week".toLowerCase() === date?.toLowerCase()
+                        ? "bg-green-600"
+                        : ""
+                    } hover:bg-[#00000080] flex justify-center items-center rounded-[5px]`}
+                  >
                     This week
                   </div>
-                  <div className="text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] hover:bg-[#00000080] flex justify-center items-center rounded-[5px]">
+                  <div
+                    onClick={() => handleQuery("date", "This Month")}
+                    className={`text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] ${
+                      "This Month".toLowerCase() === date?.toLowerCase()
+                        ? "bg-green-600"
+                        : ""
+                    } hover:bg-[#00000080] flex justify-center items-center rounded-[5px]`}
+                  >
                     This Month
                   </div>
-                  <div className="text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] hover:bg-[#00000080] flex justify-center items-center rounded-[5px]">
+                  <div
+                    onClick={() => handleQuery("date", "This year")}
+                    className={`text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] ${
+                      "This year".toLowerCase() === date?.toLowerCase()
+                        ? "bg-green-600"
+                        : ""
+                    } hover:bg-[#00000080] flex justify-center items-center rounded-[5px]`}
+                  >
                     This year
                   </div>
-                  <div className="text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] hover:bg-[#00000080] flex justify-center items-center rounded-[5px]">
+                  <div
+                    onClick={() => handleQuery("date", "All time")}
+                    className={`text-[15px] font-lato font-semibold text-[#fff] w-[123px] h-[41px] ${
+                      "All time".toLowerCase() === date?.toLowerCase()
+                        ? "bg-green-600"
+                        : ""
+                    } hover:bg-[#00000080] flex justify-center items-center rounded-[5px]`}
+                  >
                     All time
                   </div>
                 </div>
               </PopoverContent>
             </Popover>
-            <Button className="shadow-none hover:shadow-none normal-case min-w-[57px] max-w-[57px] h-[42px] bg-[#00000033] rounded-[9px] text-[12px] font-lato font-semibold text-[#FFF] flex justify-center items-center p-0">
+            <Button
+              onClick={() => navigate("")}
+              className="shadow-none hover:shadow-none normal-case min-w-[57px] max-w-[57px] h-[42px] bg-[#00000033] rounded-[9px] text-[12px] font-lato font-semibold text-[#FFF] flex justify-center items-center p-0"
+            >
               <div className="min-w-[24px] min-h-[24px]">{iRefresh}</div>
             </Button>
           </div>

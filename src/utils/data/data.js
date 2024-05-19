@@ -78,47 +78,51 @@ export const popularsTags = [
 export const resolutions = {
   resolutions1: {
     name: "Ultra Wide",
-    items: ["2560 × 1080", "3440 × 1440", "3840 × 1600"],
+    items: [
+      { width: 2560, height: 1080 },
+      { width: 3440, height: 1440 },
+      { width: 3840, height: 1600 },
+    ],
   },
   resolutions2: {
     name: "16:9",
     items: [
-      "1280 × 720",
-      "1600 × 900",
-      "1920 × 1080",
-      "2560 × 1440",
-      "3840 × 2160",
+      { width: 1280, height: 720 },
+      { width: 1600, height: 900 },
+      { width: 1920, height: 1080 },
+      { width: 2560, height: 1440 },
+      { width: 3840, height: 2160 },
     ],
   },
   resolutions3: {
     name: "16:10",
     items: [
-      "1280 × 800",
-      "1600 × 1000",
-      "1920 × 1200",
-      "2560 × 1600",
-      "3840 × 2400",
+      { width: 1280, height: 800 },
+      { width: 1600, height: 1000 },
+      { width: 1920, height: 1200 },
+      { width: 2560, height: 1600 },
+      { width: 3840, height: 2400 },
     ],
   },
   resolutions4: {
     name: "4:3",
     items: [
-      "1280 × 960",
-      "1600 × 1200",
-      "1920 × 1440",
-      "2560 × 1920",
-      "3840 × 2880",
+      { width: 1280, height: 960 },
+      { width: 1600, height: 1200 },
+      { width: 1920, height: 1440 },
+      { width: 2560, height: 1920 },
+      { width: 3840, height: 2880 },
     ],
   },
 
   resolutions5: {
     name: "16:9",
     items: [
-      "1280 × 1024",
-      "1600 × 1280",
-      "1920 × 1536",
-      "2560 × 2048",
-      "3840 × 3072",
+      { width: 1280, height: 1024 },
+      { width: 1600, height: 1280 },
+      { width: 1920, height: 1536 },
+      { width: 2560, height: 2048 },
+      { width: 3840, height: 3072 },
     ],
   },
 };

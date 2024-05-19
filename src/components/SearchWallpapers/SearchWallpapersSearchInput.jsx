@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Button,
   Popover,
@@ -11,16 +12,12 @@ import { useState } from "react";
 import { popularsTags } from "../../utils/data/data";
 import { useNavigate } from "react-router-dom";
 
-const SearchWallpapersSearchInput = () => {
+const SearchWallpapersSearchInput = ({ handleQuery }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (e.target.search.value) {
-      navigate(`?search=${e.target.search.value}`);
-    } else {
-      navigate(``);
-    }
+    handleQuery("search", e.target.search.value);
   };
   return (
     <>
@@ -68,8 +65,9 @@ const SearchWallpapersSearchInput = () => {
             <div className="flex flex-wrap gap-x-[8px] gap-y-[8px] mt-[26px]">
               {popularsTags.map((tag, index) => (
                 <Button
+                  type="button"
                   key={index}
-                  className="shadow-none hover:shadow-none px-[16px] h-[30px] rounded-[5px] bg-[#00000066] font-normal normal-case text-[#FFF] font-lato text-[13px] flex justify-center items-center"
+                  className="outline-none shadow-none hover:shadow-none px-[16px] h-[30px] rounded-[5px] bg-[#00000066] font-normal normal-case text-[#FFF] font-lato text-[13px] flex justify-center items-center"
                 >
                   {tag}
                 </Button>

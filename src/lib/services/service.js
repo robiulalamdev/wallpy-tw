@@ -95,12 +95,27 @@ const loadImage = (src) => {
   });
 };
 
-export const makeQuery = async (name, value, queryObject) => {
+export const makeQuery = async (
+  name,
+  value,
+  queryObject,
+  isDimensions = false,
+  isDelete = false
+) => {
   // Create a copy of the queryObject to avoid mutating the original object
   const updatedQueryObject = { ...queryObject };
-
-  // Update the specified query parameter with the new value
-  updatedQueryObject[name] = value;
+  // Conditionally update or delete the specified query parameter
+  if (isDelete) {
+    if (isDimensions) {
+      delete updatedQueryObject["width"];
+      delete updatedQueryObject["height"];
+    } else {
+      delete updatedQueryObject[name];
+    }
+  } else {
+    updatedQueryObject[name] = value;
+  }
+  console.log(updatedQueryObject);
 
   // Build the query string from the updated query object, excluding empty values
   const newQuery = Object.keys(updatedQueryObject)
