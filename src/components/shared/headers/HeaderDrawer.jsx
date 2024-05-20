@@ -12,14 +12,15 @@ import { Link, useNavigate } from "react-router-dom";
 
 import profile from "../../../assets/images/global/header/profile.png";
 
-import icon1 from "../../../assets/icons/global/header/icon1.png";
-import icon2 from "../../../assets/icons/global/header/icon2.png";
-import icon3 from "../../../assets/icons/global/header/icon3.png";
-import icon4 from "../../../assets/icons/global/header/icon4.png";
-import icon5 from "../../../assets/icons/global/header/icon5.png";
-import icon6 from "../../../assets/icons/global/header/icon6.png";
+// import icon1 from "../../../assets/icons/global/header/icon1.png";
+// import icon2 from "../../../assets/icons/global/header/icon2.png";
+// import icon3 from "../../../assets/icons/global/header/icon3.png";
+// import icon4 from "../../../assets/icons/global/header/icon4.png";
+// import icon5 from "../../../assets/icons/global/header/icon5.png";
+// import icon6 from "../../../assets/icons/global/header/icon6.png";
 import { AuthContext } from "../../../contextApi/AuthContext";
 import useViewImage from "../../../lib/hooks/useViewImage";
+import { socialLinkItems } from "../../../lib/data/globalData";
 
 const HeaderDrawer = ({ open, close }) => {
   const { viewImg } = useViewImage();
@@ -136,7 +137,7 @@ const HeaderDrawer = ({ open, close }) => {
           )}
         </div>
 
-        <div className="">
+        <div className="relative">
           <div
             onClick={() => logout()}
             className="flex items-center justify-center gap-1 font-bakbak-one text-[20px] text-[#939393] mb-[31px]"
@@ -145,13 +146,31 @@ const HeaderDrawer = ({ open, close }) => {
             <p>Log Out</p>
           </div>
           <div className="border-t-[1px] border-[#5A5A5A] p-0 m-0"></div>
-          <div className="flex justify-between items-center mt-[26px] pb-[29px] px-[29px]">
-            <img src={icon1} alt="icon" className="size-[17px]" />
+          <div className="flex justify-center items-center gap-x-[6vw] mt-[26px] pb-[29px] px-[29px]">
+            {Object.entries(socialLinkItems)?.map((item, index) => (
+              <>
+                {user?.profile?.socials[item[0]] && (
+                  <Link
+                    key={index}
+                    target="_blank"
+                    to={user?.profile?.socials[item[0]]}
+                    className="cursor-pointer"
+                  >
+                    <img
+                      src={item[1].icon}
+                      alt="icon"
+                      className="max-w-[15px] md:max-w-[25px] object-contain"
+                    />
+                  </Link>
+                )}
+              </>
+            ))}
+            {/* <img src={icon1} alt="icon" className="size-[17px]" />
             <img src={icon2} alt="icon" className="size-[17px]" />
             <img src={icon3} alt="icon" className="size-[17px]" />
             <img src={icon4} alt="icon" className="size-[17px]" />
             <img src={icon5} alt="icon" className="size-[17px]" />
-            <img src={icon6} alt="icon" className="size-[17px]" />
+            <img src={icon6} alt="icon" className="size-[17px]" /> */}
           </div>
         </div>
       </div>
