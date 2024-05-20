@@ -10,7 +10,7 @@ import { useGetProfileActivityByIdQuery } from "../../redux/features/users/users
 const ProfileBanner = ({ user }) => {
   const { data } = useGetProfileActivityByIdQuery(user?._id);
   const { viewImg } = useViewImage();
-  console.log(user);
+  // console.log(user);
   return (
     <div>
       <div className="pl-[4px] md:pl-[29px] relative">

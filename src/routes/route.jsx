@@ -35,6 +35,7 @@ import VerificationPrivateRoute from "./VerificationPrivateRoute";
 import OfficialBrandProfilePublic from "../pages/OfficialBrandProfile/OfficialBrandProfilePublic";
 import ProfileVerify from "../pages/Test/ProfileVerify";
 import MessageLayout from "../layouts/MessageLayout";
+import VerifyApprovedPrivateRoute from "./VerifyApprovedPrivateRoute";
 
 export const route = createBrowserRouter([
   {
@@ -114,9 +115,9 @@ export const route = createBrowserRouter([
       {
         path: "/account-verification",
         element: (
-          <PrivateRoute>
+          <VerifyApprovedPrivateRoute>
             <AccountVerification />
-          </PrivateRoute>
+          </VerifyApprovedPrivateRoute>
         ),
       },
       {

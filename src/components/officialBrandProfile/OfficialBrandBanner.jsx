@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import banner from "../../assets/images/official-brands-profile/banner.png";
+// import banner from "../../assets/images/official-brands-profile/banner.png";
+import banner from "../../assets/images/profile/banner.png";
 import profile from "../../assets/images/official-brands-profile/profile.png";
 import useViewImage from "../../lib/hooks/useViewImage";
 import { iOfficialVerified } from "../../utils/icons/icons";
@@ -7,7 +8,6 @@ import OfficialBrandProfileSocial from "./OfficialBrandProfileSocial";
 
 const OfficialBrandBanner = ({ user }) => {
   const { viewImg } = useViewImage();
-
   return (
     <div>
       <div className="pl-[4px] md:pl-[29px] relative">
@@ -15,8 +15,7 @@ const OfficialBrandBanner = ({ user }) => {
           className="h-[106px] md:h-[300px] w-full rounded-[10px]"
           style={{
             background: `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${
-              viewImg(user?.profile?.official_banner)?.replaceAll(/\\/g, "/") ||
-              banner
+              viewImg(user?.profile?.banner)?.replaceAll(/\\/g, "/") || banner
             }), lightgray 0.172px -275.808px / 100% 204.607% no-repeat`,
             backgroundSize: "100% cover",
             backgroundPosition: "center",
