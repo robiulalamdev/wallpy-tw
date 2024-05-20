@@ -1,16 +1,24 @@
 /* eslint-disable no-unused-vars */
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import RulesHeader from "../../components/shared/headers/RulesHeader";
 import UploadProggressArea from "../../components/upload/UploadProggressArea";
 import bg from "../../assets/images/upload/bg.png";
 import { iUpload } from "../../utils/icons/icons";
 import { toast } from "react-toastify";
 import { useDropzone } from "react-dropzone";
+import { AuthContext } from "../../contextApi/AuthContext";
 
 const Upload = () => {
+  const { user } = useContext(AuthContext);
   const [step, setStep] = useState(1);
   const [files, setFiles] = useState([]);
   const [upload, setUpload] = useState(false);
+
+  useMemo(() => {
+    if (user?.settings?.acceptCommunityRules) {
+      setStep(2);
+    }
+  }, [user]);
 
   const onUpload = useCallback(
     async (acceptedFiles) => {

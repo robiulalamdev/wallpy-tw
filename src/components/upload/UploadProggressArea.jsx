@@ -9,11 +9,12 @@ import {
   iFiledGalary,
   iUploadUp,
 } from "../../utils/icons/icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contextApi/AuthContext";
 import { useCreateWallpapersMutation } from "../../redux/features/wallpapers/wallpapersApi";
 import { toast } from "react-toastify";
 import { SpinnerCircularFixed } from "spinners-react";
+import { useSettingsChangeMutation } from "../../redux/features/users/usersApi";
 
 const UploadProggressArea = ({
   step,
@@ -26,6 +27,7 @@ const UploadProggressArea = ({
   const { user } = useContext(AuthContext);
   const [createWallpapers, { isLoading }] = useCreateWallpapersMutation();
   const [checked, setChecked] = useState(false);
+  const [settingsChange] = useSettingsChangeMutation();
 
   const navigate = useNavigate();
 
@@ -63,6 +65,15 @@ const UploadProggressArea = ({
       setUpload(false);
     }
   };
+
+  const handleAcceptCr = async () => {
+    const options = {
+      data: { acceptCommunityRules: true },
+    };
+    await settingsChange(options);
+  };
+
+  // console.log(user);
   return (
     <div className="md:pl-[26px] h-full w-full">
       {step === 1 && (
@@ -78,9 +89,11 @@ const UploadProggressArea = ({
             proceeding. Your cooperation is greatly appreciated.
           </p>
 
-          <h1 className="text-center font-bakbak-one text-[12px] md:text-[15px] text-[#FF2E00] mt-[13px] md:mt-[53px]">
-            Click to Read the Community Rules
-          </h1>
+          <Link to="/community-rules">
+            <h1 className="text-center font-bakbak-one text-[12px] md:text-[15px] text-[#FF2E00] mt-[13px] md:mt-[53px]">
+              Click to Read the Community Rules
+            </h1>
+          </Link>
 
           <div className="mt-[46px] md:mt-[137px]">
             <div className="flex items-center gap-x-[7px] cursor-pointer">
@@ -98,7 +111,10 @@ const UploadProggressArea = ({
             <div className="border-t-[1px] border-[#5A5A5A] mt-[12px] mb-[32px] hidden md:block"></div>
 
             <div
-              onClick={() => setStep(checked ? 2 : 1)}
+              onClick={() => {
+                handleAcceptCr();
+                setStep(checked ? 2 : 1);
+              }}
               className={`${
                 checked ? "bg-[#2924FF]" : "bg-[#5A5A5A]"
               } w-[129px] h-[38px] rounded-[5px] text-[#C4C4C4] text-[15px] font-bakbak-one mt-[45px] md:mt-[32px] flex justify-center items-center mx-auto cursor-pointer`}
@@ -174,7 +190,7 @@ const UploadProggressArea = ({
                   disabled={files.length < 1}
                   className={`${
                     files.length > 0 ? "bg-[#2924FF]" : "bg-[#5A5A5A]"
-                  } w-[129px] h-[38px] rounded-[5px] text-[#C4C4C4] text-[15px] font-bakbak-one  md:flex justify-center items-center cursor-pointer hidden md:inline-block gap-[5px]`}
+                  } w-[129px] h-[38px] rounded-[5px] text-[#C4C4C4] text-[15px] font-bakbak-one  md:flex justify-center items-center cursor-pointer flex gap-[5px]`}
                 >
                   {isLoading && (
                     <SpinnerCircularFixed
