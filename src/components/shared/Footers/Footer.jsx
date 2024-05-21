@@ -24,7 +24,7 @@ const Footer = () => {
                 Account
               </p>
             </Link>
-            <Link to="/media-center">
+            <Link to="/media-center/favorites">
               <p className="text-[#939393] font-bakbak-one text-[15px] mt-[7px] md:mt-[4px]">
                 Favorites
               </p>
