@@ -113,13 +113,13 @@ const WallpaperSidebarUi = ({ data }) => {
     }
   };
 
-  const isAuthor = data?.user === user?._id;
+  // const isAuthor = data?.user === user?._id;
 
   const handleAdd = async (e) => {
     e.preventDefault();
     const tag = e.target.tag.value;
     if (!tag) return;
-    if (isAuthor && tag) {
+    if (tag) {
       const options = {
         id: data?._id,
         data: { tags: [...tags, tag] },
@@ -385,29 +385,29 @@ const WallpaperSidebarUi = ({ data }) => {
             )}
           </div>
 
-          {isAuthor && (
-            <form
-              onSubmit={handleAdd}
-              className="max-w-[235px] h-[35px] bg-[#00000033] rounded-[7px] mx-auto mt-[34px] flex justify-between items-center px-[10px]"
+          {/* {isAuthor && ( */}
+          <form
+            onSubmit={handleAdd}
+            className="max-w-[235px] h-[35px] bg-[#00000033] rounded-[7px] mx-auto mt-[34px] flex justify-between items-center px-[10px]"
+          >
+            <input
+              onChange={(e) => setTagValue(e.target.value)}
+              type="text"
+              name="tag"
+              value={tagValue}
+              placeholder="Add tags here..."
+              className="w-full h-full flex-grow bg-transparent outline-none text-[#fff] placeholder:text-[#FFFFFF33] text-[12px] placeholder:text-[12px] placeholder:font-lato font-lato"
+            />
+            <button
+              type="submit"
+              className={`flex justify-center items-center size-[17px]  ${
+                tagValue ? "text-white" : "text-[#323232]"
+              }`}
             >
-              <input
-                onChange={(e) => setTagValue(e.target.value)}
-                type="text"
-                name="tag"
-                value={tagValue}
-                placeholder="Add tags here..."
-                className="w-full h-full flex-grow bg-transparent outline-none text-[#fff] placeholder:text-[#FFFFFF33] text-[12px] placeholder:text-[12px] placeholder:font-lato font-lato"
-              />
-              <button
-                type="button"
-                className={`flex justify-center items-center size-[17px]  ${
-                  tagValue ? "text-white" : "text-[#323232]"
-                }`}
-              >
-                {iAddTag}
-              </button>
-            </form>
-          )}
+              {iAddTag}
+            </button>
+          </form>
+          {/* )} */}
 
           <div className="max-w-[235px] w-full mt-[17px] mx-auto">
             <h1 className=" text-[#CCC] text-[15px] font-bakbak-one text-center">

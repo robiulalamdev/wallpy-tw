@@ -115,7 +115,7 @@ export const makeQuery = async (
   } else {
     updatedQueryObject[name] = value;
   }
-  console.log(updatedQueryObject);
+  // console.log(updatedQueryObject);
 
   // Build the query string from the updated query object, excluding empty values
   const newQuery = Object.keys(updatedQueryObject)

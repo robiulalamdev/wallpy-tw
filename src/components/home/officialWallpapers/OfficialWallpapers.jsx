@@ -72,7 +72,7 @@ const OfficialWallpapers = () => {
 
           <div className="flex justify-center items-center pt-[22px] md:pt-[46px]">
             <Button
-              onClick={() => navigate("/wallpapers")}
+              onClick={() => navigate("/official-brands")}
               className="w-[171px] h-[37px] md:w-[225px] md:h-[49px] shadow-none hover:shadow-none font-lato font-bold !text-white md:!text-[#949494] text-[12px]  md:text-[15px] leading-[14.4px] normal-case p-0 rounded-[100px] bg-[#00000080]"
             >
               More Official Wallpapers

@@ -4,6 +4,8 @@ import {
   useGetAllUsersQuery,
 } from "../../redux/features/users/usersApi";
 import { Button } from "@material-tailwind/react";
+import { downloadImageWithWH } from "../../lib/services/service";
+import bg from "../../assets/images/global/bgold.png";
 
 const ProfileVerify = () => {
   const { data } = useGetAllUsersQuery();
@@ -19,9 +21,11 @@ const ProfileVerify = () => {
     console.log(result);
   };
 
-  console.log(data);
   return (
     <div className="flex flex-wrap gap-6 my-16">
+      {/* <button onClick={() => downloadImageWithWH(bg, 2880, 2180)}>
+        Resize
+      </button> */}
       {data?.data?.map((user, index) => (
         <>
           {user?.profile?.verification_status !== "None" && (

@@ -46,7 +46,7 @@ const OfficialBrands = () => {
               } ${index === 2 && "col-span-3"}`}
             >
               <div
-                onClick={() => navigate("/official-brand-profile")}
+                onClick={() => navigate("/profiles/username")}
                 className={`w-full ${
                   index === 0 ? "h-[210px]" : "h-[92px]"
                 } md:h-[257px] !rounded-[10px] md:rounded-[30px] overflow-hidden cursor-pointer`}
@@ -57,7 +57,7 @@ const OfficialBrands = () => {
                   className="w-full h-full !rounded-[10px] md:rounded-[30px] object-cover"
                 />
               </div>
-              <Link to="/official-brand-profile">
+              <Link to="/profiles/username">
                 <h1 className="font-bold font-lato text-[10px] md:text-[20px] text-white mt-[3px] md:mt-[11px] text-center">
                   {item.name}
                 </h1>

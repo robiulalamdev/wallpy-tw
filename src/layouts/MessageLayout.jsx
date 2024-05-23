@@ -6,7 +6,7 @@ const MessageLayout = () => {
     <div
       className="h-screen w-full overflow-y-auto"
       style={{
-        backgroundImage: `url(${bg})`,
+        backgroundImage: `url(${bg}`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
       }}
