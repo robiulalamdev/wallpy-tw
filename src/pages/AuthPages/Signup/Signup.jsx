@@ -3,8 +3,7 @@ import bg from "../../../assets/images/auth/signup/bg.png";
 import { iInfo } from "../../../utils/icons/icons";
 import { Button } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../../contextApi/AuthContext";
+import { useState } from "react";
 import { useCreateUserMutation } from "../../../redux/features/users/usersApi";
 import { SpinnerCircularFixed } from "spinners-react";
 import VerifyModal from "../../../components/common/modals/VerifyModal";
@@ -164,7 +163,7 @@ const Signup = () => {
                   pattern: {
                     value: /^(?!\s)(?!.*\s{2})(?=.*[a-zA-Z0-9]).{6,8}$/, // Requires 6 to 8 characters with no spaces
                     message:
-                      "Password must be 6 to 8 characters long with no spaces",
+                      "Password must be 6 to 12 characters long with no spaces",
                   },
                 })}
                 type="password"

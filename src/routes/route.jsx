@@ -163,14 +163,6 @@ export const route = createBrowserRouter([
         path: "/profile-verify",
         element: <ProfileVerify />,
       },
-    ],
-  },
-
-  // without footer layout
-  {
-    path: "/",
-    element: <MessageLayout />,
-    children: [
       {
         path: "/messages",
         element: (
@@ -181,6 +173,22 @@ export const route = createBrowserRouter([
       },
     ],
   },
+
+  // without footer layout
+  // {
+  //   path: "/",
+  //   element: <MessageLayout />,
+  //   children: [
+  //     {
+  //       path: "/messages",
+  //       element: (
+  //         <PrivateRoute>
+  //           <Messages />
+  //         </PrivateRoute>
+  //       ),
+  //     },
+  //   ],
+  // },
 
   {
     path: "/",

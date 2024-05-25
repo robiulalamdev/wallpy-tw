@@ -24,7 +24,7 @@ const TitleHeader = () => {
           THE WALLPAPER SOCIETY
         </h1>
 
-        {user && <HeaderProfile />}
+        {user ? <HeaderProfile /> : <span></span>}
       </div>
 
       <div className="lg:hidden my-[23px]">

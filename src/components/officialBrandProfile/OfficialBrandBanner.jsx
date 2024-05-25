@@ -23,7 +23,7 @@ const OfficialBrandBanner = ({ user }) => {
         ></div>
         <div className="flex justify-between mt-[8px] md:mt-[25px]">
           <div className="">
-            <div className="flex items-end md:items-start w-full mb-[11px] md:mb-0">
+            <div className="flex items-end md:items-start w-full mb-[11px] md:mb-0 gap-x-[32px]">
               <img
                 src={viewImg(user?.profile?.profile_image) || profile}
                 alt="profile"

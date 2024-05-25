@@ -6,6 +6,7 @@ import {
   iAddTag,
   iDownloadArrow,
   iFilter,
+  iOfficialVerified,
   iVerifiedPro,
   iWallpaperClose,
 } from "../../utils/icons/icons";
@@ -136,6 +137,8 @@ const WallpaperSidebarUi = ({ data }) => {
     }
   };
 
+  console.log(data?.author_info);
+
   return (
     <div className="bg-[#121212] lg:bg-[#00000033] w-full min-h-[802px] max-h-[802px] max-w-[347px] min-w-[347px] rounded-[10px] pt-[15px] px-[19px] pb-[23px] scroll_off">
       <h1 className="text-center font-bakbak-one text-[12px] text-white">
@@ -152,12 +155,16 @@ const WallpaperSidebarUi = ({ data }) => {
         </div>
         <div className="flex flex-col items-center gap-[19px]">
           <div className="flex items-center gap-x-[4px]">
-            <h1 className="text-white font-bakbak-one text-[20px]">
-              {data?.author_info?.username?.length > 12
-                ? data?.author_info?.username?.slice(0, 12) + "..."
-                : data?.author_info?.username}
+            <h1 className="text-white font-bakbak-one text-[20px] oneLine">
+              {data?.author_info?.username}
             </h1>
-            {data?.author_info?.verification_status && iVerifiedPro}
+            {data?.author_info?.verification_status && (
+              <div className="min-w-[17px] min-h-[17px]">
+                {data?.author_info?.profile_type === "Brand"
+                  ? iOfficialVerified
+                  : iVerifiedPro}
+              </div>
+            )}
           </div>
           <Link to={`/profiles/${data?.author_info?.username}`}>
             <Button className="w-[97px] h-[32px] shadow-none hover:shadow-none text-white bg-[#000000] font-bakbak-one text-[10px] normal-case font-normal p-0 rounded-[15px]">

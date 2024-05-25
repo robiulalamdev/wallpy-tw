@@ -330,9 +330,9 @@ const DraftPublishSidebarUi = ({
             <button
               onClick={() => handleUpdate("Published")}
               disabled={!isTrue}
-              className={
-                "w-[129px] h-[38px] bg-[#2924FF] rounded-[5px] mt-[29px] text-[15px] font-bakbak-one inline-block mx-auto text-[#5C5C5C] flex justify-center items-center gap-2"
-              }
+              className={`w-[129px] h-[38px] bg-[#2924FF] rounded-[5px] mt-[29px] text-[15px] font-bakbak-one inline-block mx-auto  ${
+                isTrue ? "text-white" : "text-[#5C5C5C]"
+              } flex justify-center items-center gap-2`}
             >
               {isUpdateLoading && (
                 <SpinnerCircularFixed
@@ -349,7 +349,9 @@ const DraftPublishSidebarUi = ({
             <button
               onClick={() => handleUpdate("Published")}
               disabled={!isTrue}
-              className="w-[129px] h-[38px] bg-[#2924FF33] rounded-[5px] mt-[29px] text-[15px] font-bakbak-one inline-block mx-auto text-[#5C5C5C] flex justify-center items-center gap-2"
+              className={`w-[129px] h-[38px] bg-[#2924FF33] rounded-[5px] mt-[29px] text-[15px] font-bakbak-one inline-block mx-auto ${
+                isTrue ? "text-white" : "text-[#5C5C5C]"
+              } flex justify-center items-center gap-2`}
             >
               {isUpdateLoading && (
                 <SpinnerCircularFixed

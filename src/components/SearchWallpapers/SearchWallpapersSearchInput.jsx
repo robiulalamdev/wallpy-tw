@@ -9,16 +9,23 @@ import {
 import { iPopularHr1, iPopularHr2, iSearch } from "../../utils/icons/icons";
 import { official_brands } from "../../utils/data/officialBrands";
 import { useState } from "react";
-import { popularsTags } from "../../utils/data/data";
-import { useNavigate } from "react-router-dom";
+// import { popularsTags } from "../../utils/data/data";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useGetPopularTagsQuery } from "../../redux/features/wallpapers/wallpapersApi";
 
 const SearchWallpapersSearchInput = ({ handleQuery }) => {
+  const { data } = useGetPopularTagsQuery();
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const [tags,setTags]
+
+  // const tags = searchParams.get("tags");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handleSearch = async (e) => {
     e.preventDefault();
     handleQuery("search", e.target.search.value);
   };
+
   return (
     <>
       <Popover placement="bottom">
@@ -63,7 +70,7 @@ const SearchWallpapersSearchInput = ({ handleQuery }) => {
 
           {!open && (
             <div className="flex flex-wrap gap-x-[8px] gap-y-[8px] mt-[26px]">
-              {popularsTags.map((tag, index) => (
+              {data?.data?.map((tag, index) => (
                 <Button
                   type="button"
                   key={index}
