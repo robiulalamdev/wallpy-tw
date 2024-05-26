@@ -35,7 +35,7 @@ const HeaderProfile = () => {
             {iLogout}
           </IconButton>
           <IconButton
-            onClick={() => navigate("/account-settings")}
+            onClick={() => navigate("/vault")}
             className="p-0 rounded-full bg-transparent hover:bg-black"
           >
             {iLock}

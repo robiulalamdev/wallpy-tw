@@ -128,3 +128,20 @@ export const makeQuery = async (
 
   return newQuery;
 };
+
+export function validateImageSize(imageFile, maxSizeMB) {
+  const MAX_FILE_SIZE = maxSizeMB * 1024 * 1024;
+
+  // Check if the file size exceeds the maximum limit
+  if (imageFile.size > MAX_FILE_SIZE) {
+    return {
+      success: false,
+      message: "File size exceeds " + maxSizeMB + "MB",
+    };
+  } else {
+    return {
+      success: true,
+      message: "File size is within the limit",
+    };
+  }
+}

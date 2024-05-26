@@ -59,11 +59,11 @@ const Footer = () => {
                 Socials
               </p>
             </Link>
-            <Link to="/sponsors-advertisers">
+            <a href="/#advertisers">
               <p className="text-[#939393] font-bakbak-one text-[15px] mt-[7px] md:mt-[4px]">
                 Sponsors / Advertisers
               </p>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

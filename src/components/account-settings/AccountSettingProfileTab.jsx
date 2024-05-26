@@ -11,6 +11,7 @@ import useViewImage from "../../lib/hooks/useViewImage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { socialLinkItems } from "../../lib/data/globalData";
+import { validateImageSize } from "../../lib/services/service";
 
 const AccountSettingProfileTab = () => {
   const { user } = useContext(AuthContext);
@@ -110,6 +111,30 @@ const AccountSettingProfileTab = () => {
     }
   };
 
+  const handleProfileImageInput = async (image) => {
+    if (image) {
+      const result = await validateImageSize(image, 5);
+      if (result?.success) {
+        setImage(image);
+      } else {
+        toast.warning(result?.message);
+      }
+    }
+    imageRef.current.value = null;
+  };
+
+  const handleBannerImageInput = async (image) => {
+    if (image) {
+      const result = await validateImageSize(image, 10);
+      if (result?.success) {
+        setBanner(image);
+      } else {
+        toast.warning(result?.message);
+      }
+    }
+    bannerRef.current.value = null;
+  };
+
   return (
     <div>
       <div className="pt-[39px] flex justify-between items-center flex-wrap">
@@ -151,7 +176,7 @@ const AccountSettingProfileTab = () => {
         type="file"
         accept=".png, .jpg, .jpeg"
         multiple={false}
-        onChange={(e) => setImage(e.target.files[0])}
+        onChange={(e) => handleProfileImageInput(e.target.files[0])}
         className="hidden"
       />
 
@@ -179,7 +204,7 @@ const AccountSettingProfileTab = () => {
         type="file"
         accept=".png, .jpg, .jpeg"
         multiple={false}
-        onChange={(e) => setBanner(e.target.files[0])}
+        onChange={(e) => handleBannerImageInput(e.target.files[0])}
         className="hidden"
       />
 

@@ -86,14 +86,12 @@ const WallpaperSidebarUi = ({ data }) => {
   const [updateTagById] = useUpdateTagByIdMutation();
 
   const handleDimensions = async () => {
-    setDimensions({
+    const dm = {
       width: data?.dimensions?.width,
       height: data?.dimensions?.height,
-    });
-    setSelectedDm({
-      width: data?.dimensions?.width,
-      height: data?.dimensions?.height,
-    });
+    };
+    setDimensions(dm);
+    setSelectedDm(dm);
   };
 
   useEffect(() => {
@@ -137,7 +135,13 @@ const WallpaperSidebarUi = ({ data }) => {
     }
   };
 
-  console.log(data?.author_info);
+  const handleSetDm = async (dm) => {
+    // console.log(dm);
+    setSelectedDm(dm);
+    setOpen(false);
+  };
+
+  // console.log(data?.author_info);
 
   return (
     <div className="bg-[#121212] lg:bg-[#00000033] w-full min-h-[802px] max-h-[802px] max-w-[347px] min-w-[347px] rounded-[10px] pt-[15px] px-[19px] pb-[23px] scroll_off">
@@ -220,10 +224,17 @@ const WallpaperSidebarUi = ({ data }) => {
                 {resulations1.items.map((item, i) => (
                   <div
                     onClick={() =>
-                      setSelectedDm({ width: item.width, height: item.height })
+                      handleSetDm({ width: item.width, height: item.height })
                     }
                     key={i}
-                    className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                    className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px] 
+                    ${
+                      selectedDm.width === item.width &&
+                      selectedDm.height === item.height
+                        ? "bg-[#2924FF]"
+                        : "bg-[#00000066]"
+                    }
+                    `}
                   >
                     <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
                       {item.width} × {item.height}
@@ -241,10 +252,17 @@ const WallpaperSidebarUi = ({ data }) => {
                 {resulations2.items.map((item, i) => (
                   <div
                     onClick={() =>
-                      setSelectedDm({ width: item.width, height: item.height })
+                      handleSetDm({ width: item.width, height: item.height })
                     }
                     key={i}
-                    className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                    className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px] 
+                    ${
+                      selectedDm.width === item.width &&
+                      selectedDm.height === item.height
+                        ? "bg-[#2924FF]"
+                        : "bg-[#00000066]"
+                    }
+                    `}
                   >
                     <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
                       {item.width} × {item.height}
@@ -266,13 +284,20 @@ const WallpaperSidebarUi = ({ data }) => {
                   {resulations3.items.map((item, i) => (
                     <div
                       onClick={() =>
-                        setSelectedDm({
+                        handleSetDm({
                           width: item.width,
                           height: item.height,
                         })
                       }
                       key={i}
-                      className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                      className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px] 
+                      ${
+                        selectedDm.width === item.width &&
+                        selectedDm.height === item.height
+                          ? "bg-[#2924FF]"
+                          : "bg-[#00000066]"
+                      }
+                      `}
                     >
                       <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
                         {item.width} × {item.height}
@@ -292,13 +317,20 @@ const WallpaperSidebarUi = ({ data }) => {
                   {resulations4.items.map((item, i) => (
                     <div
                       onClick={() =>
-                        setSelectedDm({
+                        handleSetDm({
                           width: item.width,
                           height: item.height,
                         })
                       }
                       key={i}
-                      className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                      className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px] 
+                      ${
+                        selectedDm.width === item.width &&
+                        selectedDm.height === item.height
+                          ? "bg-[#2924FF]"
+                          : "bg-[#00000066]"
+                      }
+                      `}
                     >
                       <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
                         {item.width} × {item.height}
@@ -320,12 +352,19 @@ const WallpaperSidebarUi = ({ data }) => {
                     <div
                       key={i}
                       onClick={() =>
-                        setSelectedDm({
+                        handleSetDm({
                           width: item.width,
                           height: item.height,
                         })
                       }
-                      className="w-[83px] h-[29px] flex justify-center items-center bg-[#00000066] rounded-[5px]"
+                      className={`w-[83px] h-[29px] flex justify-center items-center rounded-[5px] 
+                      ${
+                        selectedDm.width === item.width &&
+                        selectedDm.height === item.height
+                          ? "bg-[#2924FF]"
+                          : "bg-[#00000066]"
+                      }
+                      `}
                     >
                       <h1 className="font-lato text-[12px] text-[#FFF] font-medium">
                         {item.width} × {item.height}

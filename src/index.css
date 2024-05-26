@@ -9,6 +9,9 @@
   --lato: "Lato", sans-serif;
   --roboto: "Roboto", sans-serif;
 } */
+:root {
+  scroll-behavior: smooth !important;
+}
 
 body {
   padding: 0px !important;
