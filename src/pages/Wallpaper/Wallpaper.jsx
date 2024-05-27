@@ -47,6 +47,7 @@ import {
 import { toast } from "react-toastify";
 
 const Wallpaper = () => {
+  const { user } = useContext(AuthContext);
   const { slug } = useParams();
   const { data, isLoading } = useGetWallpaperBySlugQuery(slug);
   const { data: popularWallpapers } = useGetPopularWallpapersQuery("?limit=3");
@@ -59,7 +60,6 @@ const Wallpaper = () => {
   const [permit, setPermit] = useState(true);
   const navigate = useNavigate();
 
-  const { user } = useContext(AuthContext);
   const { viewImg } = useViewImage();
   const shareRef = useRef();
   // console.log(data?.data);

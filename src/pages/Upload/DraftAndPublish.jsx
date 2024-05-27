@@ -96,7 +96,7 @@ const DraftAndPublish = () => {
           />
         </div>
 
-        <div className="flex justify-between items-start gap-x-[28px] min-h-[986px] max-h-[986px] h-full">
+        <div className="flex justify-between items-start gap-x-[28px] min-h-[986px] max-h-[1010px] h-full">
           {tab1 === "Drafts" ? (
             <DraftPublishSidebar
               open={open}

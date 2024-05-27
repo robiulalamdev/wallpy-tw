@@ -161,7 +161,7 @@ const DraftPublishSidebarUi = ({
     !!screenType;
 
   return (
-    <div className="min-w-[295px] max-w-[295px] w-full h-full bg-[#121212] lg:bg-black/20 rounded-[10px] min-h-[986px] max-h-[986px] px-[62px] md:px-[30px] relative">
+    <div className="min-w-[295px] max-w-[300px] w-full h-full bg-[#121212] lg:bg-black/20 rounded-[10px] min-h-[986px] max-h-[1020px] pb-[12px] px-[12px] md:px-[30px] relative">
       <div
         onClick={() => setOpen(false)}
         className="absolute top-[18px] right-[25px] lg:hidden"
@@ -175,7 +175,7 @@ const DraftPublishSidebarUi = ({
 
       {selectedImages?.length > 0 && (
         <>
-          <div className="bg-[#00000033] rounded-[8px] w-[235px] h-[36px] flex justify-between items-center px-[8px] mt-[21px]">
+          <div className="bg-[#00000033] rounded-[8px] w-[240px] h-[36px] flex justify-between items-center px-[8px] mt-[21px]">
             {["Select All", "Clear Selection"].map((t, i) => (
               <Button
                 onClick={() => handleSelectTab(t)}
@@ -196,12 +196,12 @@ const DraftPublishSidebarUi = ({
               Choose Type
             </h1>
 
-            <div className="bg-[#00000033] rounded-[8px] w-[235px] h-[36px] flex justify-between items-center px-[8px] mt-[21px]">
+            <div className="bg-[#00000033] rounded-[8px] w-[240px] h-[36px] flex justify-between items-center gap-x-[2px] !px-[8px] mt-[21px]">
               {["Illustration", "AI", "Photography"].map((t, i) => (
                 <Button
                   onClick={() => setTypeTab(t)}
                   key={i}
-                  className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-bold min-w-[79px] h-[29px] px-2 ${
+                  className={`hover:shadow-none shadow-none p-0 m-0 normal-case font-lato text-[12px] leading-[14.4px] font-bold min-w-[70px] h-[29px] px-2 ${
                     typeTab === t
                       ? `bg-[#0AB745] !text-[#fff] rounded-[8px]`
                       : "bg-transparent !text-[#C6C6C6]"
@@ -218,7 +218,7 @@ const DraftPublishSidebarUi = ({
               Classification
             </h1>
 
-            <div className="bg-[#00000033] rounded-[8px] w-[235px] h-[36px] flex justify-between items-center px-[8px] mt-[21px]">
+            <div className="bg-[#00000033] rounded-[8px] w-[240px] h-[36px] flex justify-between items-center px-[8px] mt-[21px]">
               {["SFW", "Risky", "NSFW"].map((t, i) => (
                 <Button
                   onClick={() => setClassification(t)}
@@ -240,7 +240,7 @@ const DraftPublishSidebarUi = ({
               Screen Type
             </h1>
 
-            <div className="bg-[#00000033] rounded-[8px] w-[235px] h-fit min-h-[82px] flex flex-wrap items-start gap-2 px-[7px] py-[6px] mt-[21px]">
+            <div className="bg-[#00000033] rounded-[8px] w-[240px] h-fit min-h-[82px] flex flex-wrap items-start gap-2 px-[7px] py-[6px] mt-[21px]">
               {["Desktop", "Phones ", "Tablets", "Handhelds", "Other"].map(
                 (t, i) => (
                   <Button

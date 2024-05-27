@@ -42,9 +42,8 @@ const AccountSettingProfileTab = () => {
     if (data?.username) {
       formData.append("username", data?.username);
     }
-    if (data?.bio) {
-      formData.append("bio", data?.bio);
-    }
+
+    formData.append("bio", data?.bio);
     if (image) {
       formData.append("profile_image", image);
     }

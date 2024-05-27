@@ -25,8 +25,8 @@ const DraftPublishSidebar = ({
       <Drawer
         open={open}
         onClose={() => setOpen(false)}
-        size={361}
-        className="p-0 bg-transparent rounded-[10px]"
+        size={300}
+        className="p-0 bg-transparent rounded-[10px] overflow-y-auto"
       >
         <DraftPublishSidebarUi
           setOpen={setOpen}

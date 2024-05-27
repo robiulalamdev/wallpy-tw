@@ -8,7 +8,7 @@ import img6 from "../../../assets/images/home/staff-pickes/img6.png";
 
 const Sponsor = () => {
   return (
-    <div id="advertisers">
+    <div>
       <h1 className="font-bakbak-one text-[15px] md:text-[35px] text-center text-white mt-[38px] mb-[23px] md:mt-[78px] md:mb-[59px]">
         The <span className="text-[#FDF516]">WPS</span> Staff Picks
       </h1>

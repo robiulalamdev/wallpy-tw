@@ -31,8 +31,24 @@ const Upload = () => {
             toast.warning("Wallpapers Upload Maximum 15");
             return;
           } else {
-            const merge = [...files, ...acceptedFiles];
-            setFiles(merge);
+            const MAX_FILE_SIZE = 20 * 1024 * 1024;
+            let isSuccess = true;
+            for (let i = 0; i < acceptedFiles.length; i++) {
+              const imageFile = acceptedFiles[i];
+              if (imageFile.size > MAX_FILE_SIZE) {
+                isSuccess = false;
+                break;
+              }
+            }
+            if (isSuccess) {
+              const merge = [...files, ...acceptedFiles];
+              setFiles(merge);
+            } else {
+              toast.warning(
+                "Max upload size is 20MB. Please use a smaller file."
+              );
+              return;
+            }
           }
         }
       }
