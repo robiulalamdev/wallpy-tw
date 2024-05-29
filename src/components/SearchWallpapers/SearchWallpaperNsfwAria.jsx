@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import { Link } from "react-router-dom";
 import { iDanger } from "../../utils/icons/icons";
 
 const SearchWallpaperNsfwAria = () => {
@@ -10,9 +11,11 @@ const SearchWallpaperNsfwAria = () => {
         it, please navigate to your account settings and, under the "Wallpapers"
         section, activate this setting.
       </p>
-      <div className="mt-[39px] md:mt-[83px] w-[133px] h-[45px] bg-[#000000CC] rounded-[100px] text-[#FFF] text-[12px] md:text-[15px] font-bakbak-one flex justify-center items-center cursor-pointer">
-        Settings
-      </div>
+      <Link to="/account-settings">
+        <div className="mt-[39px] md:mt-[83px] w-[133px] h-[45px] bg-[#000000CC] rounded-[100px] text-[#FFF] text-[12px] md:text-[15px] font-bakbak-one flex justify-center items-center cursor-pointer">
+          Settings
+        </div>
+      </Link>
     </div>
   );
 };

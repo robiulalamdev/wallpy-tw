@@ -34,6 +34,7 @@ const FeaturedWallpapers = () => {
                   onClick={() => navigate(`/wallpapers/${item?.slug}`)}
                   src={viewImg(item?.wallpaper)}
                   alt="img"
+                   loading="lazy"
                   className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
                 />
               </div>
@@ -43,6 +44,7 @@ const FeaturedWallpapers = () => {
               // onClick={() => navigate("/wallpapers/search")}
               src={img1}
               alt="img"
+              loading="lazy"
               className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
             />
           </div>
@@ -51,6 +53,7 @@ const FeaturedWallpapers = () => {
               // onClick={() => navigate("/wallpapers/search")}
               src={img2}
               alt="img"
+              loading="lazy"
               className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
             />
           </div>
@@ -59,6 +62,7 @@ const FeaturedWallpapers = () => {
               // onClick={() => navigate("/wallpapers/search")}
               src={img3}
               alt="img"
+              loading="lazy"
               className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
             />
           </div>
@@ -75,6 +79,7 @@ const FeaturedWallpapers = () => {
                 onClick={() => navigate(`/wallpapers/${item?.slug}`)}
                 src={viewImg(item?.wallpaper)}
                 alt="img"
+                 loading="lazy"
                 className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
               />
             </div>
@@ -83,6 +88,7 @@ const FeaturedWallpapers = () => {
             <img
               src={img4}
               alt="img"
+              loading="lazy"
               className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
             />
           </div>
@@ -92,6 +98,7 @@ const FeaturedWallpapers = () => {
               // onClick={() => navigate("/wallpapers/search")}
               src={img5}
               alt="img"
+              loading="lazy"
               className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
             />
           </div>
@@ -100,6 +107,7 @@ const FeaturedWallpapers = () => {
               // onClick={() => navigate("/wallpapers/search")}
               src={img6}
               alt="img"
+              loading="lazy"
               className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
             />
           </div>

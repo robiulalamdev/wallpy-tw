@@ -19,6 +19,7 @@ const VaultImages = ({ images, selectedImages, handleSelectImages }) => {
             <img
               src={viewImg(item?.wallpaper)}
               alt="image"
+              loading="lazy"
               className="w-full h-full object-cover rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
             />
           </div>

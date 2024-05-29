@@ -577,7 +577,10 @@ const SearchWallpapersTabs = ({ tab1, tab2, tab3, handleQuery }) => {
               </PopoverContent>
             </Popover>
             <Button
-              onClick={() => navigate("")}
+              onClick={() => {
+                navigate("");
+                window.location.reload();
+              }}
               className="shadow-none hover:shadow-none normal-case min-w-[57px] max-w-[57px] h-[42px] bg-[#00000033] rounded-[9px] text-[12px] font-lato font-semibold text-[#FFF] flex justify-center items-center p-0"
             >
               <div className="min-w-[24px] min-h-[24px]">{iRefresh}</div>

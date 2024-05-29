@@ -117,6 +117,7 @@ const OfficialBrandProfileMain = ({ user }) => {
                   <img
                     src={viewImg(item.wallpaper)}
                     alt="wallpaper"
+                    loading="lazy"
                     className="w-full h-full rounded-[5px] md:rounded-[7px] lg:rounded-[10px] object-cover hover:scale-110 duration-300 cursor-pointer"
                   />
                 </div>

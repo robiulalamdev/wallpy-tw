@@ -278,6 +278,7 @@ const Wallpaper = () => {
                   onClick={() => openWallpaper(item.slug)}
                   src={viewImg(item?.wallpaper)}
                   alt="image"
+                  loading="lazy"
                   className="w-full h-full object-cover rounded-[5px] md:rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
                 />
               </div>
