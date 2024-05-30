@@ -13,6 +13,7 @@ import PageLoading from "../../components/common/loadings/PageLoading";
 import { AuthContext } from "../../contextApi/AuthContext";
 import { makeQuery } from "../../lib/services/service";
 import NoData from "../../components/common/notFound/NoData";
+import LazyWallpaper from "../../components/common/wallpaper/LazyWallpaper";
 
 const SearchWallpapers = () => {
   const { user } = useContext(AuthContext);
@@ -27,6 +28,7 @@ const SearchWallpapers = () => {
   const screen_type = searchParams.get("screen_type");
   const sort_by = searchParams.get("sort_by");
   const date = searchParams.get("date");
+  const tag = searchParams.get("tag");
 
   const queries = `${search ? `search=${search}&` : ""}${
     tn ? `tn=${tn}&` : ""
@@ -34,7 +36,9 @@ const SearchWallpapers = () => {
     classification ? `classification=${classification}&` : ""
   }${width && height ? `width=${width}&height=${height}&` : ""}${
     screen_type ? `screen_type=${screen_type}&` : ""
-  }${sort_by ? `sort_by=${sort_by}&` : ""}${date ? `date=${date}&` : ""}`;
+  }${sort_by ? `sort_by=${sort_by}&` : ""}${date ? `date=${date}&` : ""}${
+    tag ? `tag=${tag}&` : ""
+  }`;
 
   const { data, isLoading } = useGetSearchAndFilterWallpapersQuery(
     `?${queries?.slice(0, -1)}`
@@ -57,6 +61,7 @@ const SearchWallpapers = () => {
     screen_type: screen_type || "",
     sort_by: sort_by || "",
     date: date || "",
+    tag: tag || "",
   };
 
   useMemo(() => {
@@ -139,10 +144,10 @@ const SearchWallpapers = () => {
                       key={index}
                       className={`w-full h-[152px] md:h-[170px] rounded-[5px] md:rounded-[10px] lg:rounded-[15px] overflow-hidden`}
                     >
-                      <img
+                      <LazyWallpaper
                         src={viewImg(item.wallpaper)}
-                        alt="wallpaper"
-                        loading="lazy"
+                        alt={item?.wallpaper}
+                        width=""
                         className="w-full h-full rounded-[5px] md:rounded-[10px] lg:rounded-[15px] object-cover hover:scale-110 duration-300 cursor-pointer"
                       />
                     </div>

@@ -2,10 +2,11 @@ import BannerTab from "./BannerTab";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useGetSearchWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
-import { lazy, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import useViewImage from "../../../lib/hooks/useViewImage";
 import PageLoading from "../../common/loadings/PageLoading";
 import NoData from "../../common/notFound/NoData";
+import LazyWallpaper from "../../common/wallpaper/LazyWallpaper";
 
 const Banner = () => {
   const [tab1, setTab1] = useState("Trending");
@@ -43,10 +44,11 @@ const Banner = () => {
                 key={index}
                 className="w-full h-[152px] 2xl:h-[190px] overflow-hidden rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px]"
               >
-                <img
+                <LazyWallpaper
                   src={viewImg(item?.wallpaper)}
-                  alt="img"
-                  loading="lazy"
+                  alt={item?.wallpaper}
+                  width="100%"
+                  height="100%"
                   className="w-full h-full object-cover hover:scale-110 rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px] duration-300 cursor-pointer"
                 />
               </div>

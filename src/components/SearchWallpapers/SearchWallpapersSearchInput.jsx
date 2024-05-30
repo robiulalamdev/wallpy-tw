@@ -15,8 +15,8 @@ import { useGetPopularTagsQuery } from "../../redux/features/wallpapers/wallpape
 
 const SearchWallpapersSearchInput = ({ handleQuery }) => {
   const { data } = useGetPopularTagsQuery();
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const [tags,setTags]
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tag = searchParams.get("tag");
 
   // const tags = searchParams.get("tags");
   const [open, setOpen] = useState(false);
@@ -70,13 +70,16 @@ const SearchWallpapersSearchInput = ({ handleQuery }) => {
 
           {!open && (
             <div className="flex flex-wrap gap-x-[8px] gap-y-[8px] mt-[26px]">
-              {data?.data?.map((tag, index) => (
+              {data?.data?.map((tagName, index) => (
                 <Button
+                  onClick={() => handleQuery("tag", tagName)}
                   type="button"
                   key={index}
-                  className="outline-none shadow-none hover:shadow-none px-[16px] h-[30px] rounded-[5px] bg-[#00000066] font-normal normal-case text-[#FFF] font-lato text-[13px] flex justify-center items-center"
+                  className={`outline-none shadow-none hover:shadow-none px-[16px] h-[30px] rounded-[5px] font-normal normal-case text-[#FFF] font-lato text-[13px] flex justify-center items-center
+                  ${tag === tagName ? "bg-blue-600" : "bg-[#00000066]"}
+                  `}
                 >
-                  {tag}
+                  {tagName}
                 </Button>
               ))}
             </div>
