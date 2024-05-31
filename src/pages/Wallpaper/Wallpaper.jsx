@@ -45,6 +45,8 @@ import {
   FacebookShareButton,
 } from "react-share";
 import { toast } from "react-toastify";
+import { downloadImageWithWH } from "../../lib/services/service";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const Wallpaper = () => {
   const { user } = useContext(AuthContext);
@@ -53,6 +55,7 @@ const Wallpaper = () => {
   const { data: popularWallpapers } = useGetPopularWallpapersQuery("?limit=3");
   const [incrementWallView] = useIncrementWallViewMutation();
   const [url, setUrl] = useState("");
+  const [downloading, setDownloading] = useState(false);
 
   const wallpaperRef = useRef();
 
@@ -92,6 +95,25 @@ const Wallpaper = () => {
     }
   }, [data]);
 
+  const handleDownload = async () => {
+    const url = viewImg(data?.data?.wallpaper);
+    if (
+      url &&
+      data?.data?.dimensions.width > 0 &&
+      data?.data?.dimensions.height > 0
+    ) {
+      setDownloading(true);
+      await downloadImageWithWH(
+        url,
+        data?.data?.dimensions.width,
+        data?.data?.dimensions.height
+      );
+      setTimeout(() => {
+        setDownloading(false);
+      }, 600);
+    }
+  };
+
   return (
     <>
       <SimpleHeader />
@@ -125,10 +147,21 @@ const Wallpaper = () => {
             </div>
 
             <div
+              onClick={() => handleDownload()}
               className="absolute bottom-[17px] left-[19px] flex justify-center items-center w-[53px] h-[50px] rounded-[5px] lg:hidden"
               style={{ background: "rgba(0, 0, 0, 0.60)" }}
             >
-              <img src={download} alt="" className="size-[40px]" />
+              {downloading ? (
+                <SpinnerCircularFixed
+                  size={24}
+                  speed={320}
+                  thickness={140}
+                  color="white"
+                  secondaryColor="gray"
+                />
+              ) : (
+                <img src={download} alt="" className="size-[40px]" />
+              )}
             </div>
 
             <Popover placement="top-end">

@@ -161,7 +161,7 @@ const Signup = () => {
                 {...register("password", {
                   required: "Password is required",
                   pattern: {
-                    value: /^(?!\s)(?!.*\s{2})(?=.*[a-zA-Z0-9]).{6,8}$/, // Requires 6 to 8 characters with no spaces
+                    value: /^(?!\s)(?!.*\s{2})(?=.*[a-zA-Z0-9]).{6,12}$/, // Requires 6 to 12 characters with no spaces
                     message:
                       "Password must be 6 to 12 characters long with no spaces",
                   },

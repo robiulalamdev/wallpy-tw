@@ -18,6 +18,7 @@ import { AuthContext } from "../../contextApi/AuthContext";
 import { useUpdateTagByIdMutation } from "../../redux/features/wallpapers/wallpapersApi";
 import { toast } from "react-toastify";
 import { useGetTotalFavoritesQuery } from "../../redux/features/favorites/favoritesApi";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const resulations1 = {
   name: "Ultra Wide",
@@ -81,6 +82,7 @@ const WallpaperSidebarUi = ({ data }) => {
   const [selectedDm, setSelectedDm] = useState({ height: 0, width: 0 });
   const [tags, setTags] = useState([]);
   const [tagValue, setTagValue] = useState("");
+  const [downloading, setDownloading] = useState(false);
 
   // mutations
   const [updateTagById] = useUpdateTagByIdMutation();
@@ -103,12 +105,18 @@ const WallpaperSidebarUi = ({ data }) => {
     }
   }, [data]);
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     const url = viewImg(data?.wallpaper);
-    if (selectedDm.width > 0 && selectedDm.height > 0) {
-      downloadImageWithWH(url, selectedDm.width, selectedDm.height);
-    } else {
-      downloadImageWithWH(url, dimensions.width, dimensions.height);
+    if (url) {
+      setDownloading(true);
+      if (selectedDm.width > 0 && selectedDm.height > 0) {
+        await downloadImageWithWH(url, selectedDm.width, selectedDm.height);
+      } else {
+        await downloadImageWithWH(url, dimensions.width, dimensions.height);
+      }
+      setTimeout(() => {
+        setDownloading(false);
+      }, 600);
     }
   };
 
@@ -534,10 +542,23 @@ const WallpaperSidebarUi = ({ data }) => {
               onClick={() => handleDownload()}
               className="flex items-center justify-center gap-x-[3px] rounded-[5px] bg-[#2924FF] w-[129px] h-[38px] mx-auto mt-[26px] shadow-none hover:shadow-none font-normal normal-case p-0"
             >
+              {downloading && (
+                <SpinnerCircularFixed
+                  size={18}
+                  speed={320}
+                  thickness={180}
+                  color="white"
+                  secondaryColor="gray"
+                />
+              )}
               <h1 className="text-[15px] text-[#C4C4C4] font-bakbak-one ">
-                Download
+                Download{downloading && "..."}
               </h1>
-              <div className="min-w-[21px] min-h-[21px]">{iDownloadArrow}</div>
+              {!downloading && (
+                <div className="min-w-[21px] min-h-[21px]">
+                  {iDownloadArrow}
+                </div>
+              )}
             </Button>
           </div>
 

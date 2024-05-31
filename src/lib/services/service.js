@@ -1,5 +1,6 @@
 import pica from "pica";
 import { BASE_URL } from "../config";
+import { toast } from "react-toastify";
 
 export const getImageDimensions = (image) => {
   return new Promise((resolve, reject) => {
@@ -80,8 +81,10 @@ export const downloadImageWithWH = async (imageUrl, width, height) => {
       link.click();
       document.body.removeChild(link);
     }, "image/png");
+    return { success: true };
   } catch (error) {
-    console.error("Error downloading image:", error);
+    toast.error("Error downloading");
+    return { success: false, error: error?.message };
   }
 };
 
