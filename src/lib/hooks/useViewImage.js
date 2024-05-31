@@ -17,6 +17,14 @@ const useViewImage = () => {
     }
   };
 
+  const viewResizeImg = (path, width, height) => {
+    if (path && width && height) {
+      return `${BASE_URL}/wallpapers/resize?path=${encodeURIComponent(
+        path
+      )}&width=${width}&height=${height}`;
+    }
+  };
+
   const formatFileSize = (bytes) => {
     if (bytes === 0) return "0 Bytes";
     const k = 1024;
@@ -25,7 +33,7 @@ const useViewImage = () => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
-  return { viewImg, formatFileSize };
+  return { viewImg, formatFileSize, viewResizeImg };
 };
 
 export default useViewImage;

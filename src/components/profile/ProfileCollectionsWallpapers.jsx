@@ -4,7 +4,7 @@ import useViewImage from "../../lib/hooks/useViewImage";
 import NoData from "../common/notFound/NoData";
 
 const ProfileCollectionsWallpapers = ({ collections = [] }) => {
-  const { viewImg } = useViewImage();
+  const { viewResizeImg } = useViewImage();
   const navigate = useNavigate();
 
   return (
@@ -20,7 +20,7 @@ const ProfileCollectionsWallpapers = ({ collections = [] }) => {
                 {item?.wallpapers?.slice(0, 4)?.map((img, i) => (
                   <img
                     key={i}
-                    src={viewImg(img?.wallpaper)}
+                    src={viewResizeImg(img?.wallpaper, 200, 200)}
                     alt="wallpaper"
                     className={`w-full h-full object-cover cursor-pointer ${
                       item?.wallpapers?.length === 1 && "col-span-2"

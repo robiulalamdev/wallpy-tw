@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
-import useViewImage from "../../lib/hooks/useViewImage";
 import NoData from "../common/notFound/NoData";
+import LazyWallpaper from "../common/wallpaper/LazyWallpaper";
 
 const ProfileUploadsWallpapers = ({ wallpapers = [] }) => {
-  const { viewImg } = useViewImage();
   const navigate = useNavigate();
   return (
     <>
@@ -16,10 +15,13 @@ const ProfileUploadsWallpapers = ({ wallpapers = [] }) => {
               key={index}
               className={`w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
             >
-              <img
-                src={viewImg(item?.wallpaper)}
-                alt="wallpaper"
-                loading="lazy"
+              <LazyWallpaper
+                src={item?.wallpaper}
+                alt={item?.wallpaper}
+                maxWidth={400}
+                maxHeight={300}
+                width={400}
+                height={300}
                 className="w-full h-full rounded-[5px] md:rounded-[7px] lg:rounded-[10px] object-cover hover:scale-110 duration-300 cursor-pointer"
               />
             </div>

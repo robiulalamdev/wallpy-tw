@@ -43,7 +43,6 @@ const SearchWallpapers = () => {
   const { data, isLoading } = useGetSearchAndFilterWallpapersQuery(
     `?${queries?.slice(0, -1)}`
   );
-  const { viewImg } = useViewImage();
   const [wallpapers, setWallpapers] = useState([]);
   const [tab1, setTab1] = useState("Trending");
   const [tab2, setTab2] = useState("All");
@@ -142,12 +141,15 @@ const SearchWallpapers = () => {
                     <div
                       onClick={() => navigate(`/wallpapers/${item?.slug}`)}
                       key={index}
-                      className={`w-full h-[152px] md:h-[170px] rounded-[5px] md:rounded-[10px] lg:rounded-[15px] overflow-hidden`}
+                      className={`w-full h-[152px] md:h-[170px] rounded-[5px] md:rounded-[10px] lg:rounded-[15px] overflow-hidden relative`}
                     >
                       <LazyWallpaper
-                        src={viewImg(item.wallpaper)}
+                        src={item.wallpaper}
                         alt={item?.wallpaper}
-                        width=""
+                        maxWidth={400}
+                        maxHeight={300}
+                        width={400}
+                        height={300}
                         className="w-full h-full rounded-[5px] md:rounded-[10px] lg:rounded-[15px] object-cover hover:scale-110 duration-300 cursor-pointer"
                       />
                     </div>

@@ -1,5 +1,10 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home/Home";
+// import Home from "../pages/Home/Home";
+// import OfficialBrands from "../pages/OfficialBrands/OfficialBrands";
+// import SearchWallpapers from "../pages/Wallpapers/SearchWallpapers";
+// import Profile from "../pages/Profile/Profile";
+// import PublicProfile from "../pages/Profile/PublicProfile";
 import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/AuthPages/Login/Login";
@@ -16,12 +21,9 @@ import CommunityRules from "../pages/CommunityRules/CommunityRules";
 import About from "../pages/About/About";
 import CopyrightInformation from "../pages/CopyrightInformation/CopyrightInformation";
 import Socials from "../pages/Socials/Socials";
-import OfficialBrands from "../pages/OfficialBrands/OfficialBrands";
 import Contact from "../pages/Contact/Contact";
 import Messages from "../pages/Messages/Messages";
 import Wallpaper from "../pages/Wallpaper/Wallpaper";
-import SearchWallpapers from "../pages/Wallpapers/SearchWallpapers";
-import Profile from "../pages/Profile/Profile";
 import Upload from "../pages/Upload/Upload";
 import DraftAndPublish from "../pages/Upload/DraftAndPublish";
 import AccountSettings from "../pages/AccountSettings/AccountSettings";
@@ -29,22 +31,53 @@ import AccountVerification from "../pages/AccountVerification/AccountVerificatio
 import MediaCenter from "../pages/MediaCenter/MediaCenter";
 import EmailVerify from "../pages/AuthPages/Signup/EmailVerify";
 import PrivateRoute from "./PrivateRoute";
-import PublicProfile from "../pages/Profile/PublicProfile";
 import ProfileVerify from "../pages/Test/ProfileVerify";
-import MessageLayout from "../layouts/MessageLayout";
 import VerifyApprovedPrivateRoute from "./VerifyApprovedPrivateRoute";
+import { Suspense, lazy } from "react";
+import PageLoading from "../components/common/loadings/PageLoading";
+
+const Home = lazy(() => import("../pages/Home/Home"));
+
+const OfficialBrands = lazy(() =>
+  import("../pages/OfficialBrands/OfficialBrands")
+);
+
+const SearchWallpapers = lazy(() =>
+  import("../pages/Wallpapers/SearchWallpapers")
+);
+
+const Profile = lazy(() => import("../pages/Profile/Profile"));
+const PublicProfile = lazy(() => import("../pages/Profile/PublicProfile"));
 
 export const route = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
     children: [
-      { path: "/", element: <Home /> },
-      { path: "/home", element: <Home /> },
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/home",
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <Home />
+          </Suspense>
+        ),
+      },
 
       {
         path: "/official-brands",
-        element: <OfficialBrands />,
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <OfficialBrands />
+          </Suspense>
+        ),
       },
       {
         path: "/contact",
@@ -53,7 +86,11 @@ export const route = createBrowserRouter([
 
       {
         path: "/wallpapers",
-        element: <SearchWallpapers />,
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <SearchWallpapers />
+          </Suspense>
+        ),
       },
 
       {
@@ -62,29 +99,24 @@ export const route = createBrowserRouter([
       },
       {
         path: "/profiles/:username",
-        element: <PublicProfile />,
+        element: (
+          <Suspense fallback={<PageLoading />}>
+            <PublicProfile />
+          </Suspense>
+        ),
       },
 
       {
         path: "/my-profile",
         element: (
           <PrivateRoute>
-            <Profile />
+            <Suspense fallback={<PageLoading />}>
+              <Profile />
+            </Suspense>
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: "/brands/:username",
-      //   element: <OfficialBrandProfilePublic />,
-      // },
-      // {
-      //   path: "/my-brand",
-      //   element: (
-      //     <VerificationPrivateRoute>
-      //       <OfficialBrandProfile />
-      //     </VerificationPrivateRoute>
-      //   ),
-      // },
+
       {
         path: "/upload",
         element: (

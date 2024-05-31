@@ -8,6 +8,7 @@ import OfficialBrandBanner from "../../components/officialBrandProfile/OfficialB
 import { useGetWallpapersByUserIdQuery } from "../../redux/features/wallpapers/wallpapersApi";
 import { useGetMyCollectionsByUserIdQuery } from "../../redux/features/collections/collectionsApi";
 import useViewImage from "../../lib/hooks/useViewImage";
+import LazyWallpaper from "../common/wallpaper/LazyWallpaper";
 
 const OfficialBrandProfileMain = ({ user }) => {
   const { data: uploadsData } = useGetWallpapersByUserIdQuery(user?._id);
@@ -16,7 +17,7 @@ const OfficialBrandProfileMain = ({ user }) => {
   const [wallpapers, setWallpapers] = useState([]);
   const [collections, setCollections] = useState([]);
 
-  const { viewImg } = useViewImage();
+  const { viewResizeImg } = useViewImage();
 
   const navigate = useNavigate();
 
@@ -114,10 +115,13 @@ const OfficialBrandProfileMain = ({ user }) => {
                   key={index}
                   className={`w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
                 >
-                  <img
-                    src={viewImg(item.wallpaper)}
-                    alt="wallpaper"
-                    loading="lazy"
+                  <LazyWallpaper
+                    src={item?.wallpaper}
+                    alt={item?.wallpaper}
+                    maxWidth={400}
+                    maxHeight={300}
+                    width={400}
+                    height={300}
                     className="w-full h-full rounded-[5px] md:rounded-[7px] lg:rounded-[10px] object-cover hover:scale-110 duration-300 cursor-pointer"
                   />
                 </div>
@@ -136,7 +140,7 @@ const OfficialBrandProfileMain = ({ user }) => {
                     {item?.wallpapers?.map((img, i) => (
                       <img
                         key={i}
-                        src={viewImg(img.wallpaper)}
+                        src={viewResizeImg(img?.wallpaper, 200, 200)}
                         alt="wallpaper"
                         className={`w-full h-full object-cover cursor-pointer  ${
                           item?.wallpapers?.length === 1 && "col-span-2"

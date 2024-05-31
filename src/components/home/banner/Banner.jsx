@@ -3,7 +3,6 @@ import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useGetSearchWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
 import { useMemo, useState } from "react";
-import useViewImage from "../../../lib/hooks/useViewImage";
 import PageLoading from "../../common/loadings/PageLoading";
 import NoData from "../../common/notFound/NoData";
 import LazyWallpaper from "../../common/wallpaper/LazyWallpaper";
@@ -21,7 +20,6 @@ const Banner = () => {
     `?${queries?.slice(0, -1)}`
   );
   const navigate = useNavigate();
-  const { viewImg } = useViewImage();
   const [wallpapers, setWallpapers] = useState([]);
 
   useMemo(() => {
@@ -42,13 +40,15 @@ const Banner = () => {
               <div
                 onClick={() => navigate(`/wallpapers/${item?.slug}`)}
                 key={index}
-                className="w-full h-[152px] 2xl:h-[190px] overflow-hidden rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px]"
+                className="w-full h-[152px] 2xl:h-[190px] overflow-hidden relative rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px]"
               >
                 <LazyWallpaper
-                  src={viewImg(item?.wallpaper)}
+                  src={item?.wallpaper}
                   alt={item?.wallpaper}
-                  width="100%"
-                  height="100%"
+                  maxWidth={400}
+                  maxHeight={300}
+                  width={400}
+                  height={300}
                   className="w-full h-full object-cover hover:scale-110 rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px] duration-300 cursor-pointer"
                 />
               </div>

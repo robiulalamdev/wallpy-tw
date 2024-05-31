@@ -47,6 +47,7 @@ import {
 import { toast } from "react-toastify";
 import { downloadImageWithWH } from "../../lib/services/service";
 import { SpinnerCircularFixed } from "spinners-react";
+import LazyWallpaper from "../../components/common/wallpaper/LazyWallpaper";
 
 const Wallpaper = () => {
   const { user } = useContext(AuthContext);
@@ -304,14 +305,17 @@ const Wallpaper = () => {
           <div className="grid grid-cols-3 gap-x-[16px] md:gap-x-[42px] lg:gap-x-[83px] mt-[17px] md:mt-[32px] lg:mt-[59px]">
             {popularWallpapers?.data?.map((item, index) => (
               <div
+                onClick={() => openWallpaper(item.slug)}
                 key={index}
                 className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]"
               >
-                <img
-                  onClick={() => openWallpaper(item.slug)}
-                  src={viewImg(item?.wallpaper)}
-                  alt="image"
-                  loading="lazy"
+                <LazyWallpaper
+                  src={item?.wallpaper}
+                  alt={item?.wallpaper}
+                  maxWidth={600}
+                  maxHeight={400}
+                  width={600}
+                  height={400}
                   className="w-full h-full object-cover rounded-[5px] md:rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
                 />
               </div>
