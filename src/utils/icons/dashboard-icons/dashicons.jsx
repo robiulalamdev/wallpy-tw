@@ -323,3 +323,40 @@ export const iDashLogout = (
     </defs>
   </svg>
 );
+
+export const iOnline = (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 15 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_f_126_31504)">
+      <circle cx="7.5" cy="7.5" r="6.5" fill="#00C22B" />
+    </g>
+    <defs>
+      <filter
+        id="filter0_f_126_31504"
+        x="0"
+        y="0"
+        width="15"
+        height="15"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="BackgroundImageFix"
+          result="shape"
+        />
+        <feGaussianBlur
+          stdDeviation="0.5"
+          result="effect1_foregroundBlur_126_31504"
+        />
+      </filter>
+    </defs>
+  </svg>
+);

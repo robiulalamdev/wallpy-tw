@@ -13,11 +13,10 @@ const DashSidebarUi = () => {
   const { currentPath } = useSelector((state) => state.global);
   const location = useLocation();
 
-  console.log(location.pathname);
   return (
     <>
-      <div className="max-w-[285px] min-w-[285px] h-full bg-dash-cm-bg rounded-[10px]">
-        <div className="flex flex-col justify-between w-full h-full pl-[20px] pb-[19px] pr-[13px]">
+      <div className="max-w-[285px] min-w-[285px] h-full bg-dash-cm-bg rounded-[10px] pb-[19px]">
+        <div className="flex flex-col justify-between w-full h-full pl-[20px] pr-[13px] overflow-y-auto">
           <div className="h-fit">
             <div className="flex justify-center items-center gap-x-[8px] mt-[22px]">
               <h1 className="font-bakbak-one font-normal text-white text-[15px] tracking-[0] leading-[normal]">
