@@ -20,7 +20,7 @@ const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   return (
     <div className="flex justify-between gap-[17px] w-full h-full">
-      <div className="flex-grow max-w-[693px] w-full overflow-y-auto">
+      <div className="flex-grow max-w-[1000px] min-w-[500px] w-full overflow-y-auto">
         <div className="flex items-center flex-wrap gap-[25px] w-full h-fit p-[10px] bg-dash-cm-bg rounded-[10px]">
           {tabs.map((tab, index) => (
             <Button
@@ -98,7 +98,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="max-w-[425px] w-full overflow-y-auto">
+      <div className="max-w-[425px] min-w-[300px] w-full overflow-y-auto">
         <MostFavorited />
         <TopCategories />
         <MostDownloaded />

@@ -3,11 +3,14 @@ import { sidebarBottomItems, sidebarItems } from "../../../utils/data/global";
 import {
   iDashLogout,
   iDashSideHr,
+  iDashSidebarLeft,
+  iDashSidebarRight,
   sideLogoCircle,
 } from "../../../utils/icons/dashboard-icons/dashicons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { DefaultProfile } from "../../../lib/data/globalData";
+import { setIsOpen } from "../../../redux/features/global/globalSlice";
 
 const DashSidebarUi = () => {
   const { isOpen } = useSelector((state) => state.global);
@@ -16,7 +19,7 @@ const DashSidebarUi = () => {
 
   return (
     <>
-      <div className="max-w-[285px] min-w-[285px] h-full bg-dash-cm-bg rounded-[10px] pb-[19px]">
+      <div className="max-w-[285px] min-w-[285px] h-full bg-dash-cm-bg rounded-[10px] pb-[19px] relative">
         <div className="flex flex-col justify-between w-full h-full pl-[20px] pr-[13px] overflow-y-auto">
           <div className="h-fit">
             <div className="flex justify-center items-center gap-x-[8px] mt-[22px]">
@@ -109,6 +112,13 @@ const DashSidebarUi = () => {
               <div>{iDashLogout}</div>
             </div>
           </div>
+        </div>
+
+        <div
+          onClick={() => dispatch(setIsOpen(!isOpen))}
+          className="absolute top-[50%] bottom-[50%] -right-2.5 text-white w-[25px] h-[25px] border-[1px] flex justify-center items-center border-gray-800 rounded-full bg-black cursor-pointer"
+        >
+          {isOpen ? iDashSidebarLeft : iDashSidebarRight}
         </div>
       </div>
     </>

@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
 import DashSidebarUi from "./DashSidebarUi";
+import DashboardIconSidebarUi from "./DashboardIconSidebarUi";
 
 const DashSidebar = () => {
-  return <DashSidebarUi />;
+  const { isOpen } = useSelector((state) => state.global);
+
+  return <>{isOpen ? <DashSidebarUi /> : <DashboardIconSidebarUi />}</>;
 };
 
 export default DashSidebar;
