@@ -18,6 +18,10 @@ module.exports = withMT({
         theme: "1920px",
       },
       colors: {
+        dash: {
+          bg: "#1B1B1B",
+          "cm-bg": "#121212",
+        },
         primary: "#FBBC05",
       },
       fontFamily: {

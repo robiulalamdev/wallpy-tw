@@ -35,6 +35,14 @@ import ProfileVerify from "../pages/Test/ProfileVerify";
 import VerifyApprovedPrivateRoute from "./VerifyApprovedPrivateRoute";
 import { Suspense, lazy } from "react";
 import PageLoading from "../components/common/loadings/PageLoading";
+import Dashboard from "../pages/DashboardPages/Dashboard";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Overseer from "../pages/DashboardPages/Overseer/Overseer";
+import MediaManagement from "../pages/DashboardPages/MediaManagement/MediaManagement";
+import Featured from "../pages/DashboardPages/Featured/Featured";
+import Sponsors from "../pages/DashboardPages/Sponsors/Sponsors";
+import ClaimsReports from "../pages/DashboardPages/ClaimsReports/ClaimsReports";
+import VerificationRequests from "../pages/DashboardPages/VerificationRequests/VerificationRequests";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 
@@ -206,22 +214,6 @@ export const route = createBrowserRouter([
     ],
   },
 
-  // without footer layout
-  // {
-  //   path: "/",
-  //   element: <MessageLayout />,
-  //   children: [
-  //     {
-  //       path: "/messages",
-  //       element: (
-  //         <PrivateRoute>
-  //           <Messages />
-  //         </PrivateRoute>
-  //       ),
-  //     },
-  //   ],
-  // },
-
   {
     path: "/",
     element: <AuthLayout />,
@@ -249,6 +241,24 @@ export const route = createBrowserRouter([
       {
         path: "/change-password/:token",
         element: <NewPassword />,
+      },
+    ],
+  },
+
+  //* dashboard routes
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      { path: "/dashboard/", element: <Dashboard /> },
+      { path: "/dashboard/overseer", element: <Overseer /> },
+      { path: "/dashboard/media-management", element: <MediaManagement /> },
+      { path: "/dashboard/featured", element: <Featured /> },
+      { path: "/dashboard/sponsors", element: <Sponsors /> },
+      { path: "/dashboard/claims/reports", element: <ClaimsReports /> },
+      {
+        path: "/dashboard/verification-requests",
+        element: <VerificationRequests />,
       },
     ],
   },
