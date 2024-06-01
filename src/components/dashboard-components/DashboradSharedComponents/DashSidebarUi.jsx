@@ -5,12 +5,13 @@ import {
   iDashSideHr,
   sideLogoCircle,
 } from "../../../utils/icons/dashboard-icons/dashicons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { DefaultProfile } from "../../../lib/data/globalData";
 
 const DashSidebarUi = () => {
-  const { currentPath } = useSelector((state) => state.global);
+  const { isOpen } = useSelector((state) => state.global);
+  const dispatch = useDispatch();
   const location = useLocation();
 
   return (

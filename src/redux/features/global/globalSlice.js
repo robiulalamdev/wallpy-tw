@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentPath: "/dashboard",
+  isOpen: true,
 };
 
 const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
-    setPath: (state, action) => {
-      state.currentPath = action.payload;
+    setIsOpen: (state, action) => {
+      state.isOpen = action.payload;
     },
   },
 });
 
-export const { setPath } = globalSlice.actions;
+export const { setIsOpen } = globalSlice.actions;
 
 export default globalSlice.reducer;

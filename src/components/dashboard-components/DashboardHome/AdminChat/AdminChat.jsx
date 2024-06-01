@@ -56,6 +56,12 @@ const AdminChat = () => {
     reset();
   };
 
+  const handleClear = () => {
+    if (messages.length > 0) {
+      setMessages([]);
+    }
+  };
+
   const scrollBottomRef = useRef();
   useEffect(() => {
     if (scrollBottomRef.current) {
@@ -65,9 +71,21 @@ const AdminChat = () => {
   }, [messages]);
   return (
     <div className="min-w-[442px] max-w-[442px] bg-dash-cm-bg rounded-[10px] max-h-screen flex flex-col justify-between h-full !p-[11px_12px_19px_11px]">
-      <h1 className="text-white font-bakbak-one text-[15px] text-center">
-        Admin / Moderators Chat
-      </h1>
+      <div className="flex flex-col justify-center items-center gap-[7px]">
+        <h1 className="text-white font-bakbak-one text-[15px] text-center">
+          Admin / Moderators Chat
+        </h1>
+        <Button
+          onClick={() => handleClear()}
+          className={`shadow-none hover:shadow-none outline-none normal-case w-[99px] h-[29px] font-lato text-[12px] font-medium rounded-[5px] flex justify-center items-center p-0 ${
+            messages?.length > 0
+              ? "bg-[#8FFF00] text-[#000000]"
+              : "bg-[#000000] text-white"
+          }`}
+        >
+          <span>Clear chat</span>
+        </Button>
+      </div>
       <div className="flex-grow h-fit overflow-y-auto grid grid-cols-1 gap-[26px] flex flex-col justify-between">
         <div></div>
         <div className="flex-grow py-2 gap-6 flex flex-col justify-end w-full">
