@@ -394,3 +394,207 @@ export const iDashSidebarRight = (
     />
   </svg>
 );
+
+export const iDashUnselected = (
+  <svg
+    width="23"
+    height="23"
+    viewBox="0 0 23 23"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_d_126_39859)">
+      <rect x="4" width="15" height="15" rx="3" fill="#D9D9D9" />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_126_39859"
+        x="0"
+        y="0"
+        width="23"
+        height="23"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_126_39859"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_126_39859"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+);
+
+export const iDashSelected = (
+  <svg
+    width="23"
+    height="23"
+    viewBox="0 0 23 23"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_d_126_39833)">
+      <rect x="4" width="15" height="15" rx="3" fill="#0AB745" />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_126_39833"
+        x="0"
+        y="0"
+        width="23"
+        height="23"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_126_39833"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_126_39833"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+);
+
+export const iDashHrThreeDots = (
+  <svg
+    width="19"
+    height="5"
+    viewBox="0 0 19 5"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="2.5" cy="2.5" r="2.5" fill="#D9D9D9" />
+    <circle cx="9.5" cy="2.5" r="2.5" fill="#D9D9D9" />
+    <circle cx="16.5" cy="2.5" r="2.5" fill="#D9D9D9" />
+  </svg>
+);
+
+export const iDashUser = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+  >
+    <g clip-path="url(#clip0_126_39813)">
+      <path
+        d="M9.99984 1.66675C5.39984 1.66675 1.6665 5.40008 1.6665 10.0001C1.6665 14.6001 5.39984 18.3334 9.99984 18.3334C14.5998 18.3334 18.3332 14.6001 18.3332 10.0001C18.3332 5.40008 14.5998 1.66675 9.99984 1.66675ZM5.8915 15.2334C6.24984 14.4834 8.43317 13.7501 9.99984 13.7501C11.5665 13.7501 13.7582 14.4834 14.1082 15.2334C12.9748 16.1334 11.5498 16.6667 9.99984 16.6667C8.44984 16.6667 7.02484 16.1334 5.8915 15.2334ZM15.2998 14.0251C14.1082 12.5751 11.2165 12.0834 9.99984 12.0834C8.78317 12.0834 5.8915 12.5751 4.69984 14.0251C3.84984 12.9084 3.33317 11.5167 3.33317 10.0001C3.33317 6.32508 6.32484 3.33341 9.99984 3.33341C13.6748 3.33341 16.6665 6.32508 16.6665 10.0001C16.6665 11.5167 16.1498 12.9084 15.2998 14.0251ZM9.99984 5.00008C8.38317 5.00008 7.08317 6.30008 7.08317 7.91675C7.08317 9.53342 8.38317 10.8334 9.99984 10.8334C11.6165 10.8334 12.9165 9.53342 12.9165 7.91675C12.9165 6.30008 11.6165 5.00008 9.99984 5.00008ZM9.99984 9.16675C9.30817 9.16675 8.74984 8.60842 8.74984 7.91675C8.74984 7.22508 9.30817 6.66675 9.99984 6.66675C10.6915 6.66675 11.2498 7.22508 11.2498 7.91675C11.2498 8.60842 10.6915 9.16675 9.99984 9.16675Z"
+        fill="#323232"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_126_39813">
+        <rect width="20" height="20" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export const idashEmail = (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_126_39817)">
+      <path
+        d="M18.3332 5.00004C18.3332 4.08337 17.5832 3.33337 16.6665 3.33337H3.33317C2.4165 3.33337 1.6665 4.08337 1.6665 5.00004V15C1.6665 15.9167 2.4165 16.6667 3.33317 16.6667H16.6665C17.5832 16.6667 18.3332 15.9167 18.3332 15V5.00004ZM16.6665 5.00004L9.99984 9.16671L3.33317 5.00004H16.6665ZM16.6665 15H3.33317V6.66671L9.99984 10.8334L16.6665 6.66671V15Z"
+        fill="#323232"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_126_39817">
+        <rect width="20" height="20" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export const idashPass = (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0_126_39818)">
+      <path
+        d="M15.0002 6.66671H14.1668V5.00004C14.1668 2.70004 12.3002 0.833374 10.0002 0.833374C7.70016 0.833374 5.8335 2.70004 5.8335 5.00004V6.66671H5.00016C4.0835 6.66671 3.3335 7.41671 3.3335 8.33337V16.6667C3.3335 17.5834 4.0835 18.3334 5.00016 18.3334H15.0002C15.9168 18.3334 16.6668 17.5834 16.6668 16.6667V8.33337C16.6668 7.41671 15.9168 6.66671 15.0002 6.66671ZM7.50016 5.00004C7.50016 3.61671 8.61683 2.50004 10.0002 2.50004C11.3835 2.50004 12.5002 3.61671 12.5002 5.00004V6.66671H7.50016V5.00004ZM15.0002 16.6667H5.00016V8.33337H15.0002V16.6667ZM10.0002 14.1667C10.9168 14.1667 11.6668 13.4167 11.6668 12.5C11.6668 11.5834 10.9168 10.8334 10.0002 10.8334C9.0835 10.8334 8.3335 11.5834 8.3335 12.5C8.3335 13.4167 9.0835 14.1667 10.0002 14.1667Z"
+        fill="#323232"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_126_39818">
+        <rect width="20" height="20" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export const idashClose = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="25"
+    height="25"
+    viewBox="0 0 25 25"
+    fill="none"
+  >
+    <g clip-path="url(#clip0_126_41351)">
+      <path
+        d="M19.7918 6.677L18.3231 5.20825L12.5002 11.0312L6.67725 5.20825L5.2085 6.677L11.0314 12.4999L5.2085 18.3228L6.67725 19.7916L12.5002 13.9687L18.3231 19.7916L19.7918 18.3228L13.9689 12.4999L19.7918 6.677Z"
+        fill="#FF4D00"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_126_41351">
+        <rect width="25" height="25" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);

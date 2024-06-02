@@ -146,6 +146,31 @@ const usersApi = api.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+
+    //* Dashboard apis
+
+    allUsers: builder.query({
+      query: (query) => `/users/all-users${query}`,
+      providesTags: ["users"],
+    }),
+
+    addUser: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/add-user`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
+
+    removeUserByIds: builder.mutation({
+      query: ({ data }) => ({
+        url: `/users/remove-users`,
+        method: "DELETE",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
+    }),
   }),
 });
 
@@ -175,4 +200,9 @@ export const {
   // APPROVED PROFILE
   useApprovedProfileMutation,
   useGetAllUsersQuery,
+
+  //* Admin  */
+  useAllUsersQuery,
+  useAddUserMutation,
+  useRemoveUserByIdsMutation,
 } = usersApi;

@@ -63,7 +63,7 @@ const Dashboard = () => {
           <h1 className="text-white font-lato font-medium text-[15px] pt-[19px] text-center">
             Wallpapers Downloaded
           </h1>
-          <h1 className="text-white font-lato text-[30px] font-bold">5893</h1>/
+          <h1 className="text-white font-lato text-[30px] font-bold">5893</h1>
           <span></span>
         </div>
 
@@ -71,7 +71,7 @@ const Dashboard = () => {
           <h1 className="text-white font-lato font-medium text-[15px] pt-[19px] text-center">
             Wallpapers Uploaded
           </h1>
-          <h1 className="text-white font-lato text-[30px] font-bold">1248</h1>/
+          <h1 className="text-white font-lato text-[30px] font-bold">1248</h1>
           <span></span>
         </div>
 
