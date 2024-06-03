@@ -23,7 +23,7 @@ const AddUserModal = ({ open, setOpen }) => {
 
   const handleAddUser = async (data) => {
     const options = {
-      data: data,
+      data: { ...data, verified: true },
     };
 
     const result = await addUser(options);
