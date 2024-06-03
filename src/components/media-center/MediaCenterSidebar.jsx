@@ -19,7 +19,7 @@ const MediaCenterSidebar = ({
       <div className="max-w-[295px] min-w-[295px] w-full rounded-[10px] bg-black/20 h-[620px] hidden lg:block">
         <MediaCenterSidebarUi
           open={open}
-          setOpen={setOpen}
+          onClose={setOpen}
           tab={tab}
           setTab={setTab}
           items={items}
@@ -34,10 +34,15 @@ const MediaCenterSidebar = ({
         className="bg-[#121212] p-0"
       >
         <div className="pt-[60px] px-0 relative">
-          <div className="absolute top-[18px] right-[25px]">{iBack}</div>
+          <div
+            onClick={() => setOpen(false)}
+            className="absolute top-[18px] right-[25px]"
+          >
+            {iBack}
+          </div>
           <MediaCenterSidebarUi
             open={open}
-            setOpen={setOpen}
+            onClose={setOpen}
             tab={tab}
             setTab={setTab}
             items={items}

@@ -93,10 +93,19 @@ const AccountSettingCredentialTab = () => {
           <input
             {...register("new_password", {
               required: false,
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters long",
+              },
+              maxLength: {
+                value: 12,
+                message: "Password must be no more than 12 characters long",
+              },
               pattern: {
-                value: /^(?!\s)(?!.*\s{2})(?=.*[a-zA-Z0-9]).{6,8}$/, // Requires 6 to 8 characters with no spaces
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])(?!.*\s).{6,12}$/,
                 message:
-                  "Password must be 6 to 8 characters long with no spaces",
+                  "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character, with no spaces",
               },
             })}
             type="password"

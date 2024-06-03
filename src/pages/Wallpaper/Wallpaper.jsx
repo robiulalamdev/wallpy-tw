@@ -224,7 +224,7 @@ const Wallpaper = () => {
                     <div
                       onClick={() =>
                         window.open(
-                          `https://discord.com/api/oauth2/authorize?client_id=<YOUR_CLIENT_ID>&scope=bot&permissions=0&redirect_uri=${encodeURIComponent(
+                          `https://discord.com/oauth2/authorize?client_id=1247258059596632134&permissions=0&scope=bot&redirect_uri=${encodeURIComponent(
                             url
                           )}`,
                           "_blank"
@@ -237,7 +237,7 @@ const Wallpaper = () => {
                     <h1
                       onClick={() =>
                         window.open(
-                          `https://discord.com/api/oauth2/authorize?client_id=<YOUR_CLIENT_ID>&scope=bot&permissions=0&redirect_uri=${encodeURIComponent(
+                          `https://discord.com/oauth2/authorize?client_id=1247258059596632134&permissions=0&scope=bot&redirect_uri=${encodeURIComponent(
                             url
                           )}`,
                           "_blank"

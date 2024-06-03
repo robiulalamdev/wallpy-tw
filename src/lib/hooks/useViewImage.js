@@ -18,10 +18,22 @@ const useViewImage = () => {
   };
 
   const viewResizeImg = (path, width, height) => {
-    if (path && width && height) {
-      return `${BASE_URL}/wallpapers/resize?path=${encodeURIComponent(
-        path
-      )}&width=${width}&height=${height}`;
+    if (path) {
+      if (path instanceof File && path.type.startsWith("image/")) {
+        return URL.createObjectURL(
+          new Blob([path], { type: "application/octet-stream" })
+        );
+      } else {
+        if (path?.startsWith("http")) {
+          return path;
+        } else {
+          if (path && width && height) {
+            return `${BASE_URL}/assets?path=${encodeURIComponent(path)}${
+              width ? `&width=${width}` : ""
+            }${height ? `&height=${height}` : ""}`;
+          }
+        }
+      }
     }
   };
 

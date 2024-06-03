@@ -18,7 +18,7 @@ const Messages = () => {
     <>
       <MainHeader />
       <div className="message-container">
-        <h1 className="text-[15px] font-bakbak-one text-white text-center mb-[15px] md:mb-[40px]">
+        <h1 className="text-[15px] md:text-[25px] font-bakbak-one text-white text-center mb-[15px] md:mb-[40px]">
           Messages
         </h1>
         <div className="border-t-[1px] border-[#5A5A5A] mb-[24px] md:mb-[62px]"></div>

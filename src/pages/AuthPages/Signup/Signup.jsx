@@ -165,6 +165,16 @@ const Signup = () => {
                     message:
                       "Password must be 6 to 12 characters long with no spaces",
                   },
+                  validate: {
+                    complexPassword: (value) => {
+                      const regex =
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,12}$/;
+                      return (
+                        regex.test(value) ||
+                        "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
+                      );
+                    },
+                  },
                 })}
                 type="password"
                 placeholder="*****************"

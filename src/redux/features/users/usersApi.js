@@ -126,7 +126,7 @@ const usersApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["users"],
+      invalidatesTags: ["users", "wallpapers"],
     }),
 
     verificationRequest: builder.mutation({

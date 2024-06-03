@@ -11,17 +11,15 @@ const MediaCenterCollectionAria = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div>
-      <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-x-[14px] gap-y-[19px] md:gap-x-[32px] md:gap-y-[24px] lg:gap-x-[41px] lg:gap-y-[34px]">
-        {items.map((item, index) => (
-          <MediaCenterSingleCollection
-            key={index}
-            data={item}
-            selectedItems={selectedItems}
-            handleSelectCollectionWallpapers={handleSelectCollectionWallpapers}
-          />
-        ))}
-      </div>
+    <div className="flex-grow grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-x-[14px] gap-y-[19px] md:gap-x-[32px] md:gap-y-[24px] lg:gap-x-[41px] lg:gap-y-[34px]">
+      {items.map((item, index) => (
+        <MediaCenterSingleCollection
+          key={index}
+          data={item}
+          selectedItems={selectedItems}
+          handleSelectCollectionWallpapers={handleSelectCollectionWallpapers}
+        />
+      ))}
     </div>
   );
 };
