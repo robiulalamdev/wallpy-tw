@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
-import useViewImage from "../../lib/hooks/useViewImage";
+import LazyWallpaper from "../common/wallpaper/LazyWallpaper";
 
 const VaultImages = ({ images, selectedImages, handleSelectImages }) => {
-  const { viewImg } = useViewImage();
   return (
     <>
       <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-y-[12px] md:gap-y-[23px] gap-x-[14px] md:gap-x-[40px] w-full h-full">
@@ -16,10 +15,13 @@ const VaultImages = ({ images, selectedImages, handleSelectImages }) => {
                 : ""
             }`}
           >
-            <img
-              src={viewImg(item?.wallpaper)}
-              alt="image"
-              loading="lazy"
+            <LazyWallpaper
+              src={item?.wallpaper}
+              alt={item?.wallpaper}
+              maxWidth={300}
+              maxHeight={150}
+              width={300}
+              height={150}
               className="w-full h-full object-cover rounded-[10px] hover:scale-110 duration-300 cursor-pointer"
             />
           </div>

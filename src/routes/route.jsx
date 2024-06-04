@@ -102,7 +102,7 @@ export const route = createBrowserRouter([
       },
 
       {
-        path: "/wallpapers/:slug",
+        path: "/w/:slug",
         element: <Wallpaper />,
       },
       {

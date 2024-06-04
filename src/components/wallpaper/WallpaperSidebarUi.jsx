@@ -179,7 +179,7 @@ const WallpaperSidebarUi = ({ data }) => {
             )}
           </div>
           <Link to={`/profiles/${data?.author_info?.username}`}>
-            <Button className="w-[97px] h-[32px] shadow-none hover:shadow-none text-white bg-[#000000] font-bakbak-one text-[10px] normal-case font-normal p-0 rounded-[15px]">
+            <Button className="w-[97px] h-[32px] shadow-none hover:shadow-none text-[#fff] bg-[#000000] font-bakbak-one !text-[11px] normal-case font-normal p-0 leading-normal rounded-[15px]">
               View Profile
             </Button>
           </Link>
@@ -506,36 +506,28 @@ const WallpaperSidebarUi = ({ data }) => {
               </div>
             </div>
 
-            {data?.source || data?.author ? (
-              <h1 className="mt-[22px] text-[#ccc] font-bakbak-one text-[15px] text-center">
-                Credits
-              </h1>
-            ) : (
-              ""
-            )}
+            <h1 className="mt-[22px] text-[#ccc] font-bakbak-one text-[15px] text-center">
+              Credits
+            </h1>
             <div className="w-fit mt-[7px]">
-              {data?.source && (
-                <div className="flex items-center gap-x-[2px]">
-                  <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
-                    Source:{" "}
-                    <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                      {data?.source || ""}
-                    </h1>
+              <div className="flex items-center gap-x-[2px]">
+                <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
+                  Source:{" "}
+                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
+                    {data?.source || ""}
                   </h1>
-                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
-                </div>
-              )}
-              {data?.author && (
-                <div className="flex items-center gap-x-[2px]">
-                  <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
-                    Original Author:{" "}
-                    <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
-                      {data?.author || ""}
-                    </h1>
+                </h1>
+                <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
+              </div>
+              <div className="flex items-center gap-x-[2px]">
+                <h1 className="text-[#606060] font-bakbak-one text-[12px] flex items-center gap-2">
+                  Original Author:{" "}
+                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]">
+                    {data?.author || ""}
                   </h1>
-                  <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
-                </div>
-              )}
+                </h1>
+                <h1 className="text-[#CCC] font-bakbak-one text-[12px]"></h1>
+              </div>
             </div>
 
             <Button

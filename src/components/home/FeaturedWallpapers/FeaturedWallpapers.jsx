@@ -31,7 +31,7 @@ const FeaturedWallpapers = () => {
                 className="min-h-[279px] max-h-[279px] max-w-[494px] w-full rounded-[15px] overflow-hidden"
               >
                 <img
-                  onClick={() => navigate(`/wallpapers/${item?.slug}`)}
+                  onClick={() => navigate(`/w/${item?.slug}`)}
                   src={viewImg(item?.wallpaper)}
                   alt="img"
                    loading="lazy"
@@ -76,7 +76,7 @@ const FeaturedWallpapers = () => {
               className="min-h-[131px] max-h-[131px] w-full rounded-[10px] overflow-hidden col-span-2"
             >
               <img
-                onClick={() => navigate(`/wallpapers/${item?.slug}`)}
+                onClick={() => navigate(`/w/${item?.slug}`)}
                 src={viewImg(item?.wallpaper)}
                 alt="img"
                  loading="lazy"

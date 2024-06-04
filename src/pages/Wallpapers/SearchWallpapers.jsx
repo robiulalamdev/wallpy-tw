@@ -139,7 +139,7 @@ const SearchWallpapers = () => {
                 <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-x-[14px] gap-y-[14px] md:gap-x-[16px] md:gap-y-[32px] lg:gap-x-[26px] lg:gap-y-[42px]">
                   {wallpapers?.map((item, index) => (
                     <div
-                      onClick={() => navigate(`/wallpapers/${item?.slug}`)}
+                      onClick={() => navigate(`/w/${item?.slug}`)}
                       key={index}
                       className={`w-full h-[152px] md:h-[170px] rounded-[5px] md:rounded-[10px] lg:rounded-[15px] overflow-hidden relative`}
                     >

@@ -69,12 +69,12 @@ const Wallpaper = () => {
   // console.log(data?.data);
 
   useEffect(() => {
-    setUrl(`${CLIENT_URL}/wallpapers/${slug}`);
+    setUrl(`${CLIENT_URL}/w/${slug}`);
   }, [slug]);
 
   const openWallpaper = (slug) => {
     wallpaperRef.current.scrollTo({ top: 0, behavior: "smooth" });
-    navigate(`/wallpapers/${slug}`);
+    navigate(`/w/${slug}`);
   };
 
   const handleView = async () => {
@@ -168,7 +168,7 @@ const Wallpaper = () => {
             <Popover placement="top-end">
               <PopoverHandler ref={shareRef}>
                 <div
-                  className="absolute bottom-[27px] lg:bottom-[24px] right-[22px] lg:right-[17px] flex justify-center items-center w-[30px] h-[30px] rounded-[5px]"
+                  className="cursor-pointer absolute bottom-[27px] lg:bottom-[24px] right-[22px] lg:right-[17px] flex justify-center items-center w-[30px] h-[30px] rounded-[5px]"
                   style={{ background: "rgba(0, 0, 0, 0.60)" }}
                 >
                   {iShare}

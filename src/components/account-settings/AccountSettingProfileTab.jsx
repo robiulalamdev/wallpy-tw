@@ -135,25 +135,24 @@ const AccountSettingProfileTab = () => {
   };
 
   return (
-    <div>
-      <div className="pt-[39px] flex justify-between items-center flex-wrap">
-        <span className="w-[188px] hidden md:block"></span>
-        <h1 className="text-center font-lato text-[12px] text-[#FFFFFF80] flex-grow">
-          Avatar size is 125x125 pixels, with a maximum file size not exceeding
-          5MB.
-        </h1>
-        <div className="md:pr-[41px] hidden md:block w-[147px]">
-          {user?.profile?.verification_status !== "Approved" && (
-            <Button
-              onClick={() => navigate("/account-verification")}
-              className="font-normal normal-case bg-[#00000080] w-[147px] h-[38px] rounded-[100px] hover:shadow-none shadow-none font-lato text-[12px] text-[#FFFFFF80] p-0 hidden md:block"
-            >
-              Request Verification
-            </Button>
-          )}
-        </div>
+    <div className="relative">
+      <h1
+        className="text-center font-lato text-[12px] flex-grow pt-[39px]"
+        style={{ color: "rgba(255, 255, 255, 0.50)" }}
+      >
+        Avatar size is 125x125 pixels, with a maximum file size not exceeding
+        5MB.
+      </h1>
+      <div className="hidden md:block min-w-[147px] max-w-[147px] absolute top-[27px] right-[41px]">
+        {user?.profile?.verification_status !== "Approved" && (
+          <Button
+            onClick={() => navigate("/account-verification")}
+            className="font-normal normal-case bg-[#00000080] backdrop-blur w-[147px] h-[38px] rounded-[100px] hover:shadow-none shadow-none font-lato text-[12px] text-[#FFFFFF80] p-0 hidden md:block"
+          >
+            Request Verification
+          </Button>
+        )}
       </div>
-
       <div className="rounded-full size-[80px] flex justify-center items-center bg-[#00000033] mx-auto mt-[12px] md:mt-[17px]">
         <img
           src={viewImg(image || user?.profile?.profile_image) || profile}
@@ -179,9 +178,13 @@ const AccountSettingProfileTab = () => {
         className="hidden"
       />
 
-      <h1 className="font-lato text-[10px] text-[#FFFFFF80] mt-[37px] text-center">
-        Banner size is 1747 x 300 pixels, with a maximum file size not exceeding
-        10MB.
+      <h1
+        className="font-lato text-[12px] text-[#FFFFFF80] mt-[37px] text-center"
+        style={{ color: "rgba(255, 255, 255, 0.50)" }}
+      >
+        Banner size is 1747 x 300 pixels. Ensure that your banner meets this
+        size for optimal display, and please note that the maximum file size
+        allowed is 10MB.
       </h1>
 
       <img
@@ -208,7 +211,7 @@ const AccountSettingProfileTab = () => {
       />
 
       <form onSubmit={handleSubmit(handleUpdate)}>
-        <div className="mt-[38px] max-w-[264px] mx-auto">
+        <div className="mt-[38px] max-w-[264px] mx-auto flex flex-col items-center w-full">
           <div>
             <h1 className="text-[15px] font-lato text-center text-[#FFF]">
               Username{" "}
@@ -235,7 +238,7 @@ const AccountSettingProfileTab = () => {
               </h1>
             )}
           </div>
-          <div className="mt-[16px]">
+          <div className="mt-[16px] w-full">
             <h1 className="text-[15px] font-lato text-center text-[#FFF]">
               Bio{" "}
             </h1>
@@ -244,7 +247,7 @@ const AccountSettingProfileTab = () => {
               {...register("bio", { required: false })}
               type="text"
               required={false}
-              className="w-full h-[76px] bg-[#00000080] outline-none rounded-[10px] px-[18px] py-[9px] font-bakbak-one placeholder:text-[12px] placeholder:font-bakbak-one text-[#FFFFFF80] placeholder:text-[#FFFFFF80] mt-[13px]"
+              className="w-full min-w-[264px] max-w-[264px] h-[76px] bg-[#00000080] outline-none rounded-[10px] px-[18px] py-[9px] font-bakbak-one placeholder:text-[12px] placeholder:font-bakbak-one text-[#FFFFFF80] placeholder:text-[#FFFFFF80] mt-[13px]"
               placeholder="Write a small bio about you..."
             ></textarea>
           </div>

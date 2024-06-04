@@ -175,10 +175,10 @@ const Login = () => {
             <div className="mt-[34px] md:mt-[48px] flex flex-col items-center gap-[12px]">
               <Button
                 type="button"
-                className="flex justify-center items-center gap-x-[5px] min-w-[163px] h-[36px] font-normal bg-[#1877F2] p-0 normal-case hover:shadow-none shadow-none rounded-[5px]"
+                className="flex justify-center items-center gap-x-[5px] min-w-[163px] px-1 h-[36px] !font-normal bg-[#1877F2] py-0 !normal-case hover:shadow-none shadow-none rounded-[5px]"
               >
                 {iFacebook}{" "}
-                <p className="text-nowrap text-[12px] font-bakbak-one text-white">
+                <p className="text-nowrap text-[12px] font-bakbak-one text-white tracking-[0.5px]">
                   Sign In with Facebook
                 </p>
               </Button>
