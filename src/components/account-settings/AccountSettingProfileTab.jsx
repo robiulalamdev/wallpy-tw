@@ -1,5 +1,4 @@
 import { useContext, useMemo, useRef, useState } from "react";
-import profile from "../../assets/images/global/header/profile.png";
 import bannerImg from "../../assets/images/profile-settings/banner.png";
 import info from "../../assets/icons/profile-settings/info.png";
 import { Button } from "@material-tailwind/react";
@@ -10,7 +9,7 @@ import { SpinnerCircularFixed } from "spinners-react";
 import useViewImage from "../../lib/hooks/useViewImage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { socialLinkItems } from "../../lib/data/globalData";
+import { DefaultProfile, socialLinkItems } from "../../lib/data/globalData";
 import { validateImageSize } from "../../lib/services/service";
 
 const AccountSettingProfileTab = () => {
@@ -155,7 +154,7 @@ const AccountSettingProfileTab = () => {
       </div>
       <div className="rounded-full size-[80px] flex justify-center items-center bg-[#00000033] mx-auto mt-[12px] md:mt-[17px]">
         <img
-          src={viewImg(image || user?.profile?.profile_image) || profile}
+          src={viewImg(image || user?.profile?.profile_image) || DefaultProfile}
           alt="profile"
           className="size-[70px] rounded-full object-cover"
         />

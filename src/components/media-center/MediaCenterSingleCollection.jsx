@@ -9,7 +9,7 @@ const MediaCenterSingleCollection = ({
   selectedItems,
   handleSelectCollectionWallpapers,
 }) => {
-  const { viewImg } = useViewImage();
+  const { viewResizeImg } = useViewImage();
 
   const isExist = selectedItems?.some((item) => item?._id === data?._id);
   return (
@@ -26,7 +26,7 @@ const MediaCenterSingleCollection = ({
               {data.wallpapers?.slice(0, 4).map((img, i) => (
                 <img
                   key={i}
-                  src={viewImg(img?.wallpaper)}
+                  src={viewResizeImg(img?.wallpaper, 300, 150)}
                   alt="wallpaper"
                   className={`w-full h-full object-cover cursor-pointer ${
                     data?.wallpapers?.length === 1 && "col-span-2"

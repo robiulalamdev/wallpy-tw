@@ -5,12 +5,12 @@ import {
   SpeedDialHandler,
 } from "@material-tailwind/react";
 
-import profile from "../../../assets/images/global/header/profile.png";
 import { iHLove, iLock, iLogout, iUser } from "../../../utils/icons/icons";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../contextApi/AuthContext";
 import useViewImage from "../../../lib/hooks/useViewImage";
 import { useNavigate } from "react-router-dom";
+import { DefaultProfile } from "../../../lib/data/globalData";
 const HeaderProfile = () => {
   const { viewImg } = useViewImage();
   const { logout, user } = useContext(AuthContext);
@@ -28,7 +28,7 @@ const HeaderProfile = () => {
             }`}
           >
             <img
-              src={viewImg(user?.profile?.profile_image) || profile}
+              src={viewImg(user?.profile?.profile_image) || DefaultProfile}
               alt="profile"
               className="size-[50px] rounded-full object-cover"
             />

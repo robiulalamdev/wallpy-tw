@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
-import useViewImage from "../../lib/hooks/useViewImage";
+import LazyWallpaper from "../common/wallpaper/LazyWallpaper";
 
 const MediaCenterFavoriteSingleImage = ({
   wallpaper,
   selectedItems,
   handleSelectFavoriteWallpapers,
 }) => {
-  const { viewImg } = useViewImage();
-
   const isExist = selectedItems?.some((item) => item?._id === wallpaper?._id);
   return (
     <>
@@ -17,9 +15,13 @@ const MediaCenterFavoriteSingleImage = ({
           isExist ? "border-[2px] border-[#B3FD16]" : ""
         }`}
       >
-        <img
-          src={viewImg(wallpaper.wallpaper?.wallpaper)}
-          alt=""
+        <LazyWallpaper
+          src={wallpaper.wallpaper?.wallpaper}
+          alt={wallpaper.wallpaper?.wallpaper}
+          maxWidth={400}
+          maxHeight={150}
+          width={400}
+          height={150}
           className="w-full h-full object-cover hover:scale-110 duration-300 cursor-pointer"
         />
       </div>

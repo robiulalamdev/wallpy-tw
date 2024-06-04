@@ -12,7 +12,7 @@ import {
 } from "../../../utils/icons/dashboard-icons/dashicons";
 import flag1 from "../../../assets/images/dashboard-images/overseer/flag1.png";
 import { useRef, useState } from "react";
-import UserDetailsInfoModal from "./UserDetailsInfoModal";
+import UserDetailsInfoModal from "./user-details-info/UserDetailsInfoModal";
 
 const UsersTableRow = ({
   data,
@@ -111,7 +111,10 @@ const UsersTableRow = ({
           </div>
         </div>
       </div>
-      <UserDetailsInfoModal open={openInfoModal} />
+      <UserDetailsInfoModal
+        open={openInfoModal}
+        onClose={() => setOpenInfoModal(null)}
+      />
     </>
   );
 };
