@@ -13,6 +13,8 @@ import {
 import flag1 from "../../../assets/images/dashboard-images/overseer/flag1.png";
 import { useRef, useState } from "react";
 import UserDetailsInfoModal from "./user-details-info/UserDetailsInfoModal";
+import UserChangePasswordModal from "./UserChangePasswordModal";
+import UserAccountDeletionModal from "./UserAccountDeletionModal";
 
 const UsersTableRow = ({
   data,
@@ -21,6 +23,8 @@ const UsersTableRow = ({
   handleRemoveUsers,
 }) => {
   const [openInfoModal, setOpenInfoModal] = useState(null);
+  const [openPassModal, setOpenPassModal] = useState(null);
+  const [openDeleteModal, setOpenDeleteModal] = useState(null);
   const [open, setOpen] = useState(false);
   const isExist = selectedItems.some((item) => item?._id === data?._id);
   return (
@@ -93,12 +97,18 @@ const UsersTableRow = ({
                   >
                     Detailed Information
                   </h1>
-                  <h1 className="text-[15px] font-lato font-medium text-[#373737] text-nowrap leading-normal cursor-pointer">
+                  <h1
+                    onClick={() => {
+                      setOpenPassModal(data);
+                      setOpen(false);
+                    }}
+                    className="text-[15px] font-lato font-medium text-[#373737] text-nowrap leading-normal cursor-pointer"
+                  >
                     Change Password
                   </h1>
                   <h1
                     onClick={() => {
-                      handleRemoveUsers([data]);
+                      setOpenDeleteModal(data);
                       setOpen(false);
                     }}
                     className="text-[15px] font-lato font-medium text-[#373737] text-nowrap leading-normal cursor-pointer"
@@ -114,6 +124,14 @@ const UsersTableRow = ({
       <UserDetailsInfoModal
         open={openInfoModal}
         onClose={() => setOpenInfoModal(null)}
+      />
+      <UserChangePasswordModal
+        open={openPassModal}
+        onClose={() => setOpenPassModal(null)}
+      />
+      <UserAccountDeletionModal
+        open={openDeleteModal}
+        onClose={() => setOpenDeleteModal(null)}
       />
     </>
   );
