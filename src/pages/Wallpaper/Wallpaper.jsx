@@ -64,7 +64,7 @@ const Wallpaper = () => {
   const [permit, setPermit] = useState(true);
   const navigate = useNavigate();
 
-  const { viewImg } = useViewImage();
+  const { viewImg, viewResizeImg } = useViewImage();
   const shareRef = useRef();
   // console.log(data?.data);
 
@@ -73,7 +73,7 @@ const Wallpaper = () => {
   }, [slug]);
 
   const openWallpaper = (slug) => {
-    wallpaperRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
     navigate(`/w/${slug}`);
   };
 
@@ -129,12 +129,12 @@ const Wallpaper = () => {
           <WallpaperSidebar open={open} setOpen={setOpen} data={data?.data} />
           <div className="w-full h-full flex-grow min-h-[755px] max-h-[755px] lg:min-h-[802px] lg:max-h-[802px] max-w-[1442px] rounded-[10px] overflow-hidden relative">
             <img
-              src={viewImg(data?.data?.wallpaper)}
+              src={viewResizeImg(data?.data?.wallpaper, 1420, 820)}
               alt="single wallpaper"
               className="w-full h-full min-h-[755px] lg:min-h-[802px] object-cover rounded-[10px] hidden lg:block"
             />
             <img
-              src={viewImg(data?.data?.wallpaper)}
+              src={viewResizeImg(data?.data?.wallpaper, 1420, 820)}
               alt="single wallpaper"
               className="w-full h-full min-h-[755px] lg:min-h-[802px] object-cover rounded-[10px] lg:hidden"
             />

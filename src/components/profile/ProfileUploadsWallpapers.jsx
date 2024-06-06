@@ -13,7 +13,7 @@ const ProfileUploadsWallpapers = ({ wallpapers = [] }) => {
             <div
               onClick={() => navigate(`/w/${item?.slug}`)}
               key={index}
-              className={`w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
+              className={`w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden relative`}
             >
               <LazyWallpaper
                 src={item?.wallpaper}

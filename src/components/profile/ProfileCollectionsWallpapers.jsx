@@ -15,7 +15,7 @@ const ProfileCollectionsWallpapers = ({ collections = [] }) => {
             <div key={index} className="">
               <div
                 onClick={() => navigate("/wallpapers")}
-                className={`grid grid-cols-2 w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
+                className={`grid grid-cols-2 w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden relative`}
               >
                 {item?.wallpapers?.slice(0, 4)?.map((img, i) => (
                   <img

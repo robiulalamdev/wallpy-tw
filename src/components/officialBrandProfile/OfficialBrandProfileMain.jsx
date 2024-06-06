@@ -113,7 +113,7 @@ const OfficialBrandProfileMain = ({ user }) => {
                 <div
                   onClick={() => navigate(`/w/${item?.slug}`)}
                   key={index}
-                  className={`w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
+                  className={`w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden relative`}
                 >
                   <LazyWallpaper
                     src={item?.wallpaper}
@@ -135,7 +135,7 @@ const OfficialBrandProfileMain = ({ user }) => {
                 <div key={index} className="">
                   <div
                     onClick={() => navigate("/wallpapers")}
-                    className={`grid grid-cols-2 w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden`}
+                    className={`grid grid-cols-2 w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden relative`}
                   >
                     {item?.wallpapers?.map((img, i) => (
                       <img
