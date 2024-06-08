@@ -97,18 +97,19 @@ const Wallpaper = () => {
   }, [data]);
 
   const handleDownload = async () => {
-    const url = viewImg(data?.data?.wallpaper);
+    const url = viewResizeImg(
+      data?.data?.wallpaper,
+      data?.data?.dimensions.width,
+      data?.data?.dimensions.height,
+      "fill"
+    );
     if (
       url &&
       data?.data?.dimensions.width > 0 &&
       data?.data?.dimensions.height > 0
     ) {
       setDownloading(true);
-      await downloadImageWithWH(
-        url,
-        data?.data?.dimensions.width,
-        data?.data?.dimensions.height
-      );
+      await downloadImageWithWH(url);
       setTimeout(() => {
         setDownloading(false);
       }, 600);

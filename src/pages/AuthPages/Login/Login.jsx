@@ -168,9 +168,11 @@ const Login = () => {
               Sign In
             </Button>
 
-            <p className="!mt-[17px] md:mt-[12px] text-center text-[#373737] text-[10px] font-bakbak-one">
-              Can’t login
-            </p>
+            <Link to="/forgot-password">
+              <p className="!mt-[17px] md:mt-[12px] text-center text-[#373737] text-[10px] font-bakbak-one">
+                Can’t login
+              </p>
+            </Link>
 
             <div className="mt-[34px] md:mt-[48px] flex flex-col items-center gap-[12px]">
               <Button

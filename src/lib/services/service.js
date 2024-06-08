@@ -50,43 +50,74 @@ export const getImageDimensions = (image) => {
 };
 
 // download image with width and height
-export const downloadImageWithWH = async (imageUrl, width, height) => {
+export const downloadImageWithWH = async (imageUrl) => {
   try {
-    const img = await loadImage(imageUrl);
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
 
-    // Create an offscreen canvas for the source image
-    const srcCanvas = document.createElement("canvas");
-    srcCanvas.width = img.width;
-    srcCanvas.height = img.height;
-    const srcCtx = srcCanvas.getContext("2d");
-    srcCtx.drawImage(img, 0, 0);
+    const blob = await response.blob();
+    const urlBlob = window.URL.createObjectURL(blob);
 
-    // Create a destination canvas for the resized image
-    const destCanvas = document.createElement("canvas");
-    destCanvas.width = width;
-    destCanvas.height = height;
+    const link = document.createElement("a");
+    link.href = urlBlob;
 
-    const picaInstance = pica();
-    await picaInstance.resize(srcCanvas, destCanvas, {
-      quality: 3, // Highest quality setting
-      alpha: true,
-    });
+    // Extract the file name from the URL
+    const urlPath = new URL(imageUrl).pathname;
+    const fileName = urlPath.substring(urlPath.lastIndexOf("/") + 1);
 
-    destCanvas.toBlob((blob) => {
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "downloaded-image.png";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }, "image/png");
+    link.download = fileName; // Use the file name extracted from the URL
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Clean up
+    window.URL.revokeObjectURL(urlBlob);
     return { success: true };
   } catch (error) {
     toast.error("Error downloading");
     return { success: false, error: error?.message };
   }
 };
+
+// export const downloadImageWithWH = async (imageUrl, width, height) => {
+//   try {
+//     const img = await loadImage(imageUrl);
+
+//     // Create an offscreen canvas for the source image
+//     const srcCanvas = document.createElement("canvas");
+//     srcCanvas.width = img.width;
+//     srcCanvas.height = img.height;
+//     const srcCtx = srcCanvas.getContext("2d");
+//     srcCtx.drawImage(img, 0, 0);
+
+//     // Create a destination canvas for the resized image
+//     const destCanvas = document.createElement("canvas");
+//     destCanvas.width = width;
+//     destCanvas.height = height;
+
+//     const picaInstance = pica();
+//     await picaInstance.resize(srcCanvas, destCanvas, {
+//       quality: 3, // Highest quality setting
+//       alpha: true,
+//     });
+
+//     destCanvas.toBlob((blob) => {
+//       const url = URL.createObjectURL(blob);
+//       const link = document.createElement("a");
+//       link.href = url;
+//       link.download = "downloaded-image.png";
+//       document.body.appendChild(link);
+//       link.click();
+//       document.body.removeChild(link);
+//     }, "image/png");
+//     return { success: true };
+//   } catch (error) {
+//     toast.error("Error downloading");
+//     return { success: false, error: error?.message };
+//   }
+// };
 
 const loadImage = (src) => {
   return new Promise((resolve, reject) => {

@@ -76,7 +76,7 @@ const resulations5 = {
 const WallpaperSidebarUi = ({ data }) => {
   const { user } = useContext(AuthContext);
   const { data: favoriteData } = useGetTotalFavoritesQuery(data?._id);
-  const { viewImg, formatFileSize } = useViewImage();
+  const { viewImg, formatFileSize, viewResizeImg } = useViewImage();
   const [open, setOpen] = useState(false);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
   const [selectedDm, setSelectedDm] = useState({ height: 0, width: 0 });
@@ -106,18 +106,28 @@ const WallpaperSidebarUi = ({ data }) => {
   }, [data]);
 
   const handleDownload = async () => {
-    const url = viewImg(data?.wallpaper);
-    if (url) {
+    if (selectedDm.width > 0 && selectedDm.height > 0) {
       setDownloading(true);
-      if (selectedDm.width > 0 && selectedDm.height > 0) {
-        await downloadImageWithWH(url, selectedDm.width, selectedDm.height);
-      } else {
-        await downloadImageWithWH(url, dimensions.width, dimensions.height);
-      }
-      setTimeout(() => {
-        setDownloading(false);
-      }, 600);
+      const url = viewResizeImg(
+        data?.wallpaper,
+        selectedDm.width,
+        selectedDm.height,
+        "fill"
+      );
+      await downloadImageWithWH(url);
+    } else {
+      setDownloading(true);
+      const url = viewResizeImg(
+        data?.wallpaper,
+        dimensions.width,
+        dimensions.height,
+        "fill"
+      );
+      await downloadImageWithWH(url);
     }
+    setTimeout(() => {
+      setDownloading(false);
+    }, 600);
   };
 
   // const isAuthor = data?.user === user?._id;

@@ -17,7 +17,7 @@ const useViewImage = () => {
     }
   };
 
-  const viewResizeImg = (path, width, height) => {
+  const viewResizeImg = (path, width, height, fit = "") => {
     if (path) {
       if (path instanceof File && path.type.startsWith("image/")) {
         return URL.createObjectURL(
@@ -30,7 +30,7 @@ const useViewImage = () => {
           if (path && width && height) {
             return `${BASE_URL}/assets?path=${encodeURIComponent(path)}${
               width ? `&width=${width}` : ""
-            }${height ? `&height=${height}` : ""}`;
+            }${height ? `&height=${height}` : ""}${fit ? `&fit=${fit}` : ""}`;
           }
         }
       }
