@@ -17,7 +17,7 @@ const MediaCenterSingleCollection = ({
       <div className={``}>
         <div
           onClick={() => handleSelectCollectionWallpapers(data)}
-          className={`grid grid-cols-2 w-full h-[152px] md:h-[138px] rounded-[10px] overflow-hidden ${
+          className={`grid grid-cols-2 w-full h-[152px] md:h-[138px] rounded-[10px] overflow-hidden relative ${
             isExist ? "border-[2px] border-[#B3FD16]" : ""
           }`}
         >

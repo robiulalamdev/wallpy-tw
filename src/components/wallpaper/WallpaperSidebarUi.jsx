@@ -170,7 +170,9 @@ const WallpaperSidebarUi = ({ data }) => {
       <div className="flex items-center justify-center gap-x-[32px] mt-[9px]">
         <div className="rounded-full size-[87px] flex justify-center items-center bg-[#00000033]">
           <img
-            src={viewImg(data?.author_info?.profile_image) || profile}
+            src={
+              viewResizeImg(data?.author_info?.profile_image, 87, 87) || profile
+            }
             alt="profile"
             className="size-[75px] rounded-full object-cover"
           />

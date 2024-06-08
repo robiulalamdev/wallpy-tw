@@ -8,7 +8,7 @@ import {
 } from "../../redux/features/conversations/conversationSlice";
 
 const SingleChat = ({ chatData, open, setOpen }) => {
-  const { viewImg } = useViewImage();
+  const { viewResizeImg } = useViewImage();
   const { chat } = useSelector((state) => state.conversation);
   const dispatch = useDispatch();
 
@@ -28,7 +28,10 @@ const SingleChat = ({ chatData, open, setOpen }) => {
       }`}
     >
       {chatData?.receiverInfo?.profile_image ? (
-        <img src={viewImg(chatData?.receiverInfo?.profile_image)} alt="" />
+        <img
+          src={viewResizeImg(chatData?.receiverInfo?.profile_image, 50, 50)}
+          alt=""
+        />
       ) : (
         <div className="min-w-[45px] max-w-[45px] min-h-[45px] max-h-[45px] rounded-full object-cover flex justify-center items-center bg-[#0000004D] border border-[#78757553]">
           <h1 className="text-white font-bakbak-one text-sm uppercase">

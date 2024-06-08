@@ -11,7 +11,7 @@ const MediaCenterFavoriteSingleImage = ({
     <>
       <div
         onClick={() => handleSelectFavoriteWallpapers(wallpaper)}
-        className={`w-full h-[152px] md:h-[138px] overflow-hidden rounded-[10px] ${
+        className={`w-full h-[152px] md:h-[138px] overflow-hidden rounded-[10px] relative ${
           isExist ? "border-[2px] border-[#B3FD16]" : ""
         }`}
       >

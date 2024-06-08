@@ -12,7 +12,7 @@ import useViewImage from "../../../lib/hooks/useViewImage";
 import { useNavigate } from "react-router-dom";
 import { DefaultProfile } from "../../../lib/data/globalData";
 const HeaderProfile = () => {
-  const { viewImg } = useViewImage();
+  const { viewResizeImg } = useViewImage();
   const { logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -28,7 +28,10 @@ const HeaderProfile = () => {
             }`}
           >
             <img
-              src={viewImg(user?.profile?.profile_image) || DefaultProfile}
+              src={
+                viewResizeImg(user?.profile?.profile_image, 55, 55) ||
+                DefaultProfile
+              }
               alt="profile"
               className="size-[50px] rounded-full object-cover"
             />

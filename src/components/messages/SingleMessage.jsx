@@ -7,14 +7,17 @@ import useViewImage from "../../lib/hooks/useViewImage";
 import profile from "../../assets/images/global/header/profile.png";
 
 const SingleMessage = ({ message }) => {
-  const { viewImg } = useViewImage();
+  const { viewResizeImg } = useViewImage();
   const { user } = useContext(AuthContext);
   const { chat } = useSelector((state) => state.conversation);
   return (
     <>
       {message?.senderId === user?._id ? (
         <div className="single-msg-container">
-          <img src={viewImg(user?.profile?.profile_image) || profile} alt="" />
+          <img
+            src={viewResizeImg(user?.profile?.profile_image, 50, 50) || profile}
+            alt=""
+          />
           <div className="single-msg-dark">
             <p className="all_break">{message?.message}</p>
           </div>
@@ -24,7 +27,7 @@ const SingleMessage = ({ message }) => {
           {chat?.receiverInfo?.profile_image ? (
             <img
               className="min-w-[50px] max-w-[50px] min-h-[50px] max-h-[50px]"
-              src={viewImg(chat?.receiverInfo?.profile_image)}
+              src={viewResizeImg(chat?.receiverInfo?.profile_image, 50, 50)}
               alt=""
             />
           ) : (
