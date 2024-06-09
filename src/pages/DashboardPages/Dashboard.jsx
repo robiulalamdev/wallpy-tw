@@ -59,7 +59,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="h-[268px] bg-dash-cm-bg rounded-[10px] flex flex-col justify-between items-center w-full gap-[14px] mt-[13px]">
+        <div className="h-[24vh] bg-dash-cm-bg rounded-[10px] flex flex-col justify-between items-center w-full gap-[14px] mt-[13px]">
           <h1 className="text-white font-lato font-medium text-[15px] pt-[19px] text-center">
             Wallpapers Downloaded
           </h1>
@@ -67,7 +67,7 @@ const Dashboard = () => {
           <span></span>
         </div>
 
-        <div className="h-[277px] bg-dash-cm-bg rounded-[10px] flex flex-col justify-between items-center w-full gap-[14px] mt-[19px]">
+        <div className="h-[24vh] bg-dash-cm-bg rounded-[10px] flex flex-col justify-between items-center w-full gap-[14px] mt-[19px]">
           <h1 className="text-white font-lato font-medium text-[15px] pt-[19px] text-center">
             Wallpapers Uploaded
           </h1>
@@ -75,7 +75,7 @@ const Dashboard = () => {
           <span></span>
         </div>
 
-        <div className="min-h-[215px] max-h-fit bg-dash-cm-bg rounded-[10px] w-full gap-[14px] mt-[19px] pb-[8px]">
+        <div className="min-h-[215px] h-[25.5vh] max-h-fit bg-dash-cm-bg rounded-[10px] w-full gap-[14px] mt-[19px] pb-[8px]">
           <h1 className="text-white font-lato font-medium text-[15px] pt-[19px] text-center">
             Sponsor Click-Through Links
           </h1>
@@ -102,11 +102,11 @@ const Dashboard = () => {
         <MostFavorited />
         <TopCategories />
         <MostDownloaded />
-        <div className="h-[215px] bg-dash-cm-bg rounded-[10px] flex flex-col justify-between items-center w-full gap-[14px] mt-[13px]">
+        <div className="h-[133px] bg-dash-cm-bg rounded-[10px] flex flex-col justify-between items-center w-full gap-[14px] mt-[13px]">
           <h1 className="text-white font-lato font-medium text-[15px] pt-[19px] text-center">
             Claims & Reports
           </h1>
-          <h1 className="text-white font-lato text-[30px] font-bold">5</h1>/
+          <h1 className="text-white font-lato text-[30px] font-bold">5</h1>
           <span></span>
         </div>
       </div>

@@ -90,6 +90,12 @@ const usersApi = api.injectEndpoints({
       query: () => `/wallpapers/popular-tags`,
       providesTags: ["wallpapers"],
     }),
+
+    ///* dashboard
+    sponsorsWallpapers: builder.query({
+      query: (query) => `/wallpapers/sponsors${query}`,
+      providesTags: ["wallpapers"],
+    }),
   }),
 });
 
@@ -114,4 +120,7 @@ export const {
   // PATCH
   useUpdateTagByIdMutation,
   useIncrementWallViewMutation,
+
+  // Dashboard */
+  useSponsorsWallpapersQuery,
 } = usersApi;
