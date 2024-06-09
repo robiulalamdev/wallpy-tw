@@ -8,6 +8,7 @@ import { useSponsorsWallpapersQuery } from "../../../redux/features/wallpapers/w
 import MediaManagementWallpaper from "../../../components/dashboard-components/mediaManagement/MediaManagementWallpaper";
 import { makeQuery } from "../../../lib/services/service";
 import AddMediaPopup from "../../../components/dashboard-components/mediaManagement/AddMediaPopup/AddMediaPopup";
+import MediaInfoPopup from "../../../components/dashboard-components/mediaManagement/MediaInfoPopup";
 
 const tabs = [
   "Today",
@@ -36,6 +37,8 @@ const MediaManagement = () => {
   const [selectedWallpapers, setSelectedWallpapers] = useState([]);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [bulkSelection, setBulkSelection] = useState(false);
+  const [wallpaperInfo, setWallpaperInfo] = useState(null);
 
   const queryObject = {
     date: date || "",
@@ -61,15 +64,19 @@ const MediaManagement = () => {
   };
 
   const handleSelectWallpapers = (item) => {
-    const itemIndex = selectedWallpapers.findIndex(
-      (sItem) => sItem._id === item._id
-    );
-    if (itemIndex !== -1) {
-      setSelectedWallpapers(
-        selectedWallpapers.filter((sItem) => sItem._id !== item._id)
+    if (bulkSelection) {
+      const itemIndex = selectedWallpapers.findIndex(
+        (sItem) => sItem._id === item._id
       );
+      if (itemIndex !== -1) {
+        setSelectedWallpapers(
+          selectedWallpapers.filter((sItem) => sItem._id !== item._id)
+        );
+      } else {
+        setSelectedWallpapers([...selectedWallpapers, item]);
+      }
     } else {
-      setSelectedWallpapers([...selectedWallpapers, item]);
+      setWallpaperInfo(item);
     }
   };
 
@@ -153,8 +160,17 @@ const MediaManagement = () => {
           <div className="flex flex-col-reverse 2xl:flex-row 2xl:items-center gap-x-[29px] gap-y-[29px] w-full mt-[30px]">
             <div className="flex justify-between 2xl:justify-start items-center">
               <div className="flex items-center gap-x-[21px] w-full min-w-[253px] max-w-[253px]">
-                <div className="flex items-center gap-x-[7px]">
-                  {iDashBulkSelection}
+                <div
+                  onClick={() => setBulkSelection(!bulkSelection)}
+                  className="flex items-center gap-x-[7px] cursor-pointer"
+                >
+                  <div
+                    className={`${
+                      bulkSelection ? "text-[#B3FD16]" : "text-white"
+                    }`}
+                  >
+                    {iDashBulkSelection}
+                  </div>
                   <h1 className="font-lato text-[15px] font-medium text-white leading-normal">
                     Bulk Selection
                   </h1>
@@ -227,6 +243,10 @@ const MediaManagement = () => {
       </div>
 
       <AddMediaPopup open={open} onClose={setOpen} />
+      <MediaInfoPopup
+        wallpaperInfo={wallpaperInfo}
+        setWallpaperInfo={setWallpaperInfo}
+      />
     </>
   );
 };

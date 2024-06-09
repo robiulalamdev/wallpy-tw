@@ -33,7 +33,7 @@ const AddMediaPopup = ({ open, onClose }) => {
   };
   return (
     <Dialog
-      open={open}
+      open={!!open}
       className="bg-transparent p-0 shadow-none border-none flex justify-center items-center"
     >
       <div className="min-w-[1001px] max-w-[1001px] max-h-fit min-h-[800px] bg-[#D5D5D5] rounded-[10px] relative">
