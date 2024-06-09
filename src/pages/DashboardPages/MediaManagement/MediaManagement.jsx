@@ -7,6 +7,7 @@ import LazyWallpaper from "../../../components/common/wallpaper/LazyWallpaper";
 import { useSponsorsWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
 import MediaManagementWallpaper from "../../../components/dashboard-components/mediaManagement/MediaManagementWallpaper";
 import { makeQuery } from "../../../lib/services/service";
+import AddMediaPopup from "../../../components/dashboard-components/mediaManagement/AddMediaPopup/AddMediaPopup";
 
 const tabs = [
   "Today",
@@ -34,6 +35,7 @@ const MediaManagement = () => {
   const [wallpapers, setWallpapers] = useState([]);
   const [selectedWallpapers, setSelectedWallpapers] = useState([]);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   const queryObject = {
     date: date || "",
@@ -140,7 +142,10 @@ const MediaManagement = () => {
                 />
               </form>
             </div>
-            <Button className="p-0 max-w-[93px] min-w-[93px] h-[35px] rounded-[5px] text-[#000000] bg-[#8FFF00] font-lato text-[12px] font-medium normal-case leading-normal">
+            <Button
+              onClick={() => setOpen(!open)}
+              className="p-0 max-w-[93px] min-w-[93px] h-[35px] rounded-[5px] text-[#000000] bg-[#8FFF00] font-lato text-[12px] font-medium normal-case leading-normal"
+            >
               Add Media
             </Button>
           </div>
@@ -220,6 +225,8 @@ const MediaManagement = () => {
           <br />
         </div>
       </div>
+
+      <AddMediaPopup open={open} onClose={setOpen} />
     </>
   );
 };

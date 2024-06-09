@@ -67,6 +67,10 @@ body {
   cursor: pointer;
 }
 
+.scrollWhite::-webkit-scrollbar-thumb {
+  background-color: white !important;
+}
+
 .oneLine {
   overflow: hidden;
   text-overflow: ellipsis;
