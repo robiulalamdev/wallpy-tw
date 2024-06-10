@@ -8,7 +8,7 @@ const MostFavorited = () => {
       <h1 className="text-white font-lato text-[15px] font-medium text-center pt-[15px]">
         Most Favorited
       </h1>
-      <div className="flex justify-center items-center gap-[10px] mt-[21px]">
+      <div className="flex justify-center items-center gap-[10px] mt-[21px] cursor-pointer">
         {[img1, img2, img3].map((item, index) => (
           <div
             key={index}
@@ -17,7 +17,7 @@ const MostFavorited = () => {
             <img
               src={item}
               alt=""
-              className="max-w-[122px] w-full h-[60px] object-cover rounded-[5px]"
+              className="max-w-[122px] w-full h-[60px] object-cover rounded-[5px] border-[1px] border-transparent hover:border-[1px] hover:border-[#B3FD16] duration-150"
             />
             <h1 className="text-white font-lato text-[15px] font-medium">
               {index + 1}

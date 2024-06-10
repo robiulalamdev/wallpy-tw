@@ -33,8 +33,8 @@ const ProfileBanner = ({ user }) => {
                 />
               </div>
               <div className="w-[100px] md:w-[200px]"></div>
-              <div className="flex flex-col items-start w-full">
-                <div className="flex items-center gap-x-[6px]">
+              <div className="flex flex-col items-start w-full ml-[10px]">
+                <div className="flex items-center gap-x-[6px] min-w-[250px]">
                   <h1 className="text-[#FFF] text-[20px] md:text-[30px] font-bakbak-one">
                     {user?.username}
                   </h1>

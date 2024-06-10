@@ -63,7 +63,7 @@ const Sponsors = () => {
                 {iDashEdit}
               </div>
             </dir>
-            <div className="grid grid-cols-5 gap-x-[60px] px-[62px] mt-[31px]">
+            <div className="relative grid grid-cols-5 gap-x-[60px] px-[62px] mt-[31px]">
               {data?.data?.data?.slice(0, 5)?.map((item, index) => (
                 <SponsorWallpaper
                   key={index}
@@ -92,7 +92,7 @@ const Sponsors = () => {
                 {iDashEdit}
               </div>
             </dir>
-            <div className="grid grid-cols-5 gap-x-[60px] px-[62px] mt-[37px]">
+            <div className="relative grid grid-cols-5 gap-x-[60px] px-[62px] mt-[37px]">
               {data?.data?.data?.slice(5, 10)?.map((item, index) => (
                 <SponsorWallpaper
                   key={index}
@@ -121,7 +121,7 @@ const Sponsors = () => {
                 {iDashEdit}
               </div>
             </dir>
-            <div className="grid grid-cols-5 gap-x-[60px] px-[62px] mt-[37px]">
+            <div className="relative grid grid-cols-5 gap-x-[60px] px-[62px] mt-[37px]">
               {data?.data?.data?.slice(10, 15)?.map((item, index) => (
                 <SponsorWallpaper
                   key={index}

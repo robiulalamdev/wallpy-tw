@@ -87,7 +87,7 @@ const UsersTableRow = ({
                 >
                   {iDashHrThreeDots}
                 </PopoverHandler>
-                <PopoverContent className="w-[176px] h-[137px] rounded-[5px] bg-[#D9D9D9] border-none shadow-none pt-[27px] px-[12px] pb-[20px] flex flex-col justify-between items-start">
+                <PopoverContent className="w-[176px] h-[120px] rounded-[5px] bg-[#D9D9D9] border-none shadow-none pt-[10px] px-[12px] pb-[10px] flex flex-col justify-between items-start">
                   <h1
                     onClick={() => {
                       setOpenInfoModal(data);

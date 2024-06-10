@@ -22,7 +22,7 @@ const TopCategories = () => {
         {categories.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col justify-center items-center gap-[6px] max-w-[103px] w-full px-1 h-[34px] rounded-[5px] bg-[#181818]"
+            className="flex flex-col justify-center items-center gap-[6px] max-w-[103px] w-full px-1 h-[34px] rounded-[5px] bg-[#181818] hover:bg-[#FF001F] duration-150 cursor-pointer"
           >
             <h1 className="text-white font-lato text-[15px] font-medium all_break oneLine">
               {item}
