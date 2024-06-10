@@ -308,7 +308,7 @@ const Wallpaper = () => {
               <div
                 onClick={() => openWallpaper(item.slug)}
                 key={index}
-                className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px]"
+                className="w-full h-[160px] md:h-[277px] overflow-hidden rounded-[5px] md:rounded-[10px] relative"
               >
                 <LazyWallpaper
                   src={item?.wallpaper}

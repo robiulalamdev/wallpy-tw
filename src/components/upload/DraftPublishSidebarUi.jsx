@@ -241,7 +241,7 @@ const DraftPublishSidebarUi = ({
             </h1>
 
             <div className="bg-[#00000033] rounded-[8px] w-[240px] h-fit min-h-[82px] flex flex-wrap items-start gap-2 px-[7px] py-[6px] mt-[21px]">
-              {["Desktop", "Phones ", "Tablets", "Handhelds", "Other"].map(
+              {["Desktop", "Phones", "Tablets", "Handhelds", "Other"].map(
                 (t, i) => (
                   <Button
                     onClick={() => setScreenType(t)}

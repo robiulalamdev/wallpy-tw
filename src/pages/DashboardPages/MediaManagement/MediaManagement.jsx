@@ -3,7 +3,6 @@ import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { iDashBulkSelection } from "../../../utils/icons/dashboard-icons/dashicons";
-import LazyWallpaper from "../../../components/common/wallpaper/LazyWallpaper";
 import { useSponsorsWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
 import MediaManagementWallpaper from "../../../components/dashboard-components/mediaManagement/MediaManagementWallpaper";
 import { makeQuery } from "../../../lib/services/service";
@@ -24,10 +23,10 @@ const MediaManagement = () => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(35);
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get("search");
-  const date = searchParams.get("date");
+  const date = searchParams.get("date") || "Today";
   const { data } = useSponsorsWallpapersQuery(
     `?${search ? `search=${search}` : ""}${date ? `&date=${date}` : ""}${
       currentPage ? `&page=${currentPage}` : ""
@@ -107,7 +106,7 @@ const MediaManagement = () => {
 
   return (
     <>
-      <div className="bg-[#121212] !pt-[22px] pr-[17px] !pl-[16px] rounded-[10px] w-full max-h-full flex flex-col justify-between h-full overflow-y-auto">
+      <div className="bg-[#121212] !pt-[22px] pr-[17px] !pl-[16px] pb-[23px] rounded-[10px] w-full max-h-full flex flex-col justify-between h-full">
         <div>
           <div className="flex justify-between items-start py-[15px] gap-[15px] w-full">
             <div className="flex items-start gap-x-[40px] lg:gap-x-[80px] xl:gap-x-[120px] 2xl:gap-x-[159px] flex-grow">
@@ -211,10 +210,10 @@ const MediaManagement = () => {
           </div>
         </div>
 
-        <div className="w-full h-full flex flex-col justify-between">
+        <div className="w-full h-full flex flex-col justify-between overflow-y-auto mt-[33px]">
           <div className="h-full">
             {wallpapers?.length > 0 && (
-              <div className="grid grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-x-[27px] gap-y-[20px] mt-[33px] w-full">
+              <div className="grid grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-x-[27px] gap-y-[20px]  w-full">
                 {wallpapers.map((item, index) => (
                   <MediaManagementWallpaper
                     key={index}
@@ -237,8 +236,6 @@ const MediaManagement = () => {
               </h1>
             </Button>
           )}
-
-          <br />
         </div>
       </div>
 

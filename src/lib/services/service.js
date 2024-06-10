@@ -179,3 +179,14 @@ export function validateImageSize(imageFile, maxSizeMB) {
     };
   }
 }
+
+export const handleItemSelection = async (selectedItems, setItems, newItem) => {
+  const itemIndex = selectedItems.findIndex(
+    (sItem) => sItem._id === newItem._id
+  );
+  if (itemIndex !== -1) {
+    setItems(selectedItems.filter((sItem) => sItem._id !== newItem._id));
+  } else {
+    setItems([...selectedItems, newItem]);
+  }
+};
