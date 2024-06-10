@@ -37,7 +37,7 @@ const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
       setTags([...wallpaperInfo.tags]);
     }
   }, [wallpaperInfo]);
-  console.log(wallpaperInfo);
+  // console.log(wallpaperInfo);
   return (
     <Dialog
       open={!!wallpaperInfo?._id}
