@@ -1,9 +1,5 @@
 const VerificationRequests = () => {
-  return (
-    <div>
-      <h1>VerificationRequests</h1>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default VerificationRequests;
