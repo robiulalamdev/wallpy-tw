@@ -1,10 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 import bg from "../../../assets/images/auth/signup/bg.png";
 import { iInfo } from "../../../utils/icons/icons";
-import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverHandler,
+} from "@material-tailwind/react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpConfirmation = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <h1 className="text-[30px] text-white font-bakbak-one mb-[17px] mt-[27px] text-center md:hidden">
@@ -19,7 +25,23 @@ const SignUpConfirmation = () => {
             backgroundPosition: "center",
           }}
         >
-          <div className="flex justify-end">{iInfo}</div>
+          <div className="flex justify-end">
+            <Popover placement="bottom-end">
+              <PopoverHandler className="cursor-pointer">
+                {iInfo}
+              </PopoverHandler>
+              <PopoverContent className="p-0 border-none shadow-none">
+                <div
+                  onClick={() => navigate("/wallpapers")}
+                  className="w-[127px] h-[37px] rounded-[10px] bg-white flex justify-center items-center cursor-pointer"
+                >
+                  <p className="text-[#151618] font-bold font-lato">
+                    Go to wallpaper
+                  </p>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
           <h1 className="text-[25px] text-[#F4F4F4] font-bakbak-one mt-[28px] text-center">
             Welcome to the Society
           </h1>

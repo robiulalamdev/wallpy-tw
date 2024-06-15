@@ -3,8 +3,13 @@ import { useForm } from "react-hook-form";
 import bg from "../../../assets/images/auth/forgot-password/bg.png";
 import { usePasswordResetMutation } from "../../../redux/features/users/usersApi";
 import { iInfo } from "../../../utils/icons/icons";
-import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverHandler,
+} from "@material-tailwind/react";
+import { Link, useNavigate } from "react-router-dom";
 import { SpinnerCircularFixed } from "spinners-react";
 
 const ForgotPassword = () => {
@@ -16,6 +21,8 @@ const ForgotPassword = () => {
   } = useForm();
 
   const [passwordReset, { isLoading }] = usePasswordResetMutation();
+
+  const navigate = useNavigate();
 
   const handleResetPassword = async (data) => {
     const options = {
@@ -51,7 +58,23 @@ const ForgotPassword = () => {
             backgroundPosition: "center center",
           }}
         >
-          <div className="flex justify-end">{iInfo}</div>
+          <div className="flex justify-end">
+            <Popover placement="bottom-end">
+              <PopoverHandler className="cursor-pointer">
+                {iInfo}
+              </PopoverHandler>
+              <PopoverContent className="p-0 border-none shadow-none">
+                <div
+                  onClick={() => navigate("/wallpapers")}
+                  className="w-[127px] h-[37px] rounded-[10px] bg-white flex justify-center items-center cursor-pointer"
+                >
+                  <p className="text-[#151618] font-bold font-lato">
+                    Go to wallpaper
+                  </p>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
           <h1 className="text-[25px] text-[#F4F4F4] font-bakbak-one mt-[28px] text-center">
             Forgot your password?
           </h1>
