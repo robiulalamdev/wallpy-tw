@@ -44,6 +44,7 @@ import Sponsors from "../pages/DashboardPages/Sponsors/Sponsors";
 import ClaimsReports from "../pages/DashboardPages/ClaimsReports/ClaimsReports";
 import VerificationRequests from "../pages/DashboardPages/VerificationRequests/VerificationRequests";
 import NotFound from "../pages/NotFound/NotFound";
+import TagDetails from "../pages/Tags/TagDetails";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 
@@ -197,6 +198,10 @@ export const route = createBrowserRouter([
       {
         path: "/socials",
         element: <Socials />,
+      },
+      {
+        path: "/tags/:tag",
+        element: <TagDetails />,
       },
 
       // test routes

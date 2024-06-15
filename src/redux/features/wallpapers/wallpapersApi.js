@@ -91,6 +91,11 @@ const usersApi = api.injectEndpoints({
       providesTags: ["wallpapers"],
     }),
 
+    getWallpapersByTag: builder.query({
+      query: ({ tag, page }) => `/wallpapers/tags/${tag}?page=${page}`,
+      providesTags: ["wallpapers"],
+    }),
+
     ///* dashboard
     sponsorsWallpapers: builder.query({
       query: (query) => `/wallpapers/sponsors${query}`,
@@ -116,6 +121,7 @@ export const {
 
   // for search
   useGetPopularTagsQuery,
+  useGetWallpapersByTagQuery,
 
   // PATCH
   useUpdateTagByIdMutation,
