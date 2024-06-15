@@ -116,6 +116,8 @@ const Wallpaper = () => {
     }
   };
 
+  console.log(data?.data);
+
   return (
     <>
       <SimpleHeader />
@@ -129,16 +131,22 @@ const Wallpaper = () => {
         >
           <WallpaperSidebar open={open} setOpen={setOpen} data={data?.data} />
           <div className="w-full h-full flex-grow min-h-[755px] max-h-[755px] lg:min-h-[802px] lg:max-h-[802px] max-w-[1442px] rounded-[10px] overflow-hidden relative">
-            <img
-              src={viewResizeImg(data?.data?.wallpaper, 1420, 820)}
-              alt="single wallpaper"
-              className="w-full h-full min-h-[755px] lg:min-h-[802px] object-cover rounded-[10px] hidden lg:block"
-            />
-            <img
-              src={viewResizeImg(data?.data?.wallpaper, 1420, 820)}
-              alt="single wallpaper"
-              className="w-full h-full min-h-[755px] lg:min-h-[802px] object-cover rounded-[10px] lg:hidden"
-            />
+            {data?.data?.screen_type !== "Phones" && (
+              <img
+                src={viewResizeImg(data?.data?.wallpaper, 1420, 820)}
+                alt="single wallpaper"
+                className="w-full h-full min-h-[755px] lg:min-h-[802px] object-cover rounded-[10px]"
+              />
+            )}
+
+            {data?.data?.screen_type === "Phones" && (
+              <img
+                src={viewResizeImg(data?.data?.wallpaper, 450, 810)}
+                alt="single wallpaper"
+                className="2xl:ml-[310px] mx-auto w-full max-w-[448px] h-full min-h-[755px] lg:min-h-[802px] lg:max-h-[802px] object-cover rounded-[10px]"
+              />
+            )}
+
             {user && <WallpaperFavoriteAndCollection data={data?.data} />}
 
             <div
