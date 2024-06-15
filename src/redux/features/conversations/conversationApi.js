@@ -22,6 +22,15 @@ const conversationApi = api.injectEndpoints({
       }),
     }),
 
+    removeChatById: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/chats/${id}`,
+        method: "DELETE",
+        body: data,
+      }),
+      // invalidatesTags: ["chats", "messages"],
+    }),
+
     myChats: builder.query({
       query: () => `/chats/me`,
       providesTags: ["chats"],
@@ -33,6 +42,7 @@ const conversationApi = api.injectEndpoints({
 
     getMessageByChatId: builder.query({
       query: (chatId) => `/messages/${chatId}`,
+      providesTags: ["messages"],
     }),
   }),
 });
@@ -42,4 +52,7 @@ export const {
   useSendMessageMutation,
   useMyChatsQuery,
   useGetMessageByChatIdQuery,
+
+  // DELETE
+  useRemoveChatByIdMutation,
 } = conversationApi;

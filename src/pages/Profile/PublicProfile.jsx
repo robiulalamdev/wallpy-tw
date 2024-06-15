@@ -24,7 +24,7 @@ const PublicProfile = () => {
               )}
             </>
           ) : (
-            <ErrorPageMain />
+            <ErrorPageMain showHeader={true} />
           )}
         </>
       )}

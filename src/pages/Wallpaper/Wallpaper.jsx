@@ -121,7 +121,7 @@ const Wallpaper = () => {
       <SimpleHeader />
 
       {isLoading && <PageLoading />}
-      {!isLoading && !data?.data && <ErrorPageMain />}
+      {!isLoading && !data?.data && <ErrorPageMain showHeader={false} />}
       {!isLoading && data?.data && (
         <div
           ref={wallpaperRef}

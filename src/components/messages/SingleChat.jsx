@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import useViewImage from "../../lib/hooks/useViewImage";
 import moment from "moment";
@@ -6,8 +7,9 @@ import {
   setChat,
   setMessages,
 } from "../../redux/features/conversations/conversationSlice";
+import { iDeleteChat } from "../../utils/icons/icons";
 
-const SingleChat = ({ chatData, open, setOpen }) => {
+const SingleChat = ({ chatData, open, setOpen, setIsDelete, isDelete }) => {
   const { viewResizeImg } = useViewImage();
   const { chat } = useSelector((state) => state.conversation);
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ const SingleChat = ({ chatData, open, setOpen }) => {
   return (
     <div
       onClick={() => handleSetChat()}
-      className={`single-chat-container flex gap-2 mt-2 ${
+      className={`single-chat-container flex items-center gap-2 mt-2 ${
         chatData?._id === chat?._id && "selected-chat !bg-[#0000004D]"
       }`}
     >
@@ -48,12 +50,22 @@ const SingleChat = ({ chatData, open, setOpen }) => {
             {moment(chatData?.lastMessage?.createdAt).format("hh:mm A")}
           </p>
         </div>
-        <p
-          className="chat-last-message all_break oneLine"
-          style={{ marginTop: "6px" }}
-        >
-          {chatData?.lastMessage?.message}
-        </p>
+        <div className="flex justify-between items-end chat-last-message">
+          <p
+            className="chat-last-message all_break oneLine flex-grow"
+            style={{ marginTop: "6px" }}
+          >
+            {chatData?.lastMessage?.message}
+          </p>
+          {isDelete?._id !== chatData?._id && (
+            <div
+              onClick={() => setIsDelete(chatData)}
+              className="mt-[4px] text-[#33363F] hover:text-[#FF0000] cursor-pointer z-50"
+            >
+              {iDeleteChat}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

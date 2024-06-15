@@ -1,7 +1,12 @@
-const ErrorPageMain = () => {
+/* eslint-disable react/prop-types */
+import ErrorPage from "../../ErrorPage/ErrorPage";
+import NotFoundHeader from "../../shared/headers/NotFoundHeader";
+
+const ErrorPageMain = ({ showHeader = true }) => {
   return (
-    <div className="h-screen flex justify-center items-center">
-      <h1 className="text-[42px] font-bold">404</h1>
+    <div className="w-full h-full">
+      {showHeader && <NotFoundHeader />}
+      <ErrorPage />
     </div>
   );
 };

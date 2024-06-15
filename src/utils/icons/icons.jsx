@@ -1308,3 +1308,50 @@ export const iAdded = (
     />
   </svg>
 );
+
+export const iBackArrow = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <path d="M15 6L9 12L15 18" stroke="white" stroke-width="2" />
+  </svg>
+);
+
+export const iDeleteChat = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+  >
+    <path
+      d="M8.33203 12.5L8.33203 10"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <path
+      d="M11.668 12.5L11.668 10"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <path
+      d="M2.5 5.8335H17.5V5.8335C17.0353 5.8335 16.803 5.8335 16.6098 5.87193C15.8164 6.02974 15.1962 6.64993 15.0384 7.44332C15 7.63651 15 7.86884 15 8.3335V12.6668C15 14.5524 15 15.4953 14.4142 16.081C13.8284 16.6668 12.8856 16.6668 11 16.6668H9C7.11438 16.6668 6.17157 16.6668 5.58579 16.081C5 15.4953 5 14.5524 5 12.6668V8.33349C5 7.86884 5 7.63651 4.96157 7.44332C4.80376 6.64993 4.18356 6.02974 3.39018 5.87193C3.19698 5.8335 2.96466 5.8335 2.5 5.8335V5.8335Z"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <path
+      d="M8.39143 2.80883C8.48638 2.72023 8.69563 2.64194 8.9867 2.5861C9.27777 2.53027 9.63441 2.5 10.0013 2.5C10.3682 2.5 10.7248 2.53027 11.0159 2.5861C11.307 2.64194 11.5162 2.72023 11.6112 2.80883"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+  </svg>
+);

@@ -43,6 +43,7 @@ import Featured from "../pages/DashboardPages/Featured/Featured";
 import Sponsors from "../pages/DashboardPages/Sponsors/Sponsors";
 import ClaimsReports from "../pages/DashboardPages/ClaimsReports/ClaimsReports";
 import VerificationRequests from "../pages/DashboardPages/VerificationRequests/VerificationRequests";
+import NotFound from "../pages/NotFound/NotFound";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 
@@ -213,7 +214,11 @@ export const route = createBrowserRouter([
       },
     ],
   },
-
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    children: [{ path: "*", element: <NotFound /> }],
+  },
   {
     path: "/",
     element: <AuthLayout />,

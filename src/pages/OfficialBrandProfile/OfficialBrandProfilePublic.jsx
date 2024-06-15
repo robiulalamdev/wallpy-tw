@@ -18,7 +18,7 @@ const OfficialBrandProfilePublic = () => {
           data?.data?.profile?.verification_status === "Approved" ? (
             <OfficialBrandProfileMain user={data?.data} />
           ) : (
-            <ErrorPageMain />
+            <ErrorPageMain showHeader={true} />
           )}
         </>
       )}

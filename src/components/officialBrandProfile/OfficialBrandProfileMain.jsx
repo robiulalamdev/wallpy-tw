@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import OfficialBrandBanner from "../../components/officialBrandProfile/OfficialBrandBanner";
 import { useGetWallpapersByUserIdQuery } from "../../redux/features/wallpapers/wallpapersApi";
 import { useGetMyCollectionsByUserIdQuery } from "../../redux/features/collections/collectionsApi";
-import useViewImage from "../../lib/hooks/useViewImage";
 import LazyWallpaper from "../common/wallpaper/LazyWallpaper";
+import OfficialBrandCollectionWallpapers from "../profile/OfficialBrandCollectionWallpapers";
 
 const OfficialBrandProfileMain = ({ user }) => {
   const { data: uploadsData } = useGetWallpapersByUserIdQuery(user?._id);
@@ -16,8 +16,6 @@ const OfficialBrandProfileMain = ({ user }) => {
   const [tab1, setTab1] = useState("Uploads");
   const [wallpapers, setWallpapers] = useState([]);
   const [collections, setCollections] = useState([]);
-
-  const { viewResizeImg } = useViewImage();
 
   const navigate = useNavigate();
 
@@ -130,30 +128,7 @@ const OfficialBrandProfileMain = ({ user }) => {
           )}
 
           {tab1 === "Collections" && (
-            <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-[14px] gap-y-[19px] md:gap-x-[32px] md:gap-y-[24px] lg:gap-x-[41px] lg:gap-y-[34px] mt-[18px] md:mt-[53px]">
-              {collections?.map((item, index) => (
-                <div key={index} className="">
-                  <div
-                    onClick={() => navigate("/wallpapers")}
-                    className={`grid grid-cols-2 w-full h-[152px] md:h-[138px] rounded-[5px] md:rounded-[7px] lg:rounded-[10px] overflow-hidden relative`}
-                  >
-                    {item?.wallpapers?.map((img, i) => (
-                      <img
-                        key={i}
-                        src={viewResizeImg(img?.wallpaper, 200, 200)}
-                        alt="wallpaper"
-                        className={`w-full h-full object-cover cursor-pointer  ${
-                          item?.wallpapers?.length === 1 && "col-span-2"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <h1 className="text-[10px] md:text-[12px] font-lato text-[#FFF] font-semibold text-center mt-[9px] md:mt-[11px] oneLine">
-                    {item.name}
-                  </h1>
-                </div>
-              ))}
-            </div>
+            <OfficialBrandCollectionWallpapers collections={collections} />
           )}
           <div className="bg-[#000000] w-[128px] h-[42px] rounded-[100px] mx-auto mt-[27px] md:mt-[40px] flex justify-center items-center font-bakbak-one text-[12px] text-[#CCC] cursor-pointer">
             View more

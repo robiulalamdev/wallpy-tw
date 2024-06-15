@@ -139,7 +139,9 @@ const ProfileMain = ({ user }) => {
             <ProfileFavoriteWallpapers wallpapers={favorites} />
           )}
           {tab1 === "Collections" && (
-            <ProfileCollectionsWallpapers collections={collections} />
+            <>
+              <ProfileCollectionsWallpapers collections={collections} />
+            </>
           )}
 
           <div className="bg-[#000000] w-[128px] h-[42px] rounded-[100px] mx-auto mt-[27px] md:mt-[40px] flex justify-center items-center font-bakbak-one text-[12px] text-[#CCC] cursor-pointer">

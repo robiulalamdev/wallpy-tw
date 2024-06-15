@@ -8,12 +8,12 @@ import { useMyChatsQuery } from "../../redux/features/conversations/conversation
 import MessagesContainer from "../../components/messages/MessagesContainer";
 
 const Messages = () => {
-  const { isLoading } = useMyChatsQuery();
+  const { isLoading, refetch } = useMyChatsQuery();
   const { chats } = useSelector((state) => state.conversation);
   const [selectedTab, setSelectedTab] = useState(0);
   const [open, setOpen] = useState(false);
 
-  console.log(chats);
+  // console.log(chats);
   return (
     <>
       <MainHeader />
@@ -56,7 +56,7 @@ const Messages = () => {
               open ? "hidden md:block" : "block"
             } message-sidebar flex flex-col items-center gap-4 w-full md:max-w-[295px]`}
           >
-            <SidebarChats open={open} setOpen={setOpen} />
+            <SidebarChats open={open} setOpen={setOpen} refetch={refetch} />
           </div>
           <MessagesContainer open={open} setOpen={setOpen} />
         </section>
