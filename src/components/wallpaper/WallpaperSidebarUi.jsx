@@ -76,7 +76,7 @@ const resulations5 = {
 const WallpaperSidebarUi = ({ data }) => {
   const { user } = useContext(AuthContext);
   const { data: favoriteData } = useGetTotalFavoritesQuery(data?._id);
-  const { viewImg, formatFileSize, viewResizeImg } = useViewImage();
+  const { formatFileSize, viewResizeImg } = useViewImage();
   const [open, setOpen] = useState(false);
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
   const [selectedDm, setSelectedDm] = useState({ height: 0, width: 0 });
@@ -446,7 +446,15 @@ const WallpaperSidebarUi = ({ data }) => {
           <div>
             {tags?.length > 0 && (
               <h1 className="text-[#FFF] font-bakbak-one text-[12px]">
-                {tags?.map((tag, index) => `#${tag}   `)}
+                {tags?.map((tag, index) => (
+                  <Link
+                    key={index}
+                    to={`/tags/${tag}`}
+                    className="hover:text-green-600"
+                  >
+                    #{tag}{" "}
+                  </Link>
+                ))}
               </h1>
             )}
           </div>
