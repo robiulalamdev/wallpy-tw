@@ -96,9 +96,9 @@ const TagDetails = () => {
                 {tags?.map((item, index) => (
                   <span
                     key={index}
-                    className="text-[10px] md:text-[14px] text-white"
+                    className="text-[10px] md:text-[14px] text-white hover:text-green-600 cursor-pointer"
                   >
-                    #{item}{" "}
+                    <a href={`/tags/${item}`}>#{item}</a>{" "}
                   </span>
                 ))}
               </h1>
