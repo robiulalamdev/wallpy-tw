@@ -53,11 +53,6 @@ const DraftAndPublish = () => {
 
   const handleTab = (t) => {
     setTab1(t);
-    // if (t === "Drafts") {
-    //   setSelectedDrafts([]);
-    // } else {
-    //   setSelectedPublished([]);
-    // }
   };
 
   return (
@@ -116,16 +111,6 @@ const DraftAndPublish = () => {
               currentTab={tab1}
             />
           )}
-          {/* <DraftPublishSidebar
-            open={open}
-            setOpen={setOpen}
-            selectedImages={
-              tab1 === "Drafts" ? selectedDrafts : selectedPublished
-            }
-            resetSelect={tab1 === "Drafts" ?setSelectedDrafts:setSelectedPublished}
-            items={drafts}
-            currentTab={tab1}
-          /> */}
 
           <div className="w-full h-full flex-grow">
             {isLoading && <PageLoading />}

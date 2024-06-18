@@ -9,7 +9,7 @@ const VaultImages = ({ images, selectedImages, handleSelectImages }) => {
           <div
             onClick={() => handleSelectImages(item)}
             key={index}
-            className={`w-full h-[138px] rounded-[10px] overflow-hidden ${
+            className={`w-full h-[138px] rounded-[10px] overflow-hidden relative ${
               selectedImages.find((sItem) => sItem?._id === item?._id)
                 ? "border-[2px] border-[#B3FD16]"
                 : ""
