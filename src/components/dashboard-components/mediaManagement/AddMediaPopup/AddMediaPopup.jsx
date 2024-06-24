@@ -63,7 +63,7 @@ const AddMediaPopup = ({ open, onClose }) => {
                 upload={upload}
               />
             )}
-            {upload && files?.length > 0 && (
+            {upload && files?.length > 0 && selectedWallpapers?.length > 0 && (
               <AddMediaEditArea
                 files={files}
                 setStep={setStep}

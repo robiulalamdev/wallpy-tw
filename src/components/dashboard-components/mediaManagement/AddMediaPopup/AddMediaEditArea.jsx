@@ -47,6 +47,9 @@ const AddMediaEditArea = ({
       (item) => !ids.includes(item._id)
     );
     setFiles(filteredStateTwo);
+    if (ids?.length === files?.length) {
+      setStep(2);
+    }
     setSelectedWallpapers([]);
     return true;
   };
