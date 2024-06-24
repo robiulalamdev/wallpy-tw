@@ -3,11 +3,16 @@ import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { iDashBulkSelection } from "../../../utils/icons/dashboard-icons/dashicons";
-import { useSponsorsWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
+import {
+  useDeleteMediaWallpapersByIdsMutation,
+  useSponsorsWallpapersQuery,
+} from "../../../redux/features/wallpapers/wallpapersApi";
 import MediaManagementWallpaper from "../../../components/dashboard-components/mediaManagement/MediaManagementWallpaper";
 import { makeQuery } from "../../../lib/services/service";
 import AddMediaPopup from "../../../components/dashboard-components/mediaManagement/AddMediaPopup/AddMediaPopup";
 import MediaInfoPopup from "../../../components/dashboard-components/mediaManagement/MediaInfoPopup";
+import { SpinnerCircularFixed } from "spinners-react";
+import { toast } from "react-toastify";
 
 const tabs = [
   "Today",
@@ -38,6 +43,9 @@ const MediaManagement = () => {
   const [open, setOpen] = useState(false);
   const [bulkSelection, setBulkSelection] = useState(false);
   const [wallpaperInfo, setWallpaperInfo] = useState(null);
+
+  const [deleteMediaWallpapersByIds, { isLoading: deleteLoading }] =
+    useDeleteMediaWallpapersByIdsMutation();
 
   const queryObject = {
     date: date || "",
@@ -95,6 +103,23 @@ const MediaManagement = () => {
       setTotal(data?.data?.meta?.total);
     }
   }, [data?.data]);
+
+  const handleDeleteItems = async () => {
+    if (selectedWallpapers?.length < 1) return;
+    const ids = await selectedWallpapers?.map((element) => {
+      return element?._id;
+    });
+    const options = {
+      data: { ids: ids },
+    };
+    const result = await deleteMediaWallpapersByIds(options);
+    if (result?.data?.success) {
+      setSelectedWallpapers([]);
+      toast.success("Media deleted successfully");
+    } else {
+      toast.error("Media deleted unSuccessfully");
+    }
+  };
 
   useEffect(() => {
     if (date && lowerTabs.includes(date.toLowerCase())) {
@@ -184,9 +209,25 @@ const MediaManagement = () => {
                   </h1>
                 )}
               </div>
-              <Button className="bg-[#FF0000] w-[129px] h-[38px] rounded-[5px] shadow-none  hover:shadow-none font-bakbak-one text-[15px] text-[#C4C4C4] p-0 font-normal leading-normal normal-case 2xl:hidden">
-                Delete
-              </Button>
+              {bulkSelection && selectedWallpapers?.length > 0 && (
+                <Button
+                  disabled={deleteLoading}
+                  onClick={() => handleDeleteItems()}
+                  className="bg-[#FF0000] w-[129px] h-[38px] rounded-[5px] shadow-none  hover:shadow-none font-bakbak-one text-[15px] text-[#C4C4C4] p-0 font-normal leading-normal normal-case 2xl:hidden flex items-center justify-center"
+                >
+                  {deleteLoading && (
+                    <SpinnerCircularFixed
+                      size={16}
+                      thickness={180}
+                      speed={300}
+                      color="rgba(255, 255, 255, 1)"
+                      secondaryColor="rgba(255, 255, 255, 0.42)"
+                      style={{ marginRight: "5px", display: "inline" }}
+                    />
+                  )}{" "}
+                  Delete
+                </Button>
+              )}
             </div>
 
             <div className="flex items-center gap-x-[47px]">
@@ -203,9 +244,25 @@ const MediaManagement = () => {
                   </Button>
                 ))}
               </div>
-              <Button className="bg-[#FF0000] w-[129px] h-[38px] rounded-[5px] shadow-none  hover:shadow-none font-bakbak-one text-[15px] text-[#C4C4C4] p-0 font-normal leading-normal normal-case hidden 2xl:block">
-                Delete
-              </Button>
+              {bulkSelection && selectedWallpapers?.length > 0 && (
+                <Button
+                  disabled={deleteLoading}
+                  onClick={() => handleDeleteItems()}
+                  className="bg-[#FF0000] w-[129px] h-[38px] rounded-[5px] shadow-none  hover:shadow-none font-bakbak-one text-[15px] text-[#C4C4C4] p-0 font-normal leading-normal normal-case hidden 2xl:block 2xl:flex items-center justify-center"
+                >
+                  {deleteLoading && (
+                    <SpinnerCircularFixed
+                      size={16}
+                      thickness={180}
+                      speed={300}
+                      color="rgba(255, 255, 255, 1)"
+                      secondaryColor="rgba(255, 255, 255, 0.42)"
+                      style={{ marginRight: "5px", display: "inline" }}
+                    />
+                  )}{" "}
+                  Delete
+                </Button>
+              )}
             </div>
           </div>
         </div>

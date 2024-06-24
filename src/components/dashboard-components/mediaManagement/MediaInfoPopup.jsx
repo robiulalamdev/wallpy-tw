@@ -6,13 +6,20 @@ import moment from "moment";
 import useViewImage from "../../../lib/hooks/useViewImage";
 import { iGrayClose, iGrayPlush } from "../../../utils/icons/icons";
 import { useMemo, useState } from "react";
-import { useUpdateMediaWallTagByIdMutation } from "../../../redux/features/wallpapers/wallpapersApi";
+import {
+  useDeleteMediaWallpapersByIdsMutation,
+  useUpdateMediaWallTagByIdMutation,
+} from "../../../redux/features/wallpapers/wallpapersApi";
+import { toast } from "react-toastify";
+import { SpinnerCircularFixed } from "spinners-react";
 
 const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
   const { formatFileSize } = useViewImage();
   const [tags, setTags] = useState([]);
   const [updateMediaWallTagById, { isLoading }] =
     useUpdateMediaWallTagByIdMutation();
+  const [deleteMediaWallpapersByIds, { isLoading: deleteLoading }] =
+    useDeleteMediaWallpapersByIdsMutation();
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -33,6 +40,19 @@ const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
 
   const handleSave = async () => {
     handleClose();
+  };
+
+  const handleDeleteItems = async () => {
+    const options = {
+      data: { ids: wallpaperInfo?._id },
+    };
+    const result = await deleteMediaWallpapersByIds(options);
+    if (result?.data?.success) {
+      handleClose();
+      toast.success("Wallpaper deleted successfully");
+    } else {
+      toast.error("Wallpaper deleted unSuccessfully");
+    }
   };
 
   useMemo(() => {
@@ -72,7 +92,21 @@ const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
                 >
                   Save Changes
                 </Button>
-                <Button className="w-[129px] h-[38px] bg-[#FF0000] rounded-[5px] shadow-none hover:shadow-none text-[#C4C4C4] font-bakbak-one text-[15px] font-normal leading-normal p-0 normal-case">
+                <Button
+                  disabled={deleteLoading}
+                  onClick={() => handleDeleteItems()}
+                  className="w-[129px] h-[38px] bg-[#FF0000] rounded-[5px] shadow-none hover:shadow-none text-[#C4C4C4] font-bakbak-one text-[15px] font-normal leading-normal p-0 normal-case flex justify-center items-center"
+                >
+                  {deleteLoading && (
+                    <SpinnerCircularFixed
+                      size={16}
+                      thickness={180}
+                      speed={300}
+                      color="rgba(255, 255, 255, 1)"
+                      secondaryColor="rgba(255, 255, 255, 0.42)"
+                      style={{ marginRight: "5px", display: "inline" }}
+                    />
+                  )}{" "}
                   Delete
                 </Button>
               </div>
@@ -101,7 +135,7 @@ const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
                   File name:
                 </h1>
                 <p className="text-[15px] font-lato text-[#313131] font-normal leading-normal oneLine">
-                  {wallpaperInfo?.slug}
+                  {wallpaperInfo?.name}
                 </p>
               </div>
               <div className="flex items-center gap-x-[3px] mt-[20px]">
