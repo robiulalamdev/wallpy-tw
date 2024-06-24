@@ -21,16 +21,20 @@ const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
   const [deleteMediaWallpapersByIds, { isLoading: deleteLoading }] =
     useDeleteMediaWallpapersByIdsMutation();
 
+  const [editMod, setEditMod] = useState(false);
+
   const handleAdd = (e) => {
     e.preventDefault();
     setTags([...tags, e.target.tag.value]);
     e.target.reset();
+    setEditMod(true);
   };
 
   const handleRemoveTag = (index) => {
     const data = [...tags];
     data.splice(index, 1);
     setTags([...data]);
+    setEditMod(true);
   };
 
   const handleClose = () => {
@@ -39,7 +43,21 @@ const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
   };
 
   const handleSave = async () => {
-    handleClose();
+    if (tags?.length < 3) {
+      toast.error("A minimum of 3 tags is required");
+      return;
+    }
+    const options = {
+      id: wallpaperInfo?._id,
+      data: { tags: tags },
+    };
+    const result = await updateMediaWallTagById(options);
+    if (result?.data?.success) {
+      handleClose();
+      toast.success("Tags updated successfully");
+    } else {
+      toast.error("Tags updated unSuccessfully");
+    }
   };
 
   const handleDeleteItems = async () => {
@@ -87,9 +105,22 @@ const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
             <div className="w-full min-h-[213px] h-full border-t-[1px] border-[#C8C8C8] flex flex-col justify-end mb-[40px]">
               <div className="flex justify-center items-center gap-x-[18px] mt-[30px]">
                 <Button
+                  disabled={isLoading || !editMod}
                   onClick={() => handleSave()}
-                  className="w-[129px] h-[38px] bg-[#2924FF33] rounded-[5px] shadow-none hover:shadow-none text-[#C4C4C4] font-bakbak-one text-[15px] font-normal leading-normal p-0 normal-case"
+                  className={`w-[129px] h-[38px] ${
+                    editMod ? "bg-[#2924FF]" : "bg-[#2924FF33]"
+                  } rounded-[5px] shadow-none hover:shadow-none text-[#C4C4C4] font-bakbak-one text-[15px] font-normal leading-normal p-0 normal-case flex justify-center items-center`}
                 >
+                  {isLoading && (
+                    <SpinnerCircularFixed
+                      size={16}
+                      thickness={180}
+                      speed={300}
+                      color="rgba(255, 255, 255, 1)"
+                      secondaryColor="rgba(255, 255, 255, 0.42)"
+                      style={{ marginRight: "5px", display: "inline" }}
+                    />
+                  )}{" "}
                   Save Changes
                 </Button>
                 <Button

@@ -135,6 +135,7 @@ const usersApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["wallpapers"],
     }),
   }),
 });
