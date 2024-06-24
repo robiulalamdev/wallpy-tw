@@ -1,13 +1,34 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { iGrayClose, iGrayPlush } from "../../../../utils/icons/icons";
 import { Button } from "@material-tailwind/react";
+import {
+  useDeleteMediaWallpapersByIdsMutation,
+  useUpdateMediaWallpapersMutation,
+} from "../../../../redux/features/wallpapers/wallpapersApi";
+import { toast } from "react-toastify";
+import { SpinnerCircularFixed } from "spinners-react";
 
-const AddMediaEditArea = ({ setStep }) => {
+const AddMediaEditArea = ({
+  setStep,
+  selectedImages,
+  files,
+  setFiles,
+  setSelectedWallpapers,
+  setUpload,
+}) => {
   const [typeTab, setTypeTab] = useState("");
   const [classification, setClassification] = useState("");
   const [screenType, setScreenType] = useState("");
   const [tags, setTags] = useState([]);
+  const [source, setSource] = useState("");
+  const [author, setAuthor] = useState("");
+
+  const [updateMediaWallpapers, { isLoading }] =
+    useUpdateMediaWallpapersMutation();
+  const [deleteMediaWallpapersByIds, { isLoading: deleteLoading }] =
+    useDeleteMediaWallpapersByIdsMutation();
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -21,8 +42,91 @@ const AddMediaEditArea = ({ setStep }) => {
     setTags([...data]);
   };
 
+  const removedItemsByIds = async (ids = []) => {
+    const filteredStateTwo = await files?.filter(
+      (item) => !ids.includes(item._id)
+    );
+    setFiles(filteredStateTwo);
+    setSelectedWallpapers([]);
+    return true;
+  };
+
   const handleSave = async () => {
-    setStep(2);
+    if (!typeTab) {
+      toast.error("Type is Required");
+      return;
+    }
+    if (!classification) {
+      toast.error("Classification is Required");
+      return;
+    }
+    if (!screenType) {
+      toast.error("Screen Type is Required");
+      return;
+    }
+    if (tags?.length < 3) {
+      toast.error("A minimum of 3 tags is required");
+      return;
+    }
+    const updatedData = {};
+
+    updatedData["status"] = "Published";
+    updatedData["type"] = typeTab;
+    updatedData["classification"] = classification;
+    updatedData["screen_type"] = screenType;
+    updatedData["tags"] = tags;
+    if (source) {
+      updatedData["source"] = source;
+    }
+    if (author) {
+      updatedData["author"] = author;
+    }
+
+    const ids = await selectedImages?.map((element) => {
+      return element?._id;
+    });
+
+    const options = {
+      data: { ids: ids, updateData: updatedData },
+    };
+
+    const result = await updateMediaWallpapers(options);
+    if (result?.data?.success) {
+      toast.success("Media saved successfully");
+      setTags([]);
+      setTypeTab("");
+      setClassification("");
+      setScreenType("");
+      setAuthor("");
+      setSource("");
+      await removedItemsByIds(ids);
+    } else {
+      toast.error("Media saved unSuccessfully");
+    }
+    // setStep(2);
+  };
+
+  const handleDelete = async () => {
+    if (selectedImages?.length < 1) return;
+    const ids = await selectedImages?.map((element) => {
+      return element?._id;
+    });
+
+    const options = {
+      data: { ids: ids },
+    };
+
+    const result = await deleteMediaWallpapersByIds(options);
+    if (result?.data?.success) {
+      await removedItemsByIds(ids);
+      if (files?.length < 1) {
+        setUpload(false);
+      }
+      toast.success("Media deleted successfully");
+    } else {
+      toast.error("Media deleted unSuccessfully");
+    }
+    // setStep(2);
   };
 
   return (
@@ -148,13 +252,17 @@ const AddMediaEditArea = ({ setStep }) => {
 
           <div className="grid grid-cols-2 gap-x-[18px] mt-[10px]">
             <input
+              onChange={(e) => setSource(e.target.value)}
+              value={source}
               type="text"
               placeholder="Source"
               className="w-full h-[35px] bg-[#313131] text-white font-lato text-[12px] font-normal leading-normal text-center placeholder:text-white outline-none border-none px-[6px] rounded-[8px]"
             />
             <input
+              onChange={(e) => setAuthor(e.target.value)}
+              value={author}
               type="text"
-              placeholder="Source"
+              placeholder="Author"
               className="w-full h-[35px] bg-[#313131] text-white font-lato text-[12px] font-normal leading-normal text-center placeholder:text-white outline-none border-none px-[6px] rounded-[8px]"
             />
           </div>
@@ -162,12 +270,38 @@ const AddMediaEditArea = ({ setStep }) => {
       </div>
       <div className="flex justify-center items-center gap-x-[18px] mt-[30px]">
         <Button
+          disabled={isLoading || selectedImages?.length < 1}
           onClick={() => handleSave()}
-          className="w-[129px] h-[38px] bg-[#2924FF33] rounded-[5px] shadow-none hover:shadow-none text-[#C4C4C4] font-bakbak-one text-[15px] font-normal leading-normal p-0 normal-case"
+          className="w-[129px] h-[38px] bg-[#2924FF33] rounded-[5px] shadow-none hover:shadow-none text-[#C4C4C4] font-bakbak-one text-[15px] font-normal leading-normal p-0 normal-case flex justify-center items-center gap-1"
         >
+          {" "}
+          {isLoading && (
+            <SpinnerCircularFixed
+              size={16}
+              thickness={180}
+              speed={300}
+              color="rgba(255, 255, 255, 1)"
+              secondaryColor="rgba(255, 255, 255, 0.42)"
+              style={{ marginRight: "5px" }}
+            />
+          )}{" "}
           Save Changes
         </Button>
-        <Button className="w-[129px] h-[38px] bg-[#FF0000] rounded-[5px] shadow-none hover:shadow-none text-[#C4C4C4] font-bakbak-one text-[15px] font-normal leading-normal p-0 normal-case">
+        <Button
+          disabled={deleteLoading || selectedImages?.length < 1}
+          onClick={() => handleDelete()}
+          className="w-[129px] h-[38px] bg-[#FF0000] rounded-[5px] shadow-none hover:shadow-none text-[#C4C4C4] font-bakbak-one text-[15px] font-normal leading-normal p-0 normal-case flex justify-center items-center gap-1"
+        >
+          {deleteLoading && (
+            <SpinnerCircularFixed
+              size={16}
+              thickness={180}
+              speed={300}
+              color="rgba(255, 255, 255, 1)"
+              secondaryColor="rgba(255, 255, 255, 0.42)"
+              style={{ marginRight: "5px" }}
+            />
+          )}{" "}
           Delete
         </Button>
       </div>

@@ -6,10 +6,13 @@ import moment from "moment";
 import useViewImage from "../../../lib/hooks/useViewImage";
 import { iGrayClose, iGrayPlush } from "../../../utils/icons/icons";
 import { useMemo, useState } from "react";
+import { useUpdateMediaWallTagByIdMutation } from "../../../redux/features/wallpapers/wallpapersApi";
 
 const MediaInfoPopup = ({ wallpaperInfo, setWallpaperInfo }) => {
   const { formatFileSize } = useViewImage();
   const [tags, setTags] = useState([]);
+  const [updateMediaWallTagById, { isLoading }] =
+    useUpdateMediaWallTagByIdMutation();
 
   const handleAdd = (e) => {
     e.preventDefault();

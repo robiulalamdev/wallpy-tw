@@ -10,7 +10,7 @@ const AddMediaFileSelection = ({
   handleSelectFile,
 }) => {
   const { user } = useContext(AuthContext);
-  const { viewImg } = useViewImage();
+  const { viewResizeImg } = useViewImage();
   return (
     <div className="py-[25px] pl-[21px] w-full h-full">
       <div
@@ -29,7 +29,7 @@ const AddMediaFileSelection = ({
                   }`}
                 >
                   <img
-                    src={viewImg(file)}
+                    src={viewResizeImg(file?.wallpaper, 150, 70)}
                     alt=""
                     className="w-full h-full rounded-[5px] object-cover hover:scale-110 duration-300 cursor-pointer"
                   />

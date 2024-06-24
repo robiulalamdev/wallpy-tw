@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { Button, Dialog } from "@material-tailwind/react";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { idashClose } from "../../../../utils/icons/dashboard-icons/dashicons";
 import AddMediaInputField from "./AddMediaInputField";
 import AddMediaEditArea from "./AddMediaEditArea";
 import AddMediaFileSelection from "./AddMediaFileSelection";
+import AddMediaUploadProgress from "./AddMediaUploadProgress";
 
 const AddMediaPopup = ({ open, onClose }) => {
   const [step, setStep] = useState(1);
@@ -31,6 +32,14 @@ const AddMediaPopup = ({ open, onClose }) => {
     setSelectedWallpapers([]);
     setFiles([]);
   };
+
+  useMemo(() => {
+    if (files?.length < 1) {
+      setUpload(false);
+    }
+  }, [files]);
+
+  console.log(upload);
   return (
     <Dialog
       open={!!open}
@@ -38,8 +47,8 @@ const AddMediaPopup = ({ open, onClose }) => {
     >
       <div className="min-w-[1001px] max-w-[1001px] max-h-fit min-h-[800px] bg-[#D5D5D5] rounded-[10px] relative">
         {step === 1 && (
-          <div className="grid grid-cols-2 w-full h-full">
-            {files.length > 0 ? (
+          <div className="grid grid-cols-2 w-full h-full min-h-[800px]">
+            {files.length > 0 && !!upload ? (
               <AddMediaFileSelection
                 files={files}
                 selectedItems={selectedWallpapers}
@@ -54,7 +63,25 @@ const AddMediaPopup = ({ open, onClose }) => {
                 upload={upload}
               />
             )}
-            <AddMediaEditArea files={files} setStep={setStep} />
+            {upload && files?.length > 0 && (
+              <AddMediaEditArea
+                files={files}
+                setStep={setStep}
+                selectedImages={selectedWallpapers}
+                setSelectedWallpapers={setSelectedWallpapers}
+                setFiles={setFiles}
+                setUpload={setUpload}
+              />
+            )}
+            {!upload && (
+              <AddMediaUploadProgress
+                files={files}
+                setStep={setStep}
+                setFiles={setFiles}
+                upload={upload}
+                setUpload={setUpload}
+              />
+            )}
           </div>
         )}
         {step === 2 && (

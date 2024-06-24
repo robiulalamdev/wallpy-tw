@@ -101,6 +101,41 @@ const usersApi = api.injectEndpoints({
       query: (query) => `/wallpapers/sponsors${query}`,
       providesTags: ["wallpapers"],
     }),
+
+    addMediaWallpaper: builder.mutation({
+      query: ({ data }) => ({
+        url: `/wallpapers/add-media`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["wallpapers"],
+    }),
+
+    updateMediaWallpapers: builder.mutation({
+      query: ({ data }) => ({
+        url: `/wallpapers/update-media-wallpaper`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["wallpapers"],
+    }),
+
+    deleteMediaWallpapersByIds: builder.mutation({
+      query: ({ data }) => ({
+        url: `/wallpapers/deletes-media`,
+        method: "DELETE",
+        body: data,
+      }),
+      invalidatesTags: ["wallpapers"],
+    }),
+
+    updateMediaWallTagById: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/wallpapers/media/update-tags/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -129,4 +164,8 @@ export const {
 
   // Dashboard */
   useSponsorsWallpapersQuery,
+  useAddMediaWallpaperMutation,
+  useUpdateMediaWallpapersMutation,
+  useDeleteMediaWallpapersByIdsMutation,
+  useUpdateMediaWallTagByIdMutation,
 } = usersApi;
