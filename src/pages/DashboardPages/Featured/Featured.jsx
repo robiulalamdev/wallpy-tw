@@ -1,7 +1,12 @@
 import { useState } from "react";
 import FeaturedWallpapersModal from "../../../components/dashboard-components/FeaturedComponets/FeaturedWallpapersModal";
 import { iDashEdit } from "../../../utils/icons/dashboard-icons/dashicons";
-import { useSponsorsWallpapersQuery } from "../../../redux/features/wallpapers/wallpapersApi";
+import {
+  useAddFeaturedItemsMutation,
+  useAddFeaturedMutation,
+  useGetFeaturedItemsQuery,
+  useSponsorsWallpapersQuery,
+} from "../../../redux/features/wallpapers/wallpapersApi";
 import FeaturedStaffPicksModal from "../../../components/dashboard-components/FeaturedComponets/FeaturedStaffPicksModal";
 import FeaturedContactFormModal from "../../../components/dashboard-components/FeaturedComponets/FeaturedContactFormModal";
 import FeaturedCredentialsModal from "../../../components/dashboard-components/FeaturedComponets/FeaturedCredentialsModal";
@@ -13,12 +18,24 @@ import useViewImage from "../../../lib/hooks/useViewImage";
 const Featured = () => {
   const { viewResizeImg } = useViewImage();
   const { data } = useSponsorsWallpapersQuery("?limit=18");
+  const { data: featuredWall } = useGetFeaturedItemsQuery();
   const [openFWModal, setOpenFWModal] = useState(false);
   const [openFStaffPickModal, setOpenFStaffPickModal] = useState(false);
   const [openFContactFormModal, setOpenFContactFormModal] = useState(false);
   const [openFCredentialsModal, setOpenFCredentialsModal] = useState(false);
   const [openFBrandSearchModal, setOpenFBrandSearchModal] = useState(false);
   const [openFArtistModal, setOpenFArtistModal] = useState(false);
+
+  const [addFeatured, { isLoading }] = useAddFeaturedMutation();
+
+  const handleAddFeatured = async (ids = [], items = []) => {
+    const options = {
+      data: { ids: ids, items: items },
+    };
+    const result = await addFeatured(options);
+    console.log(result);
+  };
+
   return (
     <>
       <div className="flex flex-col justify-between w-full h-full gap-y-[36px]">
@@ -60,8 +77,8 @@ const Featured = () => {
                   {iDashEdit}
                 </div>
               </dir>
-              <div className="grid grid-cols-3 gap-x-[18px] mt-[32px]">
-                {data?.data?.data?.slice(0, 3).map((item, index) => (
+              <div className="grid grid-cols-3 gap-x-[18px] mt-[32px] min-h-[115px]">
+                {featuredWall?.data?.slice(0, 3).map((item, index) => (
                   <FeaturedSingleWallpaper key={index} data={item} />
                 ))}
               </div>
@@ -176,7 +193,7 @@ const Featured = () => {
         open={openFWModal}
         name="Featured Wallpapers"
         onClose={setOpenFWModal}
-        items={data?.data?.data?.slice(0, 6) || []}
+        items={featuredWall?.data?.slice(0, 6) || []}
       />
       <FeaturedStaffPicksModal
         open={openFStaffPickModal}
@@ -189,6 +206,7 @@ const Featured = () => {
         name="Contact Form"
         onClose={setOpenFContactFormModal}
         items={data?.data?.data?.slice(0, 6) || []}
+        handleAdd={handleAddFeatured}
       />
       <FeaturedCredentialsModal
         open={openFCredentialsModal}

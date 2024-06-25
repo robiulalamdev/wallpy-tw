@@ -21,6 +21,7 @@ export const api = createApi({
     "helpers",
     "reports",
     "messages",
+    "featured",
   ],
   endpoints: () => ({}),
 });

@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import PageLoading from "../../common/loadings/PageLoading";
 import NoData from "../../common/notFound/NoData";
 import LazyWallpaper from "../../common/wallpaper/LazyWallpaper";
+import BannerWallpapers from "./BannerWallpapers";
 
 const Banner = () => {
   const [tab1, setTab1] = useState("Trending");
@@ -37,21 +38,7 @@ const Banner = () => {
         <>
           <div className="grid grid-cols-3 md:grid-cols-4 gap-x-[14px] gap-y-[14px] md:gap-x-[19px] xl:gap-x-[29px] md:gap-y-[30px] xl:gap-y-[40px]">
             {wallpapers?.map((item, index) => (
-              <div
-                onClick={() => navigate(`/w/${item?.slug}`)}
-                key={index}
-                className="w-full h-[152px] 2xl:h-[190px] overflow-hidden relative rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px]"
-              >
-                <LazyWallpaper
-                  src={item?.wallpaper}
-                  alt={item?.wallpaper}
-                  maxWidth={400}
-                  maxHeight={300}
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover hover:scale-110 rounded-[5px] md:rounded-[10px] 2xl:rounded-[15px] duration-300 cursor-pointer"
-                />
-              </div>
+              <BannerWallpapers key={index} item={item} />
             ))}
           </div>
           <div className="flex justify-center items-center py-[14px]">

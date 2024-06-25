@@ -77,7 +77,7 @@ const usersApi = api.injectEndpoints({
     }),
 
     getFeaturedWallpapers: builder.query({
-      query: (query) => `/wallpapers/featured${query}`,
+      query: () => `/wallpapers/featured`,
       providesTags: ["wallpapers"],
     }),
 
@@ -99,6 +99,10 @@ const usersApi = api.injectEndpoints({
     ///* dashboard
     sponsorsWallpapers: builder.query({
       query: (query) => `/wallpapers/sponsors${query}`,
+      providesTags: ["wallpapers"],
+    }),
+    getFeaturedItems: builder.query({
+      query: () => `/wallpapers/featured/items`,
       providesTags: ["wallpapers"],
     }),
 
@@ -137,6 +141,32 @@ const usersApi = api.injectEndpoints({
       }),
       invalidatesTags: ["wallpapers"],
     }),
+
+    addFeaturedItems: builder.mutation({
+      query: ({ data }) => ({
+        url: `/wallpapers/add-featured`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["wallpapers"],
+    }),
+    getInfoBySlug: builder.mutation({
+      query: ({ data, slug }) => ({
+        url: `/wallpapers/media-info/${slug}`,
+        method: "POST",
+        body: data,
+      }),
+      // invalidatesTags: ["wallpapers"],
+    }),
+
+    addFeatured: builder.mutation({
+      query: ({ data }) => ({
+        url: `/featured/create`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["featured"],
+    }),
   }),
 });
 
@@ -165,8 +195,13 @@ export const {
 
   // Dashboard */
   useSponsorsWallpapersQuery,
+  useGetFeaturedItemsQuery,
   useAddMediaWallpaperMutation,
   useUpdateMediaWallpapersMutation,
   useDeleteMediaWallpapersByIdsMutation,
   useUpdateMediaWallTagByIdMutation,
+  useAddFeaturedItemsMutation,
+  useGetInfoBySlugMutation,
+  // featured
+  useAddFeaturedMutation,
 } = usersApi;

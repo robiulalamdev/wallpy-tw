@@ -14,6 +14,7 @@ import { AuthContext } from "../../contextApi/AuthContext";
 import { makeQuery } from "../../lib/services/service";
 import NoData from "../../components/common/notFound/NoData";
 import LazyWallpaper from "../../components/common/wallpaper/LazyWallpaper";
+import SingleSearchWallpaper from "../../components/SearchWallpapers/SingleSearchWallpaper";
 
 const SearchWallpapers = () => {
   const { user } = useContext(AuthContext);
@@ -138,21 +139,7 @@ const SearchWallpapers = () => {
               <>
                 <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-x-[14px] gap-y-[14px] md:gap-x-[16px] md:gap-y-[32px] lg:gap-x-[26px] lg:gap-y-[42px]">
                   {wallpapers?.map((item, index) => (
-                    <div
-                      onClick={() => navigate(`/w/${item?.slug}`)}
-                      key={index}
-                      className={`w-full h-[152px] md:h-[170px] rounded-[5px] md:rounded-[10px] lg:rounded-[15px] overflow-hidden relative`}
-                    >
-                      <LazyWallpaper
-                        src={item.wallpaper}
-                        alt={item?.wallpaper}
-                        maxWidth={400}
-                        maxHeight={300}
-                        width={400}
-                        height={300}
-                        className="w-full h-full rounded-[5px] md:rounded-[10px] lg:rounded-[15px] object-cover hover:scale-110 duration-300 cursor-pointer"
-                      />
-                    </div>
+                    <SingleSearchWallpaper key={index} item={item} />
                   ))}
                 </div>
 
