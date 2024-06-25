@@ -45,6 +45,8 @@ import ClaimsReports from "../pages/DashboardPages/ClaimsReports/ClaimsReports";
 import VerificationRequests from "../pages/DashboardPages/VerificationRequests/VerificationRequests";
 import NotFound from "../pages/NotFound/NotFound";
 import TagDetails from "../pages/Tags/TagDetails";
+import DashboardPrivateRoute from "./DashboardPrivateRoute";
+import { ROLE_DATA } from "../lib/config";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 
@@ -258,7 +260,11 @@ export const route = createBrowserRouter([
   //* dashboard routes
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <DashboardPrivateRoute allowedRoles={[ROLE_DATA.ADMIN, ROLE_DATA.MOD]}>
+        <DashboardLayout />
+      </DashboardPrivateRoute>
+    ),
     children: [
       { path: "/dashboard/", element: <Dashboard /> },
       { path: "/dashboard/overseer", element: <Overseer /> },
