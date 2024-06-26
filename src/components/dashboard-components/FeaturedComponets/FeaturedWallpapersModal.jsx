@@ -46,31 +46,34 @@ const FeaturedWallpapersModal = ({ open, name, onClose, items }) => {
   };
 
   useMemo(() => {
-    const newItems = [];
+    if (open) {
+      const newItems = [];
+      for (let i = 0; i < items.length; i++) {
+        const element = items[i];
+        newItems.push({
+          slug: element.slug || "",
+          wallpaper: element.wallpaper || "",
+          _id: element?._id || null,
+          load: false,
+          no: i + 1,
+        });
+      }
+      if (newItems.length === items.length) {
+        setSelectedItems([...newItems]);
+      }
 
-    for (let i = 0; i < items.length; i++) {
-      const element = items[i];
-      newItems.push({
-        slug: element.slug || "",
-        wallpaper: element.wallpaper || "",
-        _id: element?._id || null,
-        load: false,
-        no: i + 1,
-      });
-      setSelectedItems(newItems);
+      for (let i = 0; i < 6 - items?.length; i++) {
+        newItems.push({
+          slug: "",
+          wallpaper: "",
+          _id: null,
+          load: false,
+          no: items.length + i + 1,
+        });
+      }
+
+      setStoredItems(newItems);
     }
-
-    for (let i = 0; i < 6 - items?.length; i++) {
-      newItems.push({
-        slug: "",
-        wallpaper: "",
-        _id: null,
-        load: false,
-        no: items.length + i + 1,
-      });
-    }
-
-    setStoredItems(newItems);
   }, [items, open]);
 
   const handleSelect = async (selectItem = null) => {
@@ -118,6 +121,8 @@ const FeaturedWallpapersModal = ({ open, name, onClose, items }) => {
     setStoredItems(stored);
   };
 
+  console.log(selectedItems);
+
   return (
     <Dialog
       open={open}
@@ -143,7 +148,7 @@ const FeaturedWallpapersModal = ({ open, name, onClose, items }) => {
                     onKeyPress={(e) => handleKeyPress(e, item)}
                     type="url"
                     defaultValue={
-                      item?._id ? `${CLIENT_URL}/${item?.slug}` : ""
+                      item?._id ? `${CLIENT_URL}/w/${item?.slug}` : ""
                     }
                     onInput={(e) => handleUrl(e, `${CLIENT_URL}/w/`)}
                     placeholder="Wallpaper URL"

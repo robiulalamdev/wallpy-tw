@@ -167,6 +167,11 @@ const usersApi = api.injectEndpoints({
       }),
       invalidatesTags: ["featured"],
     }),
+
+    getContactFeatured: builder.query({
+      query: () => `/featured/contact`,
+      providesTags: ["featured"],
+    }),
   }),
 });
 
@@ -204,4 +209,5 @@ export const {
   useGetInfoBySlugMutation,
   // featured
   useAddFeaturedMutation,
+  useGetContactFeaturedQuery,
 } = usersApi;

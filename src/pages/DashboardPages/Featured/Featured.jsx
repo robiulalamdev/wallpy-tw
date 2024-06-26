@@ -4,6 +4,7 @@ import { iDashEdit } from "../../../utils/icons/dashboard-icons/dashicons";
 import {
   useAddFeaturedItemsMutation,
   useAddFeaturedMutation,
+  useGetContactFeaturedQuery,
   useGetFeaturedItemsQuery,
   useSponsorsWallpapersQuery,
 } from "../../../redux/features/wallpapers/wallpapersApi";
@@ -19,6 +20,8 @@ const Featured = () => {
   const { viewResizeImg } = useViewImage();
   const { data } = useSponsorsWallpapersQuery("?limit=18");
   const { data: featuredWall } = useGetFeaturedItemsQuery();
+  const { data: featuredContact } = useGetContactFeaturedQuery();
+
   const [openFWModal, setOpenFWModal] = useState(false);
   const [openFStaffPickModal, setOpenFStaffPickModal] = useState(false);
   const [openFContactFormModal, setOpenFContactFormModal] = useState(false);
@@ -28,19 +31,22 @@ const Featured = () => {
 
   const [addFeatured, { isLoading }] = useAddFeaturedMutation();
 
-  const handleAddFeatured = async (ids = [], items = []) => {
+  const handleAddFeatured = async (items = []) => {
     const options = {
-      data: { ids: ids, items: items },
+      data: { items: items },
     };
     const result = await addFeatured(options);
-    console.log(result);
+    return result;
   };
 
   return (
     <>
       <div className="flex flex-col justify-between w-full h-full gap-y-[36px]">
         <div className="mt-[21px]">
-          <h1 className="text-center font-bakbak-one text-[30px] leading-normal font-normal text-white">
+          <h1
+            onClick={() => handleAddFeatured([], [])}
+            className="text-center font-bakbak-one text-[30px] leading-normal font-normal text-white"
+          >
             Featured
           </h1>
           <div className="flex justify-center items-center gap-x-[9px] mt-[47px]">
@@ -161,7 +167,7 @@ const Featured = () => {
                 </div>
               </dir>
               <div className="grid grid-cols-3 gap-x-[18px] mt-[32px]">
-                {data?.data?.data?.slice(0, 3).map((item, index) => (
+                {featuredContact?.data?.slice(0, 3).map((item, index) => (
                   <FeaturedSingleWallpaper key={index} data={item} />
                 ))}
               </div>
@@ -205,8 +211,9 @@ const Featured = () => {
         open={openFContactFormModal}
         name="Contact Form"
         onClose={setOpenFContactFormModal}
-        items={data?.data?.data?.slice(0, 6) || []}
+        items={featuredContact?.data?.slice(0, 6) || []}
         handleAdd={handleAddFeatured}
+        isLoading={isLoading}
       />
       <FeaturedCredentialsModal
         open={openFCredentialsModal}

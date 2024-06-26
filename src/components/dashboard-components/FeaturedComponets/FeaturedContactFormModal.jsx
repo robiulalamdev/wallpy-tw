@@ -10,6 +10,8 @@ import { handleItemSelection } from "../../../lib/services/service";
 import { CLIENT_URL } from "../../../lib/config";
 import useInputPattern from "../../../lib/hooks/useInputPattern";
 import { useGetInfoBySlugMutation } from "../../../redux/features/wallpapers/wallpapersApi";
+import { SpinnerCircularFixed } from "spinners-react";
+import { toast } from "react-toastify";
 
 const FeaturedContactFormModal = ({
   open,
@@ -17,6 +19,7 @@ const FeaturedContactFormModal = ({
   onClose,
   items,
   handleAdd,
+  isLoading = false,
 }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [storedItems, setStoredItems] = useState([]);
@@ -25,40 +28,61 @@ const FeaturedContactFormModal = ({
   const { handleUrl } = useInputPattern();
 
   const handleClose = () => {
+    setSelectedItems([]);
+    setSelectedItems([]);
     onClose(null);
   };
 
   const handleAddFeatured = async () => {
-    const ids = await selectedItems.map((crnI) => crnI?._id);
-    handleAdd(ids, []);
+    const items = await selectedItems.map((currentItem) => {
+      return {
+        type: "Contact",
+        targetId: currentItem?.targetId || "",
+        targetType: "Wallpaper",
+      };
+    });
+    const result = await handleAdd(items);
+    if (result?.data?.success) {
+      toast.success("Featured added successfully");
+      handleClose();
+    } else {
+      toast.error("Featured added unSuccessfully");
+    }
   };
 
   useMemo(() => {
-    const newItems = [];
+    if (open) {
+      const newItems = [];
 
-    for (let i = 0; i < items.length; i++) {
-      const element = items[i];
-      newItems.push({
-        slug: element.slug || "",
-        wallpaper: element.wallpaper || "",
-        _id: element?._id || null,
-        load: false,
-        no: i + 1,
-      });
-      setSelectedItems(newItems);
+      for (let i = 0; i < items.length; i++) {
+        const element = items[i];
+        newItems.push({
+          targetId: element?.targetId || "",
+          slug: element.slug || "",
+          wallpaper: element.wallpaper || "",
+          _id: i + 1 || null,
+          load: false,
+          no: i + 1,
+        });
+      }
+
+      if (newItems.length === items.length) {
+        setSelectedItems([...newItems]);
+      }
+
+      for (let i = 0; i < 6 - items?.length; i++) {
+        newItems.push({
+          targetId: "",
+          slug: "",
+          wallpaper: "",
+          _id: null,
+          load: false,
+          no: items.length + i + 1,
+        });
+      }
+
+      setStoredItems(newItems);
     }
-
-    for (let i = 0; i < 6 - items?.length; i++) {
-      newItems.push({
-        slug: "",
-        wallpaper: "",
-        _id: null,
-        load: false,
-        no: items.length + i + 1,
-      });
-    }
-
-    setStoredItems(newItems);
   }, [items, open]);
 
   const handleSelect = async (selectItem = null) => {
@@ -79,12 +103,16 @@ const FeaturedContactFormModal = ({
         const result = await getInfoBySlug(options);
         if (result?.data?.data?._id) {
           stored[item.no - 1] = {
-            ...result.data.data,
+            targetId: result?.data?.data?._id,
+            slug: result?.data?.data?.slug,
+            wallpaper: result?.data?.data?.wallpaper,
             load: false,
+            _id: item.no,
             no: item.no,
           };
         } else {
           stored[item.no - 1] = {
+            targetId: "",
             slug: "",
             wallpaper: "",
             _id: null,
@@ -94,7 +122,13 @@ const FeaturedContactFormModal = ({
         }
       }
     } else {
+      await handleItemSelection(
+        selectedItems,
+        setSelectedItems,
+        stored[item.no - 1]
+      );
       stored[item.no - 1] = {
+        targetId: "",
         slug: "",
         wallpaper: "",
         _id: null,
@@ -117,7 +151,7 @@ const FeaturedContactFormModal = ({
         </h1>
         <div className="mt-[38px]">
           <div className="grid grid-cols-3 gap-x-[94px] gap-y-[24px]">
-            {items?.map((item, index) => (
+            {storedItems?.map((item, index) => (
               <div key={index} className="">
                 <FeaturedViewWallpaper
                   key={index}
@@ -131,7 +165,7 @@ const FeaturedContactFormModal = ({
                     onKeyPress={(e) => handleKeyPress(e, item)}
                     type="url"
                     defaultValue={
-                      item?._id ? `${CLIENT_URL}/${item?.slug}` : ""
+                      item?._id ? `${CLIENT_URL}/w/${item?.slug}` : ""
                     }
                     onInput={(e) => handleUrl(e, `${CLIENT_URL}/w/`)}
                     placeholder="Wallpaper URL"
@@ -145,9 +179,21 @@ const FeaturedContactFormModal = ({
         </div>
 
         <Button
-          onClick={() => handleClose()}
-          className="w-[129px] h-[38px] rounded-[5px] bg-[#2924FF33] shadow-none hover:shadow-none block mx-auto mt-[57px] p-0 text-[15px] text-[#C4C4C4] font-bakbak-one leading-normal normal-case font-normal"
+          disabled={isLoading}
+          onClick={() => handleAddFeatured()}
+          className="w-[129px] h-[38px] rounded-[5px] bg-[#2924FF33] shadow-none hover:shadow-none block mx-auto mt-[57px] p-0 text-[15px] text-[#C4C4C4] font-bakbak-one leading-normal normal-case font-normal flex justify-center items-center"
         >
+          {" "}
+          {isLoading && (
+            <SpinnerCircularFixed
+              size={16}
+              thickness={180}
+              speed={300}
+              color="rgba(255, 255, 255, 1)"
+              secondaryColor="rgba(255, 255, 255, 0.42)"
+              style={{ marginRight: "5px" }}
+            />
+          )}{" "}
           Save Changes
         </Button>
         <div

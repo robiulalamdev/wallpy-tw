@@ -190,3 +190,20 @@ export const handleItemSelection = async (selectedItems, setItems, newItem) => {
     setItems([...selectedItems, newItem]);
   }
 };
+
+export const handleItemSelectionByTargetId = async (
+  selectedItems,
+  setItems,
+  newItem
+) => {
+  const itemIndex = selectedItems.findIndex(
+    (sItem) => sItem?.targetId === newItem?.targetId
+  );
+  if (itemIndex !== -1) {
+    setItems(
+      selectedItems.filter((sItem) => sItem.targetId !== newItem?.targetId)
+    );
+  } else {
+    setItems([...selectedItems, newItem]);
+  }
+};
