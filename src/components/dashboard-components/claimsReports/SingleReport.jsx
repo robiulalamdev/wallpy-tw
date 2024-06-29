@@ -6,7 +6,7 @@ const SingleReport = ({ item = null, setSelectedItem, selectedItem }) => {
   return (
     <div
       onClick={() => setSelectedItem(item)}
-      className={`h-[103px] w-full flex items-center pl-[15px] gap-[15px] border-b-[1px] border-[#222222]
+      className={`h-[103px] w-full flex items-center px-[15px] gap-[15px] border-b-[1px] border-[#222222]
         ${
           selectedItem?._id === item?._id
             ? "claimSelectBg"
