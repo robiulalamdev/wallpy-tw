@@ -15,6 +15,7 @@ import { useRef, useState } from "react";
 import UserDetailsInfoModal from "./user-details-info/UserDetailsInfoModal";
 import UserChangePasswordModal from "./UserChangePasswordModal";
 import UserAccountDeletionModal from "./UserAccountDeletionModal";
+import useViewImage from "../../../lib/hooks/useViewImage";
 
 const UsersTableRow = ({
   data,
@@ -22,6 +23,7 @@ const UsersTableRow = ({
   handleSelect,
   handleRemoveUsers,
 }) => {
+  const { viewResizeImg } = useViewImage();
   const [openInfoModal, setOpenInfoModal] = useState(null);
   const [openPassModal, setOpenPassModal] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(null);
@@ -68,8 +70,16 @@ const UsersTableRow = ({
         </div>
         <div className="text-[#8F8F8F] font-lato text-[15px] text-nowrap min-w-[120px] max-w-[120px] ml-[55px]">
           <div className="flex items-center gap-[5px]">
-            <img src={flag1} alt="" className="w-[16px] h-[12px]" />
-            <h1 className="oneLine">10.00.00.0</h1>
+            {data?.profile?.flag && (
+              <img
+                src={viewResizeImg(data?.profile?.flag, 16, 12)}
+                alt=""
+                className="w-[16px] h-[12px]"
+              />
+            )}
+            {data?.profile?.country && (
+              <h1 className="oneLine">{data?.profile?.country}</h1>
+            )}
           </div>
         </div>
         <div className="text-[#8F8F8F] font-lato text-[15px] text-nowrap min-w-[260px] max-w-[260px] ml-[55px]">
@@ -131,6 +141,7 @@ const UsersTableRow = ({
       />
       <UserAccountDeletionModal
         open={openDeleteModal}
+        handleRemoveUsers={handleRemoveUsers}
         onClose={() => setOpenDeleteModal(null)}
       />
     </>

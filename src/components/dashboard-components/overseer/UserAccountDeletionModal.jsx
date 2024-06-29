@@ -8,12 +8,35 @@ import {
   idashClose,
   idashPass,
 } from "../../../utils/icons/dashboard-icons/dashicons";
+import { useRemoveUserByIdsMutation } from "../../../redux/features/users/usersApi";
+import { toast } from "react-toastify";
+import { SpinnerCircularFixed } from "spinners-react";
 
-const UserAccountDeletionModal = ({ open, onClose }) => {
+const UserAccountDeletionModal = ({ open, onClose, handleRemoveUsers }) => {
   const [success, setSuccess] = useState(false);
-  const handleDelete = async (data) => {
-    setSuccess(true);
+  const [removeUserByIds, { isLoading }] = useRemoveUserByIdsMutation();
+
+  const handleDelete = async (items = []) => {
+    if (items?.length > 0) {
+      const ids = await items?.map((item) => item?._id);
+      const options = {
+        data: { ids: ids },
+      };
+
+      const result = await removeUserByIds(options);
+      if (result?.data?.success) {
+        setSuccess(true);
+      } else {
+        toast.error("User deleted unSuccessful");
+      }
+    }
   };
+
+  const handleClose = () => {
+    onClose();
+    setSuccess(false);
+  };
+
   return (
     <Dialog
       open={!!open?._id}
@@ -45,9 +68,19 @@ const UserAccountDeletionModal = ({ open, onClose }) => {
             </svg>
 
             <Button
-              onClick={() => handleDelete()}
-              className="w-[88px] h-[36px] mt-[78px] shadow-none hover:shadow-none normal-case bg-[#FF0000D4] rounded-[5px] text-[15px] font-lato text-white leading-normal font-medium p-0 block mx-auto"
+              disabled={isLoading}
+              onClick={() => handleDelete([open])}
+              className="w-[88px] h-[36px] mt-[78px] shadow-none hover:shadow-none normal-case bg-[#FF0000D4] rounded-[5px] text-[15px] font-lato text-white leading-normal font-medium p-0 block mx-auto flex justify-center items-center gap-x-[3px]"
             >
+              {isLoading && (
+                <SpinnerCircularFixed
+                  size={16}
+                  thickness={180}
+                  speed={350}
+                  color="rgba(255, 255, 255, 1)"
+                  secondaryColor="rgba(255, 255, 255, 0.42)"
+                />
+              )}{" "}
               Delete
             </Button>
 
@@ -66,7 +99,7 @@ const UserAccountDeletionModal = ({ open, onClose }) => {
         )}
 
         <div
-          onClick={onClose}
+          onClick={() => handleClose()}
           className="absolute top-[14px] right-[13px] cursor-pointer"
         >
           {idashClose}

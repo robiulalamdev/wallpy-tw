@@ -111,6 +111,8 @@ const Overseer = () => {
     }
   };
 
+  const selectedTotal = selectedItems?.length;
+
   return (
     <div className="bg-[#121212] h-full w-full pt-[22px] pr-[17px] pl-[16px] rounded-[10px] overflow-y-auto relative">
       <div className="flex justify-between items-start py-[15px] gap-[15px]">
@@ -156,7 +158,12 @@ const Overseer = () => {
             <div className="mt-[29px] w-full flex justify-center items-center gap-[35px]">
               <Popover placement="bottom">
                 <PopoverHandler>
-                  <Button className="p-0 w-[88px] h-[36px] rounded-[5px] text-white !bg-[#232323] font-lato text-[15px] font-medium normal-case">
+                  <Button
+                    disabled={selectedTotal < 1}
+                    className={`p-0 w-[88px] h-[36px] rounded-[5px] ${
+                      selectedTotal > 0 ? "text-white" : "text-[#585858]"
+                    }  !bg-[#232323] font-lato text-[15px] font-medium normal-case`}
+                  >
                     Role
                   </Button>
                 </PopoverHandler>
@@ -173,7 +180,12 @@ const Overseer = () => {
               </Popover>
               <Popover>
                 <PopoverHandler>
-                  <Button className="p-0 w-[88px] h-[36px] rounded-[5px] text-white bg-[#232323] font-lato text-[15px] font-medium normal-case">
+                  <Button
+                    disabled={selectedTotal < 1}
+                    className={`p-0 w-[88px] h-[36px] rounded-[5px] ${
+                      selectedTotal > 0 ? "text-white" : "text-[#585858]"
+                    } bg-[#232323] font-lato text-[15px] font-medium normal-case`}
+                  >
                     Status
                   </Button>
                 </PopoverHandler>
@@ -190,7 +202,12 @@ const Overseer = () => {
               </Popover>
               <Popover>
                 <PopoverHandler>
-                  <Button className="p-0 w-[88px] h-[36px] rounded-[5px] text-white bg-[#232323] font-lato text-[15px] font-medium normal-case">
+                  <Button
+                    disabled={selectedTotal < 1}
+                    className={`p-0 w-[88px] h-[36px] rounded-[5px] ${
+                      selectedTotal > 0 ? "text-white" : "text-[#585858]"
+                    } bg-[#232323] font-lato text-[15px] font-medium normal-case`}
+                  >
                     Verify
                   </Button>
                 </PopoverHandler>
@@ -208,8 +225,11 @@ const Overseer = () => {
                 </PopoverContent>
               </Popover>
               <Button
+                disabled={selectedTotal < 1}
                 onClick={() => handleRemoveUsers(selectedItems)}
-                className={`p-0 w-[88px] h-[36px] rounded-[5px] text-white font-lato text-[15px] font-medium normal-case flex justify-center items-center gap-2
+                className={`p-0 w-[88px] h-[36px] rounded-[5px] ${
+                  selectedTotal > 0 ? "text-white" : "text-[#585858]"
+                } font-lato text-[15px] font-medium normal-case flex justify-center items-center gap-2
               ${selectedItems?.length > 0 ? "bg-[#FF0000D4]" : "bg-[#232323]"}
               `}
               >
@@ -226,6 +246,7 @@ const Overseer = () => {
                 Delete
               </Button>
               <Button
+                disabled={selectedTotal < 1}
                 className={`p-0 w-[88px] h-[36px] rounded-[5px] text-[#585858] bg-[#232323] font-lato text-[15px] font-medium normal-case
               `}
               >
