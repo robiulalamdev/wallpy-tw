@@ -5,6 +5,8 @@ export const ACCEPT_FILES = {
   PROOF_OF_IDENTITY: ".png, .jpg, .jpeg, .doc, .pdf",
 };
 
+export const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
+
 export const ROLE_DATA = {
   ADMIN: "Admin",
   USER: "User",

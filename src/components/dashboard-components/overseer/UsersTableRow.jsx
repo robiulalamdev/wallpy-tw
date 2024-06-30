@@ -10,12 +10,14 @@ import {
   iDashSelected,
   iDashUnselected,
 } from "../../../utils/icons/dashboard-icons/dashicons";
-import flag1 from "../../../assets/images/dashboard-images/overseer/flag1.png";
-import { useRef, useState } from "react";
+// import flag1 from "../../../assets/images/dashboard-images/overseer/flag1.png";
+import { useState } from "react";
 import UserDetailsInfoModal from "./user-details-info/UserDetailsInfoModal";
 import UserChangePasswordModal from "./UserChangePasswordModal";
 import UserAccountDeletionModal from "./UserAccountDeletionModal";
 import useViewImage from "../../../lib/hooks/useViewImage";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
 const UsersTableRow = ({
   data,
@@ -29,6 +31,10 @@ const UsersTableRow = ({
   const [openDeleteModal, setOpenDeleteModal] = useState(null);
   const [open, setOpen] = useState(false);
   const isExist = selectedItems.some((item) => item?._id === data?._id);
+  const { users } = useSelector((state) => state.global);
+
+  const isActive = users.some((user) => user.userId === data?._id);
+
   return (
     <>
       <div className="w-full h-fit flex items-center mt-[23px]">
@@ -84,7 +90,15 @@ const UsersTableRow = ({
         </div>
         <div className="text-[#8F8F8F] font-lato text-[15px] text-nowrap min-w-[260px] max-w-[260px] ml-[55px]">
           <div className="flex justify-between items-center">
-            <h1>Today</h1>
+            {isActive ? (
+              <h1 className="text-[#80FF00] font-lato text-[15px] font-medium leading-normal">
+                Online
+              </h1>
+            ) : (
+              <h1 className="text-[#8F8F8F] font-lato text-[15px] font-medium leading-normal">
+                {moment(data?.lastActive).fromNow()}
+              </h1>
+            )}
             <div className="pr-[3px]">
               <Popover
                 handler={() => setOpen(false)}

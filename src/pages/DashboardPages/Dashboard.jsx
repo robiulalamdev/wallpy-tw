@@ -6,6 +6,7 @@ import AdminChat from "../../components/dashboard-components/DashboardHome/Admin
 import MostFavorited from "../../components/dashboard-components/DashboardHome/MostFavorited";
 import TopCategories from "../../components/dashboard-components/DashboardHome/TopCategories";
 import MostDownloaded from "../../components/dashboard-components/DashboardHome/MostDownloaded";
+import { useSelector } from "react-redux";
 
 const tabs = [
   "Today",
@@ -18,6 +19,8 @@ const tabs = [
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
+  const { totalVisitors = 0 } = useSelector((state) => state.global);
+
   return (
     <div className="flex justify-between gap-[17px] w-full h-full">
       <div className="flex-grow max-w-[1000px] min-w-[500px] w-full overflow-y-auto">
@@ -43,7 +46,9 @@ const Dashboard = () => {
               </h1>
               {iOnline}
             </div>
-            <h1 className="text-white font-lato text-[20px] font-bold">2287</h1>
+            <h1 className="text-white font-lato text-[20px] font-bold">
+              {totalVisitors}
+            </h1>
           </div>
           <div className="h-[102px] bg-dash-cm-bg rounded-[10px] flex flex-col justify-center items-center w-full gap-[14px]">
             <h1 className="text-white font-lato font-medium text-[15px]">
