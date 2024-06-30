@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { io } from "socket.io-client";
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { SOCKET_URL } from "../lib/config";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,7 @@ export const socket = io.connect(SOCKET_URL, {
 });
 const SocketProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
+  const [socketUsers, setSocketUsers] = useState(new Map());
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,6 +31,11 @@ const SocketProvider = ({ children }) => {
     }, 1000);
 
     socket.current.on("getUsers", (users) => {
+      const usersMap = new Map();
+      users?.users.forEach((user) => {
+        usersMap.set(user.userId, user);
+      });
+      setSocketUsers(usersMap);
       dispatch(setVisitors(users));
     });
 
@@ -40,6 +46,7 @@ const SocketProvider = ({ children }) => {
 
   const contextValue = {
     SOCKET: socket,
+    socketUsers,
   };
   return (
     <SocketContext.Provider value={contextValue}>

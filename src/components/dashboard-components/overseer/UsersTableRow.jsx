@@ -11,13 +11,14 @@ import {
   iDashUnselected,
 } from "../../../utils/icons/dashboard-icons/dashicons";
 // import flag1 from "../../../assets/images/dashboard-images/overseer/flag1.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import UserDetailsInfoModal from "./user-details-info/UserDetailsInfoModal";
 import UserChangePasswordModal from "./UserChangePasswordModal";
 import UserAccountDeletionModal from "./UserAccountDeletionModal";
 import useViewImage from "../../../lib/hooks/useViewImage";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import { SocketContext } from "../../../contextApi/SocketContext";
 
 const UsersTableRow = ({
   data,
@@ -31,9 +32,9 @@ const UsersTableRow = ({
   const [openDeleteModal, setOpenDeleteModal] = useState(null);
   const [open, setOpen] = useState(false);
   const isExist = selectedItems.some((item) => item?._id === data?._id);
-  const { users } = useSelector((state) => state.global);
+  const { socketUsers } = useContext(SocketContext);
 
-  const isActive = users.some((user) => user.userId === data?._id);
+  const isActive = socketUsers.has(data?._id);
 
   return (
     <>

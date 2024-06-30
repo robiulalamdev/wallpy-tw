@@ -1,5 +1,5 @@
 import { Button } from "@material-tailwind/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { iOnline } from "../../utils/icons/dashboard-icons/dashicons";
 import { sponsorClicks } from "../../utils/data/global";
 import AdminChat from "../../components/dashboard-components/DashboardHome/AdminChat/AdminChat";
@@ -7,6 +7,7 @@ import MostFavorited from "../../components/dashboard-components/DashboardHome/M
 import TopCategories from "../../components/dashboard-components/DashboardHome/TopCategories";
 import MostDownloaded from "../../components/dashboard-components/DashboardHome/MostDownloaded";
 import { useSelector } from "react-redux";
+import { SocketContext } from "../../contextApi/SocketContext";
 
 const tabs = [
   "Today",
@@ -18,9 +19,10 @@ const tabs = [
 ];
 
 const Dashboard = () => {
+  const { socketUsers } = useContext(SocketContext);
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const { totalVisitors = 0 } = useSelector((state) => state.global);
-
+  console.log(Array.from(socketUsers.values()));
   return (
     <div className="flex justify-between gap-[17px] w-full h-full">
       <div className="flex-grow max-w-[1000px] min-w-[500px] w-full overflow-y-auto">
